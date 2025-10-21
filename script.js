@@ -57,3 +57,35 @@ if (form) {
     }
   });
 }
+// ✅ Popup thank-you logic
+const popup = document.getElementById("popup-overlay");
+const closePopup = document.getElementById("close-popup");
+
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        popup.classList.add("active");
+        form.reset();
+        setTimeout(() => popup.classList.remove("active"), 5000); // auto-close in 5s
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      alert("Network error. Please try again.");
+    }
+  });
+}
+
+if (closePopup) {
+  closePopup.addEventListener("click", () => {
+    popup.classList.remove("active");
+  });
+}
