@@ -192,3 +192,67 @@ footer {
   padding: 1.5rem 1rem;
   font-size: 0.9rem;
 }
+
+/* ======== MOBILE MENU ======== */
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  width: 25px;
+  height: 20px;
+  justify-content: space-between;
+}
+
+.bar {
+  height: 3px;
+  width: 100%;
+  background-color: var(--dark);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Hide nav on mobile by default */
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-list {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 200px;
+    background-color: white;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .nav-list.active {
+    transform: translateX(0);
+  }
+
+  .menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
