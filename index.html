@@ -1,34 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JNUS Associates Ltd</title>
-    <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: #f5f7fa;
-        color: #222;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-      }
-      h1 {
-        font-size: 2.5rem;
-        color: #0a2e6c;
-        margin-bottom: 0.5rem;
-      }
-      p {
-        font-size: 1.1rem;
-        color: #555;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Hello JNUS Associates</h1>
-    <p>Your GitHub Pages setup is working perfectly 🚀</p>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JNUS Associates Ltd — Software & IT Consultancy</title>
+  <meta name="description" content="JNUS Associates Ltd — Business and domestic software development, IT consultancy, technical testing, and specialised design activities." />
+  <meta property="og:title" content="JNUS Associates Ltd — Software & IT Consultancy" />
+  <meta property="og:description" content="Business and domestic software development, IT consultancy, technical testing and analysis, and specialised design." />
+  <link rel="icon" href="logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="JNUS Associates Ltd home">
+        <img class="logo" src="logo.svg" alt="JNUS Associates Ltd logo" />
+        <div class="brand-text">
+          <strong>JNUS Associates Ltd</strong>
+          <div class="taglines">
+            <span>Business and domestic software development</span>
+            <span>Information technology consultancy activities</span>
+            <span>Technical testing and analysis</span>
+            <span>Specialised design activities</span>
+          </div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a class="btn primary" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Delivering clarity and confidence in software & IT.</h1>
+          <p>From bespoke apps to reliable infrastructure and testing, we help you ship value with confidence.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="mailto:juzoukwu@jnusassociates.com">Email us</a>
+            <a class="btn" href="#services">Explore services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section">
+      <div class="container">
+        <h2>Services</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Software Development</h3>
+            <p>Custom web & mobile, integrations, automation, and maintainable codebases.</p>
+            <ul>
+              <li>Full-stack apps</li>
+              <li>APIs & integrations</li>
+              <li>Legacy modernisation</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>IT Consultancy</h3>
+            <p>Architecture, cloud strategy, cost control, and technical leadership.</p>
+            <ul>
+              <li>Cloud/on-prem strategy</li>
+              <li>Security & compliance</li>
+              <li>Cost & risk analysis</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Testing & Analysis</h3>
+            <p>Automated QA, performance testing, and actionable quality reporting.</p>
+            <ul>
+              <li>CI test suites</li>
+              <li>Load & performance</li>
+              <li>Accessibility checks</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section alt">
+      <div class="container about-grid">
+        <div>
+          <h2>About JNUS Associates</h2>
+          <p>We’re a pragmatic engineering partner focusing on dependable delivery across software, IT consultancy, testing, and design. Clear communication, measurable outcomes, and user-respecting design are our defaults.</p>
+        </div>
+        <div class="facts">
+          <dl>
+            <dt>Location</dt><dd>Castle Court, 41 London Rd, Reigate RH2 9RJ</dd>
+            <dt>Email</dt><dd><a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></dd>
+            <dt>Clients</dt><dd>SMEs, domestic projects, product teams</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container contact-box">
+        <h2>Contact</h2>
+        <p>Tell us a bit about your project (goals, timeline, budget if available) and we’ll get back to you.</p>
+        <a class="btn primary lg" href="mailto:juzoukwu@jnusassociates.com">Email juzoukwu@jnusassociates.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <small>© <span id="year"></span> JNUS Associates Ltd. All rights reserved.</small>
+      <nav class="foot-nav">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
