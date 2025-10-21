@@ -193,6 +193,29 @@ footer {
   font-size: 0.9rem;
 }
 
+/* Phone and footer links */
+.phone {
+  font-size: 0.9rem;
+  color: var(--dark);
+  margin-top: 0.25rem;
+}
+.phone a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.phone a:hover {
+  text-decoration: underline;
+}
+
+footer a {
+  color: #d9e6ff;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
 /* ======== MOBILE MENU ======== */
 
 .menu-toggle {
