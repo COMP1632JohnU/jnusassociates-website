@@ -133,7 +133,22 @@ nav a:hover {
 .card h3 {
   color: var(--accent);
 }
-
+.projects .project-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+.projects .project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+.projects .project-card h3 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
 /* Contact form */
 form {
   display: flex;
