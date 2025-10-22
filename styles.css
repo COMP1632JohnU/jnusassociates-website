@@ -1,4 +1,6 @@
-/* ========== BASE STYLES ========== */
+/* =========================================================
+   GLOBAL BASE STYLES
+========================================================= */
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +21,9 @@ body {
   margin: 0 auto;
 }
 
-/* ========== HEADER ========== */
+/* =========================================================
+   HEADER & NAVIGATION
+========================================================= */
 header {
   position: fixed;
   width: 100%;
@@ -45,8 +49,8 @@ header {
 }
 
 .brand .logo {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 }
 
 nav ul {
@@ -67,26 +71,56 @@ nav a.active {
   color: #00aaff;
 }
 
-/* ========== SECTIONS ========== */
+/* =========================================================
+   GENERAL SECTION STYLING
+========================================================= */
 .section {
   padding: 6rem 0 3rem;
   text-align: center;
 }
 
 .section h2 {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   color: #2c3e50;
   margin-bottom: 2rem;
 }
 
-/* ========== PARALLAX BACKGROUND ========== */
+.section p {
+  font-size: 1rem;
+  color: #444;
+  max-width: 850px;
+  margin: 0 auto 1rem auto;
+}
+
+/* =========================================================
+   PARALLAX BACKGROUND
+========================================================= */
 .parallax-bg {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
 
-/* ========== OFFICE LOCATIONS ========== */
+/* =========================================================
+   ABOUT PAGE STYLING
+========================================================= */
+.grey-bg {
+  background: rgba(245, 245, 245, 0.95);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+ul {
+  line-height: 1.8;
+  text-align: left;
+}
+
+/* =========================================================
+   OFFICE LOCATIONS SECTION
+========================================================= */
 .office-locations {
   display: flex;
   justify-content: space-between;
@@ -121,13 +155,15 @@ nav a.active {
   line-height: 1.4;
 }
 
-/* ========== CONTACT FORM ========== */
+/* =========================================================
+   CONTACT FORM STYLING (Formspree)
+========================================================= */
 #contact-form-section {
   background: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
   max-width: 600px;
-  margin: 3rem auto;
+  margin: 4rem auto;
   padding: 2rem;
 }
 
@@ -173,16 +209,55 @@ nav a.active {
 .form-success {
   margin-top: 1rem;
   color: green;
+  font-weight: 500;
 }
 
 .form-error {
   margin-top: 1rem;
   color: red;
+  font-weight: 500;
 }
 
-/* ========== FOOTER ========== */
+/* =========================================================
+   SERVICES PAGE GRID
+========================================================= */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.service-card h3 {
+  color: #004aad;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.service-card p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
 footer {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   color: #fff;
   text-align: center;
   padding: 2rem 0;
@@ -198,7 +273,9 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
 @media (max-width: 1024px) {
   .office-locations {
     flex-direction: column;
@@ -225,5 +302,9 @@ footer a:hover {
 
   #contact-form-section {
     width: 90%;
+  }
+
+  .service-card {
+    padding: 1.5rem;
   }
 }
