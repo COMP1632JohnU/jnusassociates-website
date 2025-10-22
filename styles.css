@@ -95,28 +95,42 @@ nav a.active {
 }
 
 /* ===========================
-   OFFICE CARDS
+   OFFICE LOCATIONS
 =========================== */
 .office-locations {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  align-items: flex-start;
+  gap: 1.5rem;
   flex-wrap: wrap;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .office {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  width: 320px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.2rem;
+  width: 280px;
+  min-height: 160px;
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.office:hover {
+  transform: translateY(-5px);
 }
 
 .office h3 {
   color: #0a66c2;
-  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.office p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #333;
 }
 
 /* ===========================
@@ -124,12 +138,12 @@ nav a.active {
 =========================== */
 #contact-form-section {
   position: relative;
-  z-index: 5;
-  background: rgba(255, 255, 255, 0.95);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(6px);
   border-radius: 12px;
   padding: 3rem 2rem;
-  margin: 4rem auto;
+  margin: 3rem auto 4rem auto;
   width: 90%;
   max-width: 600px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -195,6 +209,25 @@ nav a.active {
 }
 
 /* ===========================
+   BUTTONS
+=========================== */
+.btn {
+  display: inline-block;
+  background: #0a66c2;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #4da3ff;
+}
+
+/* ===========================
    FOOTER
 =========================== */
 footer {
@@ -215,7 +248,7 @@ footer a:hover {
 }
 
 /* ===========================
-   RESPONSIVE
+   RESPONSIVE DESIGN
 =========================== */
 @media (max-width: 768px) {
   .header-inner {
@@ -223,9 +256,20 @@ footer a:hover {
     gap: 1rem;
   }
 
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
   .office-locations {
     flex-direction: column;
     align-items: center;
+  }
+
+  .office {
+    width: 90%;
+    max-width: 360px;
   }
 
   #contact-form-section {
