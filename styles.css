@@ -115,7 +115,63 @@ nav a:hover {
   color: var(--accent);
   font-size: 1.8rem;
 }
+/* ===============================
+   Parallax Background
+=============================== */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
+/* Transparent Header */
+.site-header.transparent {
+  background: rgba(10, 15, 40, 0.55);
+  backdrop-filter: blur(5px);
+}
+
+/* Glow Text Effect */
+.site-header h1 {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Office Cards */
+.office-locations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.office {
+  background: rgba(255, 255, 255, 0.9);
+  color: #222;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.office:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.office h3 {
+  color: #0A66C2;
+  margin-bottom: 0.6rem;
+}
+
+/* Contact Details */
+.contact-details p {
+  margin-top: 1rem;
+  color: white;
+  text-align: center;
+}
 /* Grid for services */
 .grid {
   display: grid;
