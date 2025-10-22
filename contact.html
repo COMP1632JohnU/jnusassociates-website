@@ -13,7 +13,11 @@
     <div class="container header-inner">
       <div class="brand">
         <img src="logo.svg" alt="JNUS Associates Logo" class="logo" />
-        <h1>JNUS Associates Ltd</h1>
+        <div>
+          <h1>JNUS Associates Ltd</h1>
+          <p>Business and domestic software development • IT consultancy • Technical testing • Design</p>
+          <p><strong>📞 020 3538 4966</strong></p>
+        </div>
       </div>
       <nav>
         <ul>
@@ -21,57 +25,54 @@
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact.html" class="active">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- OFFICE LOCATIONS -->
-  <section id="contact-offices" class="section">
+  <!-- HERO SECTION -->
+  <section class="hero">
     <div class="container">
-      <h2>Contact JNUS Associates Offices</h2>
-      <div class="office-locations">
-        <div class="office">
-          <h3>🇬🇧 UK Office</h3>
-          <p>Castle Court, 41 London Rd,<br>Reigate RH2 9RJ,<br>United Kingdom</p>
-        </div>
-        <div class="office">
-          <h3>🇳🇬 Nigeria (Abuja) Office</h3>
-          <p>4th Floor, Tower C, Churchgate Plaza,<br>AO Cadastral Zone, Constitution Avenue,<br>Central Business District, Abuja, Nigeria.</p>
-        </div>
-        <div class="office">
-          <h3>🇺🇸 USA (Ithaca) Office</h3>
-          <p>125 East State Street,<br>3rd Floor, Ithaca, NY 14850,<br>USA.</p>
-        </div>
-      </div>
+      <h2>Contact Us</h2>
+      <p style="color: #fff;">We’d love to hear from you. Reach out to our offices or send us a message below.</p>
     </div>
   </section>
 
-  <!-- FORMSPREE CONTACT FORM -->
-  <section id="contact-form-section" class="section">
+  <!-- OFFICE LOCATIONS -->
+  <section class="section">
+    <div class="container office-locations">
+
+      <div class="office">
+        <h3>🇬🇧 United Kingdom</h3>
+        <p>Castle Court, 41 London Rd,<br> Reigate RH2 9RJ.</p>
+      </div>
+
+      <div class="office">
+        <h3>🇳🇬 Nigeria</h3>
+        <p>4th Floor, Tower C, Churchgate Plaza,<br>
+        AO Cadestral Zone, Constitution Avenue,<br>
+        Central Business District, Abuja, Nigeria.</p>
+      </div>
+
+      <div class="office">
+        <h3>🇺🇸 United States</h3>
+        <p>125 East State Street, 3rd Floor,<br>
+        Ithaca, NY 14850, USA.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="section">
     <div class="container">
-      <h2>Send Us a Message</h2>
-      <form id="contact-form" action="https://formspree.io/f/kblzewpe" method="POST">
-        <label>
-          <span>Your Name</span>
-          <input type="text" name="name" required />
-        </label>
+      <h2 style="text-align:center; color:#fff; margin-bottom:25px;">Send Us a Message</h2>
 
-        <label>
-          <span>Your Email</span>
-          <input type="email" name="_replyto" required />
-        </label>
-
-        <label>
-          <span>Your Message</span>
-          <textarea name="message" rows="5" required></textarea>
-        </label>
-
-        <button type="submit" class="btn primary">Send Message</button>
-
-        <p class="form-success" style="display:none;color:green;">Message sent successfully!</p>
-        <p class="form-error" style="display:none;color:red;">Something went wrong. Please try again.</p>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="_replyto" placeholder="Your Email" required />
+        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
       </form>
     </div>
   </section>
@@ -82,7 +83,7 @@
       <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
       <p>
         <a href="tel:+442035384966">📞 020 3538 4966</a> |
-        <a href="mailto:juzoukwu@jnusassociates.com">📧 juzoukwu@jnusassociates.com</a>
+        <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a>
       </p>
     </div>
   </footer>
