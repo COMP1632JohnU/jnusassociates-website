@@ -469,3 +469,82 @@ footer a:hover {
   margin-top: 2rem;
   text-align: center;
 }
+/* ===== CONTACT FORM STYLING ===== */
+#contact-form-section {
+  background: rgba(255, 255, 255, 0.9); /* subtle white overlay */
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 3rem 2rem;
+  margin: 4rem auto;
+  width: 90%;
+  max-width: 600px;
+  color: #0a1f44;
+}
+
+#contact-form-section h2 {
+  color: #0a66c2;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+#contact-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #0a1f44;
+}
+
+#contact-form input,
+#contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 5px;
+  transition: all 0.3s ease;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+  outline: none;
+  border-color: #0a66c2;
+  box-shadow: 0 0 6px rgba(10, 102, 194, 0.2);
+}
+
+#contact-form button {
+  display: block;
+  width: 100%;
+  background: linear-gradient(90deg, #0a66c2, #b0c4de);
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+}
+
+#contact-form button:hover {
+  background: linear-gradient(90deg, #084b8a, #9bb7d8);
+  transform: translateY(-2px);
+}
+
+.form-success,
+.form-error {
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 600;
+  display: none;
+}
+
+.form-success {
+  color: #1a8f3f;
+}
+
+.form-error {
+  color: #cc0000;
+}
