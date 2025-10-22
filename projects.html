@@ -4,73 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — JNUS Associates Ltd</title>
-  <meta name="description" content="View JNUS Associates’ portfolio of software, IT consultancy, and digital transformation projects." />
-  <link rel="icon" type="image/svg+xml" href="logo.svg" />
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    body {
-      background: url('gracechurch.jpg') no-repeat center center/cover;
-      background-attachment: fixed;
-      margin: 0;
-      color: white;
-      font-family: 'Inter', sans-serif;
-    }
-  </style>
 </head>
-<body>
+<body class="parallax-bg" style="background-image: url('fenchurch.jpg');">
 
-  <header class="site-header">
+  <!-- HEADER -->
+  <header class="site-header transparent">
     <div class="container header-inner">
       <div class="brand">
         <img src="logo.svg" alt="JNUS Associates Logo" class="logo" />
-        <div class="brand-text">
+        <div>
           <h1>JNUS Associates Ltd</h1>
-          <p class="tagline">Building clarity, reliability, and performance into every project we deliver.</p>
+          <p>Business and domestic software development • IT consultancy • Technical testing • Design</p>
+          <p><strong>📞 020 3538 4966</strong></p>
         </div>
       </div>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html" class="active">Projects</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="hero-section">
-    <h2>Our Projects</h2>
-    <p>From finance to cloud systems, explore how JNUS Associates delivers value through innovation.</p>
-  </section>
-
-  <section class="section">
-    <div class="container grid">
-      <div class="project-card">
-        <h3>ERP Automation for Insurance</h3>
-        <p>Developed a tailored ERP system integrating APIs, data pipelines, and reporting automation for efficiency.</p>
-      </div>
-      <div class="project-card">
-        <h3>Testing Suite for Financial Platforms</h3>
-        <p>Delivered CI/CD-enabled automated testing pipelines to streamline financial system validation.</p>
-      </div>
-      <div class="project-card">
-        <h3>Cloud Cost Optimisation</h3>
-        <p>Implemented a cost-analysis and observability dashboard reducing monthly cloud spend by 28%.</p>
-      </div>
-      <div class="project-card">
-        <h3>Design System Modernisation</h3>
-        <p>Rebuilt UI systems for a SaaS platform with modern, accessible, and responsive components.</p>
-      </div>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+      <h2>Our Projects</h2>
+      <p style="color: #fff;">Explore some of our featured projects that demonstrate our expertise in innovation, software development, and digital transformation.</p>
     </div>
   </section>
 
+  <!-- PROJECTS GRID -->
+  <section class="section">
+    <div class="container projects-grid">
+
+      <div class="project-card">
+        <img src="marklane.jpg" alt="Mark Lane Project" />
+        <div class="project-content">
+          <h4>Mark Lane Financial Systems Upgrade</h4>
+          <p>We designed and implemented a secure reconciliation platform for a financial services firm, improving speed, accuracy, and data transparency.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="gracechurch.jpg" alt="Gracechurch Project" />
+        <div class="project-content">
+          <h4>Gracechurch Insurance Data Hub</h4>
+          <p>Developed a cloud-based analytics engine for insurance reporting and regulatory compliance with end-to-end process automation.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="lime.jpg" alt="Lime Analytics Project" />
+        <div class="project-content">
+          <h4>Lime Analytics Dashboard</h4>
+          <p>Created a dynamic web dashboard with real-time performance metrics, API integration, and visual reporting for enterprise clients.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-      <p><a href="tel:+442035384966">📞 020 3538 4966</a> | <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a></p>
+      <p>
+        <a href="tel:+442035384966">📞 020 3538 4966</a> |
+        <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a>
+      </p>
     </div>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
