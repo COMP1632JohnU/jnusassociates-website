@@ -54,14 +54,45 @@
       </div>
     </div>
   </section>
+  <!-- CONTACT FORM (Formspree) -->
+<section id="contact-form-section" class="section grey-bg">
+  <div class="container">
+    <h2>Send Us a Message</h2>
 
-  <footer>
-    <div class="container">
-      <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-      <p><a href="tel:+442035384966">📞 020 3538 4966</a> | <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a></p>
-    </div>
-  </footer>
+    <form id="contact-form" action="https://formspree.io/f/kblzewpe" method="POST">
+      <label>
+        <span>Your Name</span>
+        <input type="text" name="name" required />
+      </label>
 
-  <script src="script.js"></script>
+      <label>
+        <span>Your Email</span>
+        <input type="email" name="_replyto" required />
+      </label>
+
+      <label>
+        <span>Your Message</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+
+      <button type="submit" class="btn primary lg">Send Message</button>
+
+      <p class="form-success" style="display:none;color:green;">✅ Message sent successfully!</p>
+      <p class="form-error" style="display:none;color:red;">❌ Something went wrong. Please try again.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+    <p><a href="tel:+442035384966">📞 020 3538 4966</a> | 
+       <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a>
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
