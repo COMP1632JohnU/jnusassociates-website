@@ -1,42 +1,47 @@
-/* ===========================
-   GLOBAL STYLES
-=========================== */
+/* ==== GLOBAL STYLES ==== */
+:root {
+  --primary: #001f3f;
+  --accent: #004080;
+  --light: #ffffff;
+  --text: #222;
+  --shadow: rgba(0, 0, 0, 0.15);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  color: #333;
-  background-color: #fff;
+  background-color: var(--light);
+  color: var(--text);
   line-height: 1.6;
 }
 
-/* ===========================
-   HEADER
-=========================== */
-.site-header {
-  width: 100%;
+/* ==== HEADER ==== */
+header {
   position: fixed;
   top: 0;
-  left: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  background: rgba(0, 31, 63, 0.9);
+  color: var(--light);
+  padding: 0.8rem 0;
+  box-shadow: 0 4px 10px var(--shadow);
+  z-index: 1000;
 }
 
-.site-header.transparent {
-  background: rgba(255, 255, 255, 0.8);
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 3rem;
 }
 
 .brand {
@@ -46,220 +51,274 @@ body {
 }
 
 .logo {
-  height: 45px;
-  width: auto;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+header h1 {
+  font-size: 1.4rem;
+  color: var(--light);
 }
 
 nav ul {
-  list-style: none;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
+  list-style: none;
 }
 
 nav a {
-  color: #0a1f44;
-  font-weight: 600;
+  color: var(--light);
   text-decoration: none;
+  font-weight: 500;
   transition: color 0.3s ease;
 }
 
 nav a:hover,
 nav a.active {
-  color: #0a66c2;
+  color: #b0d4ff;
 }
 
-/* ===========================
-   SECTIONS
-=========================== */
-.section {
-  padding: 6rem 0;
-  position: relative;
-  z-index: 2;
-}
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* ===========================
-   PARALLAX BACKGROUND
-=========================== */
+/* ==== PARALLAX BACKGROUND ==== */
 .parallax-bg {
-  position: relative;
   background-attachment: fixed;
-  background-position: center;
   background-size: cover;
-  z-index: 1;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
-/* ===========================
-   OFFICE LOCATIONS
-=========================== */
+/* ==== SECTION STYLING ==== */
+.section {
+  padding: 8rem 0 4rem;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  margin-top: 4rem;
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
+/* ==== CONTACT PAGE ==== */
 .office-locations {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: 1.5rem;
+  gap: 2rem;
   flex-wrap: wrap;
   margin-top: 2rem;
 }
 
 .office {
-  background: white;
+  background: #fff;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  padding: 1.2rem;
+  box-shadow: 0 6px 14px var(--shadow);
+  padding: 1.5rem;
   width: 280px;
-  min-height: 160px;
-  text-align: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .office:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
 }
 
 .office h3 {
-  color: #0a66c2;
-  font-size: 1.1rem;
+  color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
-.office p {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: #333;
+.contact-details {
+  margin-top: 2rem;
+  text-align: center;
 }
 
-/* ===========================
-   CONTACT FORM SECTION
-=========================== */
+.contact-details p {
+  margin-bottom: 0.3rem;
+}
+
+.contact-details a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-details a:hover {
+  text-decoration: underline;
+}
+
+/* ==== CONTACT FORM STYLING ==== */
 #contact-form-section {
-  position: relative;
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
   border-radius: 12px;
+  box-shadow: 0 8px 20px var(--shadow);
   padding: 3rem 2rem;
-  margin: 3rem auto 4rem auto;
-  width: 90%;
+  margin: 4rem auto;
   max-width: 600px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  color: var(--text);
 }
 
 #contact-form-section h2 {
-  text-align: center;
-  color: #0a1f44;
+  color: var(--accent);
   font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 1.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 #contact-form label {
   display: block;
-  margin-bottom: 1.2rem;
-  color: #0a1f44;
-  font-weight: 600;
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 #contact-form input,
 #contact-form textarea {
   width: 100%;
-  padding: 0.9rem;
+  padding: 0.8rem;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  outline: none;
+  margin-top: 0.4rem;
   font-size: 1rem;
-  background-color: #fff;
-  transition: border-color 0.3s ease;
+  transition: border 0.3s ease;
 }
 
 #contact-form input:focus,
 #contact-form textarea:focus {
-  border-color: #0a66c2;
-  outline: none;
+  border-color: var(--accent);
 }
 
 #contact-form button {
-  display: block;
-  background: linear-gradient(90deg, #0a66c2, #4da3ff);
-  color: white;
+  background: var(--accent);
+  color: var(--light);
   border: none;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 0.9rem 1.5rem;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: 0.3s ease;
-  width: 100%;
-  margin-top: 1rem;
+  font-size: 1rem;
+  transition: background 0.3s ease;
 }
 
 #contact-form button:hover {
-  background: linear-gradient(90deg, #4da3ff, #0a66c2);
-  transform: translateY(-2px);
+  background: #002a66;
 }
 
 .form-success,
 .form-error {
   text-align: center;
-  font-weight: 600;
-  margin-top: 1.5rem;
+  font-weight: 500;
+  margin-top: 1rem;
 }
 
-/* ===========================
-   BUTTONS
-=========================== */
-.btn {
-  display: inline-block;
-  background: #0a66c2;
-  color: white;
-  padding: 0.8rem 1.6rem;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
+/* ==== SERVICES PAGE ==== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-.btn:hover {
-  background: #4da3ff;
+.service-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ===========================
-   FOOTER
-=========================== */
-footer {
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.service-card h3 {
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.service-card p {
+  color: #333;
+  line-height: 1.6;
+}
+
+.intro {
+  font-size: 1.1rem;
+  color: #222;
   text-align: center;
-  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+/* ==== FOOTER ==== */
+footer {
+  background: var(--primary);
+  color: var(--light);
+  text-align: center;
+  padding: 1.8rem 0;
+  font-size: 0.95rem;
+  margin-top: 3rem;
 }
 
 footer a {
-  color: #4da3ff;
+  color: #b0d4ff;
   text-decoration: none;
-  font-weight: 600;
 }
 
 footer a:hover {
-  color: #fff;
+  text-decoration: underline;
 }
 
-/* ===========================
-   RESPONSIVE DESIGN
-=========================== */
+/* ==== POPUP MESSAGE ==== */
+.popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: none;
+  text-align: center;
+  z-index: 9999;
+}
+
+.popup.active {
+  display: block;
+}
+
+.popup h3 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.popup button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  color: var(--light);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.popup button:hover {
+  background: #002a66;
+}
+
+/* ==== RESPONSIVE ==== */
 @media (max-width: 768px) {
-  .header-inner {
-    flex-direction: column;
-    gap: 1rem;
+  header {
+    text-align: center;
   }
 
   nav ul {
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
+  }
+
+  .header-inner {
+    flex-direction: column;
   }
 
   .office-locations {
@@ -267,13 +326,7 @@ footer a:hover {
     align-items: center;
   }
 
-  .office {
-    width: 90%;
-    max-width: 360px;
-  }
-
-  #contact-form-section {
-    width: 95%;
-    padding: 2rem 1.5rem;
+  .services-grid {
+    grid-template-columns: 1fr;
   }
 }
