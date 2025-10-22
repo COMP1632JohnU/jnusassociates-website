@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — JNUS Associates Ltd</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- SEO Meta -->
+  <meta name="description" content="Contact JNUS Associates Ltd — Software & IT Consultancy with offices in the UK, USA, and Nigeria." />
+  <meta name="keywords" content="JNUS Associates, IT consultancy, software development, contact JNUS, Reigate, Abuja, Ithaca" />
+  <meta name="author" content="JNUS Associates Ltd" />
+
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body class="parallax-bg" style="background-image: url('fenchurch.jpg');">
+
+  <!-- HEADER -->
   <header class="site-header transparent">
     <div class="container header-inner">
       <div class="brand">
@@ -17,7 +26,6 @@
 
       <nav>
         <ul>
-          
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="projects.html">Projects</a></li>
@@ -27,31 +35,42 @@
     </div>
   </header>
 
-  <section id="contact-form-section" class="section">
+  <!-- OFFICE LOCATIONS -->
+  <section id="office-locations" class="section">
     <div class="container">
-      <h2>Contact JNUS Associates</h2>
-      <p class="intro">
-        Get in touch with our offices in the UK, USA, or Nigeria — or send us a quick message below.
-      </p>
+      <h2>Contact JNUS Associates Offices</h2>
 
-      <!-- 🌍 Office Locations -->
       <div class="office-locations">
         <div class="office">
           <h3>🇬🇧 London Office</h3>
-          <p>Castle Court, 41 London Rd, Reigate RH2 9RJ, United Kingdom</p>
+          <p>Castle Court, 41 London Rd, Reigate RH2 9RJ, United Kingdom.</p>
         </div>
+
         <div class="office">
           <h3>🇳🇬 Nigeria (Abuja) Office</h3>
-          <p>4th Floor, Tower C, Churchgate Plaza, AO Cadestral Zone,<br>
-          Constitution Avenue, Central Business District, Abuja, Nigeria.</p>
+          <p>
+            4th Floor, Tower C, Churchgate Plaza,<br />
+            AO Cadestral Zone, Constitution Avenue,<br />
+            Central Business District, Abuja, Nigeria.
+          </p>
         </div>
+
         <div class="office">
           <h3>🇺🇸 USA (Ithaca) Office</h3>
-          <p>125 East State Street, 3rd Floor, Ithaca, NY 14850, USA.</p>
+          <p>
+            125 East State Street, 3rd Floor,<br />
+            Ithaca, NY 14850, USA.
+          </p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- ✉️ Formspree Contact Form -->
+  <!-- CONTACT FORM -->
+  <section id="contact-form-section" class="section grey-bg">
+    <div class="container">
+      <h2>Send Us a Message</h2>
+
       <form id="contact-form" action="https://formspree.io/f/kblzewpe" method="POST">
         <label>
           <span>Your Name</span>
@@ -68,7 +87,7 @@
           <textarea name="message" rows="5" required></textarea>
         </label>
 
-        <button type="submit" class="btn primary">Send Message</button>
+        <button type="submit" class="btn primary lg">Send Message</button>
 
         <p class="form-success" style="display:none;color:green;">✅ Message sent successfully!</p>
         <p class="form-error" style="display:none;color:red;">❌ Something went wrong. Please try again.</p>
@@ -76,6 +95,7 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
