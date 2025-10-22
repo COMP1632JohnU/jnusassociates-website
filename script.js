@@ -89,3 +89,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+// ===============================
+// Parallax Scroll Effect
+// ===============================
+window.addEventListener("scroll", () => {
+  const bg = document.querySelector(".parallax-bg");
+  if (bg) {
+    const offset = window.pageYOffset * 0.5; // adjust speed
+    bg.style.backgroundPositionY = `${offset}px`;
+  }
+});
