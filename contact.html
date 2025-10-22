@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — JNUS Associates Ltd</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="parallax-bg" style="background-image: url('lime.jpg');">
+
+<body class="parallax-bg" style="background-image: url('fenchurch.jpg');">
   <header class="site-header transparent">
     <div class="container header-inner">
       <div class="brand">
         <img src="logo.svg" alt="JNUS Associates Logo" class="logo" />
-        <div class="brand-text">
-          <h1>JNUS Associates Ltd</h1>
-          <p class="tagline">Business and domestic software development • IT consultancy • Technical testing • Design</p>
-          <p class="phone">📞 <a href="tel:+442035384966">020 3538 4966</a></p>
-        </div>
+        <h1>JNUS Associates Ltd</h1>
       </div>
+
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -28,68 +26,65 @@
     </div>
   </header>
 
-  <section id="contact" class="section contact-section">
+  <section id="contact-form-section" class="section">
     <div class="container">
-      <h2>Contact JNUS Associates Offices</h2>
+      <h2>Contact JNUS Associates</h2>
+      <p class="intro">
+        Get in touch with our offices in the UK, USA, or Nigeria — or send us a quick message below.
+      </p>
+
+      <!-- 🌍 Office Locations -->
       <div class="office-locations">
         <div class="office">
-          <h3>🇬🇧 UK Office</h3>
-          <p>Castle Court, 41 London Rd,<br>Reigate RH2 9RJ, United Kingdom.</p>
+          <h3>🇬🇧 London Office</h3>
+          <p>Castle Court, 41 London Rd, Reigate RH2 9RJ, United Kingdom</p>
         </div>
-
         <div class="office">
           <h3>🇳🇬 Nigeria (Abuja) Office</h3>
-          <p>4th Floor, Tower C, Churchgate Plaza,<br>AO Cadestral Zone, Constitution Avenue,<br>Central Business District, Abuja, Nigeria.</p>
+          <p>4th Floor, Tower C, Churchgate Plaza, AO Cadestral Zone,<br>
+          Constitution Avenue, Central Business District, Abuja, Nigeria.</p>
         </div>
-
         <div class="office">
           <h3>🇺🇸 USA (Ithaca) Office</h3>
-          <p>125 East State Street, 3rd Floor,<br>Ithaca, NY 14850, USA.</p>
+          <p>125 East State Street, 3rd Floor, Ithaca, NY 14850, USA.</p>
         </div>
       </div>
 
-      <div class="contact-details">
-        <p><strong>Telephone:</strong> <a href="tel:+442035384966">020 3538 4966</a></p>
-        <p><strong>Email:</strong> <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
-      </div>
+      <!-- ✉️ Formspree Contact Form -->
+      <form id="contact-form" action="https://formspree.io/f/kblzewpe" method="POST">
+        <label>
+          <span>Your Name</span>
+          <input type="text" name="name" required />
+        </label>
+
+        <label>
+          <span>Your Email</span>
+          <input type="email" name="_replyto" required />
+        </label>
+
+        <label>
+          <span>Your Message</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+
+        <button type="submit" class="btn primary">Send Message</button>
+
+        <p class="form-success" style="display:none;color:green;">✅ Message sent successfully!</p>
+        <p class="form-error" style="display:none;color:red;">❌ Something went wrong. Please try again.</p>
+      </form>
     </div>
   </section>
-  <!-- CONTACT FORM (Formspree) -->
-<section id="contact-form-section" class="section grey-bg">
-  <div class="container">
-    <h2>Send Us a Message</h2>
-    <form id="contact-form" action="https://formspree.io/f/kblzewpe" method="POST">
-      <label>
-        <span>Your Name</span>
-        <input type="text" name="name" required />
-      </label>
 
-      <label>
-        <span>Your Email</span>
-        <input type="email" name="_replyto" required />
-      </label>
+  <footer>
+    <div class="container">
+      <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+      <p>
+        <a href="tel:+442035384966">📞 020 3538 4966</a> |
+        <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a>
+      </p>
+    </div>
+  </footer>
 
-      <label>
-        <span>Your Message</span>
-        <textarea name="message" rows="5" required></textarea>
-      </label>
-
-      <button type="submit" class="btn primary lg">Send Message</button>
-
-      <p class="form-success" style="display:none; color:green;">✅ Message sent successfully!</p>
-      <p class="form-error" style="display:none; color:red;">❌ Something went wrong. Please try again.</p>
-    </form>
-  </div>
-</section>
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-    <p><a href="tel:+442035384966">📞 020 3538 4966</a> | 
-       <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a>
-    </p>
-  </div>
-</footer>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
