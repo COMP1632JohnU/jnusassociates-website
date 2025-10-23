@@ -459,3 +459,107 @@ footer a:hover {
 .navbar a.active::after {
   width: 100%;
 }
+/* ===== CONTACT PAGE (LUMINATING FORM & OFFICE CARDS) ===== */
+.contact-layout {
+  margin-top: 160px;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.contact-header h2 {
+  font-family: "Times New Roman", serif;
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.contact-header p {
+  color: #e0e0e0;
+  font-family: "Georgia", serif;
+  margin-bottom: 40px;
+}
+
+/* === Glass Form === */
+.contact-form-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px 30px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: 0 auto 60px auto;
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Inputs with teal illumination */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-family: "Georgia", serif;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #00f5d4;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+/* Submit button */
+.submit-btn {
+  background-color: #00f5d4;
+  color: #000;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #00c9a9;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+}
+
+/* === Offices Section === */
+.office-header {
+  color: #fff;
+  font-size: 1.8rem;
+  font-family: "Times New Roman", serif;
+  margin-bottom: 30px;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.8);
+}
+
+.office-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.office-card {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 25px 20px;
+  width: 280px;
+  color: #fff;
+  font-family: "Georgia", serif;
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.office-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
+}

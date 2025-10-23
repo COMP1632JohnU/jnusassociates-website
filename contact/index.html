@@ -7,9 +7,9 @@
   <link rel="stylesheet" href="/styles.css" />
 </head>
 
-<body style="background-image: url('../stmarysaxe.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+<body style="background-image: url('/stmarysaxe.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
 
-  <!-- ===== HEADER (consistent with other pages) ===== -->
+  <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
       <div class="brand">
@@ -21,62 +21,64 @@
         </div>
       </div>
 
-      <!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/contact/" class="active">Contact</a></li>
-  </ul>
-</nav>
+      <!-- ===== NAVBAR ===== -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/" class="active">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <!-- ===== CONTACT CONTENT (uses your contact styles) ===== -->
-  <main class="contact-page">
-    <section class="contact-container">
-      <div class="contact-box">
-        <h2>Contact Us</h2>
-        <p>We’re here to help — reach out to discuss a project, consultation, or partnership opportunity.</p>
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="contact-layout">
+    <div class="contact-header">
+      <h2>Contact Us</h2>
+      <p>We’re here to help — reach out to discuss a project, consultation, or partnership opportunity.</p>
+    </div>
 
-        <form action="https://formspree.io/f/xzzjllng" method="POST" class="contact-form">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your name" required />
+    <!-- Form -->
+    <div class="contact-form-container glass-card">
+      <form action="https://formspree.io/f/xzzjllng" method="POST" class="contact-form">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required />
 
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="_replyto" placeholder="you@example.com" required />
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="_replyto" placeholder="you@example.com" required />
 
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
 
-          <button type="submit" class="submit-btn">Send Message</button>
-        </form>
-      </div>
-    </section>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
 
+    <!-- Offices -->
     <section class="office-section">
-      <h2>Our Offices</h2>
+      <h2 class="office-header">Our Offices</h2>
       <div class="office-grid">
-        <div class="office-card">
+        <div class="office-card glass-card">
           <h3>🇬🇧 UK Office</h3>
           <p>Castle Court, 41 London Rd, Reigate RH2 9RJ</p>
         </div>
-        <div class="office-card">
+        <div class="office-card glass-card">
           <h3>🇳🇬 Nigeria (Abuja) Office</h3>
           <p>4th Floor, Tower C, Churchgate Plaza, AO Cadastral Zone, Constitution Ave</p>
         </div>
-        <div class="office-card">
+        <div class="office-card glass-card">
           <h3>🇺🇸 USA (Ithaca) Office</h3>
           <p>125 East State Street, 3rd Floor, Ithaca, NY 14850</p>
         </div>
       </div>
     </section>
-  </main>
+  </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer>
+  <footer class="footer-bottom">
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
