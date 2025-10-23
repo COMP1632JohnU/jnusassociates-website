@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us | JNUS Associates Ltd</title>
   <link rel="stylesheet" href="/styles.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body style="background-image: url('../fenchurch.jpg'); background-size: cover; background-position: center;">
+<body style="background-image: url('/fenchurch.jpg'); background-size: cover; background-position: center;">
 
   <!-- ===== HEADER ===== -->
   <header class="site-header">
@@ -22,21 +23,23 @@
       </div>
 
       <!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about/" class="active">About</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-</nav>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/" class="active">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <!-- ===== ABOUT SECTION ===== -->
   <section class="about-layout">
-    <div class="about-card">
+    <!-- ABOUT US -->
+    <div class="about-card glass-card">
+      <i data-lucide="building" class="about-icon"></i>
       <h2>About Us</h2>
       <p>
         We are a trusted partner for businesses seeking innovation, reliability,
@@ -44,8 +47,10 @@
       </p>
     </div>
 
+    <!-- MISSION + VISION -->
     <div class="mission-vision">
-      <div class="about-card">
+      <div class="about-card glass-card">
+        <i data-lucide="target" class="about-icon"></i>
         <h3>Our Mission</h3>
         <p>
           To deliver reliable, secure, and scalable technology solutions that
@@ -54,7 +59,8 @@
         </p>
       </div>
 
-      <div class="about-card">
+      <div class="about-card glass-card">
+        <i data-lucide="globe" class="about-icon"></i>
         <h3>Our Vision</h3>
         <p>
           To be recognized globally as a trusted partner for digital
@@ -71,5 +77,8 @@
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
 
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
