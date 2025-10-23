@@ -154,54 +154,59 @@ footer a {
     font-size: 1.8rem;
   }
 }
-/* ===== ABOUT PAGE ===== */
-.about-section {
-  text-align: center;
+/* ===== ABOUT PAGE (NEW DESIGN) ===== */
+.about-layout {
   margin-top: 160px;
-  padding: 100px 20px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 60px 20px;
+  text-align: center;
 }
 
-.about-section h2 {
-  font-size: 2.2rem;
-  color: #fff;
-  margin-bottom: 1.5rem;
+.about-card {
+  background-color: rgba(31, 58, 88, 0.95); /* Navy tone */
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 40px 30px;
+  margin: 20px auto;
+  max-width: 1200px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.about-section p {
-  color: #e0e0e0;
-  font-size: 1.05rem;
-  margin-bottom: 1.2rem;
-  line-height: 1.7;
+.about-card h2,
+.about-card h3 {
+  margin-bottom: 20px;
+  font-family: "Times New Roman", serif;
+  font-weight: 600;
+}
+
+.about-card p {
+  font-size: 1.2rem;
+  font-family: "Georgia", serif;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 90%;
 }
 
 .mission-vision {
   display: flex;
-  justify-content: space-around;
-  gap: 2rem;
+  justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 3rem;
+  gap: 20px;
+  margin-top: 30px;
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 2rem;
-  border-radius: 10px;
-  width: 45%;
-  min-width: 280px;
+.mission-vision .about-card {
+  flex: 1;
+  min-width: 45%;
 }
 
-.card h3 {
-  color: #4da3ff;
-  margin-bottom: 1rem;
+/* Responsive */
+@media (max-width: 768px) {
+  .mission-vision {
+    flex-direction: column;
+  }
+  .mission-vision .about-card {
+    min-width: 100%;
+  }
 }
 
-.card p {
-  color: #f0f0f0;
-  font-size: 1rem;
-}
