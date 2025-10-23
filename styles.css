@@ -154,3 +154,54 @@ footer a {
     font-size: 1.8rem;
   }
 }
+/* ===== ABOUT PAGE ===== */
+.about-section {
+  text-align: center;
+  margin-top: 160px;
+  padding: 100px 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-section h2 {
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.about-section p {
+  color: #e0e0e0;
+  font-size: 1.05rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+}
+
+.mission-vision {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 45%;
+  min-width: 280px;
+}
+
+.card h3 {
+  color: #4da3ff;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  color: #f0f0f0;
+  font-size: 1rem;
+}
