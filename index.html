@@ -7,52 +7,54 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body class="parallax-bg" style="background-image: url('lime.jpg');">
+<body style="background-image: url('gracechurch.jpg'); background-size: cover; background-position: center;">
 
   <!-- ===== HEADER ===== -->
-  <header class="site-header transparent">
-    <div class="container header-inner">
+  <header class="site-header">
+    <div class="container">
       <div class="brand">
-        <img src="logo.svg" alt="JNUS Associates Logo" class="logo" />
-        <div>
+        <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <div class="brand-text">
           <h1>JNUS Associates Ltd</h1>
-          <p>
-            Business and domestic software development • IT consultancy • Technical testing • Design
-          </p>
-          <p><span>📞</span> 020 3538 4966</p>
+          <p>Systems • Tech • Data</p>
+          <p>📞 020 3538 4966</p>
         </div>
       </div>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
+
+      <!-- ===== NAVIGATION ===== -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
   <!-- ===== HERO SECTION ===== -->
   <section class="hero">
-    <h1>Delivering clarity and confidence in software & IT.</h1>
-    <p>
-      From bespoke app development to IT consultancy and testing, we help your business grow
-      through dependable solutions and precise execution.
-    </p>
+    <h2>Delivering clarity and confidence in software, tech, and data.</h2>
+    <p>At JNUS Associates, we provide solutions that empower your business through innovation, precision, and engineering excellence.</p>
     <button onclick="window.location.href='contact.html'">Contact Us</button>
   </section>
 
   <!-- ===== FOOTER ===== -->
   <footer>
-    <div class="container">
-      <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-      <p>
-        📞 020 3538 4966 | 
-        <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
-      </p>
-    </div>
+    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Smooth navigation without freeze
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        if (href && href.endsWith('.html')) return;
+      });
+    });
+  </script>
 </body>
 </html>
