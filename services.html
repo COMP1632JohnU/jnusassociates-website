@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services — JNUS Associates Ltd</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body style="background-image: url('marklane.jpg'); background-size: cover; background-position: center;">
@@ -38,38 +39,47 @@
   <section class="services-layout">
     <div class="services-header">
       <h2>Our Services</h2>
-      <p>We deliver engineering-driven software, IT consultancy, and data solutions designed to meet the evolving demands of modern businesses.</p>
+      <p>We deliver engineering-driven software, IT consultancy, and data solutions.</p>
     </div>
 
     <div class="services-grid">
       <div class="service-card">
+        <i data-lucide="code" class="service-icon"></i>
         <h3>Software Development</h3>
         <p>
-          Custom-built, scalable, and secure software applications — developed with precision to align with your business needs, from concept to deployment.
+          Custom-built, scalable, and secure software applications — developed with precision
+          to align with your business needs, from concept to deployment.
         </p>
       </div>
 
       <div class="service-card">
+        <i data-lucide="settings" class="service-icon"></i>
         <h3>IT Consultancy & Systems Engineering</h3>
         <p>
-          Providing clear technical guidance and architectural solutions that improve efficiency, security, and performance across enterprise systems.
+          Providing clear technical guidance and architectural solutions that improve efficiency,
+          security, and performance across enterprise systems.
         </p>
       </div>
 
       <div class="service-card">
+        <i data-lucide="bar-chart-3" class="service-icon"></i>
         <h3>Data & Analytical Solutions</h3>
         <p>
-          Unlocking the power of data with analytical models, system integrations, and intelligent reporting for confident business decision-making.
+          Unlocking the power of data with analytical models, system integrations, and intelligent
+          reporting for confident business decision-making.
         </p>
       </div>
     </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer>
+  <footer class="footer-bottom">
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
 
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
