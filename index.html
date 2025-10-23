@@ -48,11 +48,11 @@
   </footer>
 
   <script>
-    // Smooth navigation without freeze
+    // Keep navigation smooth (no freeze)
     document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', e => {
+      link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
-        if (href && href.endsWith('.html')) return;
+        if (!href) return;
       });
     });
   </script>

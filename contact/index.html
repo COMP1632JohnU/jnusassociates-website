@@ -7,60 +7,55 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body style="background-image: url('stmarysaxe.jpg');">
+<body style="background-image: url('stmarysaxe.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
 
-  <!-- HEADER (same as other pages) -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="logo-area">
-        <img src="jnus-logo.png" alt="JNUS Associates Ltd Logo" class="logo">
-        <div class="company-info">
+  <!-- ===== HEADER (consistent with other pages) ===== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <div class="brand-text">
           <h1>JNUS Associates Ltd</h1>
           <p>AI • Systems • Tech • Data</p>
-          <p class="phone">📞 020 3538 4966</p>
+          <p>📞 020 3538 4966</p>
         </div>
       </div>
+
       <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html" class="active">Contact</a>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <!-- CONTACT CONTENT -->
-  <main class="content contact-content">
-    <section class="intro">
-      <h2>Contact Us</h2>
-      <p>We’re here to help — reach out to discuss a project, consultation, or partnership opportunity.</p>
-    </section>
+  <!-- ===== CONTACT CONTENT (uses your contact styles) ===== -->
+  <main class="contact-page">
+    <section class="contact-container">
+      <div class="contact-box">
+        <h2>Contact Us</h2>
+        <p>We’re here to help — reach out to discuss a project, consultation, or partnership opportunity.</p>
 
-    <!-- Form Section -->
-    <section class="contact-form-container">
-      <form action="https://formspree.io/f/xzzjllng" method="POST" class="contact-form">
-        <div class="form-group">
+        <form action="https://formspree.io/f/xzzjllng" method="POST" class="contact-form">
           <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your name" required>
-        </div>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
 
-        <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" name="_replyto" placeholder="you@example.com" required>
-        </div>
+          <input type="email" id="email" name="_replyto" placeholder="you@example.com" required />
 
-        <div class="form-group">
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
-        </div>
 
-        <button type="submit" class="btn">Send Message</button>
-      </form>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
     </section>
 
-    <!-- Offices -->
-    <section class="office-locations">
+    <section class="office-section">
       <h2>Our Offices</h2>
       <div class="office-grid">
         <div class="office-card">
@@ -79,11 +74,10 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
-
 </body>
 </html>
