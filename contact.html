@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | JNUS Associates Ltd</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="contact-page" style="background-image: url('stmarysaxe.jpg');">
 
@@ -12,6 +12,10 @@
   <header class="navbar">
     <div class="logo">
       <img src="jnus-logo.png" alt="JNUS Associates Ltd Logo">
+      <div class="company-info">
+        <h1>JNUS Associates Ltd</h1>
+        <p>AI • Systems • Tech • Data</p>
+      </div>
     </div>
     <nav>
       <a href="index.html">Home</a>
@@ -23,46 +27,43 @@
   </header>
 
   <!-- Contact Section -->
-  <section class="contact-section">
-    <div class="contact-overlay">
-      <h1>Contact Us</h1>
-      <p>We’d love to hear from you — whether you’re interested in a project, collaboration, or consultation.</p>
-      
-      <!-- Contact Form -->
+  <section class="contact-container">
+    <div class="contact-box">
+      <h2>Contact Us</h2>
+      <p>We’d love to hear from you. Please complete the form below and our team will get back to you.</p>
+
+      <!-- Formspree Form -->
       <form action="https://formspree.io/f/xzzjllng" method="POST" class="contact-form">
         <div class="form-group">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" placeholder="Your name" required>
         </div>
-
         <div class="form-group">
           <label for="email">Email Address</label>
           <input type="email" id="email" name="_replyto" placeholder="you@example.com" required>
         </div>
-
         <div class="form-group">
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
         </div>
-
         <button type="submit" class="submit-btn">Send Message</button>
       </form>
     </div>
   </section>
 
   <!-- Office Locations -->
-  <section class="office-locations">
+  <section class="office-section">
     <h2>Our Offices</h2>
-    <div class="locations-grid">
-      <div class="location-card">
+    <div class="office-grid">
+      <div class="office-card">
         <h3>🇬🇧 UK Office</h3>
         <p>Castle Court, 41 London Rd, Reigate RH2 9RJ</p>
       </div>
-      <div class="location-card">
+      <div class="office-card">
         <h3>🇳🇬 Abuja Office</h3>
         <p>4th Floor, Tower C, Churchgate Plaza, Constitution Ave, Abuja</p>
       </div>
-      <div class="location-card">
+      <div class="office-card">
         <h3>🇺🇸 USA (Ithaca) Office</h3>
         <p>125 East State Street, 3rd Floor, Ithaca, NY 14850</p>
       </div>
