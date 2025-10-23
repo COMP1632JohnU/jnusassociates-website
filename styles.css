@@ -44,7 +44,6 @@ body {
 .logo {
   width: 70px;
   height: auto;
-  border-radius: 4px;
 }
 
 .brand-text h1 {
@@ -74,7 +73,7 @@ body {
 
 .navbar a:hover,
 .navbar a.active {
-  color: #4da3ff;
+  color: #00f5d4; /* Teal accent */
 }
 
 /* ===== HERO ===== */
@@ -102,7 +101,7 @@ body {
 }
 
 .hero button {
-  background-color: #4da3ff;
+  background-color: #00f5d4;
   border: none;
   color: white;
   padding: 0.9rem 2.2rem;
@@ -113,7 +112,7 @@ body {
 }
 
 .hero button:hover {
-  background-color: #2a7edc;
+  background-color: #00c2a8;
 }
 
 /* ===== FOOTER ===== */
@@ -126,37 +125,15 @@ footer {
 }
 
 footer a {
-  color: #4da3ff;
+  color: #00f5d4;
   text-decoration: none;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .navbar ul {
-    flex-direction: column;
-    margin-top: 1rem;
-  }
-
-  .logo {
-    width: 60px;
-  }
-
-  .hero {
-    margin-top: 120px;
-    padding: 80px 20px;
-  }
-
-  .hero h2 {
-    font-size: 1.8rem;
-  }
+footer a:hover {
+  text-decoration: underline;
 }
 
-/* ===== ABOUT PAGE (LIQUID WHITE STYLE) ===== */
+/* ===== ABOUT PAGE ===== */
 .about-layout {
   margin-top: 160px;
   padding: 60px 20px;
@@ -193,30 +170,6 @@ footer a {
   margin: 0 auto;
 }
 
-.mission-vision {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 30px;
-}
-
-.mission-vision .about-card {
-  flex: 1;
-  min-width: 380px;
-  max-width: 500px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .mission-vision {
-    flex-direction: column;
-  }
-  .mission-vision .about-card {
-    min-width: 100%;
-  }
-}
-
 /* ===== SERVICES PAGE ===== */
 .services-layout {
   margin-top: 160px;
@@ -249,11 +202,12 @@ footer a {
   line-height: 1.6;
 }
 
+/* ===== SERVICES GRID ===== */
 .services-grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 25px;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -266,10 +220,44 @@ footer a {
   flex: 1;
   min-width: 300px;
   max-width: 350px;
-  padding: 30px 20px;
+  padding: 35px 25px;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 30px rgba(0, 255, 255, 0.3);
+}
+
+/* ✅ Updated Teal-Illuminated Icons */
+.service-icon {
+  width: 50px;
+  height: 50px;
+  color: #00f5d4;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 12px rgba(0, 245, 212, 0.8));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
+}
+
+.service-card h3 {
+  font-family: "Times New Roman", serif;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.service-card p {
+  font-family: "Georgia", serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f5f5f5;
 }
 
 /* ===== PROJECTS PAGE ===== */
@@ -292,47 +280,56 @@ footer a {
   font-family: "Georgia", serif;
 }
 
-/* ===== CONTACT PAGE (ALIGNED HEADER + FORM LAYOUT) ===== */
-.contact-page {
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: #fff;
-  font-family: "Georgia", serif;
-}
-
-.contact-content {
-  margin-top: 160px;
-  text-align: center;
-  padding: 60px 20px;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.contact-content h2 {
+.projects-header h2 {
   font-family: "Times New Roman", serif;
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 15px;
 }
 
+.projects-header p {
+  font-size: 1.1rem;
+  color: #f5f5f5;
+  line-height: 1.6;
+}
+
+.project-icon {
+  width: 45px;
+  height: 45px;
+  color: #00f5d4;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 12px rgba(0, 245, 212, 0.8));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.project-card:hover .project-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
+}
+
+/* ===== CONTACT PAGE ===== */
 .contact-form-container {
-  max-width: 600px;
-  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
 }
 
 .contact-form {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 600px;
   text-align: left;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .contact-form label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #fff;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
 }
 
 .contact-form input,
@@ -341,31 +338,26 @@ footer a {
   padding: 0.8rem;
   border: none;
   border-radius: 6px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   font-family: inherit;
 }
 
-.contact-form .btn {
-  background: #00b3b3;
+.btn {
+  background: #00f5d4;
   color: #fff;
   border: none;
   padding: 0.8rem 2rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s ease;
+  transition: 0.3s;
 }
 
-.contact-form .btn:hover {
-  background: #008c8c;
+.btn:hover {
+  background: #00c2a8;
 }
 
-/* Office Cards */
-.office-locations {
-  text-align: center;
-  padding: 4rem 2rem;
-}
-
+/* ===== OFFICES ===== */
 .office-grid {
   display: flex;
   justify-content: center;
@@ -381,4 +373,46 @@ footer a {
   width: 280px;
   padding: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .logo {
+    width: 60px;
+  }
+
+  .hero {
+    margin-top: 120px;
+    padding: 80px 20px;
+  }
+
+  .hero h2 {
+    font-size: 1.8rem;
+  }
+
+  .services-grid,
+  .projects-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-card,
+  .project-card {
+    width: 90%;
+  }
+
+  .contact-form {
+    width: 95%;
+    padding: 1.5rem;
+  }
 }
