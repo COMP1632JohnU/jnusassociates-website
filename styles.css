@@ -154,7 +154,7 @@ footer a {
     font-size: 1.8rem;
   }
 }
-/* ===== ABOUT PAGE (NEW DESIGN) ===== */
+/* ===== ABOUT PAGE (LIQUID WHITE STYLE) ===== */
 .about-layout {
   margin-top: 160px;
   padding: 60px 20px;
@@ -162,42 +162,47 @@ footer a {
 }
 
 .about-card {
-  background-color: rgba(31, 58, 88, 0.95); /* Navy tone */
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  padding: 40px 30px;
+  background: rgba(255, 255, 255, 0.15); /* translucent white */
+  color: #ffffff; /* pure white text */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 30px 25px;
   margin: 20px auto;
-  max-width: 1200px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px); /* glass/liquid effect */
+  -webkit-backdrop-filter: blur(10px);
+  font-family: "Georgia", serif;
 }
 
 .about-card h2,
 .about-card h3 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-family: "Times New Roman", serif;
   font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .about-card p {
-  font-size: 1.2rem;
-  font-family: "Georgia", serif;
+  font-size: 1.1rem;
   line-height: 1.6;
-  margin: 0 auto;
+  color: #f5f5f5;
   max-width: 90%;
+  margin: 0 auto;
 }
 
 .mission-vision {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 30px;
   margin-top: 30px;
 }
 
 .mission-vision .about-card {
   flex: 1;
-  min-width: 45%;
+  min-width: 380px;
+  max-width: 500px;
 }
 
 /* Responsive */
