@@ -260,41 +260,28 @@ footer a:hover {
   color: #f5f5f5;
 }
 
-/* ===== PROJECTS PAGE ===== */
-.projects-layout {
-  margin-top: 160px;
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.projects-header {
-  background: rgba(255, 255, 255, 0.15);
+/* ===== PROJECTS PAGE (LIQUID WHITE STYLE) ===== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.15); /* Liquid white translucent */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 30px 25px;
   color: #fff;
-  border-radius: 10px;
-  padding: 40px 25px;
-  max-width: 900px;
-  margin: 0 auto 50px auto;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  font-family: "Georgia", serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.projects-header h2 {
-  font-family: "Times New Roman", serif;
-  font-size: 2rem;
-  margin-bottom: 15px;
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 25px rgba(0, 255, 255, 0.35);
 }
 
-.projects-header p {
-  font-size: 1.1rem;
-  color: #f5f5f5;
-  line-height: 1.6;
-}
-
+/* Teal glow for icons */
 .project-icon {
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
   color: #00f5d4;
   margin-bottom: 20px;
   filter: drop-shadow(0 0 12px rgba(0, 245, 212, 0.8));
@@ -304,6 +291,33 @@ footer a:hover {
 .project-card:hover .project-icon {
   transform: scale(1.1);
   filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
+}
+
+/* Pyramid layout spacing */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.project-card {
+  flex: 1;
+  min-width: 320px;
+  max-width: 480px;
+  text-align: center;
+}
+
+.projects-header {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto 40px auto;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2);
 }
 
 /* ===== CONTACT PAGE ===== */
