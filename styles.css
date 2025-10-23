@@ -426,3 +426,36 @@ footer a:hover {
     padding: 1.5rem;
   }
 }
+/* ===== NAVBAR TEAL HOVER EFFECT ===== */
+.navbar a {
+  position: relative;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+/* Glow effect */
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #00f5d4; /* liquid teal */
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+  transition: width 0.4s ease;
+}
+
+/* Hover & Active Link */
+.navbar a:hover,
+.navbar a.active {
+  color: #00f5d4;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+  width: 100%;
+}
