@@ -1,93 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — JNUS Associates Ltd</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - JNUS Associates Ltd</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="parallax-bg" style="background-image: url('fenchurch.jpg');">
 
-  <!-- HEADER -->
-  <header class="site-header transparent">
+<body>
+  <header class="site-header white-bg">
     <div class="container header-inner">
       <div class="brand">
-        <img src="logo.svg" alt="JNUS Associates Logo" class="logo" />
-        <div>
-          <h1>JNUS Associates Ltd</h1>
-          <p>Business and domestic software development • IT consultancy • Technical testing • Design</p>
-          <p><strong>📞 020 3538 4966</strong></p>
-        </div>
+        <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <h1>JNUS Associates Ltd</h1>
       </div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
-        </ul>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html" class="active">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <p style="color: #fff;">We’d love to hear from you. Reach out to our offices or send us a message below.</p>
-    </div>
-  </section>
+  <main class="contact-container">
+    <h2>Contact Us</h2>
+    <p>We’d love to hear from you — please fill out the form below or reach us at any of our offices.</p>
 
-  <!-- OFFICE LOCATIONS -->
-  <section class="section">
-    <div class="container office-locations">
+    <form id="contact-form" action="https://formspree.io/f/kblzewpe" method="POST" class="contact-form">
+      <label>
+        <span>Your Name</span>
+        <input type="text" name="name" required>
+      </label>
 
+      <label>
+        <span>Your Email</span>
+        <input type="email" name="_replyto" required>
+      </label>
+
+      <label>
+        <span>Your Message</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+
+      <button type="submit" class="btn-teal">Send Message</button>
+    </form>
+
+    <section class="office-locations">
       <div class="office">
-        <h3>🇬🇧 United Kingdom</h3>
-        <p>Castle Court, 41 London Rd,<br> Reigate RH2 9RJ.</p>
+        <h3>🇬🇧 UK Office</h3>
+        <p>Castle Court, 41 London Rd, Reigate RH2 9RJ, United Kingdom</p>
       </div>
 
       <div class="office">
-        <h3>🇳🇬 Nigeria</h3>
-        <p>4th Floor, Tower C, Churchgate Plaza,<br>
-        AO Cadestral Zone, Constitution Avenue,<br>
-        Central Business District, Abuja, Nigeria.</p>
+        <h3>🇳🇬 Nigeria (Abuja) Office</h3>
+        <p>4th Floor, Tower C, Churchgate Plaza, AO Cadastral Zone, Constitution Avenue, Abuja, Nigeria</p>
       </div>
 
       <div class="office">
-        <h3>🇺🇸 United States</h3>
-        <p>125 East State Street, 3rd Floor,<br>
-        Ithaca, NY 14850, USA.</p>
+        <h3>🇺🇸 USA (Ithaca) Office</h3>
+        <p>125 East State Street, 3rd Floor, Ithaca, NY 14850, USA</p>
       </div>
+    </section>
+  </main>
 
-    </div>
-  </section>
-
-  <!-- CONTACT FORM -->
-  <section class="section">
-    <div class="container">
-      <h2 style="text-align:center; color:#fff; margin-bottom:25px;">Send Us a Message</h2>
-
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="_replyto" placeholder="Your Email" required />
-        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-      <p>
-        <a href="tel:+442035384966">📞 020 3538 4966</a> |
-        <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a>
-      </p>
-    </div>
+  <footer class="footer">
+    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>

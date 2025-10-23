@@ -521,3 +521,78 @@ footer a {
     width: 90%;
   }
 }
+/* CONTACT PAGE */
+.contact-container {
+  background: white;
+  color: #003333;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.contact-form label span {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+.btn-teal {
+  background-color: teal;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-teal:hover {
+  background-color: #006666;
+}
+
+.office-locations {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.office {
+  background: linear-gradient(to bottom right, #e0f7f5, #b2dfdb);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  flex: 1 1 300px;
+  padding: 1.5rem;
+  color: #004d4d;
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #003333;
+  color: white;
+}
+
+.footer a {
+  color: #66ffff;
+  text-decoration: none;
+}
