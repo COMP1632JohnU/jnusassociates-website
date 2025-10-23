@@ -407,3 +407,117 @@ footer a {
     width: 90%;
   }
 }
+
+/* ===== PROJECTS PAGE ===== */
+.projects-layout {
+  margin-top: 160px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.projects-header {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-radius: 10px;
+  padding: 40px 25px;
+  max-width: 900px;
+  margin: 0 auto 50px auto;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: "Georgia", serif;
+}
+
+.projects-header h2 {
+  font-family: "Times New Roman", serif;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.projects-header p {
+  font-size: 1.1rem;
+  color: #f5f5f5;
+  line-height: 1.6;
+}
+
+.projects-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+  padding: 35px 25px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 30px rgba(0, 255, 255, 0.3);
+}
+
+.project-icon {
+  width: 45px;
+  height: 45px;
+  color: #00f5d4;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+}
+
+.project-card h3 {
+  font-family: "Times New Roman", serif;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.project-card p {
+  font-family: "Georgia", serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f5f5f5;
+}
+
+/* Footer */
+.footer-bottom {
+  text-align: center;
+  color: white;
+  margin-top: 80px;
+  padding: 30px 0;
+  font-family: "Georgia", serif;
+  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom a {
+  color: #00f5d4;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .projects-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .project-card {
+    width: 90%;
+  }
+}

@@ -5,81 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — JNUS Associates Ltd</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="parallax-bg" style="background-image: url('fenchurch.jpg');">
 
-  <!-- HEADER -->
-  <header class="site-header transparent">
-    <div class="container header-inner">
+<body style="background-image: url('lime.jpg'); background-size: cover; background-position: center;">
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
       <div class="brand">
-        <img src="logo.svg" alt="JNUS Associates Logo" class="logo" />
-        <div>
+        <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <div class="brand-text">
           <h1>JNUS Associates Ltd</h1>
-          <p>Business and domestic software development • IT consultancy • Technical testing • Design</p>
-          <p><strong>📞 020 3538 4966</strong></p>
+          <p>Systems • Tech • Data</p>
+          <p>📞 020 3538 4966</p>
         </div>
       </div>
-      <nav>
+
+      <!-- ===== NAVIGATION ===== -->
+      <nav class="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="container">
+  <!-- ===== PROJECTS SECTION ===== -->
+  <section class="projects-layout">
+    <div class="projects-header">
       <h2>Our Projects</h2>
-      <p style="color: #fff;">Explore some of our featured projects that demonstrate our expertise in innovation, software development, and digital transformation.</p>
-    </div>
-  </section>
-
-  <!-- PROJECTS GRID -->
-  <section class="section">
-    <div class="container projects-grid">
-
-      <div class="project-card">
-        <img src="marklane.jpg" alt="Mark Lane Project" />
-        <div class="project-content">
-          <h4>Financial Systems Upgrade</h4>
-          <p>We designed and implemented a secure reconciliation platform for a financial services firm, improving speed, accuracy, and data transparency.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="gracechurch.jpg" alt="Gracechurch Project" />
-        <div class="project-content">
-          <h4>Insurance Data Hub</h4>
-          <p>Developed a cloud-based analytics engine for insurance reporting and regulatory compliance with end-to-end process automation.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="lime.jpg" alt="Lime Analytics Project" />
-        <div class="project-content">
-          <h4>Analytics Dashboard</h4>
-          <p>Created a dynamic web dashboard with real-time performance metrics, API integration, and visual reporting for enterprise clients.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
       <p>
-        <a href="tel:+442035384966">📞 020 3538 4966</a> |
-        <a href="mailto:juzoukwu@jnusassociates.com">✉️ juzoukwu@jnusassociates.com</a>
+        A showcase of our recent work — highlighting our engineering, design, and data-driven approach to software and IT solutions.
       </p>
     </div>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <i data-lucide="server" class="project-icon"></i>
+        <h3>Reinsurance Data Platform</h3>
+        <p>
+          Engineered a scalable data reconciliation platform for insurance clients, integrating API-driven pipelines and automated ETL processes.
+        </p>
+      </div>
+
+      <div class="project-card">
+        <i data-lucide="cloud" class="project-icon"></i>
+        <h3>Cloud Infrastructure Migration</h3>
+        <p>
+          Delivered a secure and high-performance cloud migration for a finance firm, enhancing observability and cost efficiency.
+        </p>
+      </div>
+
+      <div class="project-card">
+        <i data-lucide="cpu" class="project-icon"></i>
+        <h3>Automated Testing Framework</h3>
+        <p>
+          Developed a robust regression testing suite for a global reinsurer — ensuring quality, consistency, and reliability in deployment cycles.
+        </p>
+      </div>
+
+      <div class="project-card">
+        <i data-lucide="database" class="project-icon"></i>
+        <h3>Data Warehouse Optimization</h3>
+        <p>
+          Refined data warehouse architecture, boosting query performance and enabling near real-time analytics for decision support.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer-bottom">
+    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
