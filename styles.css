@@ -137,22 +137,57 @@ body {
 /* ===== FOOTER ===== */
 footer {
   text-align: center;
-  background: rgba(0, 0, 0, 0.85);
-  padding: 1.5rem 0;
-  margin-top: 100px;
-  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #e0f7f7;
+  font-family: "Courier New", monospace;
+  padding: 1.2rem 0 4rem 0;
+  border-top: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+  opacity: 0;
+  animation: fadeInGlass 1.6s ease forwards;
+  transition: background 0.6s ease, box-shadow 0.6s ease;
   position: relative;
-  z-index: 5;
-  padding-bottom: 40px;
+  z-index: 2;
 }
 
+footer p,
 footer a {
   color: #00f5d4;
-  text-decoration: none;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 footer a:hover {
-  text-decoration: underline;
+  color: #00ffd1;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+footer p:nth-child(1) {
+  animation: fadePulse 6s ease-in-out infinite;
+}
+
+footer:hover {
+  background: rgba(0, 0, 0, 0.38);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.35);
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 255, 255, 0.1),
+    rgba(0, 255, 255, 0.5),
+    rgba(0, 255, 255, 0.1)
+  );
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.2);
 }
 
 /* ===== ABOUT PAGE ICONS ===== */
@@ -314,76 +349,36 @@ footer a:hover {
 }
 
 /* ===== MARKET STATUS BAR ===== */
-.market-status-bar {
+.market-status-bar,
+.market-clock-bar,
+.stock-ticker {
   position: relative;
   width: 100%;
   text-align: center;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.28);
   color: #00f5d4;
   font-family: "Courier New", monospace;
   font-size: 0.9rem;
   padding: 6px 0;
-  border-top: 1px solid rgba(0, 255, 255, 0.3);
-  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+  border-top: 1px solid rgba(0, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.18);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  animation: fadeInGlass 1.6s ease forwards;
+  transition: all 0.4s ease;
   z-index: 2;
-  animation: barGlow 6s ease-in-out infinite;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 
-/* ===== MARKET CLOCK BAR ===== */
-.market-clock-bar {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.65);
-  color: #00f5d4;
-  font-family: "Courier New", monospace;
-  font-size: 0.9rem;
-  padding: 6px 0;
-  border-top: 1px solid rgba(0, 255, 255, 0.3);
-  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-  z-index: 2;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-.clock-item {
-  display: inline-block;
-  margin: 0 0.7rem;
-  color: #00f5d4;
-  text-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
-}
-
-.clock-label {
-  font-weight: 600;
-}
-
-.clock-time {
-  color: #e0fffb;
-}
-
-/* ===== STOCK TICKER ===== */
 .stock-ticker {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.65);
-  border-top: 1px solid rgba(0, 255, 255, 0.4);
-  box-shadow: 0 -2px 12px rgba(0, 255, 255, 0.3);
-  color: #00f5d4;
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
   font-weight: 600;
-  padding: 10px 0;
   overflow: hidden;
   white-space: nowrap;
-  z-index: 2;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  padding: 10px 0;
 }
 
 #stockTicker {
@@ -401,7 +396,6 @@ footer a:hover {
   animation-play-state: paused;
   filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9));
   color: #00f5d4;
-  transition: filter 0.3s ease;
   cursor: pointer;
 }
 
@@ -417,27 +411,40 @@ footer a:hover {
 /* ===== GLOW THEMES ===== */
 .teal-glow {
   color: #00f5d4;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6), 0 0 12px rgba(0, 255, 255, 0.4);
 }
 
 .red-glow {
   color: #ff4d4d;
-  text-shadow: 0 0 10px rgba(255, 80, 80, 0.6);
+  text-shadow: 0 0 6px rgba(255, 50, 50, 0.5);
 }
 
 .neutral-glow {
   color: #cfd8dc;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
-  opacity: 0.85;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  opacity: 0.9;
 }
 
-/* ===== FADE PULSE EFFECT ===== */
+/* ===== CLOCK + STATUS ===== */
+.market-clock-bar span,
+.market-status-bar span {
+  margin: 0 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* ===== FADE PULSE ===== */
 .fade-glow {
   animation: fadePulse 4s ease-in-out infinite;
 }
 @keyframes fadePulse {
   0%, 100% { opacity: 0.85; text-shadow: 0 0 6px rgba(0,255,255,0.6); }
   50% { opacity: 1; text-shadow: 0 0 14px rgba(0,255,255,1); }
+}
+
+/* ===== FADE-IN GLASS ===== */
+@keyframes fadeInGlass {
+  from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -463,45 +470,19 @@ footer a:hover {
   }
   .logo { width: 60px; }
 }
-/* ===== MOBILE OPTIMIZATION (Status, Clock, Ticker) ===== */
+
+/* ===== MOBILE OPTIMIZATION ===== */
 @media (max-width: 768px) {
-  /* Market Status Bar */
-  .market-status-bar {
-    font-size: 0.8rem;
-    line-height: 1.4;
-    padding: 8px 10px;
-    white-space: normal;
-  }
-
-  /* Clock Bar */
-  .market-clock-bar {
-    font-size: 0.8rem;
-    line-height: 1.4;
-    padding: 8px 10px;
-    white-space: normal;
-  }
-
-  .clock-item {
-    display: inline-block;
-    margin: 0.4rem 0.6rem;
-  }
-
-  /* Stock Ticker */
-  .stock-ticker {
-    font-size: 0.85rem;
-    padding: 8px 0;
-  }
-
-  #stockTicker {
-    animation-duration: 120s; /* slower for smaller viewports */
-  }
-
-  /* Stack glow bars smoothly */
   .market-status-bar,
   .market-clock-bar,
   .stock-ticker {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+    white-space: normal;
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.75);
   }
+
+  #stockTicker { animation-duration: 120s; }
 }
