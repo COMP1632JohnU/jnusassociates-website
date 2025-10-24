@@ -7,7 +7,7 @@ if (typeof lucide !== "undefined") {
   lucide.createIcons();
 }
 
-// === 2️⃣ Global Market Ticker Speed Control ===
+// === 2️⃣ GLOBAL MARKET HOURS & TICKER SPEED CONTROL ===
 function adjustTickerSpeed() {
   const ticker = document.getElementById("stockTicker");
   if (!ticker) return;
@@ -16,36 +16,40 @@ function adjustTickerSpeed() {
   const utcHour = nowUTC.getUTCHours();
   const utcDay = nowUTC.getUTCDay(); // 0 = Sunday, 6 = Saturday
 
-  // Skip weekends
-  if (utcDay === 0 || utcDay === 6) {
-    ticker.style.animationDuration = "80s";
-    ticker.style.filter = "drop-shadow(0 0 6px rgba(0,255,255,0.5))";
-    return;
-  }
-
   const markets = [
-    { name: "LSE (London)", open: 8, close: 16 },
-    { name: "NYSE (New York)", open: 13, close: 21 },
+    { name: "London", open: 8, close: 16 },
+    { name: "New York", open: 13, close: 21 },
     { name: "Tokyo", open: 0, close: 6 },
     { name: "Hong Kong", open: 1, close: 9 },
     { name: "Singapore", open: 1, close: 9 },
     { name: "Beijing", open: 1, close: 9 }
   ];
 
-  const anyMarketOpen = markets.some(m => utcHour >= m.open && utcHour < m.close);
-  ticker.style.animationDuration = anyMarketOpen ? "40s" : "80s";
+  const openMarkets = utcDay !== 0 && utcDay !== 6
+    ? markets.filter(m => utcHour >= m.open && utcHour < m.close)
+    : [];
+
+  const anyMarketOpen = openMarkets.length > 0;
+
+  // Update ticker appearance
+  ticker.dataset.marketStatus = anyMarketOpen ? "open" : "closed";
+  ticker.dataset.openMarkets = openMarkets.map(m => m.name).join(", ");
+
+  ticker.style.animationDuration = anyMarketOpen ? "40s" : "90s";
   ticker.style.filter = anyMarketOpen
     ? "drop-shadow(0 0 12px rgba(0,255,255,0.9))"
-    : "drop-shadow(0 0 6px rgba(0,255,255,0.4))";
+    : "drop-shadow(0 0 4px rgba(0,255,255,0.3))";
 
-  const openMarkets = markets.filter(m => utcHour >= m.open && utcHour < m.close);
-  console.log("🌐 Markets currently open:", openMarkets.length > 0 ? openMarkets.map(m => m.name).join(", ") : "None");
+  if (anyMarketOpen) ticker.classList.remove("closed");
+  else ticker.classList.add("closed");
+
+  console.log("🌐 Open Markets:", openMarkets.length ? openMarkets.map(m => m.name).join(", ") : "None");
 }
 
 window.addEventListener("load", adjustTickerSpeed);
-setInterval(adjustTickerSpeed, 900000); // 15 min refresh
+setInterval(adjustTickerSpeed, 900000); // recheck every 15 minutes
 
-// === 3️⃣ Hover Pause for Ticker ===
+// === 3️⃣ TICKER HOVER PAUSE ===
 document.addEventListener("DOMContentLoaded", () => {
   const ticker = document.querySelector(".ticker-content");
   if (ticker) {
@@ -54,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// === 4️⃣ Live Stock Price Fetch (Alpha Vantage API) ===
+// === 4️⃣ LIVE STOCK PRICE FETCH (Alpha Vantage API) ===
 const stockSymbols = [
   "AAPL","MSFT","NVDA","GOOG","AMZN","META","TSLA",
   "NFLX","ORCL","INTC","AMD","IBM","BABA","SAP","V",
@@ -63,10 +67,8 @@ const stockSymbols = [
   "TSM","ADBE"
 ];
 
-// ⚠️ Replace with your real Alpha Vantage API key
 const apiKey = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
 
-// Style helper: color & arrow by change %
 function movementStyle(changePercent) {
   if (typeof changePercent !== "number" || isNaN(changePercent)) return { cls: "neutral-glow", arrow: "•" };
   if (changePercent > 0.05) return { cls: "teal-glow", arrow: "▲" };
@@ -78,7 +80,6 @@ async function fetchStockPrices() {
   const ticker = document.getElementById("stockTicker");
   if (!ticker) return;
 
-  // Show loading animation
   ticker.style.opacity = "0.5";
   ticker.innerHTML = `<span class="neutral-glow">Loading live market data...</span>`;
 
@@ -107,9 +108,31 @@ async function fetchStockPrices() {
       r.status === "fulfilled" ? r.value : `<span class="neutral-glow">N/A</span>`
     ).join(" • ");
 
-    // Fade in smoothly
     ticker.style.transition = "opacity 1.2s ease";
     ticker.style.opacity = "1";
+
+    // === GLOWING DOT + TOOLTIP + FADE EFFECT ===
+    const existingNote = document.getElementById("marketStatusNote");
+    const openMarkets = ticker.dataset.openMarkets || "";
+    const isOpen = ticker.dataset.marketStatus === "open";
+
+    if (!existingNote) {
+      const note = document.createElement("span");
+      note.id = "marketStatusNote";
+      note.className = "market-status-note";
+      note.innerHTML = ` • <span class="status-dot ${isOpen ? "open" : "closed"}"
+        title="${isOpen ? `Markets open: ${openMarkets}` : "All major markets closed"}"></span>
+        ${isOpen ? "Live data — active sessions" : "Markets closed — data delayed"}`;
+      note.style.opacity = "0";
+      ticker.appendChild(note);
+      requestAnimationFrame(() => (note.style.opacity = "1"));
+    } else {
+      const dot = existingNote.querySelector(".status-dot");
+      dot.className = `status-dot ${isOpen ? "open" : "closed"}`;
+      dot.title = isOpen ? `Markets open: ${openMarkets}` : "All major markets closed";
+      existingNote.innerHTML = ` • ${dot.outerHTML} ${isOpen ? "Live data — active sessions" : "Markets closed — data delayed"}`;
+    }
+
   } catch (err) {
     console.error("⚠ Stock fetch failed:", err);
     ticker.innerHTML = "Error loading stock data…";
@@ -117,9 +140,9 @@ async function fetchStockPrices() {
 }
 
 fetchStockPrices();
-setInterval(fetchStockPrices, 60000); // refresh every 60s
+setInterval(fetchStockPrices, 60000);
 
-// === 5️⃣ Mobile Nav Toggle ===
+// === 5️⃣ MOBILE NAV TOGGLE ===
 document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.createElement("div");
   hamburger.classList.add("hamburger");

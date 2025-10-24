@@ -529,3 +529,79 @@ footer a:hover {
     padding: 1.5rem;
   }
 }
+.neutral-glow {
+  color: #cfd8dc;
+  text-shadow: 0 0 4px rgba(255,255,255,0.4);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+/* ===== MARKET CLOSED FADE EFFECT ===== */
+.market-status-note {
+  color: #a0e0e0;
+  text-shadow: 0 0 10px rgba(0,255,255,0.5);
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  font-style: italic;
+}
+
+.stock-ticker.closed {
+  opacity: 0.6;
+  animation-play-state: paused;
+  filter: drop-shadow(0 0 5px rgba(0,255,255,0.3));
+}
+
+/* ===== MARKET STATUS DOT + TOOLTIP ===== */
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  position: relative;
+  cursor: help;
+}
+
+.status-dot.open {
+  background-color: #00ffcc;
+  box-shadow: 0 0 12px rgba(0,255,255,0.9);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+.status-dot.closed {
+  background-color: #7af9f9;
+  box-shadow: 0 0 8px rgba(0,255,255,0.5);
+  opacity: 0.6;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Tooltip */
+.status-dot[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.85);
+  color: #00f5d4;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: "Poppins", sans-serif;
+  white-space: nowrap;
+  box-shadow: 0 0 10px rgba(0,255,255,0.4);
+  opacity: 0;
+  animation: fadeTooltip 0.3s forwards;
+}
+
+@keyframes fadeTooltip {
+  to { opacity: 1; }
+}
