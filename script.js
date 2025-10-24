@@ -82,14 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ===== LIVE STOCK PRICE FETCH (GLOBAL MARKETS) ===== */
 
 // List of tickers to display
-const stockSymbols = [
-  "AAPL", "MSFT", "NVDA", "GOOG", "AMZN", "META", "TSLA", "NFLX",
-  "ORCL", "INTC", "AMD", "IBM", "BABA", "SAP", "V", "MA",
-  "PYPL", "JPM", "BAC", "KO", "PEP", "DIS", "NKE", "MCD", "PG", "UNH", "ADBE"
-];
 
-// 💡 Replace with your *real* API key from finnhub.io
-const apiKey = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg"; // temporary — replace once your account is set up
+
+
 
 async function fetchStockPrices() {
   const ticker = document.getElementById("stockTicker");
@@ -113,63 +108,72 @@ async function fetchStockPrices() {
     ticker.innerHTML = "Error loading stock data...";
   }
 }
+/* ===== LIVE STOCK PRICE FETCH (with % change, glow + arrows) ===== */
+/* Put this whole block at the bottom of script.js (or where your ticker code lives),
+   and remove any older fetchStockPrices() / stockSymbols duplicate blocks.        */
 
-/* ===== LIVE STOCK PRICE FETCH (GLOBAL MARKETS + DIRECTION GLOW) ===== */
-
-// List of tickers to display
 const stockSymbols = [
-  "AAPL", "MSFT", "NVDA", "GOOG", "AMZN", "META", "TSLA", "NFLX",
-  "ORCL", "INTC", "AMD", "IBM", "BABA", "SAP", "V", "MA",
-  "PYPL", "JPM", "BAC", "KO", "PEP", "DIS", "NKE", "MCD", "PG", "UNH", "ADBE"
+  "AAPL","MSFT","NVDA","GOOG","AMZN","META","TSLA",
+  "NFLX","ORCL","INTC","AMD","IBM","BABA","SAP","V",
+  "MA","PYPL","JPM","BAC","GS","C","KO","PEP","DIS",
+  "NKE","MCD","SBUX","PG","UNH","BP","XOM","CVX",
+  "TSM","ADBE"
 ];
 
-// 💡 Replace with your *real* API key from finnhub.io
-const apiKey = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg"; // change this to your real key
+// ⚠️ IMPORTANT: replace "demo" with your real API key.
+// Alpha Vantage's "demo" key will return real data ONLY for MSFT.
+// For everything to work, sign up for a free key and paste it below.
+const apiKey = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+
+/* Utility to classify glow color & arrow by movement (%) */
+function movementStyle(changePercent) {
+  if (typeof changePercent !== "number" || isNaN(changePercent)) {
+    return { cls: "neutral-glow", arrow: "•" };
+  }
+  if (changePercent > 0.05)  return { cls: "teal-glow", arrow: "▲" };
+  if (changePercent < -0.05) return { cls: "red-glow",  arrow: "▼" };
+  return { cls: "neutral-glow", arrow: "•" };
+}
 
 async function fetchStockPrices() {
   const ticker = document.getElementById("stockTicker");
   if (!ticker) return;
 
   try {
-    const prices = await Promise.all(
-      stockSymbols.map(async symbol => {
-        const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
-        const res = await fetch(url);
-        const data = await res.json();
+    const rows = await Promise.allSettled(
+      stockSymbols.map(async (symbol) => {
+        const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${encodeURIComponent(symbol)}&apikey=${apiKey}`;
+        const resp = await fetch(url);
+        const data = await resp.json();
 
-        const current = data.c;
-        const previous = data.pc;
-        const change = current - previous;
+        // Alpha Vantage format
+        const q = data["Global Quote"] || {};
+        const price = parseFloat(q["05. price"]);
+        // "10. change percent" is like "1.23%", so strip % and parse
+        const pct = typeof q["10. change percent"] === "string"
+          ? parseFloat(q["10. change percent"].replace("%", ""))
+          : NaN;
 
-        // Determine arrow direction and glow color
-        let arrow = "";
-        let glow = "";
+        const priceDisplay = isFinite(price) ? price.toFixed(2) : "N/A";
+        const { cls, arrow } = movementStyle(pct);
 
-        if (change > 0) {
-          arrow = "↑";
-          glow = "teal-glow";
-        } else if (change < 0) {
-          arrow = "↓";
-          glow = "red-glow";
-        } else {
-          arrow = "→";
-          glow = "neutral-glow";
-        }
+        // Show (+X.XX%) / (-X.XX%) beside price
+        const pctDisplay = isFinite(pct)
+          ? `(${pct > 0 ? "+" : ""}${pct.toFixed(2)}%)`
+          : "";
 
-        const priceDisplay = current ? `$${current.toFixed(2)}` : "N/A";
-        return `<span class="${glow}">${symbol}: ${priceDisplay} ${arrow}</span>`;
+        return `<span class="${cls}">${symbol}: ${priceDisplay} ${pctDisplay} ${arrow}</span>`;
       })
     );
 
-    ticker.innerHTML = prices.join(" • ");
-  } catch (error) {
-    console.error("❌ Stock fetch failed:", error);
-    ticker.innerHTML = "Error loading stock data...";
+    const pieces = rows.map(r => r.status === "fulfilled" ? r.value : `<span class="neutral-glow">N/A</span>`);
+    ticker.innerHTML = pieces.join(" • ");
+  } catch (err) {
+    console.error("⚠ Stock fetch failed:", err);
+    ticker.innerHTML = "Error loading stock data…";
   }
 }
 
-// Fetch once on load
+// First load + refresh every 60s
 fetchStockPrices();
-
-// Refresh every 60 seconds
 setInterval(fetchStockPrices, 60000);

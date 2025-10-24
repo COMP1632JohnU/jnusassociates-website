@@ -65,15 +65,34 @@ body {
 }
 
 .navbar a {
-  color: #fff;
+  position: relative;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #00f5d4;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+  transition: width 0.4s ease;
+}
+
 .navbar a:hover,
 .navbar a.active {
-  color: #00f5d4; /* Teal accent */
+  color: #00f5d4;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+  width: 100%;
 }
 
 /* ===== HERO ===== */
@@ -122,6 +141,9 @@ footer {
   padding: 1.5rem 0;
   margin-top: 100px;
   font-size: 0.9rem;
+  position: relative;
+  z-index: 5;
+  padding-bottom: 40px; /* space above ticker */
 }
 
 footer a {
@@ -137,7 +159,7 @@ footer a:hover {
 .about-icon {
   width: 45px;
   height: 45px;
-  color: #00f5d4; /* Liquid teal */
+  color: #00f5d4;
   margin-bottom: 10px;
   filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.7));
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -153,7 +175,7 @@ footer a:hover {
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
-  padding: 25px 20px; /* Reduced padding */
+  padding: 25px 20px;
   margin: 15px auto;
   max-width: 850px;
   color: #ffffff;
@@ -168,24 +190,6 @@ footer a:hover {
 .about-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 25px rgba(0, 255, 255, 0.3);
-}
-
-/* Match the glass-card styling from Projects */
-.glass-card {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
-  padding: 35px 25px;
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.glass-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 25px rgba(0, 255, 255, 0.35);
 }
 
 /* ===== SERVICES PAGE ===== */
@@ -250,7 +254,7 @@ footer a:hover {
   box-shadow: 0 6px 30px rgba(0, 255, 255, 0.3);
 }
 
-/* ✅ Updated Teal-Illuminated Icons */
+/* ===== SERVICE ICONS ===== */
 .service-icon {
   width: 50px;
   height: 50px;
@@ -265,20 +269,7 @@ footer a:hover {
   filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
 }
 
-.service-card h3 {
-  font-family: "Times New Roman", serif;
-  margin-bottom: 15px;
-  font-size: 1.4rem;
-}
-
-.service-card p {
-  font-family: "Georgia", serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #f5f5f5;
-}
-
-/* ===== PROJECTS PAGE (LIQUID WHITE STYLE) ===== */
+/* ===== PROJECTS PAGE ===== */
 .project-icon {
   width: 48px;
   height: 48px;
@@ -319,39 +310,7 @@ footer a:hover {
   box-shadow: 0 2px 10px rgba(0, 255, 255, 0.2);
 }
 
-/* ===== NAVBAR TEAL HOVER EFFECT ===== */
-.navbar a {
-  position: relative;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.navbar a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background: #00f5d4;
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
-  transition: width 0.4s ease;
-}
-
-.navbar a:hover,
-.navbar a.active {
-  color: #00f5d4;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
-}
-
-.navbar a:hover::after,
-.navbar a.active::after {
-  width: 100%;
-}
-
-/* ===== CONTACT PAGE (LUMINATING FORM & OFFICE CARDS) ===== */
+/* ===== CONTACT PAGE ===== */
 .contact-layout {
   margin-top: 160px;
   text-align: center;
@@ -371,7 +330,6 @@ footer a:hover {
   margin-bottom: 40px;
 }
 
-/* === Glass Form === */
 .contact-form-container {
   background: rgba(255, 255, 255, 0.1);
   padding: 40px 30px;
@@ -403,7 +361,6 @@ footer a:hover {
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
 }
 
-/* Submit button */
 .submit-btn {
   background-color: #00f5d4;
   color: #000;
@@ -420,7 +377,6 @@ footer a:hover {
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
 }
 
-/* === Offices Section === */
 .office-header {
   color: #fff;
   font-size: 1.8rem;
@@ -455,25 +411,97 @@ footer a:hover {
   box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== STOCK TICKER (CLEAN MERGED) ===== */
+.stock-ticker {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  border-top: 1px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 -2px 12px rgba(0, 255, 255, 0.3);
+  color: #00f5d4;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.ticker-content,
+#stockTicker {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker-scroll 80s linear infinite;
+  will-change: transform;
+  transition: animation-duration 1s ease-in-out;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.stock-ticker:hover #stockTicker,
+.stock-ticker:hover .ticker-content {
+  animation-play-state: paused;
+  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9));
+  color: #00f5d4;
+  transition: filter 0.3s ease;
+  cursor: pointer;
+}
+
+.stock-ticker span {
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+  font-weight: 500;
+  margin-right: 1.5rem;
+}
+
+/* ===== GLOW THEMES ===== */
+.teal-glow {
+  color: #00f5d4;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.red-glow {
+  color: #ff4d4d;
+  text-shadow: 0 0 10px rgba(255, 80, 80, 0.6);
+}
+
+.neutral-glow {
+  color: #cfd8dc;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+  opacity: 0.85;
+}
+
+/* ===== RESPONSIVE & MOBILE MENU ===== */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     text-align: center;
   }
-@media (max-width: 768px) {
-  .stock-ticker {
-    font-size: 0.8rem;
-    padding: 8px 0;
+
+  .navbar ul {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 1rem 0;
+    border-top: 1px solid rgba(0, 255, 255, 0.4);
   }
 
-  footer {
-    padding-bottom: 35px; /* slightly more gap for small screens */
+  .navbar ul.active {
+    display: flex;
   }
-}
-  .navbar ul {
-    flex-direction: column;
-    margin-top: 1rem;
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: #00f5d4;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
   }
 
   .logo {
@@ -483,10 +511,6 @@ footer a:hover {
   .hero {
     margin-top: 120px;
     padding: 80px 20px;
-  }
-
-  .hero h2 {
-    font-size: 1.8rem;
   }
 
   .services-grid,
@@ -504,214 +528,4 @@ footer a:hover {
     width: 95%;
     padding: 1.5rem;
   }
-}
-/* ===== LUMINATED BRAND TEXT ===== */
-.glow {
-  color: #00f5d4;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
-}
-
-.glow-tagline {
-  color: #e0e0e0;
-  text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
-}
-
-/* ===== STOCK TICKER BAR ===== */
-.stock-ticker {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  border-top: 1px solid rgba(0, 255, 255, 0.4);
-  color: #00f5d4;
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.ticker-content {
-  display: inline-block;
-  animation: tickerMove 30s linear infinite;
-  padding-left: 100%;
-}
-
-@keyframes tickerMove {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-/* === ABOUT US PAGE (ICON + REDUCED BOX) === */
-.about-card.reduced {
-  max-width: 750px;
-  padding: 25px 20px;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 10px;
-  color: #fff;
-  box-shadow: 0 4px 25px rgba(0,255,255,0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  margin: 20px auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.about-card.reduced:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 25px rgba(0,255,255,0.4);
-}
-
-.about-card.reduced h2,
-.about-card.reduced h3 {
-  font-family: "Times New Roman", serif;
-  margin-bottom: 12px;
-}
-
-.about-card.reduced p {
-  font-family: "Georgia", serif;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: #f5f5f5;
-}
-
-/* === FIX: Ensure teal glow is visible in header === */
-.brand-text .glow {
-  color: #00f5d4 !important;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.9),
-               0 0 15px rgba(0, 255, 255, 0.7),
-               0 0 25px rgba(0, 255, 255, 0.4);
-  transition: text-shadow 0.3s ease-in-out;
-}
-
-.brand-text .glow-tagline {
-  color: #c8ffff !important;
-  font-weight: 500;
-  text-shadow: 0 0 6px rgba(0, 255, 255, 0.8),
-               0 0 12px rgba(0, 255, 255, 0.5);
-}
-
-.brand-text .glow:hover,
-.brand-text .glow-tagline:hover {
-  text-shadow: 0 0 12px rgba(0, 255, 255, 1),
-               0 0 25px rgba(0, 255, 255, 0.8);
-}
-/* ===== FIX: Ticker positioning below footer ===== */
-footer {
-  position: relative;
-  z-index: 2;
-  padding-bottom: 40px; /* make room for ticker */
-}
-
-/* ===== EXPANDED TICKER STYLE (LUMINATED TEAL EFFECT + PAUSE ON HOVER) ===== */
-.stock-ticker {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  border-top: 1px solid rgba(0, 255, 255, 0.4);
-  color: #00f5d4;
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  z-index: 1;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
-}
-
-#stockTicker {
-  display: inline-block;
-  animation: tickerScroll 60s linear infinite;
-  will-change: transform;
-}
-
-@keyframes tickerScroll {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-/* === PAUSE ON HOVER === */
-.stock-ticker:hover #stockTicker {
-  animation-play-state: paused;
-}
-
-.stock-ticker span {
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
-  font-weight: 500;
-  margin-right: 1.5rem;
-}
-/* ===== STOCK TICKER POSITIONING FIX ===== */
-.stock-ticker {
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  color: #00f5d4;
-  font-weight: 600;
-  font-size: 0.9rem;
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 10px 0; /* spacing inside the ticker bar */
-  z-index: 1; /* ensures it stays below the footer text */
-  border-top: 1px solid rgba(0, 255, 255, 0.3);
-  box-shadow: 0 -2px 10px rgba(0, 255, 255, 0.2);
-}
-
-/* Make sure the footer stays above */
-footer {
-  position: relative;
-  z-index: 2;
-  padding-bottom: 25px; /* extra space above ticker */
-}
-
-/* Inner ticker scroll animation */
-.ticker-content {
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker-scroll linear infinite;
-  animation-duration: 80s; /* Adjust speed dynamically if needed */
-}
-
-@keyframes ticker-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* ===== PAUSE ON HOVER (TICKER UX IMPROVEMENT) ===== */
-.stock-ticker:hover .ticker-content {
-  animation-play-state: paused;
-  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9));
-  color: #00f5d4; /* enhance glow on hover */
-  transition: filter 0.3s ease;
-}
-.stock-ticker:hover {
-  cursor: pointer;
-}
-.ticker-content {
-  transition: animation-duration 1s ease-in-out;
-}
-
-/* ===== STOCK TICKER COLOR THEMES ===== */
-.teal-glow {
-  color: #00f5d4;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-}
-
-.red-glow {
-  color: #ff4d4d;
-  text-shadow: 0 0 10px rgba(255, 80, 80, 0.6);
-}
-
-.neutral-glow {
-  color: #f0f0f0;
-  opacity: 0.8;
 }
