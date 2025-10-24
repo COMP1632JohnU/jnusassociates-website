@@ -1,50 +1,227 @@
-<!-- ===== STOCK TICKER BAR ===== -->
-<div class="stock-ticker">
-  <div class="ticker-content" id="stockTicker">
-    Loading live market data...
-  </div>
-</div>
+<!-- ===== JNUS ASSOCIATES LTD — FULL TICKER MODULE ===== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Market Ticker | JNUS Associates Ltd</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-<script>
-  const stocks = [
-    "AAPL", "MSFT", "NVDA", "GOOG", "AMZN", "META", "TSLA",
-    "NFLX", "ORCL", "INTC", "AMD", "IBM", "BABA", "SAP",
-    "V", "MA", "PYPL", "JPM", "BAC", "GS", "C",
-    "KO", "PEP", "DIS", "NKE", "MCD", "SBUX", "PG", "UNH",
-    "BP", "XOM", "CVX", "T", "VZ", "ADBE"
+<body>
+  <!-- ===== MARKET STATUS BAR ===== -->
+  <div id="marketStatusBar" class="market-status-bar">
+    <span class="neutral-glow">Checking global market status...</span>
+  </div>
+
+  <!-- ===== GLOBAL MARKET CLOCK BAR ===== -->
+  <div id="marketClockBar" class="market-clock-bar">
+    <span class="neutral-glow">Syncing global market clocks...</span>
+  </div>
+
+  <!-- ===== STOCK TICKER BAR ===== -->
+  <div class="stock-ticker">
+    <div class="ticker-content" id="stockTicker">
+      Loading live market data...
+    </div>
+  </div>
+
+  <!-- ===== INLINE SCRIPT ===== -->
+  <script>
+  // ======================================================
+  // JNUS ASSOCIATES LTD — LIVE STOCK TICKER + CLOCK
+  // ======================================================
+
+  const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+  const ALPHA_KEY = "HARHFLFJZZBX044Y";
+
+  const stockSymbols = [
+    "AAPL","MSFT","NVDA","GOOG","AMZN","META","TSLA",
+    "NFLX","ORCL","INTC","AMD","IBM","BABA","SAP","V",
+    "MA","PYPL","JPM","BAC","GS","C","KO","PEP","DIS",
+    "NKE","MCD","SBUX","PG","UNH","BP","XOM","CVX",
+    "TSM","ADBE"
   ];
 
-  const apiKey = "demo"; // Replace with real API key later
+  // === Movement Style Utility ===
+  function movementStyle(changePercent) {
+    if (typeof changePercent !== "number" || isNaN(changePercent))
+      return { cls: "neutral-glow", arrow: "•" };
+    if (changePercent > 0.05) return { cls: "teal-glow", arrow: "▲" };
+    if (changePercent < -0.05) return { cls: "red-glow", arrow: "▼" };
+    return { cls: "neutral-glow", arrow: "•" };
+  }
 
-  async function fetchStockPrices() {
-    try {
-      const ticker = document.getElementById("stockTicker");
-      if (!ticker) return;
+  function formatUTCTime() {
+    const now = new Date();
+    return now.toUTCString().split(" ")[4];
+  }
 
-      const results = [];
-      for (const symbol of stocks) {
-        results.push(`${symbol}: ${(Math.random() * 500).toFixed(2)} USD`);
-      }
+  // === Market Clock Bar ===
+  function updateMarketClocks() {
+    const clockBar = document.getElementById("marketClockBar");
+    if (!clockBar) return;
 
-      ticker.innerHTML = results.join(" • ");
-    } catch (error) {
-      console.error("Error loading stock data:", error);
+    const zones = [
+      { name: "London", offset: 0 },
+      { name: "New York", offset: -4 },
+      { name: "Tokyo", offset: 9 },
+      { name: "Hong Kong", offset: 8 },
+      { name: "Singapore", offset: 8 }
+    ];
+
+    const now = new Date();
+    const clocks = zones
+      .map(z => {
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        const local = new Date(utc + 3600000 * z.offset);
+        const hh = String(local.getHours()).padStart(2, "0");
+        const mm = String(local.getMinutes()).padStart(2, "0");
+        return `<span class="clock-item"><span class="clock-label">${z.name}:</span> <span class="clock-time">${hh}:${mm}</span></span>`;
+      })
+      .join(" • ");
+
+    clockBar.innerHTML = clocks;
+  }
+  setInterval(updateMarketClocks, 1000);
+  window.addEventListener("load", updateMarketClocks);
+
+  // === Market Speed + Status ===
+  function adjustTickerSpeed() {
+    const ticker = document.getElementById("stockTicker");
+    const statusBar = document.getElementById("marketStatusBar");
+    if (!ticker || !statusBar) return;
+
+    const nowUTC = new Date();
+    const utcHour = nowUTC.getUTCHours();
+    const utcDay = nowUTC.getUTCDay();
+
+    const markets = [
+      { name: "London", open: 8, close: 16 },
+      { name: "New York", open: 13, close: 21 },
+      { name: "Tokyo", open: 0, close: 6 },
+      { name: "Hong Kong", open: 1, close: 9 },
+      { name: "Singapore", open: 1, close: 9 },
+      { name: "Beijing", open: 1, close: 9 }
+    ];
+
+    const openMarkets =
+      utcDay !== 0 && utcDay !== 6
+        ? markets.filter(m => utcHour >= m.open && utcHour < m.close)
+        : [];
+
+    const numOpen = openMarkets.length;
+    const anyOpen = numOpen > 0;
+
+    let duration = 90;
+    if (numOpen === 1) duration = 60;
+    else if (numOpen === 2) duration = 45;
+    else if (numOpen >= 3) duration = 30;
+
+    ticker.style.animationDuration = `${duration}s`;
+    ticker.style.filter = anyOpen
+      ? `drop-shadow(0 0 ${numOpen * 4}px rgba(0,255,255,0.9))`
+      : "drop-shadow(0 0 4px rgba(0,255,255,0.3))";
+
+    const utcTime = nowUTC.toUTCString().split(" ")[4];
+
+    if (anyOpen) {
+      statusBar.innerHTML = `
+        <span class="teal-glow">
+          🌍 Markets Open: ${openMarkets.map(m => m.name).join(", ")}
+          — Speed: ${duration === 30 ? "⚡ Fast" : duration === 45 ? "⏩ Medium" : "▶ Normal"}
+        </span>
+        <span class="neutral-glow" style="margin-left: 1rem;">(${utcTime} UTC)</span>`;
+    } else {
+      statusBar.innerHTML = `
+        <span class="neutral-glow">
+          💤 All markets closed — awaiting next trading session (${utcTime} UTC)
+        </span>`;
     }
   }
 
-  fetchStockPrices();
-  setInterval(fetchStockPrices, 60000); // Refresh every 60s
-</script>
-
-<script>
-  // Adjust ticker speed dynamically
-  window.addEventListener("load", () => {
+  // === Fetch Stock Data ===
+  async function fetchStockPrices() {
     const ticker = document.getElementById("stockTicker");
-    const parent = document.querySelector(".stock-ticker");
-    if (ticker && parent) {
-      const tickerWidth = ticker.offsetWidth;
-      const speed = Math.max(40, tickerWidth / 50);
-      ticker.style.animationDuration = `${speed}s`;
+    if (!ticker) return;
+
+    ticker.innerHTML = `<span class="neutral-glow">Fetching live prices...</span>`;
+    ticker.style.opacity = "0.6";
+
+    try {
+      const finnhubResults = await Promise.allSettled(
+        stockSymbols.map(async (symbol) => {
+          const url = `https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_KEY}`;
+          const res = await fetch(url);
+          const data = await res.json();
+          const price = parseFloat(data.c);
+          const pct = parseFloat(data.dp);
+
+          if (!isFinite(price)) throw new Error("Invalid data");
+          const { cls, arrow } = movementStyle(pct);
+          const pctDisplay = isFinite(pct)
+            ? `(${pct > 0 ? "+" : ""}${pct.toFixed(2)}%)`
+            : "";
+          return `<span class="${cls}">${symbol}: ${price.toFixed(2)} ${pctDisplay} ${arrow}</span>`;
+        })
+      );
+
+      const hasData = finnhubResults.some(
+        (r) => r.status === "fulfilled" && r.value.includes(":")
+      );
+
+      let output;
+      if (!hasData) {
+        console.warn("⚠ Finnhub failed — switching to Alpha Vantage…");
+        const alphaResults = await Promise.allSettled(
+          stockSymbols.map(async (symbol) => {
+            const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${encodeURIComponent(symbol)}&apikey=${ALPHA_KEY}`;
+            const resp = await fetch(url);
+            const data = await resp.json();
+            const q = data["Global Quote"] || {};
+            const price = parseFloat(q["05. price"]);
+            const pct = q["10. change percent"]
+              ? parseFloat(q["10. change percent"].replace("%", ""))
+              : NaN;
+
+            const { cls, arrow } = movementStyle(pct);
+            const pctDisplay = isFinite(pct)
+              ? `(${pct > 0 ? "+" : ""}${pct.toFixed(2)}%)`
+              : "";
+            const priceDisplay = isFinite(price) ? price.toFixed(2) : "N/A";
+            return `<span class="${cls}">${symbol}: ${priceDisplay} ${pctDisplay} ${arrow}</span>`;
+          })
+        );
+
+        output = alphaResults
+          .map((r) => (r.status === "fulfilled" ? r.value : "N/A"))
+          .join(" • ");
+      } else {
+        output = finnhubResults
+          .map((r) => (r.status === "fulfilled" ? r.value : "N/A"))
+          .join(" • ");
+      }
+
+      const timestamp = `
+        <span class="teal-glow fade-glow" style="margin-left:1.5rem;">
+          🕒 Last updated: ${formatUTCTime()} UTC
+        </span>`;
+      ticker.innerHTML = output + timestamp;
+      ticker.style.opacity = "1";
+
+    } catch (error) {
+      console.error("Error fetching stock data:", error);
+      ticker.innerHTML = `<span class="neutral-glow">Unable to load data...</span>`;
     }
+  }
+
+  // === Init ===
+  window.addEventListener("load", () => {
+    fetchStockPrices();
+    adjustTickerSpeed();
+    setInterval(fetchStockPrices, 60000);
+    setInterval(adjustTickerSpeed, 900000);
   });
-</script>
+  </script>
+</body>
+</html>
