@@ -359,7 +359,53 @@ footer a:hover {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
   opacity: 0.85;
 }
+/* ===== FADE-UP EFFECT FOR INNER PAGES ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1.4s ease-out forwards;
+}
 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); filter: blur(3px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* Layout refinements for About page */
+.about-layout {
+  text-align: center;
+  max-width: 950px;
+  margin: 6rem auto 4rem auto;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.15);
+}
+
+.about-card.reduced {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 1.8rem 1.5rem;
+  margin-bottom: 1.8rem;
+  color: #e0f7f7;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card.reduced:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 255, 255, 0.3);
+}
+
+.about-icon {
+  width: 36px;
+  height: 36px;
+  color: #00f5d4;
+  margin-bottom: 1rem;
+}
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .container {
