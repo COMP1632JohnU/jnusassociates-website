@@ -33,10 +33,100 @@
       animation-delay: var(--delay, 0s);
       opacity: 0;
     }
+
+    /* === CENTER CONTACT FORM === */
+    .contact-form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      border-radius: 12px;
+      max-width: 700px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+      text-align: center;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 255, 255, 0.4);
+      background: rgba(0, 0, 0, 0.6);
+      color: #e0ffff;
+      font-size: 1rem;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #a5d5d5;
+    }
+
+    .contact-form .submit-btn {
+      background-color: #00f5d4;
+      border: none;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form .submit-btn:hover {
+      background-color: #00c2a8;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 30px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 60px auto 20px auto;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .office-section {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .office-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto 80px auto;
+    }
+
+    .office-card h3 {
+      margin-bottom: 10px;
+      color: #00f5d4;
+    }
+
+    .office-card p {
+      color: #e0f7f7;
+    }
   </style>
 </head>
 
-<body style="background-image:url('../gracechurch.jpg');background-size:cover;background-position:center;">
+<!-- ✅ Corrected background -->
+<body style="background-image:url('../stmarysaxe.jpg');background-size:cover;background-position:center;">
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">

@@ -8,10 +8,100 @@
   <link rel="stylesheet" href="../styles.css" />
   <script src="https://unpkg.com/lucide@latest" defer></script>
   <script src="../script.js" defer></script>
+
+  <style>
+    /* === TRIANGLE GRID LAYOUT === */
+    .projects-grid {
+      display: grid;
+      justify-content: center;
+      gap: 1.8rem;
+      padding: 2rem 1rem 5rem 1rem;
+    }
+
+    /* Top row (3 cards) */
+    .projects-row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(260px, 1fr));
+      gap: 1.8rem;
+      justify-content: center;
+    }
+
+    /* Middle row (2 cards) */
+    .projects-row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+      gap: 1.8rem;
+      justify-content: center;
+    }
+
+    /* Bottom row (1 card centered) */
+    .projects-row-1 {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Consistent fade ripple animation */
+    @keyframes fadeRipple {
+      0% { opacity: 0; transform: translateY(25px) scale(0.98); box-shadow: 0 0 0 rgba(0,255,255,0); }
+      40% { opacity: 1; transform: translateY(0) scale(1.02); box-shadow: 0 0 20px rgba(0,255,255,0.25); }
+      100% { transform: translateY(0) scale(1); box-shadow: 0 0 0 rgba(0,255,255,0); }
+    }
+
+    .project-card {
+      animation: fadeRipple 2.2s ease-out forwards;
+      animation-delay: var(--delay, 0s);
+      opacity: 0;
+      text-align: center;
+      padding: 25px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(0,255,255,0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0,255,255,0.15);
+      color: #e0f7f7;
+      max-width: 360px;
+    }
+
+    .project-card i {
+      color: #00f5d4;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 6px rgba(0,255,255,0.5));
+    }
+
+    .project-card h3 {
+      color: #00f5d4;
+      margin-bottom: 10px;
+    }
+
+    .projects-header {
+      text-align: center;
+      margin: 80px auto 40px auto;
+      max-width: 850px;
+      padding: 25px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Responsive collapse for smaller screens */
+    @media (max-width: 992px) {
+      .projects-row-3,
+      .projects-row-2 {
+        grid-template-columns: 1fr;
+      }
+      .projects-grid {
+        gap: 1rem;
+      }
+    }
+  </style>
 </head>
 
-<body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
-
+<!-- ✅ Background updated -->
+<body style="background-image:url('../lime.jpg');background-size:cover;background-position:center;">
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
@@ -38,57 +128,66 @@
   </header>
 
   <!-- ===== PROJECTS SECTION ===== -->
-  <main class="about-layout fade-up">
-
-    <section class="about-card reduced fade-up" style="animation-delay:0.1s;">
+  <main class="projects-layout fade-up">
+    <section class="projects-header fade-up" style="animation-delay:0.2s;">
       <i data-lucide="briefcase" class="about-icon"></i>
       <h2 class="teal-glow">Our Projects</h2>
       <p>
-        A selection of recent work demonstrating our expertise in AI, systems engineering,
+        A selection of recent work demonstrating our expertise in AI, systems engineering, 
         and data-driven innovation — delivering clarity, precision, and measurable impact.
       </p>
     </section>
 
-    <div class="mission-vision">
+    <div class="projects-grid">
+      <!-- === TOP ROW (3) === -->
+      <div class="projects-row-3">
+        <div class="project-card" style="--delay:0.3s;">
+          <i data-lucide="cpu"></i>
+          <h3>AI Model Deployment Platform</h3>
+          <p>Built scalable deep learning infrastructure for automated deployment pipelines — 
+          enabling seamless integration of AI models across enterprise environments.</p>
+        </div>
 
-      <!-- PROJECT 1 -->
-      <div class="about-card reduced fade-up" style="animation-delay:0.4s;">
-        <i data-lucide="cpu" class="about-icon"></i>
-        <h3 class="teal-glow">AI Model Deployment Platform</h3>
-        <p>
-          Designed and implemented a scalable deep learning infrastructure that automates deployment pipelines,
-          enabling seamless integration of advanced AI models across enterprise environments.
-        </p>
+        <div class="project-card" style="--delay:0.5s;">
+          <i data-lucide="database"></i>
+          <h3>Enterprise Data Lake Modernization</h3>
+          <p>Migrated complex legacy systems into a unified, cloud-native data lake — 
+          improving analytics latency and governance efficiency.</p>
+        </div>
+
+        <div class="project-card" style="--delay:0.7s;">
+          <i data-lucide="bar-chart-3"></i>
+          <h3>Quantum-Inspired Analytics Engine</h3>
+          <p>Developed quantum-inspired analytics engines to optimize financial modeling 
+          and accelerate computation through pattern recognition.</p>
+        </div>
       </div>
 
-      <!-- PROJECT 2 -->
-      <div class="about-card reduced fade-up" style="animation-delay:0.7s;">
-        <i data-lucide="database" class="about-icon"></i>
-        <h3 class="teal-glow">Enterprise Data Lake Modernization</h3>
-        <p>
-          Migrated complex legacy systems into a unified, cloud-native data lake — reducing analytics latency by 68%
-          while improving data governance, lineage, and cross-team collaboration.
-        </p>
+      <!-- === MIDDLE ROW (2) === -->
+      <div class="projects-row-2">
+        <div class="project-card" style="--delay:1s;">
+          <i data-lucide="network"></i>
+          <h3>Secure Systems Integration</h3>
+          <p>Implemented high-security API integration across distributed systems, 
+          maintaining 99.98% uptime for global enterprise clients.</p>
+        </div>
+
+        <div class="project-card" style="--delay:1.2s;">
+          <i data-lucide="shield"></i>
+          <h3>Cyber Resilience Initiative</h3>
+          <p>Enhanced digital infrastructure for regulated sectors, embedding AI-based 
+          threat prediction and zero-trust protocols for compliance resilience.</p>
+        </div>
       </div>
 
-      <!-- PROJECT 3 -->
-      <div class="about-card reduced fade-up" style="animation-delay:1s;">
-        <i data-lucide="bar-chart-3" class="about-icon"></i>
-        <h3 class="teal-glow">Quantum-Inspired Analytics Engine</h3>
-        <p>
-          Developed an experimental analytics layer inspired by quantum algorithms to optimize financial modeling,
-          outperforming traditional solutions in processing speed and pattern recognition.
-        </p>
-      </div>
-
-      <!-- PROJECT 4 -->
-      <div class="about-card reduced fade-up" style="animation-delay:1.3s;">
-        <i data-lucide="network" class="about-icon"></i>
-        <h3 class="teal-glow">Secure Systems Integration</h3>
-        <p>
-          Engineered end-to-end secure API integration across multiple platforms, leveraging encryption, monitoring,
-          and redundancy to maintain 99.98% uptime for high-sensitivity clients.
-        </p>
+      <!-- === BOTTOM ROW (1) === -->
+      <div class="projects-row-1">
+        <div class="project-card" style="--delay:1.5s;">
+          <i data-lucide="globe"></i>
+          <h3>Global Cloud Optimization</h3>
+          <p>Orchestrated multi-cloud optimization framework leveraging hybrid AI load-balancing, 
+          cutting operational costs by 32% across global clusters.</p>
+        </div>
       </div>
     </div>
   </main>
@@ -111,6 +210,7 @@
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
 
+  <!-- ===== INITIALIZATION ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       try { lucide.createIcons(); } catch(e){}

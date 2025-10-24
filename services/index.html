@@ -10,10 +10,10 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* === FADE-RIPPLE ANIMATION (Consistent with Contact Page) === */
+    /* === FADE-RIPPLE ANIMATION (Consistent with About & Contact Pages) === */
     @keyframes fadeRipple {
       0% { opacity: 0; transform: translateY(25px) scale(0.98); box-shadow: 0 0 0 rgba(0,255,255,0); }
-      40% { opacity: 1; transform: translateY(0) scale(1.02); box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+      40% { opacity: 1; transform: translateY(0) scale(1.02); box-shadow: 0 0 20px rgba(0,255,255,0.25); }
       100% { transform: translateY(0) scale(1); box-shadow: 0 0 0 rgba(0,255,255,0); }
     }
 
@@ -22,10 +22,41 @@
       animation-delay: var(--delay, 0s);
       opacity: 0;
     }
+
+    .services-header {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 850px;
+      margin: 80px auto 40px auto;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .service-icon {
+      color: #00f5d4;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 6px rgba(0,255,255,0.6));
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding-bottom: 80px;
+    }
   </style>
 </head>
 
-<body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
+<!-- ✅ Correct background for Services -->
+<body style="background-image:url('../marklane.jpg');background-size:cover;background-position:center;">
+
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
@@ -53,8 +84,9 @@
 
   <!-- ===== SERVICES SECTION ===== -->
   <main class="services-layout fade-up">
+    <!-- === Header Glass Card === -->
     <section class="services-header fade-up" style="animation-delay:0.2s;">
-      <i data-lucide="settings" class="about-icon"></i>
+      <i data-lucide="settings" class="service-icon"></i>
       <h2 class="teal-glow">Our Services</h2>
       <p>
         We deliver secure, high-performance solutions in AI, systems engineering, and data analytics —
@@ -62,31 +94,32 @@
       </p>
     </section>
 
+    <!-- === Service Cards === -->
     <div class="services-grid">
-      <!-- === SERVICE CARD 1 === -->
       <div class="service-card glass-card" style="--delay:0.3s;">
         <i data-lucide="cpu" class="service-icon"></i>
         <h3 class="teal-glow">AI & Data Analytics</h3>
         <p>
-          Empowering your business with advanced machine learning, predictive analytics, and quantum-driven insights to unlock a competitive edge.
+          Empowering your business with advanced machine learning, predictive analytics,
+          and quantum-driven insights to unlock a competitive edge.
         </p>
       </div>
 
-      <!-- === SERVICE CARD 2 === -->
       <div class="service-card glass-card" style="--delay:0.6s;">
         <i data-lucide="server" class="service-icon"></i>
         <h3 class="teal-glow">Systems Engineering</h3>
         <p>
-          From infrastructure modernization to secure cloud integration, we deliver dependable, scalable, and efficient systems tailored to your goals.
+          From infrastructure modernization to secure cloud integration, we deliver dependable,
+          scalable, and efficient systems tailored to your business goals.
         </p>
       </div>
 
-      <!-- === SERVICE CARD 3 === -->
       <div class="service-card glass-card" style="--delay:0.9s;">
         <i data-lucide="network" class="service-icon"></i>
         <h3 class="teal-glow">Digital Strategy & Consulting</h3>
         <p>
-          We guide organizations in aligning innovation with strategy — leveraging technology to drive measurable, sustainable business growth.
+          We guide organizations in aligning innovation with strategy —
+          leveraging technology to drive measurable, sustainable business growth.
         </p>
       </div>
     </div>
@@ -119,6 +152,10 @@
         if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
         if (typeof updateMarketClock === "function") updateMarketClock();
       } catch(e){}
+      // Reinitialize after 1.2s for animation sync
+      setTimeout(() => {
+        try { lucide.createIcons(); } catch(e){}
+      }, 1200);
     });
   </script>
 </body>

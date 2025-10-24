@@ -13,6 +13,7 @@
   <script src="../script.js" defer></script>
 </head>
 
+<!-- ✅ Updated background -->
 <body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
 
   <!-- ===== HEADER ===== -->
@@ -69,14 +70,14 @@
     </div>
   </main>
 
-  <!-- ===== FOOTER (same compact glass card as Home) ===== -->
+  <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== STATUS + CLOCK + TICKER (same IDs so script.js finds them) ===== -->
+  <!-- ===== STATUS + CLOCK + TICKER ===== -->
   <div id="marketStatusBar" class="market-status-bar">
     <span class="neutral-glow">Checking global market status...</span>
   </div>
@@ -89,20 +90,20 @@
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
 
-  <!-- Page bootstrap: re-run after DOM is ready, with a gentle retry -->
+  <!-- ===== PAGE INITIALIZATION ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // 1) Icons
+      // 1) Initialize icons
       try { lucide.createIcons(); } catch (e) {}
 
-      // 2) Kick the three bars immediately (in case window 'load' waits on large images)
+      // 2) Trigger ticker + clock immediately
       try { 
         if (typeof fetchStockPrices === "function") fetchStockPrices();
         if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
         if (typeof updateMarketClock === "function") updateMarketClock();
       } catch (e) {}
 
-      // 3) One small retry after paint—helps if APIs/rate limits hiccup
+      // 3) Retry once for safety
       setTimeout(() => {
         try { lucide.createIcons(); } catch (e) {}
         try { 
