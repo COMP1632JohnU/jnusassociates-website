@@ -88,8 +88,20 @@
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
 
-  <script>
+    <script>
     lucide.createIcons();
   </script>
+
+  <!-- Load ticker dynamically -->
+  <div id="tickerContainer"></div>
+  <script>
+    fetch("/ticker.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("tickerContainer").innerHTML = html;
+      })
+      .catch(err => console.error("Ticker failed to load:", err));
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,101 +1,81 @@
-// ===============================
-// Smooth scrolling for in-page links
-// ===============================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
+// ======================================================
+// JNUS ASSOCIATES LTD — GLOBAL JS (Ticker + UI Features)
+// ======================================================
 
-// ===============================
-// Sticky header shadow on scroll
-// ===============================
-const header = document.querySelector('.site-header');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) header.classList.add('scrolled');
-  else header.classList.remove('scrolled');
-});
-
-// ===============================
-// Fade-in reveal for sections
-// ===============================
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
-document.querySelectorAll('section').forEach(section => observer.observe(section));
-
-// ===============================
-// Formspree Contact Form + Popup
-// ===============================
-const form = document.getElementById("contact-form");
-const popup = document.getElementById("popup-overlay");
-const closePopup = document.getElementById("close-popup");
-
-if (form) {
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-
-    try {
-      const res = await fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
-
-      if (res.ok) {
-        popup.classList.add("active");
-        form.reset();
-        setTimeout(() => popup.classList.remove("active"), 5000); // Auto close in 5s
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
-    } catch (err) {
-      alert("Network error. Please try again.");
-    }
-  });
+// === 1️⃣ Lucide Icons Activation (keeps your icons glowing nicely) ===
+if (typeof lucide !== "undefined") {
+  lucide.createIcons();
 }
 
-if (closePopup) {
-  closePopup.addEventListener("click", () => {
-    popup.classList.remove("active");
-  });
+// === 2️⃣ Formspree Protection / Smooth Handling (optional) ===
+// (You can add form logic here later if needed)
+
+// === 3️⃣ Global Live Market Ticker Speed Control ===
+
+// Adjust ticker speed dynamically based on global market hours
+function adjustTickerSpeed() {
+  const ticker = document.getElementById("stockTicker");
+  if (!ticker) return; // If ticker not found on this page, skip
+
+  const nowUTC = new Date();
+  const utcHour = nowUTC.getUTCHours();
+  const utcDay = nowUTC.getUTCDay(); // 0 = Sunday, 6 = Saturday
+
+  // Skip weekends
+  if (utcDay === 0 || utcDay === 6) {
+    ticker.style.animationDuration = "80s";
+    ticker.style.filter = "drop-shadow(0 0 6px rgba(0,255,255,0.5))";
+    return;
+  }
+
+  // Define major global markets and their open hours in UTC
+  const markets = [
+    { name: "LSE (London)", open: 8, close: 16 },     // 08:00–16:00 UTC
+    { name: "NYSE (New York)", open: 13, close: 21 }, // 13:00–21:00 UTC
+    { name: "Tokyo", open: 0, close: 6 },             // 00:00–06:00 UTC
+    { name: "Hong Kong", open: 1, close: 9 },         // 01:00–09:00 UTC
+    { name: "Singapore", open: 1, close: 9 },         // 01:00–09:00 UTC
+    { name: "Beijing", open: 1, close: 9 }            // 01:00–09:00 UTC
+  ];
+
+  // Check if any market is open
+  const anyMarketOpen = markets.some(
+    market => utcHour >= market.open && utcHour < market.close
+  );
+
+  // Adjust ticker animation speed based on market activity
+  ticker.style.animationDuration = anyMarketOpen ? "40s" : "80s";
+
+  // Teal glow effect intensity depending on activity
+  ticker.style.filter = anyMarketOpen
+    ? "drop-shadow(0 0 12px rgba(0,255,255,0.9))"
+    : "drop-shadow(0 0 6px rgba(0,255,255,0.4))";
+
+  // Optional console feedback
+  const openMarkets = markets.filter(
+    m => utcHour >= m.open && utcHour < m.close
+  );
+  console.log(
+    "🌐 Markets currently open:",
+    openMarkets.length > 0 ? openMarkets.map(m => m.name).join(", ") : "None"
+  );
 }
 
-// ===============================
-// Highlight current page in navbar
-// ===============================
+// Run on page load
+window.addEventListener("load", adjustTickerSpeed);
+
+// Recheck every 15 minutes
+setInterval(adjustTickerSpeed, 900000);
+
+// === 4️⃣ Optional — Ticker Hover Pause Enhancement ===
 document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll("nav a");
-  const currentPage = window.location.pathname.split("/").pop();
-
-  navLinks.forEach(link => {
-    const href = link.getAttribute("href");
-    if (href === currentPage || (href === "index.html" && currentPage === "")) {
-      link.classList.add("active");
-    }
-  });
-});
-// ===============================
-// Parallax Scroll Effect
-// ===============================
-window.addEventListener("scroll", () => {
-  const bg = document.querySelector(".parallax-bg");
-  if (bg) {
-    const offset = window.pageYOffset * 0.5; // adjust speed
-    bg.style.backgroundPositionY = `${offset}px`;
+  const ticker = document.querySelector(".ticker-content");
+  if (ticker) {
+    ticker.addEventListener("mouseenter", () => {
+      ticker.style.animationPlayState = "paused";
+    });
+    ticker.addEventListener("mouseleave", () => {
+      ticker.style.animationPlayState = "running";
+    });
   }
 });

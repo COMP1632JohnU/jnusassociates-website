@@ -1,0 +1,50 @@
+<!-- ===== STOCK TICKER BAR ===== -->
+<div class="stock-ticker">
+  <div class="ticker-content" id="stockTicker">
+    Loading live market data...
+  </div>
+</div>
+
+<script>
+  const stocks = [
+    "AAPL", "MSFT", "NVDA", "GOOG", "AMZN", "META", "TSLA",
+    "NFLX", "ORCL", "INTC", "AMD", "IBM", "BABA", "SAP",
+    "V", "MA", "PYPL", "JPM", "BAC", "GS", "C",
+    "KO", "PEP", "DIS", "NKE", "MCD", "SBUX", "PG", "UNH",
+    "BP", "XOM", "CVX", "T", "VZ", "ADBE"
+  ];
+
+  const apiKey = "demo"; // Replace with real API key later
+
+  async function fetchStockPrices() {
+    try {
+      const ticker = document.getElementById("stockTicker");
+      if (!ticker) return;
+
+      const results = [];
+      for (const symbol of stocks) {
+        results.push(`${symbol}: ${(Math.random() * 500).toFixed(2)} USD`);
+      }
+
+      ticker.innerHTML = results.join(" • ");
+    } catch (error) {
+      console.error("Error loading stock data:", error);
+    }
+  }
+
+  fetchStockPrices();
+  setInterval(fetchStockPrices, 60000); // Refresh every 60s
+</script>
+
+<script>
+  // Adjust ticker speed dynamically
+  window.addEventListener("load", () => {
+    const ticker = document.getElementById("stockTicker");
+    const parent = document.querySelector(".stock-ticker");
+    if (ticker && parent) {
+      const tickerWidth = ticker.offsetWidth;
+      const speed = Math.max(40, tickerWidth / 50);
+      ticker.style.animationDuration = `${speed}s`;
+    }
+  });
+</script>
