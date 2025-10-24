@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us | JNUS Associates Ltd</title>
 
-  <!-- Correct relative path to CSS from /about/ -->
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- ✅ Correct relative path -->
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="../script.js" defer></script>
 </head>
 
-<body style="background-image:url('fenchurch.jpg');background-size:cover;background-position:center;">
+<body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
 
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
       <div class="brand">
-        <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
@@ -25,30 +26,30 @@
       </div>
 
       <!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about/" class="active">About</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-</nav>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/" class="active">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <!-- ===== ABOUT SECTION ===== -->
-  <section class="about-layout">
-    <div class="about-card reduced">
+  <section class="about-layout fade-up">
+    <div class="about-card reduced" style="animation-delay:0.2s;">
       <i data-lucide="briefcase" class="about-icon"></i>
       <h2>About Us</h2>
       <p>
-        JNUS Associates Ltd is a trusted partner for your businesses needs with innovation, reliability, and efficiency at the heart of we do.
+        JNUS Associates Ltd is a trusted partner for your global business needs — with innovation, reliability, transparency, transformation and efficiency at the heart of what we do.
       </p>
     </div>
 
     <div class="mission-vision">
-      <div class="about-card reduced">
+      <div class="about-card reduced" style="animation-delay:0.4s;">
         <i data-lucide="target" class="about-icon"></i>
         <h3>Our Mission</h3>
         <p>
@@ -56,7 +57,7 @@
         </p>
       </div>
 
-      <div class="about-card reduced">
+      <div class="about-card reduced" style="animation-delay:0.6s;">
         <i data-lucide="globe" class="about-icon"></i>
         <h3>Our Vision</h3>
         <p>
@@ -72,30 +73,27 @@
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
+
   <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-<div id="marketStatusBar" class="market-status-bar">
-  <span class="neutral-glow">Checking global market status...</span>
-</div>
-
-<!-- ⏱ LIVE GLOBAL CLOCK BAR -->
-<div id="marketClockBar" class="market-clock-bar">
-  <span class="neutral-glow">Loading clocks...</span>
-</div>
-
-<div class="stock-ticker">
-  <div class="ticker-content" id="stockTicker">
-    Loading live market data...
+  <div id="marketStatusBar" class="market-status-bar">
+    <span class="neutral-glow">Checking global market status...</span>
   </div>
-</div>
-
-<!-- ===== JS ===== -->
-<script src="script.js"></script>
-</body>
-</html>
+  <div id="marketClockBar" class="market-clock-bar">
+    <span class="neutral-glow">Loading clocks...</span>
+  </div>
+  <div class="stock-ticker">
+    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
+  </div>
 
   <script>
-    lucide.createIcons();
+    document.addEventListener("DOMContentLoaded", () => {
+      try { lucide.createIcons(); } catch(e){}
+      try {
+        if (typeof fetchStockPrices === "function") fetchStockPrices();
+        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+        if (typeof updateMarketClock === "function") updateMarketClock();
+      } catch(e){}
+    });
   </script>
 </body>
-<script src="script.js"></script>
 </html>
