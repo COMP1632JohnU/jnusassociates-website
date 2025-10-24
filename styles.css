@@ -1,3 +1,24 @@
+/* ===== HERO FADE-IN ANIMATION ===== */
+.hero {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: heroFadeUp 1.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 /* ===== RESET ===== */
 * {
   margin: 0;
@@ -12,6 +33,26 @@ body {
   line-height: 1.6;
   background-size: cover;
   background-position: center;
+}
+
+/* ===== CENTER MAIN CONTENT ON DESKTOP ===== */
+@media (min-width: 992px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  main,
+  .hero {
+    margin-top: 0 !important;
+    margin-bottom: auto;
+  }
+
+  footer {
+    margin-top: auto;
+  }
 }
 
 /* ===== HEADER ===== */
@@ -149,10 +190,24 @@ footer {
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
   opacity: 0;
   animation: fadeInGlass 1.6s ease forwards;
+  animation-delay: 0.8s;
   transition: background 0.6s ease, box-shadow 0.6s ease;
   position: relative;
   z-index: 2;
   margin: 2rem auto 5rem auto;
+}
+
+@keyframes fadeInGlass {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 footer p,
@@ -168,29 +223,26 @@ footer a:hover {
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
 }
 
-@keyframes fadeInGlass {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ===== MARKET STATUS & CLOCK BAR (with Fade-in) ===== */
+.market-status-bar,
+.market-clock-bar,
+.stock-ticker {
+  opacity: 0;
+  animation: fadeUpBars 1.2s ease-out forwards;
+  animation-delay: 1.2s;
 }
 
-/* ===== ABOUT / SERVICES / CONTACT PAGES ===== */
-.about-card,
-.glass-card {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
-  padding: 25px 20px;
-  color: #fff;
-  box-shadow: 0 3px 18px rgba(0, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.about-card:hover,
-.glass-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 25px rgba(0, 255, 255, 0.3);
+@keyframes fadeUpBars {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 /* ===== MARKET STATUS BAR ===== */
@@ -205,7 +257,6 @@ footer a:hover {
   border-top: 1px solid rgba(0, 255, 255, 0.3);
   border-bottom: 1px solid rgba(0, 255, 255, 0.3);
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-  animation: barGlow 6s ease-in-out infinite;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 2;
@@ -283,16 +334,16 @@ footer a:hover {
   cursor: pointer;
 }
 
-/* ===== REFRESH ANIMATION ===== */
+/* ===== GLOW & REFRESH ===== */
 .refresh-fade {
   animation: refreshFade 1.4s ease-in-out;
 }
+
 @keyframes refreshFade {
   0%, 100% { opacity: 1; filter: brightness(1); }
   50% { opacity: 0.4; filter: brightness(1.4); }
 }
 
-/* ===== GLOW THEMES ===== */
 .teal-glow {
   color: #00f5d4;
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
@@ -309,21 +360,13 @@ footer a:hover {
   opacity: 0.85;
 }
 
-/* ===== FADE PULSE EFFECT ===== */
-.fade-glow {
-  animation: fadePulse 4s ease-in-out infinite;
-}
-@keyframes fadePulse {
-  0%, 100% { opacity: 0.85; text-shadow: 0 0 6px rgba(0,255,255,0.6); }
-  50% { opacity: 1; text-shadow: 0 0 14px rgba(0,255,255,1); }
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     text-align: center;
   }
+
   .navbar ul {
     display: none;
     flex-direction: column;
@@ -331,7 +374,9 @@ footer a:hover {
     padding: 1rem 0;
     border-top: 1px solid rgba(0, 255, 255, 0.4);
   }
+
   .navbar ul.active { display: flex; }
+
   .hamburger {
     display: block;
     cursor: pointer;
@@ -339,10 +384,11 @@ footer a:hover {
     color: #00f5d4;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
   }
+
   .logo { width: 60px; }
 }
 
-/* ===== MOBILE OPTIMIZATION (Status, Clock, Ticker) ===== */
+/* ===== MOBILE OPTIMIZATION ===== */
 @media (max-width: 768px) {
   .market-status-bar,
   .market-clock-bar,
