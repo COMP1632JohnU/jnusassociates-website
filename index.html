@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JNUS Associates Ltd</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body style="background-image: url('gracechurch.jpg'); background-size: cover; background-position: center;">
@@ -15,22 +16,22 @@
       <div class="brand">
         <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
-          <h1>JNUS Associates Ltd</h1>
-          <p>AI • Systems • Tech • Business & Data Analytics</p>
+          <h1 class="glow">JNUS Associates Ltd</h1>
+          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
           <p>📞 020 3538 4966</p>
         </div>
       </div>
 
       <!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <ul>
-    <li><a href="/" class="active">Home</a></li>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-</nav>
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
@@ -45,16 +46,39 @@
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
+    <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
+  <!-- ===== STOCK TICKER BAR ===== -->
+  <div class="stock-ticker">
+    <div class="ticker-content" id="stockTicker">
+      Loading live market data...
+    </div>
+  </div>
+
   <script>
-    // Keep navigation smooth (no freeze)
-    document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (!href) return;
-      });
-    });
+    // ===== LIVE STOCK TICKER SCRIPT =====
+    const stocks = ["AAPL", "MSFT", "NVDA", "GOOG", "AMZN"];
+    const apiKey = "demo"; // Replace with a real API key (e.g. from finnhub.io or alphavantage)
+
+    async function fetchStockPrices() {
+      const stockData = [];
+      for (const symbol of stocks) {
+        try {
+          const res = await fetch(`https://api.api-ninjas.com/v1/stockprice?ticker=${symbol}`, {
+            headers: { 'X-Api-Key': 'YOUR_API_KEY_HERE' }
+          });
+          const data = await res.json();
+          stockData.push(`${symbol}: $${data.price.toFixed(2)}`);
+        } catch (err) {
+          stockData.push(`${symbol}: N/A`);
+        }
+      }
+      document.getElementById("stockTicker").innerText = stockData.join("   •   ");
+    }
+
+    fetchStockPrices();
+    setInterval(fetchStockPrices, 60000); // Refresh every 60 seconds
   </script>
 </body>
 </html>
