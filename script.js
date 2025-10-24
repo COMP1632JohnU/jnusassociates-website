@@ -177,3 +177,24 @@ async function fetchStockPrices() {
 // First load + refresh every 60s
 fetchStockPrices();
 setInterval(fetchStockPrices, 60000);
+/* ===== MOBILE NAV TOGGLE ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.createElement("div");
+  hamburger.classList.add("hamburger");
+  hamburger.innerHTML = "&#9776;"; // Unicode hamburger icon (☰)
+  
+  const navbar = document.querySelector(".navbar ul");
+  const header = document.querySelector(".site-header .container");
+
+  // Insert the hamburger icon right after your brand/logo
+  if (header && hamburger && !document.querySelector(".hamburger")) {
+    header.insertBefore(hamburger, header.lastElementChild);
+  }
+
+  // Toggle menu open/close
+  hamburger.addEventListener("click", () => {
+    navbar.classList.toggle("active");
+    hamburger.classList.toggle("active");
+    hamburger.innerHTML = navbar.classList.contains("active") ? "&times;" : "&#9776;";
+  });
+});
