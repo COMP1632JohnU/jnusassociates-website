@@ -79,3 +79,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+/* ===== LIVE STOCK PRICE FETCH (GLOBAL MARKETS) ===== */
+
+// List of tickers to display
+const stockSymbols = [
+  "AAPL", "MSFT", "NVDA", "GOOG", "AMZN", "META", "TSLA", "NFLX",
+  "ORCL", "INTC", "AMD", "IBM", "BABA", "SAP", "V", "MA",
+  "PYPL", "JPM", "BAC", "KO", "PEP", "DIS", "NKE", "MCD", "PG", "UNH", "ADBE"
+];
+
+// 💡 Replace with your *real* API key from finnhub.io
+const apiKey = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg"; // temporary — replace once your account is set up
+
+async function fetchStockPrices() {
+  const ticker = document.getElementById("stockTicker");
+  if (!ticker) return;
+
+  try {
+    const prices = await Promise.all(
+      stockSymbols.map(async symbol => {
+        const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const price = data.c || "N/A"; // "c" = current price in Finnhub API
+        return `${symbol}: ${price}`;
+      })
+    );
+
+    ticker.innerHTML = prices.join(" • ");
+  } catch (error) {
+    console.error("❌ Stock fetch failed:", error);
+    ticker.innerHTML = "Error loading stock data...";
+  }
+}
+
+// Fetch once at load
+fetchStockPrices();
+
+// Refresh every 60 seconds
+setInterval(fetchStockPrices, 60000);
