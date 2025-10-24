@@ -23,15 +23,15 @@
       </div>
 
       <!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <ul>
-    <li><a href="/" class="active">Home</a></li>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-</nav>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
@@ -48,147 +48,25 @@
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
-<!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-<div id="marketStatusBar" class="market-status-bar">
-  <span class="neutral-glow">Checking global market status...</span>
-</div>
 
-<!-- ⏱ LIVE GLOBAL CLOCK BAR -->
-<div id="marketClockBar" class="market-clock-bar">
-  <span class="neutral-glow">Loading clocks...</span>
-</div>
-
-<div class="stock-ticker">
-  <div class="ticker-content" id="stockTicker">
-    Loading live market data...
+  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
+  <div id="marketStatusBar" class="market-status-bar">
+    <span class="neutral-glow">Checking global market status...</span>
   </div>
-</div>
 
-<!-- ===== JS ===== -->
-<script src="script.js"></script>
-</body>
-</html>
-  <!-- ===== STOCK TICKER BAR ===== -->
+  <!-- ⏱ LIVE GLOBAL CLOCK BAR -->
+  <div id="marketClockBar" class="market-clock-bar">
+    <span class="neutral-glow">Loading clocks...</span>
+  </div>
+
+  <!-- 💹 STOCK TICKER -->
   <div class="stock-ticker">
     <div class="ticker-content" id="stockTicker">
       Loading live market data...
     </div>
   </div>
 
-  <script>
-    // ===== LIVE STOCK TICKER SCRIPT =====
-    const stocks = [
-    "AAPL", "MSFT", "NVDA", "GOOG", "AMZN", "META", "TSLA",
-    "NFLX", "ORCL", "INTC", "AMD", "IBM", "BABA", "SAP",
-    "V", "MA", "PYPL", "JPM", "BAC", "GS", "C",
-    "KO", "PEP", "DIS", "NKE", "MCD", "SBUX", "PG", "UNH",
-    "BP", "XOM", "CVX", "TSM", "ADBE"
-  ];
-
-    const apiKey = "demo"; // Replace with a real API key (e.g. from finnhub.io or alphavantage)
-
-    async function fetchStockPrices() {
-      const stockData = [];
-      for (const symbol of stocks) {
-        try {
-          const res = await fetch(`https://api.api-ninjas.com/v1/stockprice?ticker=${symbol}`, {
-            headers: { 'X-Api-Key': 'd3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg' }
-          });
-          const data = await res.json();
-          stockData.push(`${symbol}: $${data.price.toFixed(2)}`);
-        } catch (err) {
-          stockData.push(`${symbol}: N/A`);
-        }
-      }
-      document.getElementById("stockTicker").innerText = stockData.join("   •   ");
-    }
-
-    fetchStockPrices();
-    setInterval(fetchStockPrices, 60000); // Refresh every 60 seconds
-  </script>
-</body>
-</html>
-</script>
-
-<!-- ===== AUTO SPEED ADJUSTMENT FOR TICKER ===== -->
-<script>
-  // Adjust ticker speed dynamically based on text width
-  window.addEventListener("load", () => {
-    const ticker = document.getElementById("stockTicker");
-    const parent = document.querySelector(".stock-ticker");
-
-    if (ticker && parent) {
-      const tickerWidth = ticker.offsetWidth;
-      const speed = Math.max(40, tickerWidth / 50); // adjust timing dynamically
-      ticker.style.animationDuration = `${speed}s`;
-    }
-  });
-</script>
-<script>
-  // ===== AUTO SPEED CONTROL BASED ON MARKET HOURS =====
-  function adjustTickerSpeed() {
-    const ticker = document.getElementById("stockTicker");
-    const now = new Date();
-    const hour = now.getUTCHours(); // using UTC keeps things consistent
-    const day = now.getUTCDay(); // 0 = Sunday, 6 = Saturday
-
-    // Market hours: Monday–Friday, 9 AM – 4 PM GMT
-    const marketOpen = day >= 1 && day <= 5 && hour >= 9 && hour < 16;
-
-    // Adjust animation speed — smaller number = faster scroll
-    ticker.style.animationDuration = marketOpen ? "40s" : "80s";
-  }
-
-  // Run immediately on page load
-  adjustTickerSpeed();
-
-  // Recheck every 15 min (in case the user stays long)
-  setInterval(adjustTickerSpeed, 900000);
-</script>
-<script>
-  // ===== GLOBAL MARKET HOURS SPEED CONTROL =====
-  function adjustTickerSpeed() {
-    const ticker = document.getElementById("stockTicker");
-    if (!ticker) return;
-
-    const nowUTC = new Date();
-    const utcHour = nowUTC.getUTCHours();
-    const utcDay = nowUTC.getUTCDay(); // 0 = Sunday, 6 = Saturday
-
-    // Skip weekends completely
-    if (utcDay === 0 || utcDay === 6) {
-      ticker.style.animationDuration = "80s";
-      return;
-    }
-
-    // Define major market open windows (in UTC)
-    const markets = [
-      { name: "LSE (London)", open: 8, close: 16 },     // 08:00–16:00 UTC
-      { name: "NYSE (New York)", open: 13, close: 21 }, // 13:00–21:00 UTC
-      { name: "Tokyo", open: 0, close: 6 },             // 00:00–06:00 UTC
-      { name: "Hong Kong", open: 1, close: 9 },         // 01:00–09:00 UTC
-      { name: "Singapore", open: 1, close: 9 },         // 01:00–09:00 UTC
-      { name: "Beijing", open: 1, close: 9 }            // 01:00–09:00 UTC
-    ];
-
-    // Check if any market is open
-    const anyMarketOpen = markets.some(market => utcHour >= market.open && utcHour < market.close);
-
-    // Apply ticker speed based on market activity
-    ticker.style.animationDuration = anyMarketOpen ? "40s" : "80s";
-
-    // Optional: glow intensity effect
-    ticker.style.filter = anyMarketOpen
-      ? "drop-shadow(0 0 10px rgba(0, 255, 255, 0.9))"
-      : "drop-shadow(0 0 6px rgba(0, 255, 255, 0.5))";
-  }
-
-  // Run immediately on load
-  adjustTickerSpeed();
-
-  // Recheck every 15 minutes (900000 ms)
-  setInterval(adjustTickerSpeed, 900000);
-</script>
-<script src="script.js"></script>
+  <!-- ===== MAIN SCRIPT ===== -->
+  <script src="script.js"></script>
 </body>
 </html>
