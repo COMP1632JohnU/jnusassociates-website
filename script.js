@@ -63,10 +63,10 @@ const stockSymbols = [
   "TSM","ADBE"
 ];
 
-// ⚠️ Replace with your actual Alpha Vantage API key
+// ⚠️ Replace with your real Alpha Vantage API key
 const apiKey = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
 
-// Style helper: color & arrow based on change %
+// Style helper: color & arrow by change %
 function movementStyle(changePercent) {
   if (typeof changePercent !== "number" || isNaN(changePercent)) return { cls: "neutral-glow", arrow: "•" };
   if (changePercent > 0.05) return { cls: "teal-glow", arrow: "▲" };
@@ -77,6 +77,10 @@ function movementStyle(changePercent) {
 async function fetchStockPrices() {
   const ticker = document.getElementById("stockTicker");
   if (!ticker) return;
+
+  // Show loading animation
+  ticker.style.opacity = "0.5";
+  ticker.innerHTML = `<span class="neutral-glow">Loading live market data...</span>`;
 
   try {
     const rows = await Promise.allSettled(
@@ -102,6 +106,10 @@ async function fetchStockPrices() {
     ticker.innerHTML = rows.map(r =>
       r.status === "fulfilled" ? r.value : `<span class="neutral-glow">N/A</span>`
     ).join(" • ");
+
+    // Fade in smoothly
+    ticker.style.transition = "opacity 1.2s ease";
+    ticker.style.opacity = "1";
   } catch (err) {
     console.error("⚠ Stock fetch failed:", err);
     ticker.innerHTML = "Error loading stock data…";
