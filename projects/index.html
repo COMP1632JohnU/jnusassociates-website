@@ -40,17 +40,23 @@
       justify-content: center;
     }
 
-    /* Consistent fade ripple animation */
+    /* === FADE-RIPPLE (Permanent Visibility) === */
     @keyframes fadeRipple {
-      0% { opacity: 0; transform: translateY(25px) scale(0.98); box-shadow: 0 0 0 rgba(0,255,255,0); }
-      40% { opacity: 1; transform: translateY(0) scale(1.02); box-shadow: 0 0 20px rgba(0,255,255,0.25); }
-      100% { transform: translateY(0) scale(1); box-shadow: 0 0 0 rgba(0,255,255,0); }
+      0% {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .project-card {
-      animation: fadeRipple 2.2s ease-out forwards;
-      animation-delay: var(--delay, 0s);
       opacity: 0;
+      animation: fadeRipple 1.8s ease-out forwards;
+      animation-delay: var(--delay, 0s);
+      animation-fill-mode: forwards; /* ✅ Keeps visible after fade */
       text-align: center;
       padding: 25px;
       border-radius: 12px;
@@ -100,7 +106,7 @@
   </style>
 </head>
 
-<!-- ✅ Background updated -->
+<!-- ✅ Background for Projects -->
 <body style="background-image:url('../lime.jpg');background-size:cover;background-position:center;">
   <!-- ===== HEADER ===== -->
   <header class="site-header">
@@ -144,22 +150,28 @@
         <div class="project-card" style="--delay:0.3s;">
           <i data-lucide="cpu"></i>
           <h3>AI Model Deployment Platform</h3>
-          <p>Built scalable deep learning infrastructure for automated deployment pipelines — 
-          enabling seamless integration of AI models across enterprise environments.</p>
+          <p>
+            Built scalable deep learning infrastructure for automated deployment pipelines — 
+            enabling seamless integration of AI models across enterprise environments.
+          </p>
         </div>
 
         <div class="project-card" style="--delay:0.5s;">
           <i data-lucide="database"></i>
           <h3>Enterprise Data Lake Modernization</h3>
-          <p>Migrated complex legacy systems into a unified, cloud-native data lake — 
-          improving analytics latency and governance efficiency.</p>
+          <p>
+            Migrated complex legacy systems into a unified, cloud-native data lake — 
+            improving analytics latency and governance efficiency.
+          </p>
         </div>
 
         <div class="project-card" style="--delay:0.7s;">
           <i data-lucide="bar-chart-3"></i>
           <h3>Quantum-Inspired Analytics Engine</h3>
-          <p>Developed quantum-inspired analytics engines to optimize financial modeling 
-          and accelerate computation through pattern recognition.</p>
+          <p>
+            Developed quantum-inspired analytics engines to optimize financial modeling 
+            and accelerate computation through pattern recognition.
+          </p>
         </div>
       </div>
 
@@ -168,15 +180,19 @@
         <div class="project-card" style="--delay:1s;">
           <i data-lucide="network"></i>
           <h3>Secure Systems Integration</h3>
-          <p>Implemented high-security API integration across distributed systems, 
-          maintaining 99.98% uptime for global enterprise clients.</p>
+          <p>
+            Implemented high-security API integration across distributed systems, 
+            maintaining 99.98% uptime for global enterprise clients.
+          </p>
         </div>
 
         <div class="project-card" style="--delay:1.2s;">
           <i data-lucide="shield"></i>
           <h3>Cyber Resilience Initiative</h3>
-          <p>Enhanced digital infrastructure for regulated sectors, embedding AI-based 
-          threat prediction and zero-trust protocols for compliance resilience.</p>
+          <p>
+            Enhanced digital infrastructure for regulated sectors, embedding AI-based 
+            threat prediction and zero-trust protocols for compliance resilience.
+          </p>
         </div>
       </div>
 
@@ -185,8 +201,10 @@
         <div class="project-card" style="--delay:1.5s;">
           <i data-lucide="globe"></i>
           <h3>Global Cloud Optimization</h3>
-          <p>Orchestrated multi-cloud optimization framework leveraging hybrid AI load-balancing, 
-          cutting operational costs by 32% across global clusters.</p>
+          <p>
+            Orchestrated multi-cloud optimization framework leveraging hybrid AI load-balancing, 
+            cutting operational costs by 32% across global clusters.
+          </p>
         </div>
       </div>
     </div>
@@ -219,6 +237,10 @@
         if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
         if (typeof updateMarketClock === "function") updateMarketClock();
       } catch(e){}
+      // Refresh icons after fade-in animation completes
+      setTimeout(() => {
+        try { lucide.createIcons(); } catch(e){}
+      }, 1200);
     });
   </script>
 </body>
