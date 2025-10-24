@@ -66,7 +66,6 @@ function adjustTickerSpeed() {
     `;
   }
 
-  // 🔄 Glow fade when updated
   statusBar.classList.add("refresh-fade");
   setTimeout(() => statusBar.classList.remove("refresh-fade"), 1400);
 }
@@ -74,39 +73,44 @@ function adjustTickerSpeed() {
 window.addEventListener("load", adjustTickerSpeed);
 setInterval(adjustTickerSpeed, 900000);
 
-// === 3️⃣ LIVE GLOBAL CLOCK BAR ===
+// === 3️⃣ LIVE GLOBAL CLOCK BAR (with London UTC+1 fix) ===
 function updateMarketClock() {
   const clockBar = document.getElementById("marketClockBar");
   if (!clockBar) return;
 
   const now = new Date();
+  const utc = new Date(now.toUTCString());
+
+  // Detect if UK is in DST (BST)
+  const january = new Date(now.getFullYear(), 0, 1).getTimezoneOffset();
+  const july = new Date(now.getFullYear(), 6, 1).getTimezoneOffset();
+  const isDST = Math.min(january, july) === now.getTimezoneOffset();
+  const londonOffset = isDST ? 1 : 0; // BST (+1) or GMT (+0)
 
   const zones = [
-    { label: "UTC", offset: 0 },
-    { label: "London", offset: 0 },
-    { label: "New York", offset: -4 },
-    { label: "Tokyo", offset: 9 },
-    { label: "Hong Kong", offset: 8 },
-    { label: "Singapore", offset: 8 }
+    { city: "UTC", offset: 0 },
+    { city: "London", offset: londonOffset },
+    { city: "New York", offset: -4 },
+    { city: "Tokyo", offset: 9 },
+    { city: "Hong Kong", offset: 8 },
+    { city: "Singapore", offset: 8 }
   ];
 
   const html = zones
     .map((z) => {
-      const local = new Date(now.getTime() + z.offset * 3600 * 1000);
-      const time = local.toUTCString().split(" ")[4];
-      return `<span class="clock-item"><span class="clock-label">${z.label}:</span> <span class="clock-time">${time}</span></span>`;
+      const local = new Date(utc.getTime() + z.offset * 3600 * 1000);
+      const time = local.toTimeString().split(" ")[0].substring(0, 8);
+      return `<span class="clock-item"><span class="clock-label teal-glow">${z.city}:</span> <span class="clock-time">${time}</span></span>`;
     })
     .join(" • ");
 
   clockBar.innerHTML = html;
-
-  // 🔄 Glow fade each refresh
   clockBar.classList.add("refresh-fade");
-  setTimeout(() => clockBar.classList.remove("refresh-fade"), 1400);
+  setTimeout(() => clockBar.classList.remove("refresh-fade"), 700);
 }
 
 window.addEventListener("load", updateMarketClock);
-setInterval(updateMarketClock, 10000); // update every 10 s
+setInterval(updateMarketClock, 1000);
 
 // === 4️⃣ TICKER HOVER PAUSE ===
 document.addEventListener("DOMContentLoaded", () => {
@@ -217,7 +221,6 @@ async function fetchStockPrices() {
     ticker.innerHTML = output + timestamp;
     ticker.style.opacity = "1";
 
-    // 🔄 Fade glow each refresh
     ticker.classList.add("refresh-fade");
     setTimeout(() => ticker.classList.remove("refresh-fade"), 1400);
 
