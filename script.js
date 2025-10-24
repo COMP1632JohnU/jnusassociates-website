@@ -114,7 +114,61 @@ async function fetchStockPrices() {
   }
 }
 
-// Fetch once at load
+/* ===== LIVE STOCK PRICE FETCH (GLOBAL MARKETS + DIRECTION GLOW) ===== */
+
+// List of tickers to display
+const stockSymbols = [
+  "AAPL", "MSFT", "NVDA", "GOOG", "AMZN", "META", "TSLA", "NFLX",
+  "ORCL", "INTC", "AMD", "IBM", "BABA", "SAP", "V", "MA",
+  "PYPL", "JPM", "BAC", "KO", "PEP", "DIS", "NKE", "MCD", "PG", "UNH", "ADBE"
+];
+
+// 💡 Replace with your *real* API key from finnhub.io
+const apiKey = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg"; // change this to your real key
+
+async function fetchStockPrices() {
+  const ticker = document.getElementById("stockTicker");
+  if (!ticker) return;
+
+  try {
+    const prices = await Promise.all(
+      stockSymbols.map(async symbol => {
+        const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const current = data.c;
+        const previous = data.pc;
+        const change = current - previous;
+
+        // Determine arrow direction and glow color
+        let arrow = "";
+        let glow = "";
+
+        if (change > 0) {
+          arrow = "↑";
+          glow = "teal-glow";
+        } else if (change < 0) {
+          arrow = "↓";
+          glow = "red-glow";
+        } else {
+          arrow = "→";
+          glow = "neutral-glow";
+        }
+
+        const priceDisplay = current ? `$${current.toFixed(2)}` : "N/A";
+        return `<span class="${glow}">${symbol}: ${priceDisplay} ${arrow}</span>`;
+      })
+    );
+
+    ticker.innerHTML = prices.join(" • ");
+  } catch (error) {
+    console.error("❌ Stock fetch failed:", error);
+    ticker.innerHTML = "Error loading stock data...";
+  }
+}
+
+// Fetch once on load
 fetchStockPrices();
 
 // Refresh every 60 seconds

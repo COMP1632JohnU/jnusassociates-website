@@ -699,3 +699,19 @@ footer {
 .ticker-content {
   transition: animation-duration 1s ease-in-out;
 }
+
+/* ===== STOCK TICKER COLOR THEMES ===== */
+.teal-glow {
+  color: #00f5d4;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.red-glow {
+  color: #ff4d4d;
+  text-shadow: 0 0 10px rgba(255, 80, 80, 0.6);
+}
+
+.neutral-glow {
+  color: #f0f0f0;
+  opacity: 0.8;
+}
