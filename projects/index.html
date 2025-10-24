@@ -10,34 +10,7 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* === TRIANGLE GRID LAYOUT === */
-    .projects-grid {
-      display: grid;
-      justify-content: center;
-      gap: 1.8rem;
-      padding: 2rem 1rem 5rem 1rem;
-    }
-
-    .projects-row-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(260px, 1fr));
-      gap: 1.8rem;
-      justify-content: center;
-    }
-
-    .projects-row-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(300px, 1fr));
-      gap: 1.8rem;
-      justify-content: center;
-    }
-
-    .projects-row-1 {
-      display: flex;
-      justify-content: center;
-    }
-
-    /* === FADE-IN ANIMATION (PERSISTENT) === */
+    /* === FADE-IN ANIMATION (Permanent) === */
     @keyframes fadeRipple {
       0% {
         opacity: 0;
@@ -49,7 +22,7 @@
       }
     }
 
-    /* === PROJECT CARD STYLING === */
+    /* === PROJECT CARD STYLE === */
     .project-card {
       opacity: 0;
       animation: fadeRipple 1.8s ease-out forwards;
@@ -68,7 +41,7 @@
       transition: all 0.4s ease;
     }
 
-    /* === Hover Highlight (Luminous Glow) === */
+    /* === HOVER GLOW (Unified Intensity Across Site) === */
     .project-card:hover {
       transform: translateY(-6px) scale(1.02);
       border-color: rgba(0, 255, 255, 0.5);
@@ -99,6 +72,7 @@
       transition: text-shadow 0.3s ease;
     }
 
+    /* === HEADER CARD === */
     .projects-header {
       text-align: center;
       margin: 80px auto 40px auto;
@@ -113,11 +87,47 @@
       color: #e0f7f7;
     }
 
-    /* === Responsive Alignment === */
+    .projects-header h2 {
+      color: #00f5d4;
+    }
+
+    /* === GRID STRUCTURE === */
+    .projects-grid {
+      display: grid;
+      justify-content: center;
+      gap: 1.8rem;
+      padding: 2rem 1rem 5rem 1rem;
+    }
+
+    /* Top row (3 cards) */
+    .projects-row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(260px, 1fr));
+      gap: 1.8rem;
+      justify-content: center;
+    }
+
+    /* Middle row (2 cards, realigned under Quantum Engine) */
+    .projects-row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+      gap: 1.8rem;
+      justify-content: center;
+      margin-left: 12%; /* ✅ Slight shift to align visually under right column */
+    }
+
+    /* Bottom row (1 card centered) */
+    .projects-row-1 {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* === RESPONSIVE === */
     @media (max-width: 992px) {
       .projects-row-3,
       .projects-row-2 {
         grid-template-columns: 1fr;
+        margin-left: 0;
       }
       .projects-grid {
         gap: 1rem;
@@ -197,23 +207,23 @@
         </div>
       </div>
 
-      <!-- === MIDDLE ROW (2) === -->
+      <!-- === MIDDLE ROW (2 aligned right) === -->
       <div class="projects-row-2">
         <div class="project-card" style="--delay:1s;">
-          <i data-lucide="network"></i>
-          <h3>Secure Systems Integration</h3>
-          <p>
-            Implemented high-security API integration across distributed systems, 
-            maintaining 99.98% uptime for global enterprise clients.
-          </p>
-        </div>
-
-        <div class="project-card" style="--delay:1.2s;">
           <i data-lucide="shield"></i>
           <h3>Cyber Resilience Initiative</h3>
           <p>
             Enhanced digital infrastructure for regulated sectors, embedding AI-based 
             threat prediction and zero-trust protocols for compliance resilience.
+          </p>
+        </div>
+
+        <div class="project-card" style="--delay:1.2s;">
+          <i data-lucide="network"></i>
+          <h3>Secure Systems Integration</h3>
+          <p>
+            Implemented high-security API integration across distributed systems, 
+            maintaining 99.98% uptime for global enterprise clients.
           </p>
         </div>
       </div>

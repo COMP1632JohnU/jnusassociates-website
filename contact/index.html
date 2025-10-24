@@ -10,7 +10,6 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* === FADE-RIPPLE (Permanent Visibility for Office Cards) === */
     @keyframes fadeRipple {
       0% {
         opacity: 0;
@@ -26,7 +25,7 @@
       opacity: 0;
       animation: fadeRipple 1.6s ease-out forwards;
       animation-delay: var(--delay, 0s);
-      animation-fill-mode: forwards; /* ✅ Keeps visible */
+      animation-fill-mode: forwards;
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0, 255, 255, 0.25);
       border-radius: 12px;
@@ -38,7 +37,6 @@
       transition: all 0.4s ease;
     }
 
-    /* === Hover Glow (Illumination) === */
     .office-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
@@ -71,7 +69,6 @@
       filter: drop-shadow(0 0 10px rgba(0,255,255,0.8));
     }
 
-    /* === CONTACT FORM === */
     .contact-form-container {
       display: flex;
       flex-direction: column;
@@ -123,7 +120,6 @@
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
     }
 
-    /* === HEADER CARD === */
     .contact-header {
       text-align: center;
       background: rgba(0, 0, 0, 0.45);
@@ -137,7 +133,6 @@
       box-shadow: 0 0 20px rgba(0,255,255,0.1);
     }
 
-    /* === OFFICES SECTION === */
     .office-section {
       text-align: center;
       margin-top: 60px;
@@ -217,7 +212,6 @@
           <h3>🇬🇧 United Kingdom</h3>
           <i data-lucide="map-pin"></i>
           <p>
-            <strong>JNUS Associates Ltd</strong><br />
             Castle Court, 41 London Rd<br />
             Reigate RH2 9RJ<br />
             United Kingdom
@@ -267,7 +261,6 @@
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
 
-  <!-- ===== INITIALIZATION ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       try { lucide.createIcons(); } catch(e){}

@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services | JNUS Associates Ltd</title>
 
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
   <script src="https://unpkg.com/lucide@latest" defer></script>
-  <script src="../script.js" defer></script>
+  <script src="/script.js" defer></script>
 
   <style>
-    /* === CONSISTENT FADE-IN (No Disappearance) === */
+    /* === FADE-IN ANIMATION === */
     @keyframes fadeRipple {
       0% {
         opacity: 0;
@@ -22,78 +22,97 @@
       }
     }
 
-    /* === GLASS EFFECT SHARED STYLE === */
-    .glass-card {
+    /* === SERVICE CARD GLASS EFFECT === */
+    .service-card {
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0, 255, 255, 0.25);
       border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      color: #e0f7f7;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
-      color: #e0f7f7;
-    }
-
-    /* === HEADER CARD === */
-    .services-header {
-      padding: 25px;
-      max-width: 850px;
-      margin: 80px auto 40px auto;
-      text-align: center;
-      animation: fadeRipple 1.6s ease-out forwards;
+      transition: all 0.4s ease;
       opacity: 0;
-    }
-
-    /* === INDIVIDUAL SERVICE CARDS === */
-    .service-card {
-      text-align: center;
-      padding: 25px;
-      border-radius: 12px;
       animation: fadeRipple 1.8s ease-out forwards;
       animation-delay: var(--delay, 0s);
-      animation-fill-mode: forwards;
-      opacity: 0;
+      animation-fill-mode: forwards; /* Keeps visible */
+    }
+
+    /* === Hover Illumination (Luminous Glow) === */
+    .service-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(0, 255, 255, 0.5);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.35);
+    }
+
+    .service-card:hover i {
+      color: #00ffe0;
+      filter: drop-shadow(0 0 8px rgba(0,255,255,0.8));
+    }
+
+    .service-card:hover h3 {
+      text-shadow: 0 0 6px rgba(0,255,255,0.6);
     }
 
     .service-icon {
       color: #00f5d4;
       margin-bottom: 12px;
       font-size: 1.8rem;
-      filter: drop-shadow(0 0 6px rgba(0,255,255,0.6));
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      width: 90%;
-      max-width: 1200px;
-      margin: auto;
-      padding-bottom: 80px;
-      align-items: stretch;
+      filter: drop-shadow(0 0 6px rgba(0,255,255,0.5));
+      transition: all 0.3s ease;
     }
 
     .service-card h3 {
       color: #00f5d4;
       margin-bottom: 10px;
+      transition: text-shadow 0.3s ease;
+    }
+
+    .services-header {
+      text-align: center;
+      margin: 80px auto 40px auto;
+      padding: 25px;
+      max-width: 800px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #e0f7f7;
+    }
+
+    .services-header h2 {
+      color: #00f5d4;
+      margin-bottom: 10px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding-bottom: 80px;
     }
 
     @media (max-width: 768px) {
       .services-grid {
-        gap: 1.5rem;
-      }
-      .service-icon {
-        font-size: 1.5rem;
+        gap: 1.2rem;
       }
     }
   </style>
 </head>
 
-<body style="background-image:url('../marklane.jpg');background-size:cover;background-position:center;">
+<body style="background-image:url('../marklane.jpg'); background-size:cover; background-position:center;">
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
       <div class="brand">
-        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <img src="/jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
@@ -115,43 +134,39 @@
   </header>
 
   <!-- ===== SERVICES SECTION ===== -->
-  <main class="services-layout fade-up">
-    <!-- === Header Glass Card === -->
-    <section class="services-header glass-card" style="--delay:0.2s;">
-      <i data-lucide="settings" class="service-icon"></i>
+  <main class="services-layout">
+    <div class="services-header fade-up" style="animation-delay:0.2s;">
       <h2 class="teal-glow">Our Services</h2>
       <p>
-        We deliver secure, high-performance solutions in AI, systems engineering, and data analytics —
-        helping your business thrive through innovation, scalability, and precision.
+        We deliver engineering-driven software, IT consultancy, and data solutions.
       </p>
-    </section>
+    </div>
 
-    <!-- === Service Cards === -->
     <div class="services-grid">
-      <div class="service-card glass-card" style="--delay:0.3s;">
-        <i data-lucide="cpu" class="service-icon"></i>
-        <h3 class="teal-glow">AI & Data Analytics</h3>
+      <div class="service-card" style="--delay:0.3s;">
+        <i data-lucide="code" class="service-icon"></i>
+        <h3>Software Development</h3>
         <p>
-          Empowering your business with advanced machine learning, predictive analytics,
-          and quantum-driven insights to unlock a competitive edge.
+          Custom-built, scalable, and secure software applications — developed with precision
+          to align with your business needs, from concept to deployment.
         </p>
       </div>
 
-      <div class="service-card glass-card" style="--delay:0.6s;">
-        <i data-lucide="server" class="service-icon"></i>
-        <h3 class="teal-glow">Systems Engineering</h3>
+      <div class="service-card" style="--delay:0.6s;">
+        <i data-lucide="settings" class="service-icon"></i>
+        <h3>IT Consultancy & Systems Engineering</h3>
         <p>
-          From infrastructure modernization to secure cloud integration, we deliver dependable,
-          scalable, and efficient systems tailored to your business goals.
+          Providing clear technical guidance and architectural solutions that improve efficiency,
+          security, and performance across enterprise systems.
         </p>
       </div>
 
-      <div class="service-card glass-card" style="--delay:0.9s;">
-        <i data-lucide="network" class="service-icon"></i>
-        <h3 class="teal-glow">Digital Strategy & Consulting</h3>
+      <div class="service-card" style="--delay:0.9s;">
+        <i data-lucide="bar-chart-3" class="service-icon"></i>
+        <h3>AI, Business & Data Analytical Solutions</h3>
         <p>
-          We guide organizations in aligning innovation with strategy —
-          leveraging technology to drive measurable, sustainable business growth.
+          Unlocking the power of AI & data with analytical models, system integrations, and intelligent
+          reporting for confident business decision-making.
         </p>
       </div>
     </div>
@@ -164,13 +179,15 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== MARKET STATUS + CLOCK + TICKER ===== -->
+  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
   <div id="marketStatusBar" class="market-status-bar">
     <span class="neutral-glow">Checking global market status...</span>
   </div>
+
   <div id="marketClockBar" class="market-clock-bar">
     <span class="neutral-glow">Loading clocks...</span>
   </div>
+
   <div class="stock-ticker">
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
@@ -178,22 +195,12 @@
   <!-- ===== INITIALIZATION ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      try { lucide.createIcons(); } catch (e) {}
+      try { lucide.createIcons(); } catch(e){}
       try {
         if (typeof fetchStockPrices === "function") fetchStockPrices();
         if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
         if (typeof updateMarketClock === "function") updateMarketClock();
-      } catch (e) {}
-
-      // Re-run after short delay for reliable init
-      setTimeout(() => {
-        try { lucide.createIcons(); } catch (e) {}
-        try {
-          if (typeof fetchStockPrices === "function") fetchStockPrices();
-          if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
-          if (typeof updateMarketClock === "function") updateMarketClock();
-        } catch (e) {}
-      }, 1200);
+      } catch(e){}
     });
   </script>
 </body>
