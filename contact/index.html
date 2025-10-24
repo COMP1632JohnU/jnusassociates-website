@@ -3,14 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | JNUS Associates Ltd</title>
+  <title>Contact Us | JNUS Associates Ltd</title>
 
   <link rel="stylesheet" href="../styles.css" />
   <script src="https://unpkg.com/lucide@latest" defer></script>
   <script src="../script.js" defer></script>
+
+  <style>
+    /* === FADE-RIPPLE ANIMATION FOR OFFICE CARDS === */
+    @keyframes fadeRipple {
+      0% {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+        box-shadow: 0 0 0 rgba(0,255,255,0);
+      }
+      40% {
+        opacity: 1;
+        transform: translateY(0) scale(1.02);
+        box-shadow: 0 0 20px rgba(0,255,255,0.3);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 0 rgba(0,255,255,0);
+      }
+    }
+
+    .office-card {
+      animation: fadeRipple 2.2s ease-out forwards;
+      animation-delay: var(--delay, 0s);
+      opacity: 0;
+    }
+  </style>
 </head>
 
-<body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
+<body style="background-image:url('../gracechurch.jpg');background-size:cover;background-position:center;">
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
@@ -23,6 +49,7 @@
         </div>
       </div>
 
+      <!-- ===== NAVIGATION ===== -->
       <nav class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
@@ -36,46 +63,70 @@
   </header>
 
   <!-- ===== CONTACT SECTION ===== -->
-  <main class="about-layout fade-up">
-    <section class="about-card reduced">
-      <i data-lucide="mail" class="about-icon"></i>
+  <main class="contact-layout fade-up">
+    <div class="contact-header fade-up" style="animation-delay:0.2s;">
       <h2 class="teal-glow">Get in Touch</h2>
-      <p>
-        We’re here to discuss how JNUS Associates can support your technology, data, and innovation goals.
-        Reach out below or visit our office in Reigate.
-      </p>
-    </section>
-
-    <div class="mission-vision">
-      <div class="about-card reduced fade-up" style="animation-delay:.35s;">
-        <i data-lucide="map-pin" class="about-icon"></i>
-        <h3 class="teal-glow">Office Location</h3>
-        <p>Castle Court, 41 London Rd, Reigate RH2 9RJ</p>
-      </div>
-
-      <div class="about-card reduced fade-up" style="animation-delay:.7s;">
-        <i data-lucide="phone" class="about-icon"></i>
-        <h3 class="teal-glow">Telephone</h3>
-        <p>020 3538 4966</p>
-      </div>
-
-      <div class="about-card reduced fade-up" style="animation-delay:1.05s;">
-        <i data-lucide="send" class="about-icon"></i>
-        <h3 class="teal-glow">Email</h3>
-        <p><a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
-      </div>
+      <p>We’d love to hear from you — reach out for collaborations, projects, or inquiries.</p>
     </div>
 
-    <!-- ===== FORMSPREE FORM ===== -->
-    <div class="contact-form-container fade-up" style="animation-delay:1.4s;">
-      <form class="contact-form" action="https://formspree.io/f/xvgwejpa" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="_replyto" placeholder="Your Email" required />
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <!-- ===== CONTACT FORM ===== -->
+    <div class="contact-form-container fade-up" style="animation-delay:0.4s;">
+      <form
+        class="contact-form"
+        action="https://formspree.io/f/xvgwejpa"
+        method="POST"
+      >
         <input type="hidden" name="_next" value="https://jnusassociates.com/thank-you.html" />
+
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="text" name="subject" placeholder="Subject" />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
         <button type="submit" class="submit-btn">Send Message</button>
       </form>
     </div>
+
+    <!-- ===== OFFICES SECTION ===== -->
+    <section class="office-section fade-up" style="animation-delay:0.6s;">
+      <h2 class="office-header teal-glow">Our Offices</h2>
+
+      <div class="office-grid">
+        <!-- 🇬🇧 UK OFFICE -->
+        <div class="office-card glass-card" style="--delay:0.3s;">
+          <h3>🇬🇧 United Kingdom</h3>
+          <i data-lucide="map-pin" class="about-icon"></i>
+          <p>
+            <strong>JNUS Associates Ltd</strong><br />
+            Castle Court, 41 London Rd<br />
+            Reigate RH2 9RJ<br />
+            United Kingdom
+          </p>
+        </div>
+
+        <!-- 🇳🇬 NIGERIA OFFICE -->
+        <div class="office-card glass-card" style="--delay:0.6s;">
+          <h3>🇳🇬 Nigeria (Abuja)</h3>
+          <i data-lucide="building" class="about-icon"></i>
+          <p>
+            4th Floor, Tower C, Churchgate Plaza<br />
+            AO Cadastral Zone, Constitution Avenue<br />
+            Abuja, Nigeria
+          </p>
+        </div>
+
+        <!-- 🇺🇸 USA OFFICE -->
+        <div class="office-card glass-card" style="--delay:0.9s;">
+          <h3>🇺🇸 United States</h3>
+          <i data-lucide="building-2" class="about-icon"></i>
+          <p>
+            125 East State Street, 3rd Floor<br />
+            Ithaca, NY 14850<br />
+            United States
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -85,6 +136,7 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
+  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
   <div id="marketStatusBar" class="market-status-bar">
     <span class="neutral-glow">Checking global market status...</span>
   </div>
@@ -95,6 +147,7 @@
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
 
+  <!-- ===== INITIALIZATION ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       try { lucide.createIcons(); } catch(e){}

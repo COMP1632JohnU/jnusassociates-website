@@ -8,10 +8,24 @@
   <link rel="stylesheet" href="../styles.css" />
   <script src="https://unpkg.com/lucide@latest" defer></script>
   <script src="../script.js" defer></script>
+
+  <style>
+    /* === FADE-RIPPLE ANIMATION (Consistent with Contact Page) === */
+    @keyframes fadeRipple {
+      0% { opacity: 0; transform: translateY(25px) scale(0.98); box-shadow: 0 0 0 rgba(0,255,255,0); }
+      40% { opacity: 1; transform: translateY(0) scale(1.02); box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+      100% { transform: translateY(0) scale(1); box-shadow: 0 0 0 rgba(0,255,255,0); }
+    }
+
+    .service-card {
+      animation: fadeRipple 2.2s ease-out forwards;
+      animation-delay: var(--delay, 0s);
+      opacity: 0;
+    }
+  </style>
 </head>
 
 <body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
-
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
@@ -38,37 +52,41 @@
   </header>
 
   <!-- ===== SERVICES SECTION ===== -->
-  <main class="about-layout fade-up">
-    <section class="about-card reduced">
+  <main class="services-layout fade-up">
+    <section class="services-header fade-up" style="animation-delay:0.2s;">
       <i data-lucide="settings" class="about-icon"></i>
       <h2 class="teal-glow">Our Services</h2>
       <p>
-        We provide high-performance, scalable solutions in AI systems, data analytics, and digital transformation.
+        We deliver secure, high-performance solutions in AI, systems engineering, and data analytics —
+        helping your business thrive through innovation, scalability, and precision.
       </p>
     </section>
 
-    <div class="mission-vision">
-      <div class="about-card reduced fade-up" style="animation-delay:.35s;">
-        <i data-lucide="cpu" class="about-icon"></i>
+    <div class="services-grid">
+      <!-- === SERVICE CARD 1 === -->
+      <div class="service-card glass-card" style="--delay:0.3s;">
+        <i data-lucide="cpu" class="service-icon"></i>
         <h3 class="teal-glow">AI & Data Analytics</h3>
         <p>
-          Empowering your business with advanced machine learning, automation, and quantum data intelligence to unlock competitive advantage.
+          Empowering your business with advanced machine learning, predictive analytics, and quantum-driven insights to unlock a competitive edge.
         </p>
       </div>
 
-      <div class="about-card reduced fade-up" style="animation-delay:.7s;">
-        <i data-lucide="server" class="about-icon"></i>
+      <!-- === SERVICE CARD 2 === -->
+      <div class="service-card glass-card" style="--delay:0.6s;">
+        <i data-lucide="server" class="service-icon"></i>
         <h3 class="teal-glow">Systems Engineering</h3>
         <p>
-          From infrastructure modernization to secure cloud integration, we deliver robust, reliable, and scalable technology foundations.
+          From infrastructure modernization to secure cloud integration, we deliver dependable, scalable, and efficient systems tailored to your goals.
         </p>
       </div>
 
-      <div class="about-card reduced fade-up" style="animation-delay:1.05s;">
-        <i data-lucide="network" class="about-icon"></i>
+      <!-- === SERVICE CARD 3 === -->
+      <div class="service-card glass-card" style="--delay:0.9s;">
+        <i data-lucide="network" class="service-icon"></i>
         <h3 class="teal-glow">Digital Strategy & Consulting</h3>
         <p>
-          We guide organizations in leveraging innovation to achieve measurable growth through strategic planning and technology adoption.
+          We guide organizations in aligning innovation with strategy — leveraging technology to drive measurable, sustainable business growth.
         </p>
       </div>
     </div>
@@ -85,16 +103,14 @@
   <div id="marketStatusBar" class="market-status-bar">
     <span class="neutral-glow">Checking global market status...</span>
   </div>
-
   <div id="marketClockBar" class="market-clock-bar">
     <span class="neutral-glow">Loading clocks...</span>
   </div>
-
   <div class="stock-ticker">
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
 
-  <!-- ===== PAGE INITIALIZATION ===== -->
+  <!-- ===== INITIALIZATION ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       try { lucide.createIcons(); } catch(e){}
@@ -103,14 +119,6 @@
         if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
         if (typeof updateMarketClock === "function") updateMarketClock();
       } catch(e){}
-      setTimeout(() => {
-        try { lucide.createIcons(); } catch(e){}
-        try {
-          if (typeof fetchStockPrices === "function") fetchStockPrices();
-          if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
-          if (typeof updateMarketClock === "function") updateMarketClock();
-        } catch(e){}
-      }, 1200);
     });
   </script>
 </body>
