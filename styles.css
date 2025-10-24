@@ -463,3 +463,45 @@ footer a:hover {
   }
   .logo { width: 60px; }
 }
+/* ===== MOBILE OPTIMIZATION (Status, Clock, Ticker) ===== */
+@media (max-width: 768px) {
+  /* Market Status Bar */
+  .market-status-bar {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    padding: 8px 10px;
+    white-space: normal;
+  }
+
+  /* Clock Bar */
+  .market-clock-bar {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    padding: 8px 10px;
+    white-space: normal;
+  }
+
+  .clock-item {
+    display: inline-block;
+    margin: 0.4rem 0.6rem;
+  }
+
+  /* Stock Ticker */
+  .stock-ticker {
+    font-size: 0.85rem;
+    padding: 8px 0;
+  }
+
+  #stockTicker {
+    animation-duration: 120s; /* slower for smaller viewports */
+  }
+
+  /* Stack glow bars smoothly */
+  .market-status-bar,
+  .market-clock-bar,
+  .stock-ticker {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.75);
+  }
+}
