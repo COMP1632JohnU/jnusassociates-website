@@ -3,125 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects — JNUS Associates Ltd</title>
-  <link rel="stylesheet" href="/styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>Projects | JNUS Associates Ltd</title>
+
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="../script.js" defer></script>
 </head>
 
-<body style="background-image: url('/lime.jpg'); background-size: cover; background-position: center;">
+<body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
 
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
       <div class="brand">
-        <img src="/jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
-          <h1>JNUS Associates Ltd</h1>
-          <p>AI • Systems • Tech • Business & Data Analytics</p>
+          <h1 class="glow">JNUS Associates Ltd</h1>
+          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
           <p>📞 020 3538 4966</p>
         </div>
       </div>
 
-     <!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/projects/" class="active">Projects</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-</nav>
+      <!-- ===== NAVIGATION ===== -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/" class="active">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <!-- ===== PROJECTS SECTION ===== -->
-  <section class="projects-layout">
-    <div class="projects-header">
-      <h2>Our Projects</h2>
+  <main class="about-layout fade-up">
+
+    <section class="about-card reduced fade-up" style="animation-delay:0.1s;">
+      <i data-lucide="briefcase" class="about-icon"></i>
+      <h2 class="teal-glow">Our Projects</h2>
       <p>
-        A showcase of our recent work — highlighting our engineering, design, and data-driven approach to software and IT solutions.
+        A selection of recent work demonstrating our expertise in AI, systems engineering,
+        and data-driven innovation — delivering clarity, precision, and measurable impact.
       </p>
+    </section>
+
+    <div class="mission-vision">
+
+      <!-- PROJECT 1 -->
+      <div class="about-card reduced fade-up" style="animation-delay:0.4s;">
+        <i data-lucide="cpu" class="about-icon"></i>
+        <h3 class="teal-glow">AI Model Deployment Platform</h3>
+        <p>
+          Designed and implemented a scalable deep learning infrastructure that automates deployment pipelines,
+          enabling seamless integration of advanced AI models across enterprise environments.
+        </p>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="about-card reduced fade-up" style="animation-delay:0.7s;">
+        <i data-lucide="database" class="about-icon"></i>
+        <h3 class="teal-glow">Enterprise Data Lake Modernization</h3>
+        <p>
+          Migrated complex legacy systems into a unified, cloud-native data lake — reducing analytics latency by 68%
+          while improving data governance, lineage, and cross-team collaboration.
+        </p>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="about-card reduced fade-up" style="animation-delay:1s;">
+        <i data-lucide="bar-chart-3" class="about-icon"></i>
+        <h3 class="teal-glow">Quantum-Inspired Analytics Engine</h3>
+        <p>
+          Developed an experimental analytics layer inspired by quantum algorithms to optimize financial modeling,
+          outperforming traditional solutions in processing speed and pattern recognition.
+        </p>
+      </div>
+
+      <!-- PROJECT 4 -->
+      <div class="about-card reduced fade-up" style="animation-delay:1.3s;">
+        <i data-lucide="network" class="about-icon"></i>
+        <h3 class="teal-glow">Secure Systems Integration</h3>
+        <p>
+          Engineered end-to-end secure API integration across multiple platforms, leveraging encryption, monitoring,
+          and redundancy to maintain 99.98% uptime for high-sensitivity clients.
+        </p>
+      </div>
     </div>
-
-    <div class="projects-grid">
-      <!-- Row 1 -->
-      <div class="project-card glass-card">
-        <i data-lucide="server" class="project-icon"></i>
-        <h3>Reinsurance Data Platform</h3>
-        <p>
-          Engineered a scalable data reconciliation platform for insurance clients, integrating API-driven pipelines, built a price prediction model using linear regression, and automated ETL processes.
-        </p>
-      </div>
-
-      <div class="project-card glass-card">
-        <i data-lucide="cloud" class="project-icon"></i>
-        <h3>Cloud Infrastructure Migration</h3>
-        <p>
-          Delivered secure and high-performance cloud migration for insurance, reinsurance, and finance firms — enhancing observability and cost efficiency.
-        </p>
-      </div>
-
-      <!-- Row 2 -->
-      <div class="project-card glass-card">
-        <i data-lucide="cpu" class="project-icon"></i>
-        <h3>Automated Testing Framework</h3>
-        <p>
-          Developed a robust regression testing suite for a global reinsurer — ensuring quality, consistency, and reliability in deployment cycles.
-        </p>
-      </div>
-
-      <!-- Row 3 -->
-      <div class="project-card glass-card">
-        <i data-lucide="database" class="project-icon"></i>
-        <h3>Data Warehouse Optimization</h3>
-        <p>
-          Refined data warehouse architecture, boosting query performance and enabling near real-time analytics for decision support.
-        </p>
-      </div>
-    </div>
-  </section>
+  </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer-bottom">
+  <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
-     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
+    <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
-<!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-<div id="marketStatusBar" class="market-status-bar">
-  <span class="neutral-glow">Checking global market status...</span>
-</div>
 
-<!-- ⏱ LIVE GLOBAL CLOCK BAR -->
-<div id="marketClockBar" class="market-clock-bar">
-  <span class="neutral-glow">Loading clocks...</span>
-</div>
-
-<div class="stock-ticker">
-  <div class="ticker-content" id="stockTicker">
-    Loading live market data...
+  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
+  <div id="marketStatusBar" class="market-status-bar">
+    <span class="neutral-glow">Checking global market status...</span>
   </div>
-</div>
+  <div id="marketClockBar" class="market-clock-bar">
+    <span class="neutral-glow">Loading clocks...</span>
+  </div>
+  <div class="stock-ticker">
+    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
+  </div>
 
-<!-- ===== JS ===== -->
-<script src="script.js"></script>
-</body>
-</html>
-    <script>
-    lucide.createIcons();
-  </script>
-
-  <!-- Load ticker dynamically -->
-  <div id="tickerContainer"></div>
   <script>
-    fetch("/ticker.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("tickerContainer").innerHTML = html;
-      })
-      .catch(err => console.error("Ticker failed to load:", err));
+    document.addEventListener("DOMContentLoaded", () => {
+      try { lucide.createIcons(); } catch(e){}
+      try {
+        if (typeof fetchStockPrices === "function") fetchStockPrices();
+        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+        if (typeof updateMarketClock === "function") updateMarketClock();
+      } catch(e){}
+    });
   </script>
-  <script src="script.js"></script>
 </body>
 </html>

@@ -4,104 +4,106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | JNUS Associates Ltd</title>
-  <link rel="stylesheet" href="/styles.css" />
+
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="../script.js" defer></script>
 </head>
 
-<body style="background-image: url('/stmarysaxe.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
-
+<body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
       <div class="brand">
-        <img src="/jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
-          <h1>JNUS Associates Ltd</h1>
-          <p>AI • Systems • Tech • Business & Data Analytics</p>
+          <h1 class="glow">JNUS Associates Ltd</h1>
+          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
           <p>📞 020 3538 4966</p>
         </div>
       </div>
 
-      <!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/contact/" class="active">Contact</a></li>
-  </ul>
-</nav>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/" class="active">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <!-- ===== CONTACT SECTION ===== -->
-  <section class="contact-layout">
-    <div class="contact-header">
-      <h2>Contact Us</h2>
-      <p>We’re here to help — reach out to discuss a project, consultation, or partnership opportunity.</p>
+  <main class="about-layout fade-up">
+    <section class="about-card reduced">
+      <i data-lucide="mail" class="about-icon"></i>
+      <h2 class="teal-glow">Get in Touch</h2>
+      <p>
+        We’re here to discuss how JNUS Associates can support your technology, data, and innovation goals.
+        Reach out below or visit our office in Reigate.
+      </p>
+    </section>
+
+    <div class="mission-vision">
+      <div class="about-card reduced fade-up" style="animation-delay:.35s;">
+        <i data-lucide="map-pin" class="about-icon"></i>
+        <h3 class="teal-glow">Office Location</h3>
+        <p>Castle Court, 41 London Rd, Reigate RH2 9RJ</p>
+      </div>
+
+      <div class="about-card reduced fade-up" style="animation-delay:.7s;">
+        <i data-lucide="phone" class="about-icon"></i>
+        <h3 class="teal-glow">Telephone</h3>
+        <p>020 3538 4966</p>
+      </div>
+
+      <div class="about-card reduced fade-up" style="animation-delay:1.05s;">
+        <i data-lucide="send" class="about-icon"></i>
+        <h3 class="teal-glow">Email</h3>
+        <p><a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
+      </div>
     </div>
 
-    <!-- Form -->
-    <div class="contact-form-container glass-card">
-      <form action="https://formspree.io/f/xzzjllng" method="POST" class="contact-form">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required />
-
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="_replyto" placeholder="you@example.com" required />
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
-
+    <!-- ===== FORMSPREE FORM ===== -->
+    <div class="contact-form-container fade-up" style="animation-delay:1.4s;">
+      <form class="contact-form" action="https://formspree.io/f/xvgwejpa" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="_replyto" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <input type="hidden" name="_next" value="https://jnusassociates.com/thank-you.html" />
         <button type="submit" class="submit-btn">Send Message</button>
       </form>
     </div>
-
-    <!-- Offices -->
-    <section class="office-section">
-      <h2 class="office-header">Our Offices</h2>
-      <div class="office-grid">
-        <div class="office-card glass-card">
-          <h3>🇬🇧 UK Office</h3>
-          <p>Castle Court, 41 London Rd, Reigate RH2 9RJ</p>
-        </div>
-        <div class="office-card glass-card">
-          <h3>🇳🇬 Nigeria (Abuja) Office</h3>
-          <p>4th Floor, Tower C, Churchgate Plaza, AO Cadastral Zone, Constitution Ave</p>
-        </div>
-        <div class="office-card glass-card">
-          <h3>🇺🇸 USA (Ithaca) Office</h3>
-          <p>125 East State Street, 3rd Floor, Ithaca, NY 14850</p>
-        </div>
-      </div>
-    </section>
-  </section>
+  </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer-bottom">
+  <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
-  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-<div id="marketStatusBar" class="market-status-bar">
-  <span class="neutral-glow">Checking global market status...</span>
-</div>
 
-<!-- ⏱ LIVE GLOBAL CLOCK BAR -->
-<div id="marketClockBar" class="market-clock-bar">
-  <span class="neutral-glow">Loading clocks...</span>
-</div>
-
-<div class="stock-ticker">
-  <div class="ticker-content" id="stockTicker">
-    Loading live market data...
+  <div id="marketStatusBar" class="market-status-bar">
+    <span class="neutral-glow">Checking global market status...</span>
   </div>
-</div>
+  <div id="marketClockBar" class="market-clock-bar">
+    <span class="neutral-glow">Loading clocks...</span>
+  </div>
+  <div class="stock-ticker">
+    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
+  </div>
 
-<!-- ===== JS ===== -->
-<script src="script.js"></script>
-</body>
-</html>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      try { lucide.createIcons(); } catch(e){}
+      try {
+        if (typeof fetchStockPrices === "function") fetchStockPrices();
+        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+        if (typeof updateMarketClock === "function") updateMarketClock();
+      } catch(e){}
+    });
+  </script>
 </body>
 </html>

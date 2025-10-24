@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us | JNUS Associates Ltd</title>
+
+  <!-- Correct relative path to CSS from /about/ -->
   <link rel="stylesheet" href="../styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Defer both scripts so they execute after parsing, in order -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="../script.js" defer></script>
 </head>
 
 <body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
@@ -46,7 +51,7 @@
     </section>
 
     <div class="mission-vision">
-      <div class="about-card reduced fade-up" style="animation-delay: 0.4s;">
+      <div class="about-card reduced fade-up" style="animation-delay: .35s;">
         <i data-lucide="target" class="about-icon"></i>
         <h3 class="teal-glow">Our Mission</h3>
         <p>
@@ -54,7 +59,7 @@
         </p>
       </div>
 
-      <div class="about-card reduced fade-up" style="animation-delay: 0.8s;">
+      <div class="about-card reduced fade-up" style="animation-delay: .7s;">
         <i data-lucide="globe" class="about-icon"></i>
         <h3 class="teal-glow">Our Vision</h3>
         <p>
@@ -64,14 +69,14 @@
     </div>
   </main>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- ===== FOOTER (same compact glass card as Home) ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
+  <!-- ===== STATUS + CLOCK + TICKER (same IDs so script.js finds them) ===== -->
   <div id="marketStatusBar" class="market-status-bar">
     <span class="neutral-glow">Checking global market status...</span>
   </div>
@@ -81,15 +86,32 @@
   </div>
 
   <div class="stock-ticker">
-    <div class="ticker-content" id="stockTicker">
-      Loading live market data...
-    </div>
+    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
 
-  <!-- ===== JS ===== -->
-  <script src="../script.js"></script>
+  <!-- Page bootstrap: re-run after DOM is ready, with a gentle retry -->
   <script>
-    lucide.createIcons();
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1) Icons
+      try { lucide.createIcons(); } catch (e) {}
+
+      // 2) Kick the three bars immediately (in case window 'load' waits on large images)
+      try { 
+        if (typeof fetchStockPrices === "function") fetchStockPrices();
+        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+        if (typeof updateMarketClock === "function") updateMarketClock();
+      } catch (e) {}
+
+      // 3) One small retry after paint—helps if APIs/rate limits hiccup
+      setTimeout(() => {
+        try { lucide.createIcons(); } catch (e) {}
+        try { 
+          if (typeof fetchStockPrices === "function") fetchStockPrices();
+          if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+          if (typeof updateMarketClock === "function") updateMarketClock();
+        } catch (e) {}
+      }, 1200);
+    });
   </script>
 </body>
 </html>

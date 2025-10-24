@@ -3,115 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services — JNUS Associates Ltd</title>
-  <link rel="stylesheet" href="/styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>Services | JNUS Associates Ltd</title>
+
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="../script.js" defer></script>
 </head>
 
-<body style="background-image: url('../marklane.jpg'); background-size: cover; background-position: center;">
+<body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
 
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
       <div class="brand">
-        <img src="/jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
-          <h1>JNUS Associates Ltd</h1>
-          <p>AI • Systems • Tech • Business & Data Analytics</p>
+          <h1 class="glow">JNUS Associates Ltd</h1>
+          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
           <p>📞 020 3538 4966</p>
         </div>
       </div>
 
-     <!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about/">About</a></li>
-    <li><a href="/services/" class="active">Services</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-</nav>
+      <!-- ===== NAVIGATION ===== -->
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/" class="active">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <!-- ===== SERVICES SECTION ===== -->
-  <section class="services-layout">
-    <div class="services-header">
-      <h2>Our Services</h2>
-      <p>We deliver engineering-driven software, IT consultancy, and data solutions.</p>
+  <main class="about-layout fade-up">
+    <section class="about-card reduced">
+      <i data-lucide="settings" class="about-icon"></i>
+      <h2 class="teal-glow">Our Services</h2>
+      <p>
+        We provide high-performance, scalable solutions in AI systems, data analytics, and digital transformation.
+      </p>
+    </section>
+
+    <div class="mission-vision">
+      <div class="about-card reduced fade-up" style="animation-delay:.35s;">
+        <i data-lucide="cpu" class="about-icon"></i>
+        <h3 class="teal-glow">AI & Data Analytics</h3>
+        <p>
+          Empowering your business with advanced machine learning, automation, and quantum data intelligence to unlock competitive advantage.
+        </p>
+      </div>
+
+      <div class="about-card reduced fade-up" style="animation-delay:.7s;">
+        <i data-lucide="server" class="about-icon"></i>
+        <h3 class="teal-glow">Systems Engineering</h3>
+        <p>
+          From infrastructure modernization to secure cloud integration, we deliver robust, reliable, and scalable technology foundations.
+        </p>
+      </div>
+
+      <div class="about-card reduced fade-up" style="animation-delay:1.05s;">
+        <i data-lucide="network" class="about-icon"></i>
+        <h3 class="teal-glow">Digital Strategy & Consulting</h3>
+        <p>
+          We guide organizations in leveraging innovation to achieve measurable growth through strategic planning and technology adoption.
+        </p>
+      </div>
     </div>
-
-    <div class="services-grid">
-      <div class="service-card">
-        <i data-lucide="code" class="service-icon"></i>
-        <h3>Software Development</h3>
-        <p>
-          Custom-built, scalable, and secure software applications — developed with precision
-          to align with your business needs, from concept to deployment.
-        </p>
-      </div>
-
-      <div class="service-card">
-        <i data-lucide="settings" class="service-icon"></i>
-        <h3>IT Consultancy & Systems Engineering</h3>
-        <p>
-          Providing clear technical guidance and architectural solutions that improve efficiency,
-          security, and performance across enterprise systems.
-        </p>
-      </div>
-
-      <div class="service-card">
-        <i data-lucide="bar-chart-3" class="service-icon"></i>
-        <h3>AI, Data & Analytical Solutions</h3>
-        <p>
-          Unlocking the power of AI & data with analytical models, system integrations, and intelligent
-          reporting for confident business decision-making.
-        </p>
-      </div>
-    </div>
-  </section>
+  </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer-bottom">
+  <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
-     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
+    <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
-<!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-<div id="marketStatusBar" class="market-status-bar">
-  <span class="neutral-glow">Checking global market status...</span>
-</div>
 
-<!-- ⏱ LIVE GLOBAL CLOCK BAR -->
-<div id="marketClockBar" class="market-clock-bar">
-  <span class="neutral-glow">Loading clocks...</span>
-</div>
-
-<div class="stock-ticker">
-  <div class="ticker-content" id="stockTicker">
-    Loading live market data...
+  <!-- ===== MARKET STATUS + CLOCK + TICKER ===== -->
+  <div id="marketStatusBar" class="market-status-bar">
+    <span class="neutral-glow">Checking global market status...</span>
   </div>
-</div>
 
-<!-- ===== JS ===== -->
-<script src="script.js"></script>
-</body>
-</html>
-    <script>
-    lucide.createIcons();
-  </script>
+  <div id="marketClockBar" class="market-clock-bar">
+    <span class="neutral-glow">Loading clocks...</span>
+  </div>
 
-  <!-- Load ticker dynamically -->
-  <div id="tickerContainer"></div>
+  <div class="stock-ticker">
+    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
+  </div>
+
+  <!-- ===== PAGE INITIALIZATION ===== -->
   <script>
-    fetch("/ticker.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("tickerContainer").innerHTML = html;
-      })
-      .catch(err => console.error("Ticker failed to load:", err));
+    document.addEventListener("DOMContentLoaded", () => {
+      try { lucide.createIcons(); } catch(e){}
+      try {
+        if (typeof fetchStockPrices === "function") fetchStockPrices();
+        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+        if (typeof updateMarketClock === "function") updateMarketClock();
+      } catch(e){}
+      setTimeout(() => {
+        try { lucide.createIcons(); } catch(e){}
+        try {
+          if (typeof fetchStockPrices === "function") fetchStockPrices();
+          if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+          if (typeof updateMarketClock === "function") updateMarketClock();
+        } catch(e){}
+      }, 1200);
+    });
   </script>
-  <script src="script.js"></script>
 </body>
 </html>
