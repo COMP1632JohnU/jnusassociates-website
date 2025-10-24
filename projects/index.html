@@ -18,7 +18,6 @@
       padding: 2rem 1rem 5rem 1rem;
     }
 
-    /* Top row (3 cards) */
     .projects-row-3 {
       display: grid;
       grid-template-columns: repeat(3, minmax(260px, 1fr));
@@ -26,7 +25,6 @@
       justify-content: center;
     }
 
-    /* Middle row (2 cards) */
     .projects-row-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(300px, 1fr));
@@ -34,13 +32,12 @@
       justify-content: center;
     }
 
-    /* Bottom row (1 card centered) */
     .projects-row-1 {
       display: flex;
       justify-content: center;
     }
 
-    /* === FADE-RIPPLE (Permanent Visibility) === */
+    /* === FADE-IN ANIMATION (PERSISTENT) === */
     @keyframes fadeRipple {
       0% {
         opacity: 0;
@@ -52,32 +49,54 @@
       }
     }
 
+    /* === PROJECT CARD STYLING === */
     .project-card {
       opacity: 0;
       animation: fadeRipple 1.8s ease-out forwards;
       animation-delay: var(--delay, 0s);
-      animation-fill-mode: forwards; /* ✅ Keeps visible after fade */
+      animation-fill-mode: forwards;
       text-align: center;
       padding: 25px;
       border-radius: 12px;
-      background: rgba(0,0,0,0.45);
-      border: 1px solid rgba(0,255,255,0.25);
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.25);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(0,255,255,0.15);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
       color: #e0f7f7;
       max-width: 360px;
+      transition: all 0.4s ease;
+    }
+
+    /* === Hover Highlight (Luminous Glow) === */
+    .project-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(0, 255, 255, 0.5);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.35);
+    }
+
+    .project-card:hover i {
+      color: #00ffe0;
+      filter: drop-shadow(0 0 8px rgba(0,255,255,0.8));
+    }
+
+    .project-card:hover h3 {
+      text-shadow: 0 0 6px rgba(0,255,255,0.6);
     }
 
     .project-card i {
       color: #00f5d4;
       margin-bottom: 10px;
-      filter: drop-shadow(0 0 6px rgba(0,255,255,0.5));
+      font-size: 1.8rem;
+      filter: drop-shadow(0 0 6px rgba(0,255,255,0.4));
+      transition: all 0.3s ease;
     }
 
     .project-card h3 {
       color: #00f5d4;
       margin-bottom: 10px;
+      font-weight: 600;
+      transition: text-shadow 0.3s ease;
     }
 
     .projects-header {
@@ -91,9 +110,10 @@
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      color: #e0f7f7;
     }
 
-    /* Responsive collapse for smaller screens */
+    /* === Responsive Alignment === */
     @media (max-width: 992px) {
       .projects-row-3,
       .projects-row-2 {
@@ -102,11 +122,14 @@
       .projects-grid {
         gap: 1rem;
       }
+      .project-card {
+        max-width: 90%;
+        margin: 0 auto;
+      }
     }
   </style>
 </head>
 
-<!-- ✅ Background for Projects -->
 <body style="background-image:url('../lime.jpg');background-size:cover;background-position:center;">
   <!-- ===== HEADER ===== -->
   <header class="site-header">
@@ -120,7 +143,6 @@
         </div>
       </div>
 
-      <!-- ===== NAVIGATION ===== -->
       <nav class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
@@ -237,7 +259,6 @@
         if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
         if (typeof updateMarketClock === "function") updateMarketClock();
       } catch(e){}
-      // Refresh icons after fade-in animation completes
       setTimeout(() => {
         try { lucide.createIcons(); } catch(e){}
       }, 1200);

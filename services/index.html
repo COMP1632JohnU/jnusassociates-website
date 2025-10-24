@@ -10,7 +10,7 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* === FADE-RIPPLE ANIMATION (Consistent with About & Contact Pages) === */
+    /* === CONSISTENT FADE-IN (No Disappearance) === */
     @keyframes fadeRipple {
       0% {
         opacity: 0;
@@ -22,47 +22,73 @@
       }
     }
 
-    .service-card {
-      opacity: 0;
-      animation: fadeRipple 1.8s ease-out forwards;
-      animation-delay: var(--delay, 0s);
-      animation-fill-mode: forwards; /* Keeps visible after fade */
+    /* === GLASS EFFECT SHARED STYLE === */
+    .glass-card {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+      color: #e0f7f7;
     }
 
+    /* === HEADER CARD === */
     .services-header {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(0, 255, 255, 0.2);
-      border-radius: 12px;
       padding: 25px;
       max-width: 850px;
       margin: 80px auto 40px auto;
       text-align: center;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      animation: fadeRipple 1.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    /* === INDIVIDUAL SERVICE CARDS === */
+    .service-card {
+      text-align: center;
+      padding: 25px;
+      border-radius: 12px;
+      animation: fadeRipple 1.8s ease-out forwards;
+      animation-delay: var(--delay, 0s);
+      animation-fill-mode: forwards;
+      opacity: 0;
     }
 
     .service-icon {
       color: #00f5d4;
       margin-bottom: 12px;
+      font-size: 1.8rem;
       filter: drop-shadow(0 0 6px rgba(0,255,255,0.6));
     }
 
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.8rem;
+      gap: 2rem;
       width: 90%;
       max-width: 1200px;
       margin: auto;
       padding-bottom: 80px;
+      align-items: stretch;
+    }
+
+    .service-card h3 {
+      color: #00f5d4;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .services-grid {
+        gap: 1.5rem;
+      }
+      .service-icon {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 
-<!-- ✅ Correct background for Services -->
 <body style="background-image:url('../marklane.jpg');background-size:cover;background-position:center;">
-
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
@@ -91,7 +117,7 @@
   <!-- ===== SERVICES SECTION ===== -->
   <main class="services-layout fade-up">
     <!-- === Header Glass Card === -->
-    <section class="services-header fade-up" style="animation-delay:0.2s;">
+    <section class="services-header glass-card" style="--delay:0.2s;">
       <i data-lucide="settings" class="service-icon"></i>
       <h2 class="teal-glow">Our Services</h2>
       <p>
@@ -152,15 +178,21 @@
   <!-- ===== INITIALIZATION ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      try { lucide.createIcons(); } catch(e){}
+      try { lucide.createIcons(); } catch (e) {}
       try {
         if (typeof fetchStockPrices === "function") fetchStockPrices();
         if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
         if (typeof updateMarketClock === "function") updateMarketClock();
-      } catch(e){}
-      // Reinitialize after 1.2s for animation sync
+      } catch (e) {}
+
+      // Re-run after short delay for reliable init
       setTimeout(() => {
-        try { lucide.createIcons(); } catch(e){}
+        try { lucide.createIcons(); } catch (e) {}
+        try {
+          if (typeof fetchStockPrices === "function") fetchStockPrices();
+          if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+          if (typeof updateMarketClock === "function") updateMarketClock();
+        } catch (e) {}
       }, 1200);
     });
   </script>
