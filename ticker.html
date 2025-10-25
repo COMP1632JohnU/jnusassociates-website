@@ -1,4 +1,4 @@
-<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (REFINED GLASS + ALIGNMENT) ===== -->
+<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (CENTERED W/ GRADIENT FADE) ===== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,6 @@
   <title>Global Market Ticker | JNUS Associates Ltd</title>
 
   <style>
-    /* ===== Unified Glass & Typography ===== */
     body {
       margin: 0;
       font-family: "Courier New", monospace;
@@ -16,68 +15,91 @@
       color: #dff;
     }
 
+    /* ===== Compact Glass Band Container ===== */
+    .ticker-wrapper {
+      position: relative;
+      width: 72%;                    /* Lagos → Singapore visual range */
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: 8px;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: 0 0 12px rgba(0,255,255,0.15);
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0,255,255,0.2);
+    }
+
+    /* ===== Gradient Edge Fades ===== */
+    .ticker-wrapper::before,
+    .ticker-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 60px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .ticker-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    .ticker-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    /* ===== Bar Sections ===== */
     .market-status-bar,
     .market-clock-bar,
     .exchange-label,
     .region-divider,
     .stock-ticker {
-      background: rgba(0, 0, 0, 0.35);
-      border-top: 1px solid rgba(0,255,255,0.25);
-      border-bottom: 1px solid rgba(0,255,255,0.25);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      box-shadow: 0 0 10px rgba(0,255,255,0.12);
+      background: rgba(0, 0, 0, 0.2);
       color: #e4fdfd;
       text-shadow: 0 0 6px rgba(0,255,255,0.4);
       text-align: center;
       letter-spacing: 0.6px;
-      padding: 5px 0;
-      font-size: 0.9rem;
-      transition: all 0.5s ease-in-out;
+      padding: 4px 0;
+      font-size: 0.88rem;
+      transition: all 0.4s ease-in-out;
     }
 
-    /* ===== Exchange Label ===== */
     .exchange-label {
       color: #00f5d4;
       font-weight: 500;
-      box-shadow: 0 0 6px rgba(0,255,255,0.2);
     }
 
-    /* ===== Region Divider ===== */
     .region-divider {
       color: #00ffd1;
-      font-size: 0.9rem;
       text-transform: uppercase;
     }
 
-    /* ===== Clocks ===== */
-    .clock-item {
-      margin: 0 6px;
-    }
-    .clock-label {
-      color: #bff;
-    }
+    .clock-item { margin: 0 6px; }
 
-    /* ===== Active Region Pulses ===== */
+    /* ===== Glow Styles ===== */
+    .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,0.6); }
+    .red-glow { color: #ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,0.6); }
+    .neutral-glow { color: #ccf; opacity: 0.9; }
+
+    /* ===== Asia Active & Weekend ===== */
     .asia-active {
       background: rgba(0, 255, 255, 0.1);
       box-shadow: 0 0 25px rgba(0,255,255,0.4);
-      text-shadow: 0 0 12px rgba(0,255,255,0.9);
       animation: pulseAsia 3s ease-in-out infinite;
     }
 
     @keyframes pulseAsia {
-      0%, 100% { box-shadow: 0 0 10px rgba(0,255,255,0.25); }
+      0%,100% { box-shadow: 0 0 10px rgba(0,255,255,0.25); }
       50% { box-shadow: 0 0 22px rgba(0,255,255,0.7); }
     }
 
-    /* ===== Weekend Mode ===== */
     .weekend-dim {
       opacity: 0.65;
       filter: brightness(0.8);
-      animation: none !important;
-      box-shadow: none !important;
-      text-shadow: 0 0 4px rgba(0,255,255,0.3);
     }
 
     .weekend-pulse {
@@ -85,6 +107,7 @@
       text-shadow: 0 0 10px rgba(0,255,255,0.7);
       animation: weekendGlow 3s ease-in-out infinite;
     }
+
     @keyframes weekendGlow {
       0%,100% { opacity: 0.7; text-shadow: 0 0 8px rgba(0,255,255,0.3); }
       50% { opacity: 1; text-shadow: 0 0 18px rgba(0,255,255,1); }
@@ -94,58 +117,64 @@
     .stock-ticker {
       overflow: hidden;
       white-space: nowrap;
-      padding: 4px 0;
+      position: relative;
+      z-index: 2;
     }
+
     .ticker-content {
       display: inline-block;
       animation: tickerMove linear infinite;
       animation-duration: 90s;
     }
+
     @keyframes tickerMove {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
 
-    /* ===== Glow Classes ===== */
-    .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,0.6); }
-    .red-glow { color: #ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,0.6); }
-    .neutral-glow { color: #ccf; opacity: 0.9; }
+    /* ===== Responsive Adjustments ===== */
+    @media (max-width: 900px) {
+      .ticker-wrapper { width: 90%; }
+      .ticker-wrapper::before,
+      .ticker-wrapper::after { width: 40px; }
+    }
+
+    @media (max-width: 600px) {
+      .ticker-wrapper { width: 100%; border-radius: 0; }
+      .market-status-bar, .market-clock-bar, .exchange-label, .region-divider {
+        font-size: 0.8rem;
+        padding: 3px 0;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- ===== MARKET STATUS BAR ===== -->
-  <div id="marketStatusBar" class="market-status-bar">
-    <span class="neutral-glow">Checking global market status...</span>
-  </div>
+  <div class="ticker-wrapper">
+    <div id="marketStatusBar" class="market-status-bar">
+      <span class="neutral-glow">Checking global market status...</span>
+    </div>
 
-  <!-- ===== REGION DIVIDER ===== -->
-  <div id="regionDivider" class="region-divider">
-    🌍 Africa • Europe • America • Asia-Pacific
-  </div>
+    <div id="regionDivider" class="region-divider">
+      🌍 Africa • Europe • America • Asia-Pacific
+    </div>
 
-  <!-- ===== GLOBAL MARKET CLOCK BAR ===== -->
-  <div id="marketClockBar" class="market-clock-bar">
-    <span class="neutral-glow">Syncing global market clocks...</span>
-  </div>
+    <div id="marketClockBar" class="market-clock-bar">
+      <span class="neutral-glow">Syncing global market clocks...</span>
+    </div>
 
-  <!-- ===== ACTIVE EXCHANGE LABEL ===== -->
-  <div id="exchangeLabel" class="exchange-label">📊 Loading exchange data...</div>
+    <div id="exchangeLabel" class="exchange-label">📊 Loading exchange data...</div>
 
-  <!-- ===== STOCK TICKER BAR ===== -->
-  <div id="stockTickerContainer" class="stock-ticker">
-    <div class="ticker-content" id="stockTicker">
-      Loading live market data...
+    <div id="stockTickerContainer" class="stock-ticker">
+      <div class="ticker-content" id="stockTicker">
+        Loading live market data...
+      </div>
     </div>
   </div>
 
   <script>
-  // ======================================================
-  // 🌍 JNUS ASSOCIATES LTD — GLOBAL TICKER w/ WEEKEND PULSE
-  // ======================================================
-
+  // === GLOBAL MARKET TICKER CORE SCRIPT ===
   const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-  const ALPHA_KEY   = "HARHFLFJZZBX044Y";
 
   let stockSymbols = [];
   let currentExchangeIndex = 0;
@@ -169,99 +198,33 @@
 
   function updateMarketClocks() {
     const zones = [
-      { name: "Lagos (WAT)", offset: 1, region: "africa" },
-      { name: "Johannesburg (SAST)", offset: 2, region: "africa" },
+      { name: "Lagos (WAT)", offset: 1 },
+      { name: "Johannesburg (SAST)", offset: 2 },
       { name: "London", offset: 0 },
       { name: "New York", offset: -4 },
-      { name: "Shanghai (CST)", offset: 8, region: "shanghai-active" },
+      { name: "Shanghai (CST)", offset: 8 },
       { name: "Tokyo", offset: 9 },
       { name: "Hong Kong", offset: 8 },
       { name: "Singapore", offset: 8 }
     ];
     const now = new Date();
     const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-    const utcHour = now.getUTCHours();
     const clocks = zones.map(z => {
       const local = new Date(utc + 3600000 * z.offset);
       const hh = String(local.getHours()).padStart(2,"0");
       const mm = String(local.getMinutes()).padStart(2,"0");
-      let glowClass = "";
-      if (z.region === "shanghai-active" && utcHour >= 1.5 && utcHour < 7) glowClass = "glow";
-      const regionAttr = z.region ? `data-region="${z.region}"` : "";
-      return `<span class="clock-item"><span class="clock-label ${glowClass}" ${regionAttr}>${z.name}:</span> <span class="clock-time">${hh}:${mm}</span></span>`;
+      return `<span class="clock-item">${z.name}: ${hh}:${mm}</span>`;
     }).join(" • ");
     document.getElementById("marketClockBar").innerHTML = clocks;
   }
+
   setInterval(updateMarketClocks, 1000);
   window.addEventListener("load", updateMarketClocks);
-
-  function adjustTickerSpeed() {
-    const ticker = document.getElementById("stockTicker");
-    const statusBar = document.getElementById("marketStatusBar");
-    const divider = document.getElementById("regionDivider");
-    const tickerContainer = document.getElementById("stockTickerContainer");
-    if (!ticker || !statusBar || !divider) return;
-
-    const nowUTC = new Date();
-    const utcHour = nowUTC.getUTCHours();
-    const utcDay  = nowUTC.getUTCDay();
-
-    const markets = [
-      { name: "Lagos", open: 8, close: 16 },
-      { name: "Johannesburg", open: 7, close: 15 },
-      { name: "London", open: 8, close: 16 },
-      { name: "New York", open: 13, close: 21 },
-      { name: "Shanghai", open: 1.5, close: 7 },
-      { name: "Tokyo", open: 0, close: 6 },
-      { name: "Hong Kong", open: 1, close: 9 },
-      { name: "Singapore", open: 1, close: 9 }
-    ];
-
-    const weekend = utcDay === 0 || utcDay === 6;
-    divider.classList.toggle("weekend-dim", weekend);
-    statusBar.classList.toggle("weekend-dim", weekend);
-    tickerContainer.classList.toggle("weekend-dim", weekend);
-
-    const openMarkets = !weekend
-      ? markets.filter(m => utcHour >= m.open && utcHour < m.close)
-      : [];
-
-    const asiaOpen = openMarkets.some(m => ["Shanghai","Tokyo","Hong Kong","Singapore"].includes(m.name));
-    divider.classList.toggle("asia-active", asiaOpen && !weekend);
-    statusBar.classList.toggle("asia-active", asiaOpen && !weekend);
-
-    const numOpen = openMarkets.length;
-    const anyOpen = numOpen > 0;
-    let duration = weekend ? 140 : 90;
-    if (!weekend) {
-      if (numOpen === 1) duration = 60;
-      else if (numOpen === 2) duration = 45;
-      else if (numOpen >= 3) duration = 30;
-    }
-
-    ticker.style.animationDuration = `${duration}s`;
-    const utcTime = nowUTC.toUTCString().split(" ")[4];
-    const asiaClass = asiaOpen ? "asia-time-glow" : "teal-glow";
-
-    if (weekend) {
-      statusBar.innerHTML = `<span class="weekend-pulse">🕊 Weekend Mode — All Global Markets Closed (${utcTime} UTC)</span>`;
-    } else if (anyOpen) {
-      statusBar.innerHTML = `
-        <span class="teal-glow">
-          🌍 Markets Open: ${openMarkets.map(m => m.name).join(", ")}
-          — Speed: ${duration===30?"⚡ Fast":duration===45?"⏩ Medium":"▶ Normal"}
-        </span>
-        <span class="${asiaClass}" style="margin-left:1rem;">🕒 Last updated: ${utcTime} UTC</span>`;
-    } else {
-      statusBar.innerHTML = `<span class="neutral-glow">💤 All markets closed — awaiting next session (${utcTime} UTC)</span>`;
-    }
-  }
 
   async function loadAllTickers(exchangeObj) {
     try {
       const { code, name } = exchangeObj;
-      const label = document.getElementById("exchangeLabel");
-      label.innerHTML = `📊 Now showing: <strong>${name}</strong>`;
+      document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: <strong>${name}</strong>`;
       const res = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=${code}&token=${FINNHUB_KEY}`);
       const data = await res.json();
       stockSymbols = Array.from(new Set(data.map(i => i.symbol))).slice(0, 80);
@@ -276,20 +239,18 @@
     const ticker = document.getElementById("stockTicker");
     if (!ticker || stockSymbols.length === 0) return;
     ticker.innerHTML = `<span class='neutral-glow'>Fetching ${lastLoadedExchange} quotes…</span>`;
-    ticker.style.opacity = "0.6";
     try {
       const results = await Promise.allSettled(
         stockSymbols.map(async s => {
-          const url = `https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`;
-          const r = await fetch(url);
+          const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`);
           const d = await r.json();
           const price = parseFloat(d.c);
-          const pct   = parseFloat(d.dp);
-          const {cls, arrow} = movementStyle(pct);
+          const pct = parseFloat(d.dp);
+          const { cls, arrow } = movementStyle(pct);
           return `<span class="${cls}">${s}: ${isFinite(price)?price.toFixed(2):"N/A"} (${isFinite(pct)?pct.toFixed(2):"0"}%) ${arrow}</span>`;
         })
       );
-      ticker.innerHTML = results.filter(r=>r.status==="fulfilled").map(r=>r.value).join(" • ");
+      ticker.innerHTML = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
     } catch { ticker.innerHTML = `<span class="neutral-glow">Error fetching stock data</span>`; }
   }
 
@@ -300,8 +261,6 @@
 
   window.addEventListener("load", () => {
     loadAllTickers(exchanges[currentExchangeIndex]);
-    adjustTickerSpeed();
-    setInterval(adjustTickerSpeed, 900000);
     setInterval(fetchStockPrices, 60000);
     setInterval(rotateExchange, 600000);
   });
