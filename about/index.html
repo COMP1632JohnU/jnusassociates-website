@@ -11,7 +11,6 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* ===== UNIFIED LAYOUT (MATCHES SERVICES PAGE) ===== */
     .about-section {
       text-align: center;
       margin-top: 120px;
@@ -54,6 +53,8 @@
       transition: transform 0.35s ease, box-shadow 0.35s ease;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      text-decoration: none;
     }
 
     .about-card:hover {
@@ -111,7 +112,6 @@
         </div>
       </div>
 
-      <!-- ===== NAVIGATION ===== -->
       <nav class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
@@ -133,32 +133,32 @@
     </p>
 
     <div class="about-grid">
-      <div class="about-card">
+      <a href="/about/mission.html" class="about-card">
         <i data-lucide="target" class="about-icon"></i>
         <h3>Our Mission</h3>
         <p>
           To deliver reliable, secure, and scalable technology solutions that drive meaningful 
           impact — empowering businesses to operate with clarity and confidence.
         </p>
-      </div>
+      </a>
 
-      <div class="about-card">
+      <a href="/about/vision.html" class="about-card">
         <i data-lucide="globe" class="about-icon"></i>
         <h3>Our Vision</h3>
         <p>
           To be recognized globally as a trusted partner for digital transformation and 
           sustainable innovation through dependable solutions and client-centric delivery.
         </p>
-      </div>
+      </a>
 
-      <div class="about-card">
+      <a href="/about/values.html" class="about-card">
         <i data-lucide="briefcase" class="about-icon"></i>
         <h3>Our Values</h3>
         <p>
           Built on integrity, collaboration, and excellence — we foster innovation while 
           maintaining transparency and accountability in every engagement.
         </p>
-      </div>
+      </a>
     </div>
   </section>
 
