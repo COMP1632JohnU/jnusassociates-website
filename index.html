@@ -156,23 +156,28 @@
   <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
   <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
 
-  <!-- ===== LUCIDE ICON INIT SCRIPT ===== -->
+  <!-- ===== LUCIDE ICON INIT SCRIPT + AUTO REFRESH ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // === Initialize Lucide Icons ===
       function initLucide() {
         if (window.lucide) lucide.createIcons();
         else setTimeout(initLucide, 150);
       }
       initLucide();
 
-      // === Load YouTube videos dynamically ===
+      // === YouTube Data Fetch Function ===
       const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
-      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // 🔹 Replace when YouTube activates
+      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // 🔹 Replace after activation
       const videoContainer = document.getElementById("youtubeFeed");
 
-      fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`)
-        .then(response => response.json())
-        .then(data => {
+      async function fetchYouTubeVideos() {
+        try {
+          const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`);
+          const data = await response.json();
+
+          if (!data.items) throw new Error("No items returned.");
+
           videoContainer.innerHTML = "";
           data.items.forEach(item => {
             if (item.id.kind === "youtube#video") {
@@ -185,10 +190,17 @@
                 </div>`;
             }
           });
-        })
-        .catch(() => {
-          videoContainer.innerHTML = "<p style='color:#f88;'>Unable to load videos right now.</p>";
-        });
+        } catch (error) {
+          videoContainer.innerHTML = "<p style='color:#f88;'>Unable to load podcasts at this time. Please check your API key or channel ID.</p>";
+        }
+      }
+
+      // === Fetch on load ===
+      fetchYouTubeVideos();
+
+      // === Auto-refresh every 4 hours ===
+      const FOUR_HOURS = 4 * 60 * 60 * 1000;
+      setInterval(fetchYouTubeVideos, FOUR_HOURS);
     });
   </script>
 </body>
