@@ -42,6 +42,18 @@
       transition: all 0.4s ease;
     }
 
+    /* === CLICKABLE LINK WRAPPER === */
+    .project-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .project-link:hover {
+      transform: translateY(-4px);
+    }
+
     /* === HOVER GLOW (Unified Intensity Across Site) === */
     .project-card:hover {
       transform: translateY(-6px) scale(1.02);
@@ -100,7 +112,6 @@
       padding: 2rem 1rem 5rem 1rem;
     }
 
-    /* Top row (3 cards) */
     .projects-row-3 {
       display: grid;
       grid-template-columns: repeat(3, minmax(260px, 1fr));
@@ -108,22 +119,19 @@
       justify-content: center;
     }
 
-    /* Middle row (2 cards, realigned under Quantum Engine) */
     .projects-row-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(300px, 1fr));
       gap: 1.8rem;
       justify-content: center;
-      margin-left: 12%; /* ✅ Slight shift to align visually under right column */
+      margin-left: 12%;
     }
 
-    /* Bottom row (1 card centered) */
     .projects-row-1 {
       display: flex;
       justify-content: center;
     }
 
-    /* === RESPONSIVE === */
     @media (max-width: 992px) {
       .projects-row-3,
       .projects-row-2 {
@@ -178,68 +186,82 @@
     </section>
 
     <div class="projects-grid">
+
       <!-- === TOP ROW (3) === -->
       <div class="projects-row-3">
-        <div class="project-card" style="--delay:0.3s;">
-          <i data-lucide="cpu"></i>
-          <h3>AI Model Deployment Platform</h3>
-          <p>
-            Built scalable deep learning infrastructure for automated deployment pipelines — 
-            enabling seamless integration of AI models across enterprise environments.
-          </p>
-        </div>
+        <a href="/projects/ai-model" class="project-link" style="--delay:0.3s;">
+          <div class="project-card">
+            <i data-lucide="cpu"></i>
+            <h3>AI Model Deployment Platform</h3>
+            <p>
+              Built scalable deep learning infrastructure for automated deployment pipelines — 
+              enabling seamless integration of AI models across enterprise environments.
+            </p>
+          </div>
+        </a>
 
-        <div class="project-card" style="--delay:0.5s;">
-          <i data-lucide="database"></i>
-          <h3>Enterprise Data Lake Modernization</h3>
-          <p>
-            Migrated complex legacy systems into a unified, cloud-native data lake — 
-            improving analytics latency and governance efficiency.
-          </p>
-        </div>
+        <a href="/projects/enterprise" class="project-link" style="--delay:0.5s;">
+          <div class="project-card">
+            <i data-lucide="database"></i>
+            <h3>Enterprise Data Lake Modernization</h3>
+            <p>
+              Migrated complex legacy systems into a unified, cloud-native data lake — 
+              improving analytics latency and governance efficiency.
+            </p>
+          </div>
+        </a>
 
-        <div class="project-card" style="--delay:0.7s;">
-          <i data-lucide="bar-chart-3"></i>
-          <h3>Quantum-Inspired Analytics Engine</h3>
-          <p>
-            Developed quantum-inspired analytics engines to optimize financial modeling 
-            and accelerate computation through pattern recognition.
-          </p>
-        </div>
+        <a href="/projects/quantum" class="project-link" style="--delay:0.7s;">
+          <div class="project-card">
+            <i data-lucide="bar-chart-3"></i>
+            <h3>Quantum-Inspired Analytics Engine</h3>
+            <p>
+              Developed quantum-inspired analytics engines to optimize financial modeling 
+              and accelerate computation through pattern recognition.
+            </p>
+          </div>
+        </a>
       </div>
 
       <!-- === MIDDLE ROW (2 aligned right) === -->
       <div class="projects-row-2">
-        <div class="project-card" style="--delay:1s;">
-          <i data-lucide="shield"></i>
-          <h3>Cyber Resilience Initiative</h3>
-          <p>
-            Enhanced digital infrastructure for regulated sectors, embedding AI-based 
-            threat prediction and zero-trust protocols for compliance resilience.
-          </p>
-        </div>
+        <a href="/projects/cyber" class="project-link" style="--delay:1s;">
+          <div class="project-card">
+            <i data-lucide="shield"></i>
+            <h3>Cyber Resilience Initiative</h3>
+            <p>
+              Enhanced digital infrastructure for regulated sectors, embedding AI-based 
+              threat prediction and zero-trust protocols for compliance resilience.
+            </p>
+          </div>
+        </a>
 
-        <div class="project-card" style="--delay:1.2s;">
-          <i data-lucide="network"></i>
-          <h3>Secure Systems Integration</h3>
-          <p>
-            Implemented high-security API integration across distributed systems, 
-            maintaining uptime for global enterprise clients.
-          </p>
-        </div>
+        <a href="/projects/secure" class="project-link" style="--delay:1.2s;">
+          <div class="project-card">
+            <i data-lucide="network"></i>
+            <h3>Secure Systems Integration</h3>
+            <p>
+              Implemented high-security API integration across distributed systems, 
+              maintaining uptime for global enterprise clients.
+            </p>
+          </div>
+        </a>
       </div>
 
       <!-- === BOTTOM ROW (1) === -->
       <div class="projects-row-1">
-        <div class="project-card" style="--delay:1.5s;">
-          <i data-lucide="globe"></i>
-          <h3>Global Cloud Optimization</h3>
-          <p>
-            Orchestrated multi-cloud optimization framework leveraging hybrid AI load-balancing, 
-            cutting operational costs across global clusters.
-          </p>
-        </div>
+        <a href="/projects/global" class="project-link" style="--delay:1.5s;">
+          <div class="project-card">
+            <i data-lucide="globe"></i>
+            <h3>Global Cloud Optimization</h3>
+            <p>
+              Orchestrated multi-cloud optimization framework leveraging hybrid AI load-balancing, 
+              cutting operational costs across global clusters.
+            </p>
+          </div>
+        </a>
       </div>
+
     </div>
   </main>
 
