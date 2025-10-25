@@ -3,23 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JNUS Associates Ltd | AI • Systems • Tech • Data Analytics</title>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <title>JNUS Associates Ltd | AI • Systems • Tech • Business & Data Analytics</title>
 
   <link rel="stylesheet" href="styles.css" />
   <script src="https://unpkg.com/lucide@latest" defer></script>
   <script src="script.js" defer></script>
+
+  <style>
+    /* ===== Glass and Glow Styles ===== */
+    .glass-box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 20px 30px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .glow, .glow-tagline {
+      color: #eaf4f8;
+      text-shadow: 0 0 10px rgba(173, 216, 230, 0.6), 0 0 20px rgba(0, 128, 255, 0.3);
+    }
+
+    /* ===== WhatsApp Icon Hover Glow ===== */
+    .whatsapp-icon {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 8px;
+      text-decoration: none;
+      color: #25D366; /* WhatsApp green */
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 4px rgba(37, 211, 102, 0.5));
+    }
+
+    .whatsapp-icon:hover {
+      color: #5af58f;
+      filter: drop-shadow(0 0 10px rgba(90, 245, 143, 0.8)) brightness(1.2);
+      transform: scale(1.1);
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      color: #eaf4f8;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    footer a {
+      color: #eaf4f8;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
 <body style="background-image:url('gracechurch.jpg');background-size:cover;background-position:center;">
   <!-- ===== HEADER ===== -->
-  <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65);">
-    <div class="container">
+  <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65); padding: 20px 0;">
+    <div class="container glass-box">
       <div class="brand">
         <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p>📞 020 3538 4966</p>
+          <p class="glow">
+            📞 020 3538 4966
+            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
+              <i data-lucide="whatsapp"></i>
+            </a>
+          </p>
         </div>
       </div>
       <nav class="navbar">
@@ -44,7 +105,13 @@
   <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
+    <p>
+      📞 020 3538 4966 
+      <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
+        <i data-lucide="whatsapp"></i>
+      </a>
+      | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
+    </p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
@@ -58,5 +125,11 @@
   <div class="stock-ticker">
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      lucide.createIcons();
+    });
+  </script>
 </body>
 </html>
