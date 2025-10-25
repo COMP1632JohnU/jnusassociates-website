@@ -31,7 +31,6 @@
       animation: heroFadeUp 1.2s ease-out forwards;
     }
 
-    /* Teal hover glow */
     .project-card::before {
       content: "";
       position: absolute;
@@ -78,11 +77,9 @@
       color: #d6f3f3;
     }
 
-    /* Prev / Next / Back links */
+    /* Prev / Next links only */
     .nav-links {
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       margin-top: 26px;
@@ -109,8 +106,13 @@
       transform: translateY(-2px);
     }
 
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(15px); filter: blur(3px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
     @media (max-width: 640px) {
-      .nav-links { justify-content: center; }
+      .nav-links { justify-content: center; gap: 16px; }
     }
   </style>
 </head>
@@ -166,7 +168,6 @@
       <div class="nav-links">
         <a href="/projects/ai-model">← Previous</a>
         <a href="/projects/quantum">Next →</a>
-        <a href="/projects/">Back to Projects</a>
       </div>
     </div>
   </main>
