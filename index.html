@@ -25,13 +25,15 @@
 
     .glow, .glow-tagline {
       color: #eaf4f8;
-      text-shadow: 0 0 10px rgba(173, 216, 230, 0.6), 0 0 20px rgba(0, 128, 255, 0.3);
+      text-shadow: 0 0 10px rgba(173, 216, 230, 0.6),
+                   0 0 20px rgba(0, 128, 255, 0.3);
     }
 
-    /* ===== WhatsApp Icon Hover Glow ===== */
+    /* ===== WhatsApp Icon Visible + Glow ===== */
     .whatsapp-icon {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       margin-left: 8px;
       text-decoration: none;
       color: #25D366; /* WhatsApp green */
@@ -39,12 +41,21 @@
       filter: drop-shadow(0 0 4px rgba(37, 211, 102, 0.5));
     }
 
-    .whatsapp-icon:hover {
-      color: #5af58f;
-      filter: drop-shadow(0 0 10px rgba(90, 245, 143, 0.8)) brightness(1.2);
-      transform: scale(1.1);
+    .whatsapp-icon i {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.2px;
+      color: inherit;
     }
 
+    .whatsapp-icon:hover {
+      color: #5af58f;
+      filter: drop-shadow(0 0 12px rgba(90, 245, 143, 0.9))
+              brightness(1.3);
+      transform: scale(1.15);
+    }
+
+    /* ===== Footer Styling ===== */
     footer {
       background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(8px);
@@ -55,13 +66,27 @@
       border-top: 1px solid rgba(255, 255, 255, 0.2);
     }
 
+    /* ===== Footer Links ===== */
     footer a {
       color: #eaf4f8;
       text-decoration: none;
+      transition: all 0.3s ease;
     }
 
     footer a:hover {
-      text-decoration: underline;
+      color: #7fe0ff; /* Aqua glow */
+      text-shadow: 0 0 8px rgba(127, 224, 255, 0.9),
+                   0 0 16px rgba(100, 200, 255, 0.6);
+    }
+
+    /* ===== Email Glow Consistency ===== */
+    footer a[href^="mailto:"] {
+      filter: drop-shadow(0 0 3px rgba(100, 200, 255, 0.4));
+    }
+
+    footer a[href^="mailto:"]:hover {
+      filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.9))
+              brightness(1.3);
     }
   </style>
 </head>
@@ -106,11 +131,12 @@
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>
-      📞 020 3538 4966 
+      📞 020 3538 4966
       <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
         <i data-lucide="whatsapp"></i>
       </a>
-      | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
+      |
+      <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
     </p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
