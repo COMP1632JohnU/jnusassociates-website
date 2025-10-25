@@ -11,12 +11,25 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* Ensure section matches your home + services glass aesthetic */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: #000;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.6s ease-in-out;
+    }
+
     .mission-section {
       text-align: center;
-      margin-top: 120px;
+      margin-top: 140px;
       padding: 80px 30px;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.45);
       border-radius: 14px;
       max-width: 950px;
       margin-left: auto;
@@ -69,14 +82,17 @@
       from { opacity: 0; transform: translateY(25px); filter: blur(3px); }
       to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
+
+    /* Ensure background loads smoothly */
+    .loaded {
+      background-image: url('../wall.jpg');
+    }
   </style>
 </head>
 
-<!-- ✅ FIXED BACKGROUND PATH -->
-<body style="background-image:url('wall.jpg');background-size:cover;background-position:center;">
-
+<body>
   <!-- ===== HEADER ===== -->
-  <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65); padding: 20px 0;">
+  <header class="site-header" style="position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.65); padding: 20px 0; z-index: 999;">
     <div class="container glass-box">
       <div class="brand">
         <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
@@ -130,14 +146,17 @@
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
 
-  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
   <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
   <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
   <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // Ensure Lucide icons and ticker scripts initialize correctly
       if (window.lucide) lucide.createIcons();
+
+      // Delay background load to prevent black flash
+      setTimeout(() => document.body.classList.add("loaded"), 100);
     });
   </script>
 </body>
