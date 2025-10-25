@@ -6,9 +6,8 @@
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
   <title>JNUS Associates Ltd | AI • Systems • Tech • Business & Data Analytics</title>
 
-  <!-- Lucide & Global Script -->
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest" defer></script>
-  <script src="script.js" defer></script>
 
   <style>
     /* ===== GLOBAL ===== */
@@ -16,18 +15,17 @@
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-      overflow-y: hidden; /* lock scroll */
+      overflow-y: hidden;
       background: #000;
       color: #e0f7f7;
       font-family: "Inter", sans-serif;
       height: 100%;
-      scroll-behavior: smooth;
     }
+
     body {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 100vh;
       background-image: url('gracechurch.jpg');
       background-size: cover;
       background-position: center;
@@ -35,273 +33,271 @@
     }
 
     /* ===== HEADER ===== */
-    .site-header {
+    header.site-header {
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(0,255,255,0.15);
+      padding: 10px 20px;
       text-align: center;
-      padding: 8px 14px;
     }
 
-    .header-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-    }
-
-    .brand-row {
+    .brand {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 12px;
     }
 
     .logo {
-      width: clamp(40px, 6vw, 55px);
+      width: 58px;
       height: auto;
     }
 
     .brand-text h1 {
       color: #00f5d4;
-      font-size: clamp(1rem, 2.4vw, 1.3rem);
+      font-size: clamp(1.1rem, 2.6vw, 1.6rem);
       margin: 0;
     }
 
-    .brand-text .tagline {
+    .brand-text p {
       color: #aef;
-      font-size: clamp(0.75rem, 1.8vw, 0.9rem);
-      margin-top: 2px;
+      font-size: clamp(0.8rem, 1.6vw, 1rem);
+      margin: 2px 0 0;
     }
 
-    .contact-line {
+    .navbar ul {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
       display: flex;
       justify-content: center;
-      gap: 10px;
-      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      flex-wrap: wrap;
+      gap: 18px;
     }
 
-    .contact-line a {
-      color: #00f5d4;
+    .navbar a {
+      color: #dff;
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* ===== NAVIGATION ===== */
-    .navbar {
-      margin-top: 4px;
-      position: relative;
-    }
-    .menu-toggle {
-      background: none;
-      border: none;
-      color: #00f5d4;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      position: absolute;
-      top: 35px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.85);
-      border: 1px solid rgba(0,255,255,0.25);
-      border-radius: 6px;
-      padding: 8px 14px;
-      z-index: 100;
-    }
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    .nav-links a.active, .nav-links a:hover {
-      color: #00f5d4;
-    }
-
-    .menu-toggle.active + .nav-links { display: flex; }
-
-    @media (min-width: 768px) {
-      .menu-toggle { display: none; }
-      .nav-links {
-        display: flex !important;
-        position: static;
-        flex-direction: row;
-        gap: 16px;
-        background: none;
-        border: none;
-        padding: 0;
-      }
-    }
-
-    /* ===== HERO ===== */
-    .hero {
-      text-align: center;
-      padding: clamp(20px, 6vh, 45px) 16px 10px;
-      color: #fff;
-      flex: 1;
-    }
-    .hero h2 {
-      font-size: clamp(1rem, 3vw, 1.4rem);
-      line-height: 1.4;
-      margin-bottom: 0.6rem;
-      text-shadow: 0 0 8px rgba(0,255,255,0.4);
-    }
-    .hero p {
+      font-weight: 500;
       font-size: clamp(0.8rem, 1.6vw, 1rem);
-      color: #cff;
-      margin-bottom: 0.8rem;
+      transition: color 0.3s ease;
     }
+
+    .navbar a.active, .navbar a:hover {
+      color: #00f5d4;
+    }
+
+    /* ===== HERO (Glass Panel) ===== */
+    main.hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero-glass {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 40px 30px;
+      max-width: 900px;
+      animation: fadeUp 1s ease-out;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: #fff;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 12px rgba(0,255,255,0.4);
+      line-height: 1.5;
+    }
+
+    .hero p {
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: #c0f8f8;
+      margin-bottom: 1.5rem;
+    }
+
     .hero button {
       background-color: #00f5d4;
-      color: #000;
       border: none;
-      padding: 6px 16px;
-      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
-      border-radius: 5px;
+      color: #000;
+      padding: 10px 25px;
       font-weight: 600;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.25s;
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      transition: all 0.3s ease;
     }
-    .hero button:hover { background-color: #00ffd1; }
 
-    /* ===== PODCASTS ===== */
+    .hero button:hover {
+      background-color: #00ffd1;
+      transform: translateY(-2px);
+    }
+
+    /* ===== PODCAST SECTION ===== */
     .podcast-section {
       text-align: center;
-      margin: 0 auto;
-      padding: 16px 14px 10px;
+      margin: 30px auto 10px;
+      padding: 30px 20px;
+      max-width: 900px;
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0,255,255,0.25);
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,255,255,0.15);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      width: 92%;
-      max-width: 900px;
-      flex-shrink: 0;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
+
     .podcast-section h2 {
       color: #00f5d4;
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      margin-bottom: 0.4rem;
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
+
     .podcast-intro {
-      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      max-width: 700px;
+      margin: 0 auto 20px;
       color: #c0f8f8;
-      margin: 0 auto 10px;
-      max-width: 600px;
-      line-height: 1.4;
+      font-size: 1rem;
+      line-height: 1.6;
     }
+
     .podcast-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
       justify-content: center;
     }
+
     .podcast-card {
-      background: rgba(0,0,0,0.35);
+      background: rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(0,255,255,0.25);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       opacity: 0;
       transform: translateY(10px);
-      transition: all 0.4s ease;
+      transition: all 0.5s ease;
     }
+
     .podcast-card.visible { opacity: 1; transform: translateY(0); }
+
     .podcast-card iframe {
       width: 100%;
-      height: clamp(140px, 16vh, 180px);
+      height: 200px;
     }
+
     .podcast-card h3 {
       color: #00f5d4;
-      font-size: clamp(0.8rem, 1.4vw, 1rem);
-      margin: 6px 0 10px 0;
+      font-size: 1rem;
+      margin: 10px 0;
+      text-shadow: 0 0 8px rgba(0,255,255,0.5);
     }
+
     .last-updated {
-      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
-      color: #77baff;
-      margin-top: 4px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #89f;
       opacity: 0.8;
     }
 
     /* ===== TICKER FRAME ===== */
     .ticker-frame {
-      width: 100%;
-      height: clamp(85px, 10vh, 100px);
+      width: 92%;
+      max-width: 900px;
+      height: 110px;
       border: none;
-      border-radius: 10px;
-      margin: 10px auto;
-      background: rgba(0,0,0,0.4);
+      margin: 30px auto 0;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.45);
       border: 1px solid rgba(0,255,255,0.25);
-      box-shadow: 0 0 14px rgba(0,255,255,0.15);
+      box-shadow: 0 0 18px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
     }
 
-    /* ===== FOOTER ===== */
+    /* ===== FOOTER (Centered Glass Bar) ===== */
     footer {
+      margin: 25px auto 20px;
+      padding: 20px 16px;
+      max-width: 800px;
       text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       color: #aef;
-      background: rgba(0,0,0,0.6);
-      border-top: 1px solid rgba(0,255,255,0.2);
-      padding: 6px 8px;
-      font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+      font-size: 0.85rem;
+      line-height: 1.6;
     }
+
     footer a {
       color: #00f5d4;
       text-decoration: none;
     }
 
-    /* ===== FADE-IN ===== */
-    body { animation: fadeIn 0.8s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-glass {
+        padding: 25px 20px;
+      }
+      footer {
+        width: 90%;
+      }
+    }
   </style>
 </head>
 
 <body>
   <!-- ===== HEADER ===== -->
   <header class="site-header">
-    <div class="header-inner">
-      <div class="brand-row">
-        <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
-        <div class="brand-text">
-          <h1>JNUS Associates Ltd</h1>
-          <p class="tagline">AI • Systems • Tech • Business & Data Analytics</p>
-        </div>
+    <div class="brand">
+      <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+      <div class="brand-text">
+        <h1>JNUS Associates Ltd</h1>
+        <p>AI • Systems • Tech • Business & Data Analytics</p>
       </div>
-
-      <div class="contact-line">
-        <a href="tel:02035384966"><i data-lucide="phone"></i> 020 3538 4966</a>
-        <a href="https://wa.me/442035384966" target="_blank" title="Chat on WhatsApp"><i data-lucide="whatsapp"></i></a>
-      </div>
-
-      <nav class="navbar">
-        <button class="menu-toggle"><i data-lucide="menu"></i></button>
-        <ul class="nav-links">
-          <li><a href="/" class="active">Home</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/services/">Services</a></li>
-          <li><a href="/projects/">Projects</a></li>
-          <li><a href="/contact/">Contact</a></li>
-        </ul>
-      </nav>
     </div>
+
+    <div class="contact-line" style="margin-top: 6px;">
+      <a href="tel:02035384966" style="color:#00f5d4;text-decoration:none;"><i data-lucide="phone"></i> 020 3538 4966</a>
+      <a href="https://wa.me/442035384966" target="_blank" title="Chat on WhatsApp"><i data-lucide="whatsapp"></i></a>
+    </div>
+
+    <nav class="navbar">
+      <ul>
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <!-- ===== HERO ===== -->
   <main class="hero">
-    <h2>Delivering clarity and confidence in deep learning, software, tech, and quantum data analytics.</h2>
-    <p>At JNUS Associates, we provide solutions that empower your business through innovation, precision, and engineering excellence.</p>
-    <button onclick="window.location.href='/contact/'">Contact Us</button>
+    <div class="hero-glass">
+      <h2>Delivering clarity and confidence in deep learning, software, tech, and quantum data analytics.</h2>
+      <p>At JNUS Associates, we provide solutions that empower your business through innovation, precision, and engineering excellence.</p>
+      <button onclick="window.location.href='/contact/'">Contact Us</button>
+    </div>
   </main>
 
   <!-- ===== PODCASTS ===== -->
@@ -324,7 +320,7 @@
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>
       📞 020 3538 4966
-      <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a> |
+      <a href="https://wa.me/442035384966" target="_blank" title="Chat on WhatsApp"><i data-lucide="whatsapp"></i></a> |
       <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
     </p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
@@ -333,12 +329,6 @@
   <!-- ===== SCRIPT: ICONS + YOUTUBE ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const toggle = document.querySelector(".menu-toggle");
-      const nav = document.querySelector(".nav-links");
-      toggle.addEventListener("click", () => {
-        toggle.classList.toggle("active");
-        nav.style.display = nav.style.display === "flex" ? "none" : "flex";
-      });
       if (window.lucide) lucide.createIcons();
 
       const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
@@ -348,7 +338,6 @@
 
       async function loadVideos() {
         try {
-          if (!CHANNEL_ID || CHANNEL_ID === "YOUR_CHANNEL_ID_HERE") throw new Error("Missing channel ID");
           const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
           const res = await fetch(url);
           const data = await res.json();
@@ -370,6 +359,7 @@
           feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Check API key or channel ID.</p>";
         }
       }
+
       loadVideos();
       setInterval(loadVideos, 14400000);
     });
