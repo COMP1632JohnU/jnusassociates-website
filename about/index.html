@@ -11,41 +11,60 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* ===== GLASS + TEAL GLOW CARD STYLING ===== */
-    .about-layout {
+    /* ===== UNIFIED LAYOUT (MATCHES SERVICES PAGE) ===== */
+    .about-section {
       text-align: center;
-      max-width: 950px;
-      margin: 6rem auto 4rem auto;
-      background: rgba(0, 0, 0, 0.45);
-      padding: 3rem 2rem;
-      border-radius: 16px;
+      margin-top: 120px;
+      padding: 100px 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(0, 255, 255, 0.25);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
-      color: #e0f7f7;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
       animation: fadeUp 1.2s ease-out forwards;
     }
 
-    .about-card.reduced {
+    .about-section h2 {
+      font-size: 2rem;
+      color: #00f5d4;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    }
+
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .about-card {
+      flex: 1 1 280px;
+      max-width: 300px;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(0, 255, 255, 0.25);
-      border-radius: 14px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 12px;
       padding: 2rem 1.8rem;
-      margin-bottom: 2rem;
       color: #e0f7f7;
       box-shadow: 0 0 15px rgba(0, 255, 255, 0.12);
       transition: transform 0.35s ease, box-shadow 0.35s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    .about-card.reduced:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 6px 25px rgba(0, 255, 255, 0.35);
-      border-color: rgba(0, 255, 255, 0.5);
+    .about-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.35);
     }
 
-    .about-card h2, .about-card h3 {
+    .about-card h3 {
       margin-bottom: 0.8rem;
+      color: #00ffd1;
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
     }
 
     .about-card p {
@@ -55,8 +74,8 @@
     }
 
     .about-icon {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       color: #00f5d4;
       margin-bottom: 1rem;
       filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4));
@@ -67,9 +86,8 @@
       filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9));
     }
 
-    /* ===== FADE-UP ANIMATION ===== */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(25px); filter: blur(4px); }
+      from { opacity: 0; transform: translateY(25px); filter: blur(3px); }
       to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
   </style>
@@ -107,35 +125,38 @@
   </header>
 
   <!-- ===== ABOUT SECTION ===== -->
-  <section class="about-layout fade-up">
-    <div class="about-card reduced" style="animation-delay:0.2s;">
-      <i data-lucide="briefcase" class="about-icon"></i>
-      <h2 class="glow">About Us</h2>
-      <p>
-        JNUS Associates Ltd is a trusted partner for your global business needs — 
-        with innovation, reliability, transparency, transformation, and efficiency 
-        at the heart of everything we do.
-      </p>
-    </div>
+  <section class="about-section fade-up">
+    <h2>About Us</h2>
+    <p style="max-width:750px;margin:0 auto 2rem;color:#d6f3f3;">
+      JNUS Associates Ltd is a trusted partner for your global business needs — with innovation, 
+      reliability, transparency, transformation, and efficiency at the heart of everything we do.
+    </p>
 
-    <div class="mission-vision">
-      <div class="about-card reduced" style="animation-delay:0.4s;">
+    <div class="about-grid">
+      <div class="about-card">
         <i data-lucide="target" class="about-icon"></i>
-        <h3 class="glow-tagline">Our Mission</h3>
+        <h3>Our Mission</h3>
         <p>
-          To deliver reliable, secure, and scalable technology solutions that 
-          drive meaningful impact — empowering businesses to operate with 
-          clarity and confidence.
+          To deliver reliable, secure, and scalable technology solutions that drive meaningful 
+          impact — empowering businesses to operate with clarity and confidence.
         </p>
       </div>
 
-      <div class="about-card reduced" style="animation-delay:0.6s;">
+      <div class="about-card">
         <i data-lucide="globe" class="about-icon"></i>
-        <h3 class="glow-tagline">Our Vision</h3>
+        <h3>Our Vision</h3>
         <p>
-          To be recognized globally as a trusted partner for digital 
-          transformation and sustainable innovation through dependable 
-          solutions and client-centric delivery.
+          To be recognized globally as a trusted partner for digital transformation and 
+          sustainable innovation through dependable solutions and client-centric delivery.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <i data-lucide="briefcase" class="about-icon"></i>
+        <h3>Our Values</h3>
+        <p>
+          Built on integrity, collaboration, and excellence — we foster innovation while 
+          maintaining transparency and accountability in every engagement.
         </p>
       </div>
     </div>
@@ -165,7 +186,6 @@
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
 
-  <!-- ===== ICON INITIALIZATION ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       function initLucide() {
@@ -176,12 +196,6 @@
         }
       }
       initLucide();
-
-      window.addEventListener("load", () => {
-        setTimeout(() => {
-          if (window.lucide) lucide.createIcons();
-        }, 500);
-      });
     });
   </script>
 </body>
