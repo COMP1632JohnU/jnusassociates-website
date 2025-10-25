@@ -72,7 +72,6 @@
     .podcast-card iframe {
       width: 100%;
       height: 200px;
-      border: none;
     }
 
     .podcast-card h3 {
@@ -130,12 +129,11 @@
   <section class="podcast-section">
     <h2><i data-lucide="radio"></i> Financial Insights & Podcasts</h2>
     <p class="podcast-intro">
-      Stay informed with the latest market analysis, fintech innovations, insurance and    
- reinsurance trends, MGAs, and business strategy discussions curated for modern enterprises.
+      Stay informed with the latest market analysis, fintech innovations, insurance and reinsurance trends, MGAs, and business strategy discussions curated for modern enterprises.
     </p>
 
-    <div class="podcast-grid" id="podcastGrid">
-      <p>Loading latest financial podcasts...</p>
+    <div class="podcast-grid" id="youtubeFeed">
+      <p style="color:#88f; text-align:center;">Loading latest videos...</p>
     </div>
   </section>
 
@@ -154,76 +152,44 @@
   </footer>
 
   <!-- ===== MARKET STATUS + CLOCK + TICKER ===== -->
-  <div id="marketStatusBar" class="market-status-bar">
-    <span class="neutral-glow">Checking global market status...</span>
-  </div>
-  <div id="marketClockBar" class="market-clock-bar">
-    <span class="neutral-glow">Loading clocks...</span>
-  </div>
-  <div class="stock-ticker">
-    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
-  </div>
+  <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
+  <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
+  <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
 
   <!-- ===== LUCIDE ICON INIT SCRIPT ===== -->
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    function initLucide() {
-      if (window.lucide) {
-        lucide.createIcons();
-      } else {
-        setTimeout(initLucide, 150);
-      }
-    }
-    initLucide();
-
-    window.addEventListener("load", () => {
-      setTimeout(() => {
+    document.addEventListener("DOMContentLoaded", function () {
+      function initLucide() {
         if (window.lucide) lucide.createIcons();
-      }, 500);
+        else setTimeout(initLucide, 150);
+      }
+      initLucide();
+
+      // === Load YouTube videos dynamically ===
+      const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
+      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // 🔹 Replace when YouTube activates
+      const videoContainer = document.getElementById("youtubeFeed");
+
+      fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`)
+        .then(response => response.json())
+        .then(data => {
+          videoContainer.innerHTML = "";
+          data.items.forEach(item => {
+            if (item.id.kind === "youtube#video") {
+              const videoId = item.id.videoId;
+              const title = item.snippet.title;
+              videoContainer.innerHTML += `
+                <div class="podcast-card">
+                  <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                  <h3>${title}</h3>
+                </div>`;
+            }
+          });
+        })
+        .catch(() => {
+          videoContainer.innerHTML = "<p style='color:#f88;'>Unable to load videos right now.</p>";
+        });
     });
-  });
-  </script>
-
-  <!-- ===== YOUTUBE PODCAST LOADER ===== -->
-  <script>
-  document.addEventListener("DOMContentLoaded", async () => {
-    const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
-    const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // Replace with your YouTube channel ID
-    const podcastGrid = document.getElementById("podcastGrid");
-
-    try {
-      // Fetch the uploads playlist ID from the channel
-      const channelRes = await fetch(
-        `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`
-      );
-      const channelData = await channelRes.json();
-      const uploadsPlaylist = channelData.items[0].contentDetails.relatedPlaylists.uploads;
-
-      // Fetch the latest 3 videos
-      const videosRes = await fetch(
-        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=3&playlistId=${uploadsPlaylist}&key=${API_KEY}`
-      );
-      const videosData = await videosRes.json();
-
-      podcastGrid.innerHTML = videosData.items
-        .map(
-          (item) => `
-          <div class="podcast-card">
-            <iframe
-              src="https://www.youtube.com/embed/${item.snippet.resourceId.videoId}"
-              title="${item.snippet.title}"
-              allowfullscreen>
-            </iframe>
-            <h3>${item.snippet.title}</h3>
-          </div>`
-        )
-        .join("");
-    } catch (error) {
-      console.error("Failed to load YouTube videos:", error);
-      podcastGrid.innerHTML = `
-        <p style="color:#ff8;">Unable to load podcasts at this time. Please check your API key or channel ID.</p>`;
-    }
-  });
   </script>
 </body>
 </html>
