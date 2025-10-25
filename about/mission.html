@@ -11,10 +11,41 @@
   <script src="../script.js" defer></script>
 
   <style>
+    /* Ensure section matches your home + services glass aesthetic */
+    .mission-section {
+      text-align: center;
+      margin-top: 120px;
+      padding: 80px 30px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 14px;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.25);
+      animation: fadeUp 1.2s ease-out forwards;
+    }
+
+    .mission-section h2 {
+      font-size: 2rem;
+      color: #00f5d4;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    }
+
+    .mission-section p {
+      color: #d6f3f3;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
     .back-button {
       display: inline-block;
       margin-top: 2rem;
-      padding: 0.8rem 2rem;
+      padding: 0.9rem 2rem;
       background: rgba(0, 255, 255, 0.1);
       border: 1px solid rgba(0, 255, 255, 0.3);
       color: #00f5d4;
@@ -34,14 +65,17 @@
       transform: scale(1.05);
     }
 
-    .about-section p {
-      line-height: 1.8;
-      font-size: 1.1rem;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); filter: blur(3px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
   </style>
 </head>
 
-<body style="background-image:url('../wall.jpg');background-size:cover;background-position:center;">
+<!-- ✅ FIXED BACKGROUND PATH -->
+<body style="background-image:url('wall.jpg');background-size:cover;background-position:center;">
+
+  <!-- ===== HEADER ===== -->
   <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65); padding: 20px 0;">
     <div class="container glass-box">
       <div class="brand">
@@ -49,8 +83,11 @@
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p class="glow">📞 020 3538 4966
-            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon"><i data-lucide="whatsapp"></i></a>
+          <p class="glow">
+            📞 020 3538 4966
+            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
+              <i data-lucide="whatsapp"></i>
+            </a>
           </p>
         </div>
       </div>
@@ -58,7 +95,7 @@
       <nav class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/" class="active">About</a></li>
           <li><a href="/services/">Services</a></li>
           <li><a href="/projects/">Projects</a></li>
           <li><a href="/contact/">Contact</a></li>
@@ -67,34 +104,41 @@
     </div>
   </header>
 
-  <section class="about-section fade-up">
+  <!-- ===== MISSION SECTION ===== -->
+  <section class="mission-section fade-up">
     <h2>Our Mission</h2>
-    <p style="max-width:850px;margin:0 auto 1.5rem;color:#d6f3f3;">
+    <p>
       At JNUS Associates Ltd, our mission is to bridge innovation with reliability — creating systems and technology
       solutions that are not only intelligent but deeply practical. We are driven by a commitment to excellence,
       ensuring that every solution we deliver enhances business agility, efficiency, and confidence.
     </p>
-    <p style="max-width:850px;margin:0 auto 1.5rem;color:#d6f3f3;">
+    <p>
       Our focus extends beyond technology — it’s about enabling transformation. Whether developing AI-driven platforms,
       automating workflows, or securing enterprise systems, we build scalable and transparent solutions that empower
       organizations to adapt and grow in a complex digital economy.
     </p>
-    <p style="max-width:850px;margin:0 auto 2rem;color:#d6f3f3;">
+    <p>
       We are devoted to creating impact through precision engineering, measurable outcomes, and sustainable digital
       growth — delivering excellence that stands the test of time.
     </p>
     <a href="/about/" class="back-button">← Back to About Us</a>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
   </footer>
 
+  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
   <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
   <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
   <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
 
-  <script>document.addEventListener("DOMContentLoaded",()=>{if(window.lucide)lucide.createIcons();});</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
 </body>
 </html>
