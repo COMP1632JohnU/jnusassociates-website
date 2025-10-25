@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>Quantum-Inspired Analytics Engine | JNUS Associates Ltd</title>
+
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="../script.js" defer></script>
+
+  <style>
+    .project-card {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      border-radius: 12px;
+      padding: 40px 30px;
+      text-align: center;
+      color: #e0f7f7;
+      max-width: 850px;
+      margin: 120px auto;
+      box-shadow: 0 0 20px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: heroFadeUp 1.2s ease-out forwards;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(0,255,255,0.22) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover::before { opacity: 1; }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,255,255,0.6);
+      box-shadow: 0 0 32px rgba(0,255,255,0.4);
+    }
+
+    .project-card i {
+      color: #00f5d4;
+      font-size: 2rem;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 0 6px rgba(0,255,255,0.5));
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover i {
+      color: #00ffe0;
+      filter: drop-shadow(0 0 10px rgba(0,255,255,0.9));
+    }
+
+    .project-card h2 {
+      color: #00f5d4;
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
+      font-weight: 700;
+    }
+
+    .project-card p {
+      line-height: 1.75;
+      margin-bottom: 1.1rem;
+      color: #d6f3f3;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 26px;
+    }
+
+    .nav-links a {
+      color: #00f5d4;
+      text-decoration: none;
+      font-weight: 600;
+      text-shadow: 0 0 6px rgba(0,255,255,0.4);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(0,255,255,0.25);
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .nav-links a:hover {
+      color: #00ffe0;
+      box-shadow: 0 0 16px rgba(0,255,255,0.35);
+      text-shadow: 0 0 10px rgba(0,255,255,0.8);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { justify-content: center; }
+    }
+  </style>
+</head>
+
+<body style="background-image:url('../waihai.jpg'); background-size:cover; background-position:center;">
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <div class="brand-text">
+          <h1 class="glow">JNUS Associates Ltd</h1>
+          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
+          <p>📞 020 3538 4966</p>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/" class="active">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <div class="project-card fade-up">
+      <i data-lucide="bar-chart-3"></i>
+      <h2>Quantum-Inspired Analytics Engine</h2>
+
+      <p>
+        Our Quantum-Inspired Analytics Engine combines advanced AI algorithms with quantum-style optimization
+        to deliver unprecedented speed and accuracy in data-driven forecasting and resource allocation.
+      </p>
+
+      <p>
+        We model complex systems using quantum annealing principles — enabling enterprises to handle multidimensional datasets,
+        reduce compute costs, and improve decision-making in domains like finance, logistics, and healthcare.
+      </p>
+
+      <p>
+        By merging <strong>machine learning inference</strong> with <strong>quantum-inspired mathematics</strong>,
+        we help organizations achieve faster scenario analysis, adaptive modeling, and real-time predictive insights.
+      </p>
+
+      <div class="nav-links">
+        <a href="/projects/enterprise">← Previous</a>
+        <a href="/projects/cyber">Next →</a>
+        <a href="/projects/">Back to Projects</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
+    <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
+  </footer>
+
+  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
+  <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
+  <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
+  <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
+
+  <!-- ===== INITIALIZATION ===== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      try { if (window.lucide) lucide.createIcons(); } catch (e) {}
+      try {
+        if (typeof updateMarketClock === "function") updateMarketClock();
+        if (typeof fetchStockPrices === "function") fetchStockPrices();
+        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
