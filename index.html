@@ -13,143 +13,248 @@
   <script src="script.js" defer></script>
 
   <style>
-    /* ===== Podcast Section (Glass Aesthetic) ===== */
+    /* ===== GLOBAL ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: hidden; /* Prevent scroll */
+      background: #000;
+      color: #e0f7f7;
+      font-family: "Inter", sans-serif;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100vh;
+      background-image: url('gracechurch.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* ===== HEADER ===== */
+    header.site-header {
+      position: relative;
+      background: rgba(0,0,0,0.65);
+      padding: 16px 0;
+      text-align: center;
+    }
+
+    header .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header .logo {
+      width: 60px;
+      margin-bottom: 6px;
+    }
+
+    .brand-text h1 {
+      color: #00f5d4;
+      margin: 0;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+    }
+
+    .brand-text p {
+      color: #aef;
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      margin: 2px 0;
+    }
+
+    .navbar ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .navbar a {
+      color: #dff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: clamp(0.8rem, 1.6vw, 1rem);
+    }
+
+    .navbar a.active, .navbar a:hover {
+      color: #00f5d4;
+    }
+
+    /* ===== HERO ===== */
+    main.hero {
+      text-align: center;
+      padding: clamp(30px, 5vh, 60px) 15px 25px;
+      max-width: 900px;
+      margin: 0 auto;
+      color: #fff;
+      flex: 1 0 auto;
+    }
+
+    main.hero h2 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(0,255,255,0.3);
+    }
+
+    main.hero p {
+      font-size: clamp(0.9rem, 1.6vw, 1rem);
+      margin-bottom: 1.2rem;
+      color: #dff;
+    }
+
+    main.hero button {
+      background-color: #00f5d4;
+      border: none;
+      color: #000;
+      padding: 8px 20px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+    }
+
+    main.hero button:hover { background-color: #00ffd1; }
+
+    /* ===== PODCAST SECTION ===== */
     .podcast-section {
       text-align: center;
-      margin: 120px auto;
-      padding: 60px 30px;
-      max-width: 1200px;
+      margin: clamp(20px, 3vh, 40px) auto 0;
+      padding: clamp(20px, 3vh, 35px) 15px;
+      max-width: 1000px;
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0,255,255,0.25);
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(0,255,255,0.15);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       color: #e0f7f7;
-      animation: fadeUp 1.2s ease-out forwards;
+      flex-shrink: 0;
     }
 
     .podcast-section h2 {
       color: #00f5d4;
       text-shadow: 0 0 10px rgba(0,255,255,0.6);
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      margin-bottom: 0.6rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .podcast-intro {
-      max-width: 800px;
-      margin: 0 auto 40px;
+      max-width: 700px;
+      margin: 0 auto 18px;
       color: #c0f8f8;
-      font-size: 1.1rem;
-      line-height: 1.7;
+      font-size: clamp(0.85rem, 1.6vw, 1rem);
+      line-height: 1.5;
     }
 
     .podcast-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
       justify-content: center;
     }
 
     .podcast-card {
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(0,255,255,0.25);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 15px rgba(0,255,255,0.1);
+      box-shadow: 0 0 12px rgba(0,255,255,0.1);
       transition: all 0.3s ease, opacity 0.6s ease;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(10px);
     }
-    .podcast-card.visible { opacity: 1; transform: translateY(0); }
 
-    .podcast-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 30px rgba(0,255,255,0.4);
-    }
+    .podcast-card.visible { opacity: 1; transform: translateY(0); }
 
     .podcast-card iframe {
       width: 100%;
-      height: 200px;
+      height: clamp(160px, 20vh, 200px);
     }
 
     .podcast-card h3 {
       color: #00f5d4;
-      font-size: 1.1rem;
-      margin: 12px 0 18px 0;
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      margin: 8px 0 10px 0;
       text-shadow: 0 0 8px rgba(0,255,255,0.5);
     }
 
-    /* ===== Timestamp, Spinner, and Caption ===== */
     .last-updated {
-      margin-top: 25px;
-      font-size: 0.9rem;
+      margin-top: 10px;
+      font-size: clamp(0.7rem, 1.3vw, 0.85rem);
       color: #89f;
-      text-shadow: 0 0 8px rgba(0,255,255,0.3);
       font-family: "Courier New", monospace;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       opacity: 0;
       transition: opacity 0.6s ease;
     }
+
     .last-updated.visible { opacity: 1; }
 
-    .spinner {
-      display: inline-flex;
-      width: 18px;
-      height: 18px;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
     .spinner.active {
       opacity: 1;
       animation: spin 1s linear infinite;
     }
+
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .update-caption {
-      font-size: 0.8rem;
+      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
       color: #77baff;
       opacity: 0.75;
-      margin-top: 4px;
-      font-family: "Courier New", monospace;
+      margin-top: 2px;
     }
 
-    /* ===== Embedded Global Ticker (Glass Frame) ===== */
+    /* ===== TICKER FRAME ===== */
     .ticker-frame {
       width: 100%;
-      height: 140px;
+      height: clamp(90px, 12vh, 110px);
       border: none;
-      margin-top: 80px;
-      margin-bottom: 40px;
-      border-radius: 12px;
+      margin: 18px auto;
+      display: block;
+      border-radius: 10px;
       background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
       border: 1px solid rgba(0,255,255,0.25);
-      box-shadow: 0 0 25px rgba(0,255,255,0.15);
-      transition: all 0.5s ease-in-out;
+      box-shadow: 0 0 18px rgba(0,255,255,0.15);
     }
 
-    .ticker-frame:hover {
-      box-shadow: 0 0 35px rgba(0,255,255,0.35);
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      color: #aef;
+      background: rgba(0,0,0,0.6);
+      padding: clamp(10px, 2vh, 15px) 10px;
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      border-top: 1px solid rgba(0,255,255,0.2);
+      flex-shrink: 0;
     }
 
-    @keyframes fadeUp {
-      from {opacity: 0; transform: translateY(25px);}
-      to {opacity: 1; transform: translateY(0);}
+    footer a {
+      color: #00f5d4;
+      text-decoration: none;
     }
   </style>
 </head>
 
-<body style="background-image:url('gracechurch.jpg');background-size:cover;background-position:center;">
+<body>
   <!-- ===== HEADER ===== -->
-  <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65); padding: 20px 0;">
+  <header class="site-header">
     <div class="container glass-box">
       <div class="brand">
         <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
