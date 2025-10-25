@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
   <title>JNUS Associates Ltd | AI • Systems • Tech • Business & Data Analytics</title>
 
@@ -14,18 +14,19 @@
     html, body {
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
-      overflow-y: hidden;
       background: #000;
       color: #e0f7f7;
       font-family: "Inter", sans-serif;
       height: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     body {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: flex-start;
       background-image: url('gracechurch.jpg');
       background-size: cover;
       background-position: center;
@@ -34,19 +35,22 @@
 
     /* ===== HEADER ===== */
     header.site-header {
+      width: 100%;
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(0,255,255,0.15);
-      padding: 10px 20px;
       text-align: center;
+      padding: 8px 10px 10px;
+      box-sizing: border-box;
     }
 
     .brand {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -56,31 +60,47 @@
 
     .brand-text h1 {
       color: #00f5d4;
-      font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
       margin: 0;
     }
 
     .brand-text p {
       color: #aef;
-      font-size: clamp(0.8rem, 1.6vw, 1rem);
+      font-size: clamp(0.75rem, 1.4vw, 0.95rem);
       margin: 2px 0 0;
+    }
+
+    .contact-line {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      margin-top: 4px;
+    }
+
+    .contact-line a {
+      color: #00f5d4;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .navbar ul {
       list-style: none;
-      margin: 8px 0 0;
+      margin: 6px 0 0;
       padding: 0;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 14px;
     }
 
     .navbar a {
       color: #dff;
       text-decoration: none;
       font-weight: 500;
-      font-size: clamp(0.8rem, 1.6vw, 1rem);
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
       transition: color 0.3s ease;
     }
 
@@ -88,14 +108,41 @@
       color: #00f5d4;
     }
 
-    /* ===== HERO (Glass Panel) ===== */
-    main.hero {
+    /* ===== HERO WITH SIDE GLASS ===== */
+    .hero-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1200px;
+      gap: 16px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .side-glass {
+      flex: 1;
+      min-width: 220px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-align: center;
+      padding: 16px;
+      color: #aef;
+      font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+      line-height: 1.4;
+    }
+
+    .hero {
+      flex: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 50px 20px;
     }
 
     .hero-glass {
@@ -105,23 +152,25 @@
       box-shadow: 0 0 25px rgba(0,255,255,0.15);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      padding: 40px 30px;
-      max-width: 900px;
+      padding: 30px 25px;
+      max-width: 850px;
+      margin: 0 auto;
       animation: fadeUp 1s ease-out;
     }
 
     .hero h2 {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
       color: #fff;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       text-shadow: 0 0 12px rgba(0,255,255,0.4);
       line-height: 1.5;
     }
 
     .hero p {
-      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      font-size: clamp(0.85rem, 1.8vw, 1.1rem);
       color: #c0f8f8;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
     }
 
     .hero button {
@@ -132,7 +181,7 @@
       font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
-      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
       transition: all 0.3s ease;
     }
 
@@ -144,9 +193,9 @@
     /* ===== PODCAST SECTION ===== */
     .podcast-section {
       text-align: center;
-      margin: 30px auto 10px;
-      padding: 30px 20px;
-      max-width: 900px;
+      margin: 25px auto;
+      padding: 25px 20px;
+      max-width: 850px;
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 16px;
@@ -158,7 +207,7 @@
     .podcast-section h2 {
       color: #00f5d4;
       text-shadow: 0 0 10px rgba(0,255,255,0.6);
-      font-size: 1.4rem;
+      font-size: clamp(1rem, 2vw, 1.3rem);
       margin-bottom: 0.6rem;
       display: flex;
       justify-content: center;
@@ -167,80 +216,59 @@
     }
 
     .podcast-intro {
-      max-width: 700px;
-      margin: 0 auto 20px;
+      max-width: 680px;
+      margin: 0 auto 18px;
       color: #c0f8f8;
-      font-size: 1rem;
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
       line-height: 1.6;
     }
 
-    .podcast-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      justify-content: center;
-    }
-
-    .podcast-card {
-      background: rgba(0, 0, 0, 0.35);
+    /* ===== EXPANDED BOTTOM GLASS TICKER ===== */
+    .ticker-glass {
+      width: 95%;
+      max-width: 1000px;
+      background: rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(0,255,255,0.25);
-      border-radius: 12px;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.5s ease;
-    }
-
-    .podcast-card.visible { opacity: 1; transform: translateY(0); }
-
-    .podcast-card iframe {
-      width: 100%;
-      height: 200px;
-    }
-
-    .podcast-card h3 {
-      color: #00f5d4;
-      font-size: 1rem;
-      margin: 10px 0;
-      text-shadow: 0 0 8px rgba(0,255,255,0.5);
-    }
-
-    .last-updated {
-      margin-top: 10px;
-      font-size: 0.85rem;
-      color: #89f;
-      opacity: 0.8;
-    }
-
-    /* ===== TICKER FRAME ===== */
-    .ticker-frame {
-      width: 92%;
-      max-width: 900px;
-      height: 110px;
-      border: none;
-      margin: 30px auto 0;
-      border-radius: 12px;
-      background: rgba(0,0,0,0.45);
-      border: 1px solid rgba(0,255,255,0.25);
-      box-shadow: 0 0 18px rgba(0,255,255,0.15);
-      backdrop-filter: blur(10px);
-    }
-
-    /* ===== FOOTER (Centered Glass Bar) ===== */
-    footer {
-      margin: 25px auto 20px;
-      padding: 20px 16px;
-      max-width: 800px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(0,255,255,0.25);
-      border-radius: 12px;
+      border-radius: 16px;
       box-shadow: 0 0 20px rgba(0,255,255,0.15);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      text-align: center;
+      margin: 20px auto;
+      padding: 16px;
+    }
+
+    .ticker-cities {
+      font-size: clamp(0.75rem, 1.4vw, 0.9rem);
       color: #aef;
-      font-size: 0.85rem;
-      line-height: 1.6;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .ticker-frame {
+      width: 100%;
+      height: 100px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.45);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      width: 90%;
+      max-width: 800px;
+      text-align: center;
+      color: #aef;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 14px 10px;
+      margin-bottom: 25px;
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      line-height: 1.5;
     }
 
     footer a {
@@ -248,17 +276,22 @@
       text-decoration: none;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(25px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    /* ===== MOBILE ===== */
     @media (max-width: 768px) {
-      .hero-glass {
-        padding: 25px 20px;
+      .hero-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
       }
-      footer {
+      .side-glass {
         width: 90%;
+        padding: 10px 12px;
+      }
+      .ticker-frame {
+        height: 90px;
+      }
+      html, body {
+        overflow-y: auto;
       }
     }
   </style>
@@ -274,12 +307,10 @@
         <p>AI • Systems • Tech • Business & Data Analytics</p>
       </div>
     </div>
-
-    <div class="contact-line" style="margin-top: 6px;">
-      <a href="tel:02035384966" style="color:#00f5d4;text-decoration:none;"><i data-lucide="phone"></i> 020 3538 4966</a>
+    <div class="contact-line">
+      <a href="tel:02035384966"><i data-lucide="phone"></i> 020 3538 4966</a>
       <a href="https://wa.me/442035384966" target="_blank" title="Chat on WhatsApp"><i data-lucide="whatsapp"></i></a>
     </div>
-
     <nav class="navbar">
       <ul>
         <li><a href="/" class="active">Home</a></li>
@@ -291,14 +322,20 @@
     </nav>
   </header>
 
-  <!-- ===== HERO ===== -->
-  <main class="hero">
-    <div class="hero-glass">
-      <h2>Delivering clarity and confidence in deep learning, software, tech, and quantum data analytics.</h2>
-      <p>At JNUS Associates, we provide solutions that empower your business through innovation, precision, and engineering excellence.</p>
-      <button onclick="window.location.href='/contact/'">Contact Us</button>
-    </div>
-  </main>
+  <!-- ===== HERO WITH SIDE GLASS ===== -->
+  <section class="hero-container">
+    <div class="side-glass">Checking global market status...</div>
+
+    <main class="hero">
+      <div class="hero-glass">
+        <h2>Delivering clarity and confidence in deep learning, software, tech, and quantum data analytics.</h2>
+        <p>At JNUS Associates, we provide solutions that empower your business through innovation, precision, and engineering excellence.</p>
+        <button onclick="window.location.href='/contact/'">Contact Us</button>
+      </div>
+    </main>
+
+    <div class="side-glass">AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
+  </section>
 
   <!-- ===== PODCASTS ===== -->
   <section class="podcast-section">
@@ -306,62 +343,29 @@
     <p class="podcast-intro">
       Stay informed with the latest market analysis, fintech innovations, insurance and reinsurance trends, MGAs, and business strategy discussions curated for modern enterprises.
     </p>
-    <div class="podcast-grid" id="youtubeFeed">
-      <p style="color:#88f; text-align:center;">Loading latest videos...</p>
-    </div>
-    <p class="last-updated" id="lastUpdated">Last updated: Initializing…</p>
   </section>
 
-  <!-- ===== GLOBAL TICKER ===== -->
-  <iframe src="/ticker.html" title="Global Market Ticker" class="ticker-frame" loading="lazy"></iframe>
+  <!-- ===== EXPANDED TICKER ===== -->
+  <section class="ticker-glass">
+    <div class="ticker-cities">
+      Lagos • Johannesburg • London • New York • Shanghai
+    </div>
+    <iframe src="/ticker.html" title="Global Market Ticker" class="ticker-frame" loading="lazy"></iframe>
+  </section>
 
   <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-    <p>
-      📞 020 3538 4966
-      <a href="https://wa.me/442035384966" target="_blank" title="Chat on WhatsApp"><i data-lucide="whatsapp"></i></a> |
+    <p>📞 020 3538 4966
+      <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a> |
       <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
     </p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== SCRIPT: ICONS + YOUTUBE ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       if (window.lucide) lucide.createIcons();
-
-      const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
-      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE";
-      const feed = document.getElementById("youtubeFeed");
-      const updated = document.getElementById("lastUpdated");
-
-      async function loadVideos() {
-        try {
-          const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
-          const res = await fetch(url);
-          const data = await res.json();
-          if (!data.items) throw new Error("No items");
-          feed.innerHTML = "";
-          data.items.forEach((i, idx) => {
-            if (i.id.kind === "youtube#video") {
-              const id = i.id.videoId;
-              const title = i.snippet.title;
-              const card = document.createElement("div");
-              card.classList.add("podcast-card");
-              card.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe><h3>${title}</h3>`;
-              feed.appendChild(card);
-              setTimeout(() => card.classList.add("visible"), idx * 200);
-            }
-          });
-          updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
-        } catch (e) {
-          feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Check API key or channel ID.</p>";
-        }
-      }
-
-      loadVideos();
-      setInterval(loadVideos, 14400000);
     });
   </script>
 </body>
