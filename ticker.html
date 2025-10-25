@@ -1,4 +1,4 @@
-<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (CENTERED W/ GRADIENT FADE) ===== -->
+<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (FINAL CLEAN ALIGNMENT) ===== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +17,6 @@
 
     /* ===== Compact Glass Band Container ===== */
     .ticker-wrapper {
-      position: relative;
       width: 72%;                    /* Lagos → Singapore visual range */
       max-width: 1100px;
       margin: 0 auto;
@@ -30,47 +29,27 @@
       border: 1px solid rgba(0,255,255,0.2);
     }
 
-    /* ===== Gradient Edge Fades ===== */
-    .ticker-wrapper::before,
-    .ticker-wrapper::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 60px;
-      height: 100%;
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .ticker-wrapper::before {
-      left: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
-    }
-
-    .ticker-wrapper::after {
-      right: 0;
-      background: linear-gradient(to left, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
-    }
-
     /* ===== Bar Sections ===== */
     .market-status-bar,
     .market-clock-bar,
     .exchange-label,
     .region-divider,
     .stock-ticker {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.25);
       color: #e4fdfd;
       text-shadow: 0 0 6px rgba(0,255,255,0.4);
       text-align: center;
       letter-spacing: 0.6px;
-      padding: 4px 0;
-      font-size: 0.88rem;
+      padding: 6px 10px;  /* Added horizontal padding for breathing space */
+      font-size: 0.9rem;
+      line-height: 1.4rem;
       transition: all 0.4s ease-in-out;
     }
 
     .exchange-label {
       color: #00f5d4;
       font-weight: 500;
+      padding-bottom: 8px;  /* Extra spacing to prevent clipping */
     }
 
     .region-divider {
@@ -119,6 +98,7 @@
       white-space: nowrap;
       position: relative;
       z-index: 2;
+      padding: 8px 0 10px 0; /* Increased bottom padding so text never crops */
     }
 
     .ticker-content {
@@ -135,15 +115,13 @@
     /* ===== Responsive Adjustments ===== */
     @media (max-width: 900px) {
       .ticker-wrapper { width: 90%; }
-      .ticker-wrapper::before,
-      .ticker-wrapper::after { width: 40px; }
     }
 
     @media (max-width: 600px) {
       .ticker-wrapper { width: 100%; border-radius: 0; }
       .market-status-bar, .market-clock-bar, .exchange-label, .region-divider {
         font-size: 0.8rem;
-        padding: 3px 0;
+        padding: 4px 6px;
       }
     }
   </style>
