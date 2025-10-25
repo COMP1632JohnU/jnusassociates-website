@@ -61,8 +61,11 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 0 15px rgba(0,255,255,0.1);
-      transition: all 0.3s ease;
+      transition: all 0.3s ease, opacity 0.6s ease;
+      opacity: 0;
+      transform: translateY(20px);
     }
+    .podcast-card.visible { opacity: 1; transform: translateY(0); }
 
     .podcast-card:hover {
       transform: translateY(-6px);
@@ -79,6 +82,42 @@
       font-size: 1.1rem;
       margin: 12px 0 18px 0;
       text-shadow: 0 0 8px rgba(0,255,255,0.5);
+    }
+
+    /* ===== Timestamp, Spinner, and Caption ===== */
+    .last-updated {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: #89f;
+      text-shadow: 0 0 8px rgba(0,255,255,0.3);
+      font-family: "Courier New", monospace;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .last-updated.visible { opacity: 1; }
+
+    .spinner {
+      display: inline-flex;
+      width: 18px;
+      height: 18px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .spinner.active {
+      opacity: 1;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .update-caption {
+      font-size: 0.8rem;
+      color: #77baff;
+      opacity: 0.75;
+      margin-top: 4px;
+      font-family: "Courier New", monospace;
     }
 
     @keyframes fadeUp {
@@ -135,6 +174,12 @@
     <div class="podcast-grid" id="youtubeFeed">
       <p style="color:#88f; text-align:center;">Loading latest videos...</p>
     </div>
+
+    <p class="last-updated" id="lastUpdated">
+      <span id="updatedText">Last updated: Initializing...</span>
+      <span class="spinner" id="fetchSpinner" aria-hidden="true"><i data-lucide="loader-2"></i></span>
+    </p>
+    <p class="update-caption">(auto-updating every 4 hours)</p>
   </section>
 
   <!-- ===== FOOTER ===== -->
@@ -166,41 +211,96 @@
       }
       initLucide();
 
-      // === YouTube Data Fetch Function ===
       const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
-      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // 🔹 Replace after activation
+      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // 🔹 Replace once ready
+
       const videoContainer = document.getElementById("youtubeFeed");
+      const lastUpdated = document.getElementById("lastUpdated");
+      const updatedText = document.getElementById("updatedText");
+      const spinner = document.getElementById("fetchSpinner");
+
+      let lastUpdateTime = null;
+
+      function updateTimestamp() {
+        if (!lastUpdateTime) return;
+        const now = new Date();
+        const diffMs = now - lastUpdateTime;
+        const diffMins = Math.floor(diffMs / 60000);
+        const hours = Math.floor(diffMins / 60);
+        const minutes = diffMins % 60;
+
+        const agoText =
+          diffMins < 1 ? "(just now)" :
+          hours > 0 ? `(${hours}h ${minutes}m ago)` :
+          `(${minutes}m ago)`;
+
+        const timeString = lastUpdateTime.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+        const dateString = lastUpdateTime.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+
+        updatedText.textContent = `Last updated: ${dateString}, ${timeString} ${agoText}`;
+        lastUpdated.classList.add("visible");
+      }
 
       async function fetchYouTubeVideos() {
         try {
-          const response = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`);
+          // Show spinner + status
+          spinner.classList.add("active");
+          updatedText.textContent = "Refreshing…";
+          lastUpdated.classList.add("visible");
+
+          // If channel not set yet, fail gracefully
+          if (!CHANNEL_ID || CHANNEL_ID === "YOUR_CHANNEL_ID_HERE") {
+            throw new Error("Channel ID not set yet.");
+          }
+
+          const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
+          const response = await fetch(url);
           const data = await response.json();
 
           if (!data.items) throw new Error("No items returned.");
 
           videoContainer.innerHTML = "";
-          data.items.forEach(item => {
-            if (item.id.kind === "youtube#video") {
+          let added = 0;
+
+          data.items.forEach((item, index) => {
+            if (item.id && item.id.kind === "youtube#video") {
               const videoId = item.id.videoId;
               const title = item.snippet.title;
-              videoContainer.innerHTML += `
-                <div class="podcast-card">
-                  <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
-                  <h3>${title}</h3>
-                </div>`;
+              const card = document.createElement("div");
+              card.classList.add("podcast-card");
+              card.innerHTML = `
+                <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                <h3>${title}</h3>
+              `;
+              videoContainer.appendChild(card);
+              setTimeout(() => card.classList.add("visible"), index * 200);
+              added++;
             }
           });
+
+          if (added === 0) {
+            videoContainer.innerHTML = "<p style='color:#8af;'>No public videos found for this channel yet.</p>";
+          }
+
+          lastUpdateTime = new Date();
+          updateTimestamp();
         } catch (error) {
           videoContainer.innerHTML = "<p style='color:#f88;'>Unable to load podcasts at this time. Please check your API key or channel ID.</p>";
+          updatedText.textContent = "Last updated: Error fetching data";
+          lastUpdated.classList.add("visible");
+        } finally {
+          spinner.classList.remove("active");
+          // Re-render lucide in case icon mounts late
+          try { if (window.lucide) lucide.createIcons(); } catch(e){}
         }
       }
 
-      // === Fetch on load ===
+      // Initial fetch + schedules
       fetchYouTubeVideos();
 
-      // === Auto-refresh every 4 hours ===
       const FOUR_HOURS = 4 * 60 * 60 * 1000;
-      setInterval(fetchYouTubeVideos, FOUR_HOURS);
+      setInterval(fetchYouTubeVideos, FOUR_HOURS);  // Auto-refresh every 4 hours
+      setInterval(updateTimestamp, 60 * 1000);      // Refresh “x minutes ago” every minute
     });
   </script>
 </body>
