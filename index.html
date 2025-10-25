@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-
   <title>JNUS Associates Ltd | AI • Systems • Tech • Business & Data Analytics</title>
 
-  <!-- Styles and Scripts -->
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Lucide & Global Script -->
   <script src="https://unpkg.com/lucide@latest" defer></script>
   <script src="script.js" defer></script>
 
@@ -18,13 +16,13 @@
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-      overflow-y: hidden; /* Prevent scroll */
+      overflow-y: hidden; /* lock scroll */
       background: #000;
       color: #e0f7f7;
       font-family: "Inter", sans-serif;
       height: 100%;
+      scroll-behavior: smooth;
     }
-
     body {
       display: flex;
       flex-direction: column;
@@ -37,201 +35,216 @@
     }
 
     /* ===== HEADER ===== */
-    header.site-header {
-      position: relative;
-      background: rgba(0,0,0,0.65);
-      padding: 16px 0;
+    .site-header {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,255,255,0.15);
       text-align: center;
+      padding: 8px 14px;
     }
 
-    header .brand {
+    .header-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      gap: 4px;
     }
 
-    header .logo {
-      width: 60px;
-      margin-bottom: 6px;
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .logo {
+      width: clamp(40px, 6vw, 55px);
+      height: auto;
     }
 
     .brand-text h1 {
       color: #00f5d4;
+      font-size: clamp(1rem, 2.4vw, 1.3rem);
       margin: 0;
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
     }
 
-    .brand-text p {
+    .brand-text .tagline {
       color: #aef;
-      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-      margin: 2px 0;
+      font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+      margin-top: 2px;
     }
 
-    .navbar ul {
-      list-style: none;
-      padding: 0;
-      margin: 8px 0;
+    .contact-line {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
+      gap: 10px;
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
     }
 
-    .navbar a {
-      color: #dff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: clamp(0.8rem, 1.6vw, 1rem);
-    }
-
-    .navbar a.active, .navbar a:hover {
+    .contact-line a {
       color: #00f5d4;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .navbar {
+      margin-top: 4px;
+      position: relative;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: #00f5d4;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      position: absolute;
+      top: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.85);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 6px;
+      padding: 8px 14px;
+      z-index: 100;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .nav-links a.active, .nav-links a:hover {
+      color: #00f5d4;
+    }
+
+    .menu-toggle.active + .nav-links { display: flex; }
+
+    @media (min-width: 768px) {
+      .menu-toggle { display: none; }
+      .nav-links {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        gap: 16px;
+        background: none;
+        border: none;
+        padding: 0;
+      }
     }
 
     /* ===== HERO ===== */
-    main.hero {
+    .hero {
       text-align: center;
-      padding: clamp(30px, 5vh, 60px) 15px 25px;
-      max-width: 900px;
-      margin: 0 auto;
+      padding: clamp(20px, 6vh, 45px) 16px 10px;
       color: #fff;
-      flex: 1 0 auto;
+      flex: 1;
     }
-
-    main.hero h2 {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 10px rgba(0,255,255,0.3);
+    .hero h2 {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      line-height: 1.4;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 0 8px rgba(0,255,255,0.4);
     }
-
-    main.hero p {
-      font-size: clamp(0.9rem, 1.6vw, 1rem);
-      margin-bottom: 1.2rem;
-      color: #dff;
+    .hero p {
+      font-size: clamp(0.8rem, 1.6vw, 1rem);
+      color: #cff;
+      margin-bottom: 0.8rem;
     }
-
-    main.hero button {
+    .hero button {
       background-color: #00f5d4;
-      border: none;
       color: #000;
-      padding: 8px 20px;
+      border: none;
+      padding: 6px 16px;
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      border-radius: 5px;
       font-weight: 600;
-      border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s;
-      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      transition: all 0.25s;
     }
+    .hero button:hover { background-color: #00ffd1; }
 
-    main.hero button:hover { background-color: #00ffd1; }
-
-    /* ===== PODCAST SECTION ===== */
+    /* ===== PODCASTS ===== */
     .podcast-section {
       text-align: center;
-      margin: clamp(20px, 3vh, 40px) auto 0;
-      padding: clamp(20px, 3vh, 35px) 15px;
-      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px 14px 10px;
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,255,255,0.15);
+      box-shadow: 0 0 15px rgba(0,255,255,0.15);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      color: #e0f7f7;
+      width: 92%;
+      max-width: 900px;
       flex-shrink: 0;
     }
-
     .podcast-section h2 {
       color: #00f5d4;
-      text-shadow: 0 0 10px rgba(0,255,255,0.6);
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      margin-bottom: 0.6rem;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      margin-bottom: 0.4rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
-
     .podcast-intro {
-      max-width: 700px;
-      margin: 0 auto 18px;
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
       color: #c0f8f8;
-      font-size: clamp(0.85rem, 1.6vw, 1rem);
-      line-height: 1.5;
+      margin: 0 auto 10px;
+      max-width: 600px;
+      line-height: 1.4;
     }
-
     .podcast-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
       justify-content: center;
     }
-
     .podcast-card {
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0,0,0,0.35);
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 12px rgba(0,255,255,0.1);
-      transition: all 0.3s ease, opacity 0.6s ease;
       opacity: 0;
       transform: translateY(10px);
+      transition: all 0.4s ease;
     }
-
     .podcast-card.visible { opacity: 1; transform: translateY(0); }
-
     .podcast-card iframe {
       width: 100%;
-      height: clamp(160px, 20vh, 200px);
+      height: clamp(140px, 16vh, 180px);
     }
-
     .podcast-card h3 {
       color: #00f5d4;
-      font-size: clamp(0.85rem, 1.5vw, 1rem);
-      margin: 8px 0 10px 0;
-      text-shadow: 0 0 8px rgba(0,255,255,0.5);
+      font-size: clamp(0.8rem, 1.4vw, 1rem);
+      margin: 6px 0 10px 0;
     }
-
     .last-updated {
-      margin-top: 10px;
-      font-size: clamp(0.7rem, 1.3vw, 0.85rem);
-      color: #89f;
-      font-family: "Courier New", monospace;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    .last-updated.visible { opacity: 1; }
-
-    .spinner.active {
-      opacity: 1;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .update-caption {
-      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
       color: #77baff;
-      opacity: 0.75;
-      margin-top: 2px;
+      margin-top: 4px;
+      opacity: 0.8;
     }
 
     /* ===== TICKER FRAME ===== */
     .ticker-frame {
       width: 100%;
-      height: clamp(90px, 12vh, 110px);
+      height: clamp(85px, 10vh, 100px);
       border: none;
-      margin: 18px auto;
-      display: block;
       border-radius: 10px;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(8px);
+      margin: 10px auto;
+      background: rgba(0,0,0,0.4);
       border: 1px solid rgba(0,255,255,0.25);
-      box-shadow: 0 0 18px rgba(0,255,255,0.15);
+      box-shadow: 0 0 14px rgba(0,255,255,0.15);
     }
 
     /* ===== FOOTER ===== */
@@ -239,39 +252,41 @@
       text-align: center;
       color: #aef;
       background: rgba(0,0,0,0.6);
-      padding: clamp(10px, 2vh, 15px) 10px;
-      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
       border-top: 1px solid rgba(0,255,255,0.2);
-      flex-shrink: 0;
+      padding: 6px 8px;
+      font-size: clamp(0.7rem, 1.3vw, 0.85rem);
     }
-
     footer a {
       color: #00f5d4;
       text-decoration: none;
     }
+
+    /* ===== FADE-IN ===== */
+    body { animation: fadeIn 0.8s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   </style>
 </head>
 
 <body>
   <!-- ===== HEADER ===== -->
   <header class="site-header">
-    <div class="container glass-box">
-      <div class="brand">
+    <div class="header-inner">
+      <div class="brand-row">
         <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
-          <h1 class="glow">JNUS Associates Ltd</h1>
-          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p class="glow">
-            📞 020 3538 4966
-            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
-              <i data-lucide="whatsapp"></i>
-            </a>
-          </p>
+          <h1>JNUS Associates Ltd</h1>
+          <p class="tagline">AI • Systems • Tech • Business & Data Analytics</p>
         </div>
       </div>
 
+      <div class="contact-line">
+        <a href="tel:02035384966"><i data-lucide="phone"></i> 020 3538 4966</a>
+        <a href="https://wa.me/442035384966" target="_blank" title="Chat on WhatsApp"><i data-lucide="whatsapp"></i></a>
+      </div>
+
       <nav class="navbar">
-        <ul>
+        <button class="menu-toggle"><i data-lucide="menu"></i></button>
+        <ul class="nav-links">
           <li><a href="/" class="active">Home</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="/services/">Services</a></li>
@@ -289,25 +304,19 @@
     <button onclick="window.location.href='/contact/'">Contact Us</button>
   </main>
 
-  <!-- ===== FINANCIAL PODCASTS SECTION ===== -->
+  <!-- ===== PODCASTS ===== -->
   <section class="podcast-section">
     <h2><i data-lucide="radio"></i> Financial Insights & Podcasts</h2>
     <p class="podcast-intro">
       Stay informed with the latest market analysis, fintech innovations, insurance and reinsurance trends, MGAs, and business strategy discussions curated for modern enterprises.
     </p>
-
     <div class="podcast-grid" id="youtubeFeed">
       <p style="color:#88f; text-align:center;">Loading latest videos...</p>
     </div>
-
-    <p class="last-updated" id="lastUpdated">
-      <span id="updatedText">Last updated: Initializing...</span>
-      <span class="spinner" id="fetchSpinner" aria-hidden="true"><i data-lucide="loader-2"></i></span>
-    </p>
-    <p class="update-caption">(auto-updating every 4 hours)</p>
+    <p class="last-updated" id="lastUpdated">Last updated: Initializing…</p>
   </section>
 
-  <!-- ===== EMBEDDED GLOBAL MARKET TICKER ===== -->
+  <!-- ===== GLOBAL TICKER ===== -->
   <iframe src="/ticker.html" title="Global Market Ticker" class="ticker-frame" loading="lazy"></iframe>
 
   <!-- ===== FOOTER ===== -->
@@ -315,100 +324,54 @@
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>
       📞 020 3538 4966
-      <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
-        <i data-lucide="whatsapp"></i>
-      </a>
-      |
+      <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a> |
       <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
     </p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== LUCIDE ICON INIT SCRIPT + AUTO REFRESH ===== -->
+  <!-- ===== SCRIPT: ICONS + YOUTUBE ===== -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      function initLucide() {
-        if (window.lucide) lucide.createIcons();
-        else setTimeout(initLucide, 150);
-      }
-      initLucide();
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector(".nav-links");
+      toggle.addEventListener("click", () => {
+        toggle.classList.toggle("active");
+        nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+      });
+      if (window.lucide) lucide.createIcons();
 
       const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
       const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE";
+      const feed = document.getElementById("youtubeFeed");
+      const updated = document.getElementById("lastUpdated");
 
-      const videoContainer = document.getElementById("youtubeFeed");
-      const lastUpdated = document.getElementById("lastUpdated");
-      const updatedText = document.getElementById("updatedText");
-      const spinner = document.getElementById("fetchSpinner");
-
-      let lastUpdateTime = null;
-
-      function updateTimestamp() {
-        if (!lastUpdateTime) return;
-        const now = new Date();
-        const diffMs = now - lastUpdateTime;
-        const diffMins = Math.floor(diffMs / 60000);
-        const hours = Math.floor(diffMins / 60);
-        const minutes = diffMins % 60;
-        const agoText =
-          diffMins < 1 ? "(just now)" :
-          hours > 0 ? `(${hours}h ${minutes}m ago)` :
-          `(${minutes}m ago)`;
-
-        const timeString = lastUpdateTime.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
-        const dateString = lastUpdateTime.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
-
-        updatedText.textContent = `Last updated: ${dateString}, ${timeString} ${agoText}`;
-        lastUpdated.classList.add("visible");
-      }
-
-      async function fetchYouTubeVideos() {
+      async function loadVideos() {
         try {
-          spinner.classList.add("active");
-          updatedText.textContent = "Refreshing…";
-          lastUpdated.classList.add("visible");
-
-          if (!CHANNEL_ID || CHANNEL_ID === "YOUR_CHANNEL_ID_HERE") {
-            throw new Error("Channel ID not set yet.");
-          }
-
+          if (!CHANNEL_ID || CHANNEL_ID === "YOUR_CHANNEL_ID_HERE") throw new Error("Missing channel ID");
           const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
-          const response = await fetch(url);
-          const data = await response.json();
-
-          if (!data.items) throw new Error("No items returned.");
-          videoContainer.innerHTML = "";
-
-          data.items.forEach((item, index) => {
-            if (item.id && item.id.kind === "youtube#video") {
-              const videoId = item.id.videoId;
-              const title = item.snippet.title;
+          const res = await fetch(url);
+          const data = await res.json();
+          if (!data.items) throw new Error("No items");
+          feed.innerHTML = "";
+          data.items.forEach((i, idx) => {
+            if (i.id.kind === "youtube#video") {
+              const id = i.id.videoId;
+              const title = i.snippet.title;
               const card = document.createElement("div");
               card.classList.add("podcast-card");
-              card.innerHTML = `
-                <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
-                <h3>${title}</h3>
-              `;
-              videoContainer.appendChild(card);
-              setTimeout(() => card.classList.add("visible"), index * 200);
+              card.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe><h3>${title}</h3>`;
+              feed.appendChild(card);
+              setTimeout(() => card.classList.add("visible"), idx * 200);
             }
           });
-
-          lastUpdateTime = new Date();
-          updateTimestamp();
-        } catch (error) {
-          videoContainer.innerHTML = "<p style='color:#f88;'>Unable to load podcasts at this time. Please check your API key or channel ID.</p>";
-          updatedText.textContent = "Last updated: Error fetching data";
-          lastUpdated.classList.add("visible");
-        } finally {
-          spinner.classList.remove("active");
-          if (window.lucide) lucide.createIcons();
+          updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
+        } catch (e) {
+          feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Check API key or channel ID.</p>";
         }
       }
-
-      fetchYouTubeVideos();
-      setInterval(fetchYouTubeVideos, 4 * 60 * 60 * 1000);
-      setInterval(updateTimestamp, 60 * 1000);
+      loadVideos();
+      setInterval(loadVideos, 14400000);
     });
   </script>
 </body>
