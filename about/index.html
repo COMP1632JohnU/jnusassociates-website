@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>About Us | JNUS Associates Ltd</title>
 
-  <!-- ✅ Correct relative path -->
+  <!-- Shared Styles -->
   <link rel="stylesheet" href="../styles.css" />
   <script src="https://unpkg.com/lucide@latest" defer></script>
   <script src="../script.js" defer></script>
@@ -15,14 +15,19 @@
 <body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
 
   <!-- ===== HEADER ===== -->
-  <header class="site-header">
-    <div class="container">
+  <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65); padding: 20px 0;">
+    <div class="container glass-box">
       <div class="brand">
         <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p>📞 020 3538 4966</p>
+          <p class="glow">
+            📞 020 3538 4966
+            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
+              <i data-lucide="whatsapp"></i>
+            </a>
+          </p>
         </div>
       </div>
 
@@ -43,26 +48,32 @@
   <section class="about-layout fade-up">
     <div class="about-card reduced" style="animation-delay:0.2s;">
       <i data-lucide="briefcase" class="about-icon"></i>
-      <h2>About Us</h2>
+      <h2 class="glow">About Us</h2>
       <p>
-        JNUS Associates Ltd is a trusted partner for your global business needs — with innovation, reliability, transparency, transformation and efficiency at the heart of what we do.
+        JNUS Associates Ltd is a trusted partner for your global business needs — 
+        with innovation, reliability, transparency, transformation, and efficiency 
+        at the heart of everything we do.
       </p>
     </div>
 
     <div class="mission-vision">
       <div class="about-card reduced" style="animation-delay:0.4s;">
         <i data-lucide="target" class="about-icon"></i>
-        <h3>Our Mission</h3>
+        <h3 class="glow-tagline">Our Mission</h3>
         <p>
-          To deliver reliable, secure, and scalable technology solutions that drive meaningful impact — empowering businesses to operate with clarity and confidence.
+          To deliver reliable, secure, and scalable technology solutions that 
+          drive meaningful impact — empowering businesses to operate with 
+          clarity and confidence.
         </p>
       </div>
 
       <div class="about-card reduced" style="animation-delay:0.6s;">
         <i data-lucide="globe" class="about-icon"></i>
-        <h3>Our Vision</h3>
+        <h3 class="glow-tagline">Our Vision</h3>
         <p>
-          To be recognized globally as a trusted partner for digital transformation and sustainable innovation through dependable solutions and client-centric delivery.
+          To be recognized globally as a trusted partner for digital 
+          transformation and sustainable innovation through dependable 
+          solutions and client-centric delivery.
         </p>
       </div>
     </div>
@@ -71,7 +82,13 @@
   <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
+    <p>
+      📞 020 3538 4966 
+      <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
+        <i data-lucide="whatsapp"></i>
+      </a>
+      | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
+    </p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
@@ -86,14 +103,23 @@
     <div class="ticker-content" id="stockTicker">Loading live market data...</div>
   </div>
 
+  <!-- ===== ICON INITIALIZATION ===== -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      try { lucide.createIcons(); } catch(e){}
-      try {
-        if (typeof fetchStockPrices === "function") fetchStockPrices();
-        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
-        if (typeof updateMarketClock === "function") updateMarketClock();
-      } catch(e){}
+    document.addEventListener("DOMContentLoaded", function () {
+      function initLucide() {
+        if (window.lucide) {
+          lucide.createIcons();
+        } else {
+          setTimeout(initLucide, 150);
+        }
+      }
+      initLucide();
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          if (window.lucide) lucide.createIcons();
+        }, 500);
+      });
     });
   </script>
 </body>
