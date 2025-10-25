@@ -1,4 +1,4 @@
-<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (FINAL CLEAN ALIGNMENT) ===== -->
+<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (FULLY FITTED, NO SCROLL OR EMPTY SPACE) ===== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,96 +15,74 @@
       color: #dff;
     }
 
-    /* ===== Compact Glass Band Container ===== */
+    /* ===== Optimized Glass Band Container ===== */
     .ticker-wrapper {
-      width: 72%;                    /* Lagos → Singapore visual range */
-      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      max-width: 100%;
       margin: 0 auto;
       border-radius: 8px;
-      overflow: hidden;
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      box-shadow: 0 0 12px rgba(0,255,255,0.15);
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(0,255,255,0.2);
+      box-shadow: 0 0 12px rgba(0,255,255,0.15);
+      padding: 4px 14px;
+      overflow: hidden;
     }
 
-    /* ===== Bar Sections ===== */
+    /* ===== Ticker Section Styles ===== */
     .market-status-bar,
+    .region-divider,
     .market-clock-bar,
     .exchange-label,
-    .region-divider,
     .stock-ticker {
-      background: rgba(0, 0, 0, 0.25);
       color: #e4fdfd;
       text-shadow: 0 0 6px rgba(0,255,255,0.4);
       text-align: center;
       letter-spacing: 0.6px;
-      padding: 6px 10px;  /* Added horizontal padding for breathing space */
+      padding: 6px 0;
       font-size: 0.9rem;
-      line-height: 1.4rem;
-      transition: all 0.4s ease-in-out;
+      line-height: 1.3rem;
+      white-space: normal;
+      word-break: keep-all;
+      width: 100%;
+      transition: all 0.3s ease-in-out;
     }
 
     .exchange-label {
       color: #00f5d4;
       font-weight: 500;
-      padding-bottom: 8px;  /* Extra spacing to prevent clipping */
+      padding-bottom: 6px;
     }
 
     .region-divider {
       color: #00ffd1;
       text-transform: uppercase;
+      margin-top: 4px;
     }
 
-    .clock-item { margin: 0 6px; }
-
-    /* ===== Glow Styles ===== */
-    .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,0.6); }
-    .red-glow { color: #ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,0.6); }
-    .neutral-glow { color: #ccf; opacity: 0.9; }
-
-    /* ===== Asia Active & Weekend ===== */
-    .asia-active {
-      background: rgba(0, 255, 255, 0.1);
-      box-shadow: 0 0 25px rgba(0,255,255,0.4);
-      animation: pulseAsia 3s ease-in-out infinite;
+    .clock-item {
+      margin: 0 6px;
+      display: inline-block;
+      white-space: nowrap;
     }
 
-    @keyframes pulseAsia {
-      0%,100% { box-shadow: 0 0 10px rgba(0,255,255,0.25); }
-      50% { box-shadow: 0 0 22px rgba(0,255,255,0.7); }
-    }
-
-    .weekend-dim {
-      opacity: 0.65;
-      filter: brightness(0.8);
-    }
-
-    .weekend-pulse {
-      color: #00fff6;
-      text-shadow: 0 0 10px rgba(0,255,255,0.7);
-      animation: weekendGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes weekendGlow {
-      0%,100% { opacity: 0.7; text-shadow: 0 0 8px rgba(0,255,255,0.3); }
-      50% { opacity: 1; text-shadow: 0 0 18px rgba(0,255,255,1); }
-    }
-
-    /* ===== Stock Ticker ===== */
+    /* ===== Ticker Line ===== */
     .stock-ticker {
       overflow: hidden;
-      white-space: nowrap;
-      position: relative;
-      z-index: 2;
-      padding: 8px 0 10px 0; /* Increased bottom padding so text never crops */
+      text-align: center;
+      padding: 10px 0;
     }
 
     .ticker-content {
       display: inline-block;
       animation: tickerMove linear infinite;
       animation-duration: 90s;
+      white-space: nowrap;
     }
 
     @keyframes tickerMove {
@@ -112,17 +90,33 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* ===== Responsive Adjustments ===== */
-    @media (max-width: 900px) {
-      .ticker-wrapper { width: 90%; }
+    /* ===== Visual Effects ===== */
+    .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,0.6); }
+    .red-glow { color: #ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,0.6); }
+    .neutral-glow { color: #ccf; opacity: 0.9; }
+
+    .asia-active {
+      background: rgba(0, 255, 255, 0.1);
+      box-shadow: 0 0 25px rgba(0,255,255,0.4);
+      animation: pulseAsia 3s ease-in-out infinite;
+    }
+    @keyframes pulseAsia {
+      0%,100% { box-shadow: 0 0 10px rgba(0,255,255,0.25); }
+      50% { box-shadow: 0 0 22px rgba(0,255,255,0.7); }
     }
 
-    @media (max-width: 600px) {
-      .ticker-wrapper { width: 100%; border-radius: 0; }
-      .market-status-bar, .market-clock-bar, .exchange-label, .region-divider {
-        font-size: 0.8rem;
-        padding: 4px 6px;
-      }
+    .weekend-dim { opacity: 0.7; filter: brightness(0.85); }
+
+    /* ===== Responsive Tweaks ===== */
+    @media (max-width: 1200px) {
+      .ticker-wrapper { width: 95%; }
+      .market-clock-bar { font-size: 0.85rem; }
+    }
+
+    @media (max-width: 768px) {
+      .ticker-wrapper { width: 100%; border-radius: 0; padding: 2px 6px; }
+      .market-clock-bar { font-size: 0.8rem; line-height: 1.2rem; }
+      .stock-ticker { font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -151,7 +145,7 @@
   </div>
 
   <script>
-  // === GLOBAL MARKET TICKER CORE SCRIPT ===
+  // === GLOBAL MARKET TICKER SCRIPT ===
   const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
 
   let stockSymbols = [];
