@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>Our Mission | JNUS Associates Ltd</title>
+
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="../script.js" defer></script>
+
+  <style>
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      color: #00f5d4;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+
+    .back-button:hover {
+      color: #00ffd1;
+      background: rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      transform: scale(1.05);
+    }
+
+    .about-section p {
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body style="background-image:url('../wall.jpg');background-size:cover;background-position:center;">
+  <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65); padding: 20px 0;">
+    <div class="container glass-box">
+      <div class="brand">
+        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <div class="brand-text">
+          <h1 class="glow">JNUS Associates Ltd</h1>
+          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
+          <p class="glow">📞 020 3538 4966
+            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon"><i data-lucide="whatsapp"></i></a>
+          </p>
+        </div>
+      </div>
+
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="about-section fade-up">
+    <h2>Our Mission</h2>
+    <p style="max-width:850px;margin:0 auto 1.5rem;color:#d6f3f3;">
+      At JNUS Associates Ltd, our mission is to bridge innovation with reliability — creating systems and technology
+      solutions that are not only intelligent but deeply practical. We are driven by a commitment to excellence,
+      ensuring that every solution we deliver enhances business agility, efficiency, and confidence.
+    </p>
+    <p style="max-width:850px;margin:0 auto 1.5rem;color:#d6f3f3;">
+      Our focus extends beyond technology — it’s about enabling transformation. Whether developing AI-driven platforms,
+      automating workflows, or securing enterprise systems, we build scalable and transparent solutions that empower
+      organizations to adapt and grow in a complex digital economy.
+    </p>
+    <p style="max-width:850px;margin:0 auto 2rem;color:#d6f3f3;">
+      We are devoted to creating impact through precision engineering, measurable outcomes, and sustainable digital
+      growth — delivering excellence that stands the test of time.
+    </p>
+    <a href="/about/" class="back-button">← Back to About Us</a>
+  </section>
+
+  <footer>
+    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
+  </footer>
+
+  <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
+  <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
+  <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
+
+  <script>document.addEventListener("DOMContentLoaded",()=>{if(window.lucide)lucide.createIcons();});</script>
+</body>
+</html>
