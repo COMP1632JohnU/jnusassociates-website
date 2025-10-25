@@ -11,10 +11,54 @@
   <script src="../script.js" defer></script>
 
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: #000;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.6s ease-in-out;
+    }
+
+    .values-section {
+      text-align: center;
+      margin-top: 140px;
+      padding: 80px 30px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 14px;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.25);
+      animation: fadeUp 1.2s ease-out forwards;
+    }
+
+    .values-section h2 {
+      font-size: 2rem;
+      color: #00f5d4;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+    }
+
+    .values-section p {
+      color: #d6f3f3;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
     .back-button {
       display: inline-block;
       margin-top: 2rem;
-      padding: 0.8rem 2rem;
+      padding: 0.9rem 2rem;
       background: rgba(0, 255, 255, 0.1);
       border: 1px solid rgba(0, 255, 255, 0.3);
       color: #00f5d4;
@@ -34,23 +78,30 @@
       transform: scale(1.05);
     }
 
-    .about-section p {
-      line-height: 1.8;
-      font-size: 1.1rem;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); filter: blur(3px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .loaded {
+      background-image: url('../hudson.jpg');
     }
   </style>
 </head>
 
-<body style="background-image:url('../hudson.jpg');background-size:cover;background-position:center;">
-  <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65); padding: 20px 0;">
+<body>
+  <header class="site-header" style="position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.65); padding: 20px 0; z-index: 999;">
     <div class="container glass-box">
       <div class="brand">
         <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p class="glow">📞 020 3538 4966
-            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon"><i data-lucide="whatsapp"></i></a>
+          <p class="glow">
+            📞 020 3538 4966
+            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
+              <i data-lucide="whatsapp"></i>
+            </a>
           </p>
         </div>
       </div>
@@ -58,7 +109,7 @@
       <nav class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/" class="active">About</a></li>
           <li><a href="/services/">Services</a></li>
           <li><a href="/projects/">Projects</a></li>
           <li><a href="/contact/">Contact</a></li>
@@ -67,21 +118,19 @@
     </div>
   </header>
 
-  <section class="about-section fade-up">
+  <section class="values-section fade-up">
     <h2>Our Values</h2>
-    <p style="max-width:850px;margin:0 auto 1.5rem;color:#d6f3f3;">
-      Our values form the foundation of who we are and how we operate. Every solution we deliver is guided by integrity,
-      built on trust, and driven by a pursuit of excellence. We believe in doing what’s right — for our clients,
-      partners, and communities.
+    <p>
+      At the heart of JNUS Associates Ltd lies a culture built on **integrity, collaboration, and excellence**. 
+      These values shape the way we think, build, and deliver solutions that empower clients and communities alike.
     </p>
-    <p style="max-width:850px;margin:0 auto 1.5rem;color:#d6f3f3;">
-      Collaboration lies at the heart of our approach. We work alongside our clients to co-create solutions, ensuring
-      that every engagement is transparent, purposeful, and measurable. Our commitment to accountability and open
-      communication drives confidence and long-term partnerships.
+    <p>
+      We believe in maintaining **transparency** and accountability across every engagement. 
+      Our commitment to ethical practice ensures that innovation never comes at the expense of trust or sustainability.
     </p>
-    <p style="max-width:850px;margin:0 auto 2rem;color:#d6f3f3;">
-      We uphold sustainability, innovation, and respect for diversity as central to our culture — ensuring that the
-      technology we build today contributes meaningfully to a more connected, equitable, and forward-looking world.
+    <p>
+      Through teamwork, precision, and continuous learning, we foster an environment where ideas thrive, 
+      talent grows, and progress is achieved with measurable impact — delivering meaningful change, responsibly.
     </p>
     <a href="/about/" class="back-button">← Back to About Us</a>
   </section>
@@ -95,6 +144,11 @@
   <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
   <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
 
-  <script>document.addEventListener("DOMContentLoaded",()=>{if(window.lucide)lucide.createIcons();});</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) lucide.createIcons();
+      setTimeout(() => document.body.classList.add("loaded"), 100);
+    });
+  </script>
 </body>
 </html>
