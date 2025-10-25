@@ -120,6 +120,26 @@
       font-family: "Courier New", monospace;
     }
 
+    /* ===== Embedded Global Ticker (Glass Frame) ===== */
+    .ticker-frame {
+      width: 100%;
+      height: 140px;
+      border: none;
+      margin-top: 80px;
+      margin-bottom: 40px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,255,255,0.25);
+      box-shadow: 0 0 25px rgba(0,255,255,0.15);
+      transition: all 0.5s ease-in-out;
+    }
+
+    .ticker-frame:hover {
+      box-shadow: 0 0 35px rgba(0,255,255,0.35);
+    }
+
     @keyframes fadeUp {
       from {opacity: 0; transform: translateY(25px);}
       to {opacity: 1; transform: translateY(0);}
@@ -182,6 +202,9 @@
     <p class="update-caption">(auto-updating every 4 hours)</p>
   </section>
 
+  <!-- ===== EMBEDDED GLOBAL MARKET TICKER ===== -->
+  <iframe src="/ticker.html" title="Global Market Ticker" class="ticker-frame" loading="lazy"></iframe>
+
   <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
@@ -196,15 +219,9 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== MARKET STATUS + CLOCK + TICKER ===== -->
-  <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
-  <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
-  <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
-
   <!-- ===== LUCIDE ICON INIT SCRIPT + AUTO REFRESH ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // === Initialize Lucide Icons ===
       function initLucide() {
         if (window.lucide) lucide.createIcons();
         else setTimeout(initLucide, 150);
@@ -212,7 +229,7 @@
       initLucide();
 
       const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
-      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // 🔹 Replace once ready
+      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE";
 
       const videoContainer = document.getElementById("youtubeFeed");
       const lastUpdated = document.getElementById("lastUpdated");
@@ -228,7 +245,6 @@
         const diffMins = Math.floor(diffMs / 60000);
         const hours = Math.floor(diffMins / 60);
         const minutes = diffMins % 60;
-
         const agoText =
           diffMins < 1 ? "(just now)" :
           hours > 0 ? `(${hours}h ${minutes}m ago)` :
@@ -243,12 +259,10 @@
 
       async function fetchYouTubeVideos() {
         try {
-          // Show spinner + status
           spinner.classList.add("active");
           updatedText.textContent = "Refreshing…";
           lastUpdated.classList.add("visible");
 
-          // If channel not set yet, fail gracefully
           if (!CHANNEL_ID || CHANNEL_ID === "YOUR_CHANNEL_ID_HERE") {
             throw new Error("Channel ID not set yet.");
           }
@@ -258,9 +272,7 @@
           const data = await response.json();
 
           if (!data.items) throw new Error("No items returned.");
-
           videoContainer.innerHTML = "";
-          let added = 0;
 
           data.items.forEach((item, index) => {
             if (item.id && item.id.kind === "youtube#video") {
@@ -274,13 +286,8 @@
               `;
               videoContainer.appendChild(card);
               setTimeout(() => card.classList.add("visible"), index * 200);
-              added++;
             }
           });
-
-          if (added === 0) {
-            videoContainer.innerHTML = "<p style='color:#8af;'>No public videos found for this channel yet.</p>";
-          }
 
           lastUpdateTime = new Date();
           updateTimestamp();
@@ -290,17 +297,13 @@
           lastUpdated.classList.add("visible");
         } finally {
           spinner.classList.remove("active");
-          // Re-render lucide in case icon mounts late
-          try { if (window.lucide) lucide.createIcons(); } catch(e){}
+          if (window.lucide) lucide.createIcons();
         }
       }
 
-      // Initial fetch + schedules
       fetchYouTubeVideos();
-
-      const FOUR_HOURS = 4 * 60 * 60 * 1000;
-      setInterval(fetchYouTubeVideos, FOUR_HOURS);  // Auto-refresh every 4 hours
-      setInterval(updateTimestamp, 60 * 1000);      // Refresh “x minutes ago” every minute
+      setInterval(fetchYouTubeVideos, 4 * 60 * 60 * 1000);
+      setInterval(updateTimestamp, 60 * 1000);
     });
   </script>
 </body>
