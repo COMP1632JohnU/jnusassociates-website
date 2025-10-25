@@ -76,6 +76,7 @@
       color: #d6f3f3;
     }
 
+    /* Navigation links */
     .nav-links {
       display: flex;
       gap: 12px;
@@ -106,8 +107,13 @@
       transform: translateY(-2px);
     }
 
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(15px); filter: blur(3px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
     @media (max-width: 640px) {
-      .nav-links { justify-content: center; }
+      .nav-links { justify-content: center; gap: 16px; }
     }
   </style>
 </head>
@@ -161,7 +167,6 @@
       <div class="nav-links">
         <a href="/projects/enterprise">← Previous</a>
         <a href="/projects/cyber">Next →</a>
-        <a href="/projects/">Back to Projects</a>
       </div>
     </div>
   </main>
