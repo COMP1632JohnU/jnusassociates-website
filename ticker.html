@@ -1,4 +1,4 @@
-<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (FULLY FITTED, NO SCROLL OR EMPTY SPACE) ===== -->
+<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (DUAL-LINE, NO SCROLL, FULL VISIBILITY) ===== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,26 +15,24 @@
       color: #dff;
     }
 
-    /* ===== Optimized Glass Band Container ===== */
+    /* ===== Compact Glass Container ===== */
     .ticker-wrapper {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
-      width: fit-content;
-      max-width: 100%;
+      max-width: 1100px;
       margin: 0 auto;
       border-radius: 8px;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(0,255,255,0.2);
-      box-shadow: 0 0 12px rgba(0,255,255,0.15);
-      padding: 4px 14px;
       overflow: hidden;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.38);
+      border: 1px solid rgba(0,255,255,0.25);
+      box-shadow: 0 0 14px rgba(0,255,255,0.15);
     }
 
-    /* ===== Ticker Section Styles ===== */
+    /* ===== Bar Sections ===== */
     .market-status-bar,
     .region-divider,
     .market-clock-bar,
@@ -44,60 +42,60 @@
       text-shadow: 0 0 6px rgba(0,255,255,0.4);
       text-align: center;
       letter-spacing: 0.6px;
-      padding: 6px 0;
+      padding: 6px 12px;
       font-size: 0.9rem;
-      line-height: 1.3rem;
-      white-space: normal;
-      word-break: keep-all;
-      width: 100%;
+      line-height: 1.4rem;
       transition: all 0.3s ease-in-out;
     }
 
     .exchange-label {
       color: #00f5d4;
       font-weight: 500;
-      padding-bottom: 6px;
+      padding-bottom: 4px;
     }
 
     .region-divider {
       color: #00ffd1;
       text-transform: uppercase;
-      margin-top: 4px;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(0,255,255,0.25);
+      border-bottom: 1px solid rgba(0,255,255,0.25);
+    }
+
+    /* ===== Clock Line ===== */
+    .market-clock-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 8px 12px;
+      font-size: 0.88rem;
     }
 
     .clock-item {
-      margin: 0 6px;
-      display: inline-block;
       white-space: nowrap;
     }
 
-    /* ===== Ticker Line ===== */
+    /* ===== Stock Line (Dual-Row Readable) ===== */
     .stock-ticker {
-      overflow: hidden;
-      text-align: center;
-      padding: 10px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 24px;
+      padding: 8px 12px 10px;
+      font-size: 0.88rem;
+      border-top: 1px solid rgba(0,255,255,0.15);
     }
 
-    .ticker-content {
-      display: inline-block;
-      animation: tickerMove linear infinite;
-      animation-duration: 90s;
-      white-space: nowrap;
-    }
-
-    @keyframes tickerMove {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
-    /* ===== Visual Effects ===== */
+    /* ===== Glow Styles ===== */
     .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,0.6); }
     .red-glow { color: #ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,0.6); }
     .neutral-glow { color: #ccf; opacity: 0.9; }
 
+    /* ===== Active Effects ===== */
     .asia-active {
-      background: rgba(0, 255, 255, 0.1);
-      box-shadow: 0 0 25px rgba(0,255,255,0.4);
+      background: rgba(0, 255, 255, 0.12);
+      box-shadow: 0 0 20px rgba(0,255,255,0.35);
       animation: pulseAsia 3s ease-in-out infinite;
     }
     @keyframes pulseAsia {
@@ -108,15 +106,14 @@
     .weekend-dim { opacity: 0.7; filter: brightness(0.85); }
 
     /* ===== Responsive Tweaks ===== */
-    @media (max-width: 1200px) {
+    @media (max-width: 1024px) {
       .ticker-wrapper { width: 95%; }
-      .market-clock-bar { font-size: 0.85rem; }
+      .market-clock-bar, .stock-ticker { font-size: 0.83rem; }
     }
-
     @media (max-width: 768px) {
-      .ticker-wrapper { width: 100%; border-radius: 0; padding: 2px 6px; }
-      .market-clock-bar { font-size: 0.8rem; line-height: 1.2rem; }
-      .stock-ticker { font-size: 0.8rem; }
+      .ticker-wrapper { width: 100%; border-radius: 0; }
+      .market-clock-bar, .stock-ticker { flex-direction: column; gap: 6px; }
+      .region-divider { font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -138,18 +135,16 @@
     <div id="exchangeLabel" class="exchange-label">📊 Loading exchange data...</div>
 
     <div id="stockTickerContainer" class="stock-ticker">
-      <div class="ticker-content" id="stockTicker">
-        Loading live market data...
-      </div>
+      <span class="neutral-glow">Loading live market data...</span>
     </div>
   </div>
 
   <script>
-  // === GLOBAL MARKET TICKER SCRIPT ===
+  // === GLOBAL MARKET TICKER — DUAL LINE VERSION ===
   const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-
   let stockSymbols = [];
   let currentExchangeIndex = 0;
+
   const exchanges = [
     { code: "US", name: "New York Stock Exchange (NYSE)" },
     { code: "LSE", name: "London Stock Exchange" },
@@ -183,8 +178,8 @@
     const utc = now.getTime() + now.getTimezoneOffset() * 60000;
     const clocks = zones.map(z => {
       const local = new Date(utc + 3600000 * z.offset);
-      const hh = String(local.getHours()).padStart(2,"0");
-      const mm = String(local.getMinutes()).padStart(2,"0");
+      const hh = String(local.getHours()).padStart(2, "0");
+      const mm = String(local.getMinutes()).padStart(2, "0");
       return `<span class="clock-item">${z.name}: ${hh}:${mm}</span>`;
     }).join(" • ");
     document.getElementById("marketClockBar").innerHTML = clocks;
@@ -199,16 +194,16 @@
       document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: <strong>${name}</strong>`;
       const res = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=${code}&token=${FINNHUB_KEY}`);
       const data = await res.json();
-      stockSymbols = Array.from(new Set(data.map(i => i.symbol))).slice(0, 80);
+      stockSymbols = Array.from(new Set(data.map(i => i.symbol))).slice(0, 10);
       lastLoadedExchange = code;
       fetchStockPrices();
     } catch {
-      document.getElementById("stockTicker").innerHTML = "<span class='neutral-glow'>Unable to load ticker list…</span>";
+      document.getElementById("stockTickerContainer").innerHTML = "<span class='neutral-glow'>Unable to load ticker list…</span>";
     }
   }
 
   async function fetchStockPrices() {
-    const ticker = document.getElementById("stockTicker");
+    const ticker = document.getElementById("stockTickerContainer");
     if (!ticker || stockSymbols.length === 0) return;
     ticker.innerHTML = `<span class='neutral-glow'>Fetching ${lastLoadedExchange} quotes…</span>`;
     try {
@@ -222,8 +217,14 @@
           return `<span class="${cls}">${s}: ${isFinite(price)?price.toFixed(2):"N/A"} (${isFinite(pct)?pct.toFixed(2):"0"}%) ${arrow}</span>`;
         })
       );
-      ticker.innerHTML = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
-    } catch { ticker.innerHTML = `<span class="neutral-glow">Error fetching stock data</span>`; }
+      ticker.innerHTML = results
+        .filter(r => r.status === "fulfilled")
+        .map(r => r.value)
+        .slice(0, 12)
+        .join(" • ");
+    } catch {
+      ticker.innerHTML = `<span class="neutral-glow">Error fetching stock data</span>`;
+    }
   }
 
   function rotateExchange() {
@@ -233,7 +234,7 @@
 
   window.addEventListener("load", () => {
     loadAllTickers(exchanges[currentExchangeIndex]);
-    setInterval(fetchStockPrices, 60000);
+    setInterval(fetchStockPrices, 90000);
     setInterval(rotateExchange, 600000);
   });
   </script>
