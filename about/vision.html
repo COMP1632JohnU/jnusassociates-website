@@ -55,9 +55,14 @@
       margin-bottom: 1.5rem;
     }
 
-    .back-button {
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2.5rem;
+    }
+
+    .nav-buttons a {
       display: inline-block;
-      margin-top: 2rem;
       padding: 0.9rem 2rem;
       background: rgba(0, 255, 255, 0.1);
       border: 1px solid rgba(0, 255, 255, 0.3);
@@ -71,7 +76,7 @@
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     }
 
-    .back-button:hover {
+    .nav-buttons a:hover {
       color: #00ffd1;
       background: rgba(0, 255, 255, 0.2);
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
@@ -86,7 +91,8 @@
     .loaded {
       background-image: url('../tribeca.jpg');
     }
-/* Navbar glow (teal luminescence) */
+
+    /* Navbar glow */
     .navbar a {
       color: #fff;
       text-decoration: none;
@@ -165,10 +171,14 @@
       By building partnerships founded on trust, precision, and forward-thinking design, JNUS Associates strives to 
       create a legacy of innovation that inspires progress for generations to come.
     </p>
-    <a href="/about/" class="back-button">← Back to About Us</a>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <a href="/about/mission.html">← Our Mission</a>
+      <a href="/about/values.html">Our Values →</a>
+    </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>
@@ -193,4 +203,3 @@
   </script>
 </body>
 </html>
-
