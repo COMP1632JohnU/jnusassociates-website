@@ -153,9 +153,20 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
+    // Ensure Lucide is loaded before creating icons
+    if (window.lucide) {
       lucide.createIcons();
-    });
-  </script>
+    } else {
+      // Fallback if script loads slower (Safari/GitHub Pages)
+      const lucideCheck = setInterval(() => {
+        if (window.lucide) {
+          lucide.createIcons();
+          clearInterval(lucideCheck);
+        }
+      }, 100);
+    }
+  });
+</script>
 </body>
 </html>
