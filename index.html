@@ -77,20 +77,25 @@
 
   <!-- ===== LUCIDE ICON INIT SCRIPT ===== -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Ensure Lucide is loaded before creating icons
+  document.addEventListener("DOMContentLoaded", function () {
+    function initLucide() {
       if (window.lucide) {
         lucide.createIcons();
       } else {
-        // Fallback if script loads slower (Safari/GitHub Pages)
-        const lucideCheck = setInterval(() => {
-          if (window.lucide) {
-            lucide.createIcons();
-            clearInterval(lucideCheck);
-          }
-        }, 100);
+        setTimeout(initLucide, 150); // retry until Lucide is ready
       }
+    }
+
+    // Attempt Lucide load and retry until it’s active
+    initLucide();
+
+    // Extra fallback for Safari/GitHub Pages (force rerender)
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        if (window.lucide) lucide.createIcons();
+      }, 500);
     });
-  </script>
+  });
+</script>
 </body>
 </html>
