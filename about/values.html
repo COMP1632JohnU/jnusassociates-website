@@ -55,9 +55,14 @@
       margin-bottom: 1.5rem;
     }
 
-    .back-button {
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2.5rem;
+    }
+
+    .nav-buttons a {
       display: inline-block;
-      margin-top: 2rem;
       padding: 0.9rem 2rem;
       background: rgba(0, 255, 255, 0.1);
       border: 1px solid rgba(0, 255, 255, 0.3);
@@ -71,7 +76,7 @@
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     }
 
-    .back-button:hover {
+    .nav-buttons a:hover {
       color: #00ffd1;
       background: rgba(0, 255, 255, 0.2);
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
@@ -90,6 +95,7 @@
 </head>
 
 <body>
+  <!-- ===== HEADER ===== -->
   <header class="site-header" style="position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.65); padding: 20px 0; z-index: 999;">
     <div class="container glass-box">
       <div class="brand">
@@ -118,24 +124,30 @@
     </div>
   </header>
 
+  <!-- ===== VALUES SECTION ===== -->
   <section class="values-section fade-up">
     <h2>Our Values</h2>
     <p>
-      At the heart of JNUS Associates Ltd lies a culture built on **integrity, collaboration, and excellence**. 
+      At the heart of JNUS Associates Ltd lies a culture built on <strong>integrity, collaboration, and excellence</strong>. 
       These values shape the way we think, build, and deliver solutions that empower clients and communities alike.
     </p>
     <p>
-      We believe in maintaining **transparency** and accountability across every engagement. 
+      We believe in maintaining <strong>transparency</strong> and accountability across every engagement. 
       Our commitment to ethical practice ensures that innovation never comes at the expense of trust or sustainability.
     </p>
     <p>
       Through teamwork, precision, and continuous learning, we foster an environment where ideas thrive, 
       talent grows, and progress is achieved with measurable impact — delivering meaningful change, responsibly.
     </p>
-    <a href="/about/" class="back-button">← Back to About Us</a>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <a href="/about/vision.html" class="back-button">← Our Vision</a>
+      <a href="/about/" class="next-button">Back to About Us →</a>
+    </div>
   </section>
 
-   <!-- ===== FOOTER ===== -->
+  <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>
@@ -148,6 +160,7 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
+  <!-- ===== MARKET + CLOCK + TICKER ===== -->
   <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
   <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
   <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>

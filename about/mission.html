@@ -55,9 +55,14 @@
       margin-bottom: 1.5rem;
     }
 
-    .back-button {
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2.5rem;
+    }
+
+    .nav-buttons a {
       display: inline-block;
-      margin-top: 2rem;
       padding: 0.9rem 2rem;
       background: rgba(0, 255, 255, 0.1);
       border: 1px solid rgba(0, 255, 255, 0.3);
@@ -71,7 +76,7 @@
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     }
 
-    .back-button:hover {
+    .nav-buttons a:hover {
       color: #00ffd1;
       background: rgba(0, 255, 255, 0.2);
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
@@ -137,7 +142,12 @@
       We are devoted to creating impact through precision engineering, measurable outcomes, and sustainable digital
       growth — delivering excellence that stands the test of time.
     </p>
-    <a href="/about/" class="back-button">← Back to About Us</a>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <a href="/about/" class="back-button">← Back to About Us</a>
+      <a href="/about/vision.html" class="next-button">Next → Our Vision</a>
+    </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
@@ -153,16 +163,20 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
-  <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
-  <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
+  <!-- ===== MARKET + CLOCK + TICKER ===== -->
+  <div id="marketStatusBar" class="market-status-bar">
+    <span class="neutral-glow">Checking global market status...</span>
+  </div>
+  <div id="marketClockBar" class="market-clock-bar">
+    <span class="neutral-glow">Loading clocks...</span>
+  </div>
+  <div class="stock-ticker">
+    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
+  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Ensure Lucide icons and ticker scripts initialize correctly
       if (window.lucide) lucide.createIcons();
-
-      // Delay background load to prevent black flash
       setTimeout(() => document.body.classList.add("loaded"), 100);
     });
   </script>
