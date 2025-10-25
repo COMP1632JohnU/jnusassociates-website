@@ -91,6 +91,39 @@
     .loaded {
       background-image: url('../hudson.jpg');
     }
+/* Navbar glow (teal luminescence) */
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+      color: #00f5d4;
+      text-shadow: 0 0 8px rgba(0, 245, 212, 0.8), 0 0 16px rgba(0, 245, 212, 0.4);
+    }
+
+    .navbar a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0,245,212,1) 0%, rgba(0,255,255,0.7) 100%);
+      box-shadow: 0 0 6px rgba(0,245,212,0.6);
+      transition: width 0.3s ease;
+    }
+
+    .navbar a:hover::after,
+    .navbar a.active::after {
+      width: 100%;
+    }
+
+
   </style>
 </head>
 
@@ -173,3 +206,4 @@
   </script>
 </body>
 </html>
+
