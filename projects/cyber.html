@@ -27,6 +27,7 @@
       animation: fadeIn 1.5s ease-out forwards;
       transition: box-shadow 0.4s ease, transform 0.4s ease;
     }
+
     .glass-card:hover {
       box-shadow: 0 0 40px rgba(0,255,255,0.4);
       transform: translateY(-6px);
@@ -37,45 +38,70 @@
       text-shadow: 0 0 10px rgba(0,255,255,0.7);
       margin-bottom: 15px;
     }
-    p { line-height: 1.7; color: #d6ffff; margin-bottom: 1rem; }
+
+    p {
+      line-height: 1.7;
+      color: #d6ffff;
+      margin-bottom: 1rem;
+    }
 
     /* Teal icon glow to match site */
     .service-icon {
-      width: 45px; height: 45px;
+      width: 45px;
+      height: 45px;
       color: #00f5d4;
       margin-bottom: 16px;
       filter: drop-shadow(0 0 8px rgba(0,255,255,0.6));
     }
 
-    /* Prev/Next arrows */
+    /* === NAVIGATION ARROWS FIX (Enhanced Visibility + Glass Style) === */
     .nav-arrows {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       max-width: 850px;
-      margin: 0 auto 100px auto;
-      gap: 12px;
+      margin: 60px auto 120px auto;
+      padding: 12px 20px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(0,255,255,0.15);
     }
+
     .nav-arrows a {
       color: #00f5d4;
       text-decoration: none;
       font-weight: 600;
-      transition: text-shadow 0.3s ease, transform 0.3s ease;
+      letter-spacing: 0.3px;
+      transition: all 0.3s ease;
     }
+
     .nav-arrows a:hover {
-      text-shadow: 0 0 8px rgba(0,255,255,0.9);
+      text-shadow: 0 0 10px rgba(0,255,255,0.8);
       transform: translateY(-2px);
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(12px); filter: blur(3px); }
-      to   { opacity: 1; transform: translateY(0);   filter: blur(0); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
 
     /* Keep main content centered on large screens like other pages */
     @media (min-width: 992px) {
-      body { display: flex; flex-direction: column; min-height: 100vh; }
-      main { margin-top: 0 !important; margin-bottom: auto; }
-      footer { margin-top: auto; }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main {
+        margin-top: 0 !important;
+        margin-bottom: auto;
+      }
+      footer {
+        margin-top: auto;
+      }
     }
   </style>
 </head>
