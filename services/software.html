@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>Software Development | JNUS Associates Ltd</title>
+
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="/script.js" defer></script>
+
+  <style>
+    body {
+      background-image: url('../marunouchi3.jpg');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #d6f3f3;
+    }
+
+    .service-section {
+      text-align: center;
+      margin-top: 140px;
+      padding: 70px 30px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 14px;
+      max-width: 950px;
+      margin-left: auto;
+      margin-right: auto;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.25);
+      animation: fadeUp 1.2s ease-out forwards;
+    }
+
+    .service-section h2 {
+      color: #00f5d4;
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-section i {
+      color: #00f5d4;
+      filter: drop-shadow(0 0 8px rgba(0,255,255,0.6));
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .service-section p {
+      color: #d6f3f3;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-buttons a {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: rgba(0,255,255,0.1);
+      border: 1px solid rgba(0,255,255,0.3);
+      color: #00f5d4;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,255,255,0.2);
+    }
+
+    .nav-buttons a:hover {
+      background: rgba(0,255,255,0.2);
+      color: #00ffd1;
+      box-shadow: 0 0 18px rgba(0,255,255,0.6);
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(25px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <img src="/jnus-logo.png" alt="JNUS Associates Logo" class="logo">
+        <div class="brand-text">
+          <h1 class="glow">JNUS Associates Ltd</h1>
+          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
+          <p>📞 020 3538 4966</p>
+        </div>
+      </div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/" class="active">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== CONTENT ===== -->
+  <section class="service-section fade-up">
+    <i data-lucide="code"></i>
+    <h2>Software Development</h2>
+    <p>
+      JNUS Associates Ltd develops secure, scalable, and performance-optimized software systems that drive
+      organizational transformation. Our engineers deliver enterprise-grade solutions from system architecture 
+      to deployment and long-term support.
+    </p>
+    <p>
+      We specialize in <strong>bespoke software</strong>, <strong>automation frameworks</strong>, and <strong>API integrations</strong>
+      that unify processes and accelerate growth. From financial systems to business operations platforms, 
+      we build technology that performs and endures.
+    </p>
+    <div class="nav-buttons">
+      <a href="/services/" class="back-button">← Back to Services</a>
+      <a href="/services/consultancy" class="next-button">Next → IT Consultancy & Systems Engineering</a>
+    </div>
+  </section>
+ <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
+    <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
+  </footer>
+
+  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
+  <div id="marketStatusBar" class="market-status-bar"><span class="neutral-glow">Checking global market status...</span></div>
+  <div id="marketClockBar" class="market-clock-bar"><span class="neutral-glow">Loading clocks...</span></div>
+  <div class="stock-ticker"><div class="ticker-content" id="stockTicker">Loading live market data...</div></div>
+
+  <!-- ===== INITIALIZATION ===== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      try { lucide.createIcons(); } catch(e){}
+      try {
+        if (typeof fetchStockPrices === "function") fetchStockPrices();
+        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
+        if (typeof updateMarketClock === "function") updateMarketClock();
+      } catch(e){}
+    });
+  </script>
+</body>
+</html>
