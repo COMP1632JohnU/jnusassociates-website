@@ -34,27 +34,46 @@
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      transition: all 0.4s ease;
+      transition: all 0.4s ease, box-shadow 0.4s ease;
       opacity: 0;
       animation: fadeRipple 1.8s ease-out forwards;
       animation-delay: var(--delay, 0s);
       animation-fill-mode: forwards;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* === Hover Illumination (Luminous Glow) === */
+    /* === Hover Illumination (Teal Glow) === */
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(0,255,255,0.25) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
     .service-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      border-color: rgba(0, 255, 255, 0.5);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.35);
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(0, 255, 255, 0.6);
+      box-shadow: 0 0 35px rgba(0, 255, 255, 0.4);
     }
 
     .service-card:hover i {
       color: #00ffe0;
-      filter: drop-shadow(0 0 8px rgba(0,255,255,0.8));
+      filter: drop-shadow(0 0 10px rgba(0,255,255,0.9));
     }
 
     .service-card:hover h3 {
-      text-shadow: 0 0 6px rgba(0,255,255,0.6);
+      text-shadow: 0 0 10px rgba(0,255,255,0.7);
     }
 
     .service-icon {
@@ -88,6 +107,7 @@
     .services-header h2 {
       color: #00f5d4;
       margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
     }
 
     .services-grid {
@@ -157,7 +177,7 @@
 
     <div class="services-grid">
 
-      <a href="/services/software.html" class="service-link" style="--delay:0.3s;">
+      <a href="/services/software" class="service-link" style="--delay:0.3s;">
         <div class="service-card">
           <i data-lucide="code" class="service-icon"></i>
           <h3>Software Development</h3>
@@ -168,7 +188,7 @@
         </div>
       </a>
 
-      <a href="/services/consultancy.html" class="service-link" style="--delay:0.6s;">
+      <a href="/services/consultancy" class="service-link" style="--delay:0.6s;">
         <div class="service-card">
           <i data-lucide="settings" class="service-icon"></i>
           <h3>IT Consultancy & Systems Engineering</h3>
@@ -179,7 +199,7 @@
         </div>
       </a>
 
-      <a href="/services/analytics.html" class="service-link" style="--delay:0.9s;">
+      <a href="/services/analytics" class="service-link" style="--delay:0.9s;">
         <div class="service-card">
           <i data-lucide="bar-chart-3" class="service-icon"></i>
           <h3>AI, Business & Data Analytical Solutions</h3>
