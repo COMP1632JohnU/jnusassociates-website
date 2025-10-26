@@ -354,10 +354,12 @@
 
       async function loadApplePodcasts() {
         try {
-          const searchTerms = ["finance","AI","Systems integration","data analytics","business analytics","insurance","reinsurance","tech stocks","mergers and acquisitions"];
+          const searchTerms = ["finance","private equity","AI","Systems integration","systems engineering","data engineering","data analytics","business analytics","insurance","reinsurance","tech stocks","ETFs","investment in gold","crude oil","exotic sports cars","mergers and acquisitions"];
           const query = encodeURIComponent(searchTerms.join(" "));
           const res = await fetch(`https://itunes.apple.com/search?term=${query}&media=podcast&limit=5`);
           const data = await res.json();
+
+
 
           // Header badge (JNUS Data Feeds)
           const header = `
