@@ -6,24 +6,20 @@
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>About Us | JNUS Associates Ltd</title>
 
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <style>
-    /* ===== GLOBAL ===== */
     html, body {
       margin: 0;
       padding: 0;
       background: #000;
-      color: #e0f7f7;
       font-family: "Inter", sans-serif;
-      height: 100%;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+      color: #e0f7f7;
       background-image: url('../fenchurch.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      overflow-x: hidden;
     }
 
     /* ===== HEADER ===== */
@@ -36,117 +32,81 @@
       padding: 16px 0;
     }
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo {
-      width: 60px;
-      margin-bottom: 6px;
-    }
-
-    .brand-text h1 {
-      color: #00f5d4;
-      margin: 0;
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-    }
-
-    .brand-text p {
-      color: #aef;
-      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
-      margin: 2px 0;
-    }
+    .brand { display: flex; flex-direction: column; align-items: center; }
+    .logo { width: 60px; margin-bottom: 6px; }
+    .brand-text h1 { color: #00f5d4; margin: 0; font-size: clamp(1.1rem, 2vw, 1.5rem); }
+    .brand-text p { color: #aef; margin: 2px 0; font-size: clamp(0.8rem, 1.4vw, 0.95rem); }
 
     nav.navbar ul {
-      list-style: none;
-      padding: 0;
-      margin: 8px 0;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      list-style: none; padding: 0; margin: 8px 0;
+      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
     }
-
     nav.navbar a {
-      color: #dff;
-      text-decoration: none;
-      font-weight: 500;
+      color: #dff; text-decoration: none; font-weight: 500;
       font-size: clamp(0.8rem, 1.6vw, 1rem);
     }
+    nav.navbar a.active, nav.navbar a:hover { color: #00f5d4; }
 
-    nav.navbar a.active,
-    nav.navbar a:hover {
-      color: #00f5d4;
-    }
-
-    /* ===== ABOUT SECTION ===== */
+    /* ===== ABOUT ===== */
     .about-section {
       text-align: center;
       margin: 60px auto 0;
       padding: 50px 20px;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(0,255,255,0.25);
       border-radius: 16px;
       max-width: 900px;
-      border: 1px solid rgba(0,255,255,0.25);
-      box-shadow: 0 0 25px rgba(0,255,255,0.15);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      animation: fadeUp 1.2s ease-out forwards;
+      box-shadow: 0 0 25px rgba(0,255,255,0.15);
+      animation: fadeUp 1s ease-out;
     }
-
     .about-section h2 {
-      font-size: 1.8rem;
-      color: #00f5d4;
+      color: #00f5d4; font-size: 1.8rem;
       text-shadow: 0 0 10px rgba(0,255,255,0.6);
-      margin-bottom: 1rem;
     }
-
     .about-section p {
-      color: #d6f3f3;
-      font-size: clamp(0.9rem, 1.5vw, 1rem);
-      line-height: 1.6;
-      max-width: 750px;
-      margin: 0 auto 2rem;
+      color: #d6f3f3; line-height: 1.6;
+      max-width: 750px; margin: 0 auto 2rem;
     }
 
     .about-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;
     }
-
     .about-card {
-      flex: 1 1 260px;
-      max-width: 280px;
-      background: rgba(0, 0, 0, 0.35);
+      flex: 1 1 260px; max-width: 280px;
+      background: rgba(0,0,0,0.35);
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 12px;
       padding: 20px 16px;
-      color: #e0f7f7;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      box-shadow: 0 0 12px rgba(0,255,255,0.1);
-      text-decoration: none;
+      text-decoration: none; color: #e0f7f7;
+      transition: all .35s ease; box-shadow: 0 0 12px rgba(0,255,255,0.1);
     }
+    .about-card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,255,255,0.35); }
+    .about-card h3 { color: #00ffd1; margin-bottom: 8px; text-shadow: 0 0 8px rgba(0,255,255,0.5); }
 
-    .about-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(0,255,255,0.35);
-    }
-
-    .about-card h3 {
+    /* ===== REGION & CITY BAR ===== */
+    .region-divider, .market-clock-bar {
+      text-align: center;
       color: #00ffd1;
-      margin-bottom: 8px;
-      text-shadow: 0 0 8px rgba(0,255,255,0.5);
+      font-size: 0.9rem;
+      margin-top: 12px;
+      text-shadow: 0 0 6px rgba(0,255,255,0.4);
+      letter-spacing: 0.6px;
+      animation: fadeIn 1.4s ease forwards;
     }
-
-    .about-card p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #dff;
+    .region-divider {
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 10px;
+      padding: 6px 0;
+      width: 100%;
+      max-width: 900px;
+      margin: 25px auto 5px;
+      backdrop-filter: blur(6px);
+    }
+    .market-clock-bar {
+      font-size: 0.85rem;
+      margin-bottom: 10px;
     }
 
     /* ===== FOOTER ===== */
@@ -157,19 +117,18 @@
       border-top: 1px solid rgba(0,255,255,0.2);
       border-radius: 12px;
       max-width: 900px;
-      margin: 25px auto;
+      margin: 20px auto;
       padding: 12px;
       font-size: clamp(0.75rem, 1.4vw, 0.9rem);
       box-shadow: 0 0 15px rgba(0,255,255,0.1);
     }
-
     footer a { color: #00f5d4; text-decoration: none; }
 
-    /* ===== MINI PODCAST PLAYER ===== */
+    /* ===== PODCAST BUTTON ===== */
     .podcast-btn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 30px;
+      right: 30px;
       background: rgba(0,255,255,0.15);
       border: 1px solid rgba(0,255,255,0.35);
       color: #00f5d4;
@@ -182,69 +141,36 @@
       box-shadow: 0 0 15px rgba(0,255,255,0.3);
       transition: all 0.4s ease;
       animation: fadeIn 1.2s ease forwards;
+      z-index: 9999;
     }
-
     .podcast-btn:hover { background: rgba(0,255,255,0.3); transform: scale(1.05); }
 
     .podcast-popup {
       position: fixed;
-      bottom: 80px;
-      right: 20px;
-      width: 250px;
-      height: 250px;
+      bottom: 80px; right: 30px;
+      width: 260px; height: 260px;
       background: rgba(0,0,0,0.75);
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0,255,255,0.25);
-      backdrop-filter: blur(10px);
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: fadePopup 0.8s ease forwards;
-      z-index: 999;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0,255,255,0.25);
+      animation: fadePopup .8s ease forwards;
+      z-index: 10000;
     }
-
-    .podcast-popup iframe {
-      width: 90%;
-      height: 60%;
-      border: none;
-      border-radius: 8px;
-    }
-
-    .podcast-popup h4 {
-      color: #00f5d4;
-      margin: 6px 0;
-      font-size: 0.9rem;
-      text-shadow: 0 0 10px rgba(0,255,255,0.6);
-    }
-
+    .podcast-popup iframe { width: 90%; height: 60%; border: none; border-radius: 8px; }
+    .podcast-popup h4 { color: #00f5d4; margin: 6px 0; font-size: 0.9rem; }
     .close-popup {
-      position: absolute;
-      top: 6px;
-      right: 10px;
-      color: #00f5d4;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: color 0.3s ease;
+      position: absolute; top: 6px; right: 10px;
+      color: #00f5d4; cursor: pointer; font-size: 1rem;
     }
 
-    .close-popup:hover { color: #fff; }
-
-    @keyframes fadePopup {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(25px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes fadePopup { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(25px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
     @media (max-width: 768px) {
       .podcast-btn {
@@ -254,13 +180,12 @@
         font-size: 0.8rem;
         padding: 8px 14px;
       }
-
       .podcast-popup {
         bottom: 70px;
         right: 50%;
         transform: translateX(50%);
-        width: 200px;
-        height: 200px;
+        width: 210px;
+        height: 210px;
       }
     }
   </style>
@@ -276,7 +201,6 @@
         <p>AI • Systems • Tech • Business & Data Analytics</p>
       </div>
     </div>
-
     <nav class="navbar">
       <ul>
         <li><a href="/">Home</a></li>
@@ -308,6 +232,10 @@
       </a>
     </div>
   </section>
+
+  <!-- ===== REGION & CITY BAR ===== -->
+  <div class="region-divider">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
+  <div class="market-clock-bar">Lagos • Johannesburg • London • New York • Shanghai • Tokyo</div>
 
   <!-- ===== FOOTER ===== -->
   <footer>
