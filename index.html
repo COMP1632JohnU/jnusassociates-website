@@ -155,24 +155,36 @@
     }
 
     .podcast-card {
-      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(0,0,0,0.45);
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 12px;
-      overflow: hidden;
-      opacity: 0; transform: translateY(10px);
-      transition: all 0.5s ease;
+      padding: 12px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(12px);
     }
 
-    .podcast-card.visible { opacity: 1; transform: translateY(0); }
-
-    .podcast-card iframe { width: 100%; height: clamp(160px, 20vh, 200px); }
-
-    .podcast-card h3 {
-      color: #00f5d4;
-      font-size: clamp(0.85rem, 1.4vw, 1rem);
-      margin: 10px 0;
-      text-shadow: 0 0 8px rgba(0,255,255,0.5);
+    .podcast-card.visible, .podcast-card.fade-up {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease-out;
     }
+
+    .podcast-cover {
+      width: 80px; height: 80px; border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.4);
+    }
+
+    .podcast-info h3 { color: #00f5d4; margin: 0 0 3px; font-size: clamp(0.85rem, 1.4vw, 1rem); text-shadow: 0 0 8px rgba(0,255,255,0.5); }
+    .podcast-info p { color: #d6f3f3; margin: 0 0 5px; font-size: clamp(0.75rem, 1.2vw, 0.9rem); }
+
+    .teal-link { color: #00f5d4; text-decoration: none; font-weight: 600; transition: color 0.2s ease; }
+    .teal-link:hover { color: #00ffee; }
 
     .last-updated { margin-top: 10px; font-size: clamp(0.75rem, 1.3vw, 0.85rem); color: #89f; opacity: 0.8; }
     .update-caption { font-size: 0.8rem; color: #77baff; opacity: 0.75; margin-top: 4px; }
@@ -186,17 +198,11 @@
       font-weight: 600;
       font-size: clamp(0.8rem, 1.5vw, 1rem);
     }
-    .cities-bar {
-      color: #aef;
-      font-weight: 400;
-      margin-top: 6px;
-      font-size: clamp(0.75rem, 1.3vw, 0.9rem);
-    }
+    .cities-bar { color: #aef; font-weight: 400; margin-top: 6px; font-size: clamp(0.75rem, 1.3vw, 0.9rem); }
 
     /* ===== TICKER BAR ===== */
     .ticker-bar {
-      width: 100%;
-      max-width: 1200px;
+      width: 100%; max-width: 1200px;
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 12px;
@@ -209,32 +215,22 @@
       animation: fadeIn 1s ease-in-out 2s forwards;
     }
 
-    .ticker-content {
-      display: inline-block;
-      white-space: nowrap;
-      animation: scrollTicker 60s linear infinite;
-    }
-
-    @keyframes scrollTicker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
+    .ticker-content { display: inline-block; white-space: nowrap; animation: scrollTicker 60s linear infinite; }
+    @keyframes scrollTicker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
     .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,0.6); font-weight: bold; }
+    .red-glow { color: #ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,0.6); }
+    .neutral-glow { color: #ccf; opacity: 0.92; }
 
     /* ===== FOOTER ===== */
     footer {
-      width: 90%;
-      max-width: 800px;
-      text-align: center;
-      color: #aef;
+      width: 90%; max-width: 800px; text-align: center; color: #aef;
       background: rgba(0,0,0,0.6);
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 12px;
       box-shadow: 0 0 18px rgba(0,255,255,0.15);
       backdrop-filter: blur(10px);
-      padding: 14px 10px;
-      margin-bottom: 25px;
+      padding: 14px 10px; margin-bottom: 25px;
       font-size: clamp(0.75rem, 1.5vw, 0.9rem);
     }
     footer a { color: #00f5d4; text-decoration: none; }
@@ -278,15 +274,17 @@
     </div>
   </main>
 
-  <!-- PODCASTS -->
+  <!-- 🎙 PODCASTS SECTION (YouTube + Apple Fallback) -->
   <section class="podcast-section">
     <h2><i data-lucide="radio"></i> Financial Insights & Podcasts</h2>
     <p class="podcast-intro">
       Stay informed with the latest market analysis, fintech innovations, insurance and reinsurance trends, MGAs, and business strategy discussions curated for modern enterprises.
     </p>
-    <div class="podcast-grid" id="youtubeFeed">
-      <p style="color:#88f; text-align:center;">Loading latest videos...</p>
+
+    <div class="podcast-grid" id="podcastFeed">
+      <p style="color:#88f; text-align:center;">Loading latest episodes...</p>
     </div>
+
     <p class="last-updated" id="lastUpdated">Last updated: Initializing…</p>
     <p class="update-caption">(auto-updating every 4 hours)</p>
   </section>
@@ -314,21 +312,23 @@
 
   <!-- SCRIPT -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
       if (window.lucide) lucide.createIcons();
 
-      /* === YouTube Podcasts === */
-      const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
-      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE";
-      const feed = document.getElementById("youtubeFeed");
+      const feed = document.getElementById("podcastFeed");
       const updated = document.getElementById("lastUpdated");
 
-      async function loadVideos() {
+      /* === YouTube + Apple Podcasts Fallback (Branded) === */
+      const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
+      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // keep your existing channel id here
+
+      async function loadYouTube() {
         try {
           const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
           const res = await fetch(url);
           const data = await res.json();
-          if (!data.items) throw new Error("No items");
+          if (!data.items || !data.items.length) throw new Error("No videos");
+
           feed.innerHTML = "";
           data.items.forEach((i, idx) => {
             if (i.id.kind === "youtube#video") {
@@ -336,51 +336,96 @@
               const title = i.snippet.title;
               const card = document.createElement("div");
               card.classList.add("podcast-card");
-              card.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe><h3>${title}</h3>`;
+              card.innerHTML = `
+                <iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
+                <h3>${title}</h3>
+              `;
               feed.appendChild(card);
               setTimeout(() => card.classList.add("visible"), idx * 200);
             }
           });
           updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
+          return true;
         } catch {
-          feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Check API key or channel ID.</p>";
-          updated.textContent = "Last updated: Error fetching data";
+          console.warn("YouTube API unavailable, switching to Apple Podcasts");
+          return false;
         }
       }
 
-      loadVideos();
-      setInterval(loadVideos, 14400000); // refresh every 4h
+      async function loadApplePodcasts() {
+        try {
+          const searchTerms = ["finance","AI","Systems integration","data analytics","business analytics","insurance","reinsurance","tech stocks","mergers and acquisitions"];
+          const query = encodeURIComponent(searchTerms.join(" "));
+          const res = await fetch(`https://itunes.apple.com/search?term=${query}&media=podcast&limit=5`);
+          const data = await res.json();
+
+          // Header badge (JNUS Data Feeds)
+          const header = `
+            <div style="text-align:center;margin-bottom:14px;color:#00f5d4;font-weight:600;text-shadow:0 0 8px rgba(0,255,255,0.6);animation:fadeUp 1s ease-out;">
+              🎧 Powered by <span style="font-weight:700;">JNUS Data Feeds</span> — Curated from Apple Podcasts
+            </div>
+          `;
+
+          const cards = (data.results || []).map((p, idx) => `
+            <div class="podcast-card fade-up" style="animation-delay:${idx * 0.2}s;">
+              <img src="${p.artworkUrl600 || p.artworkUrl100 || ''}" alt="${p.collectionName || 'Podcast'}" class="podcast-cover"/>
+              <div class="podcast-info">
+                <h3>${p.collectionName || 'Podcast'}</h3>
+                <p>${p.artistName || ''}</p>
+                <a href="${p.collectionViewUrl || '#'}" target="_blank" rel="noopener" class="teal-link">🎧 Listen on Apple Podcasts</a>
+              </div>
+            </div>
+          `).join("");
+
+          feed.innerHTML = header + (cards || "<p style='color:#f88;'>No podcasts found.</p>");
+          updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
+        } catch {
+          feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Please try again later.</p>";
+          updated.textContent = "Last updated: Error fetching Apple Podcasts";
+        }
+      }
+
+      const ytOK = await loadYouTube();
+      if (!ytOK) await loadApplePodcasts();
+
+      // Auto-refresh every 4 hours, keeping YouTube primary and Apple as fallback
+      setInterval(async () => {
+        const ok = await loadYouTube();
+        if (!ok) await loadApplePodcasts();
+      }, 14400000);
 
       /* === Market Ticker === */
       const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-      const ALPHA_KEY = "HARHFLFJZZBX044Y";
       const tickerContent = document.getElementById("tickerContent");
+
+      function fmt(n) { return Number.isFinite(n) ? n.toFixed(2) : "N/A"; }
 
       async function fetchStocks() {
         try {
-          const res = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${FINNHUB_KEY}`);
-          const data = await res.json();
-          const symbols = Array.from(new Set(data.map(i => i.symbol))).slice(0, 30);
+          // Focused tech list (readable + lively)
+          const TECH = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
           const results = await Promise.allSettled(
-            symbols.map(async s => {
+            TECH.map(async s => {
               const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`);
               const d = await r.json();
               const price = parseFloat(d.c);
               const pct = parseFloat(d.dp);
-              const cls = pct > 0 ? "teal-glow" : pct < 0 ? "red-glow" : "neutral-glow";
-              const arrow = pct > 0 ? "▲" : pct < 0 ? "▼" : "•";
-              return `<span class="${cls}">${s}: ${isFinite(price)?price.toFixed(2):"N/A"} (${isFinite(pct)?pct.toFixed(2):"0"}%) ${arrow}</span>`;
+              const cls = Number.isFinite(pct) ? (pct > 0 ? "teal-glow" : pct < 0 ? "red-glow" : "neutral-glow") : "neutral-glow";
+              const arrow = Number.isFinite(pct) ? (pct > 0 ? "▲" : pct < 0 ? "▼" : "•") : "•";
+              return `<span class="${cls}">${s}: ${fmt(price)} (${Number.isFinite(pct) ? pct.toFixed(2) : "0.00"}%) ${arrow}</span>`;
             })
           );
           const html = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
-          tickerContent.innerHTML = `<span class="teal-glow">📊 Now showing: New York Stock Exchange</span> • ${html}`;
-        } catch {
+          tickerContent.innerHTML = `<span class="teal-glow">📊 Now showing: New York Tech Stocks (Live)</span> • ${html}`;
+        } catch (e) {
           tickerContent.innerHTML = `<span class="neutral-glow">Unable to load live stock data</span>`;
         }
       }
 
+      // Initial + regular refresh (every 3 minutes)
       setTimeout(fetchStocks, 2000);
-      setInterval(fetchStocks, 1800000);
+      setInterval(fetchStocks, 180000);
     });
   </script>
 </body>
+</html>
