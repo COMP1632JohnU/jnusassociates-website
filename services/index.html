@@ -11,19 +11,66 @@
   <script src="/script.js" defer></script>
 
   <style>
-    /* === FADE-IN ANIMATION === */
-    @keyframes fadeRipple {
-      0% {
-        opacity: 0;
-        transform: translateY(25px) scale(0.98);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    body {
+      margin: 0;
+      color: #e0f7f7;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background-image: url('../marklane.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
 
-    /* === SERVICE CARD GLASS EFFECT === */
+    /* ==== Fade animation ==== */
+    @keyframes fadeRipple {
+      0% { opacity: 0; transform: translateY(25px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ==== Services header ==== */
+    .services-header {
+      text-align: center;
+      margin: 80px auto 40px auto;
+      padding: 25px;
+      max-width: 800px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      color: #e0f7f7;
+      animation: fadeRipple 1.8s ease-out forwards;
+    }
+
+    .services-header h2 {
+      color: #00f5d4;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
+    }
+
+    /* ==== Grid & cards ==== */
+    .services-grid {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding-bottom: 80px;
+    }
+
+    .service-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex: 1 1 300px;
+      min-width: 280px;
+      max-width: 380px;
+      transition: transform 0.3s ease;
+    }
+
     .service-card {
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0, 255, 255, 0.25);
@@ -33,36 +80,20 @@
       color: #e0f7f7;
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       transition: all 0.4s ease, box-shadow 0.4s ease;
       opacity: 0;
       animation: fadeRipple 1.8s ease-out forwards;
       animation-delay: var(--delay, 0s);
-      animation-fill-mode: forwards;
-      position: relative;
-      overflow: hidden;
-      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
     }
 
-    /* === Hover Illumination (Teal Glow) === */
-    .service-card::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(0,255,255,0.25) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-
-    .service-card:hover::before {
-      opacity: 1;
+    .service-icon {
+      color: #00f5d4;
+      margin-bottom: 12px;
+      font-size: 1.8rem;
+      filter: drop-shadow(0 0 6px rgba(0,255,255,0.5));
+      transition: all 0.3s ease;
     }
 
     .service-card:hover {
@@ -76,82 +107,110 @@
       filter: drop-shadow(0 0 10px rgba(0,255,255,0.9));
     }
 
-    .service-card:hover h3 {
-      text-shadow: 0 0 10px rgba(0,255,255,0.7);
-    }
-
-    .service-icon {
-      color: #00f5d4;
-      margin-bottom: 12px;
-      font-size: 1.8rem;
-      filter: drop-shadow(0 0 6px rgba(0,255,255,0.5));
-      transition: all 0.3s ease;
-    }
-
     .service-card h3 {
       color: #00f5d4;
       margin-bottom: 10px;
       transition: text-shadow 0.3s ease;
     }
 
-    .services-header {
-      text-align: center;
-      margin: 80px auto 40px auto;
-      padding: 25px;
-      max-width: 800px;
+    /* ==== Market ticker section ==== */
+    .market-wrap {
+      width: 92%;
+      max-width: 1100px;
+      margin: 40px auto 20px;
+    }
+
+    .region-band, .city-band, .ticker-shell {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0, 255, 255, 0.22);
       border-radius: 12px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(0, 255, 255, 0.25);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+      box-shadow: 0 0 14px rgba(0, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      color: #e4fdfd;
+      text-align: center;
+      letter-spacing: .5px;
+    }
+
+    .region-band {
+      padding: 8px 10px;
+      text-transform: uppercase;
+      font-size: .9rem;
+      color: #00ffd1;
+      margin-bottom: 8px;
+    }
+
+    .city-band {
+      padding: 10px 14px;
+      font-family: "Courier New", monospace;
+      font-size: .95rem;
+      margin-bottom: 12px;
+      white-space: nowrap;
+      overflow-x: auto;
+      display: block;
+      min-height: 2.2rem;
+      line-height: 1.6rem;
+    }
+
+    .ticker-shell { position: relative; padding: 8px 10px 12px; overflow: hidden; }
+    .now-showing { font-weight: 700; color: #00f5d4; text-shadow: 0 0 10px rgba(0,255,255,.75); margin-bottom: 6px; font-family: "Courier New", monospace; }
+    .marquee-viewport { width: 100%; overflow: hidden; position: relative; height: 1.6rem; }
+    .marquee-inner {
+      position: absolute;
+      left: 100%;
+      white-space: nowrap;
+      font-family: "Courier New", monospace;
+      font-size: .9rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards, scrollMarquee 60s linear infinite;
+      animation-delay: 0s, 2s;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } }
+
+    .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,.6); }
+    .red-glow { color: #ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,.6); }
+    .neutral-glow { color: #ccf; opacity: .92; }
+
+    footer {
+      width: 92%;
+      max-width: 880px;
+      margin: 16px auto 28px;
+      text-align: center;
+      color: #aef;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,255,255,.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #e0f7f7;
+      padding: 12px 10px;
+      font-size: clamp(.78rem,1.4vw,.92rem);
     }
 
-    .services-header h2 {
-      color: #00f5d4;
-      margin-bottom: 10px;
-      text-shadow: 0 0 10px rgba(0,255,255,0.6);
-    }
+    footer a { color: #00f5d4; text-decoration: none; }
 
-    /* === ALIGNMENT FIX === */
-    .services-grid {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      gap: 1.8rem;
-      flex-wrap: wrap;
-      width: 90%;
-      max-width: 1200px;
-      margin: auto;
-      padding-bottom: 80px;
-    }
-
-    /* === Make Entire Card Clickable === */
-    .service-link {
+    .podcast-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,0,0,.65);
+      border: 1px solid rgba(0,255,255,.35);
+      color: #c8ffff;
+      padding: 10px 12px;
+      border-radius: 999px;
+      box-shadow: 0 0 18px rgba(0,255,255,.35);
+      font-weight: 600;
+      font-size: .92rem;
+      backdrop-filter: blur(6px);
       text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex: 1 1 300px;
-      min-width: 280px;
-      max-width: 380px;
-      transition: transform 0.3s ease;
-    }
-
-    .service-link:hover {
-      transform: translateY(-4px);
-    }
-
-    @media (max-width: 768px) {
-      .services-grid {
-        flex-direction: column;
-        align-items: center;
-      }
     }
   </style>
 </head>
 
-<body style="background-image:url('../marklane.jpg'); background-size:cover; background-position:center;">
+<body>
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
@@ -160,11 +219,9 @@
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p>📞 020 3538 4966</p>
         </div>
       </div>
 
-      <!-- ===== NAVIGATION ===== -->
       <nav class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
@@ -177,25 +234,19 @@
     </div>
   </header>
 
-  <!-- ===== SERVICES SECTION ===== -->
+  <!-- ===== SERVICES ===== -->
   <main class="services-layout">
-    <div class="services-header fade-up" style="animation-delay:0.2s;">
+    <div class="services-header fade-up">
       <h2 class="teal-glow">Our Services</h2>
-      <p>
-        We deliver engineering-driven software, IT consultancy, and business & data solutions.
-      </p>
+      <p>We deliver engineering-driven software, IT consultancy, and business & data solutions.</p>
     </div>
 
     <div class="services-grid">
-
       <a href="/services/software" class="service-link" style="--delay:0.3s;">
         <div class="service-card">
           <i data-lucide="code" class="service-icon"></i>
           <h3>Software Development</h3>
-          <p>
-            Custom-built, scalable, and secure software applications — developed with precision
-            to align with your business needs, from concept to deployment.
-          </p>
+          <p>Custom-built, scalable, and secure applications — aligned with your business needs, from concept to deployment.</p>
         </div>
       </a>
 
@@ -203,10 +254,7 @@
         <div class="service-card">
           <i data-lucide="settings" class="service-icon"></i>
           <h3>IT Consultancy & Systems Engineering</h3>
-          <p>
-            Providing clear technical guidance and architectural solutions that improve efficiency,
-            security, and performance across insurance, reinsurance & enterprise finance systems.
-          </p>
+          <p>Providing clear technical guidance and architectures that improve efficiency, security, and performance across enterprise systems.</p>
         </div>
       </a>
 
@@ -214,15 +262,21 @@
         <div class="service-card">
           <i data-lucide="bar-chart-3" class="service-icon"></i>
           <h3>AI, Business & Data Analytical Solutions</h3>
-          <p>
-            Unlocking the power of AI & data with analytical models, system integrations, and intelligent
-            reporting for confident business decision-making.
-          </p>
+          <p>Unlocking the power of AI and data with analytical models, integrations, and intelligent reporting for confident decision-making.</p>
         </div>
       </a>
-
     </div>
   </main>
+
+  <!-- ===== REGION / CITY / TICKER ===== -->
+  <div class="market-wrap">
+    <div class="region-band">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
+    <div class="city-band" id="marketClockBar">Lagos • Johannesburg • London • New York • Shanghai • Singapore • Tokyo</div>
+    <div class="ticker-shell">
+      <div class="now-showing" id="exchangeLabel">📊 Now showing: <strong>New York Tech Stocks (Live)</strong></div>
+      <div class="marquee-viewport"><div class="marquee-inner" id="stockTicker">Loading prices…</div></div>
+    </div>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer>
@@ -231,28 +285,82 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-  <div id="marketStatusBar" class="market-status-bar">
-    <span class="neutral-glow">Checking global market status...</span>
-  </div>
+  <!-- ===== PODCAST BUTTON ===== -->
+  <a class="podcast-fab" href="/#podcasts">
+    <i data-lucide="headphones"></i> Open Podcasts
+  </a>
 
-  <div id="marketClockBar" class="market-clock-bar">
-    <span class="neutral-glow">Loading clocks...</span>
-  </div>
-
-  <div class="stock-ticker">
-    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
-  </div>
-
-  <!-- ===== INITIALIZATION ===== -->
+  <!-- ===== STOCK / CLOCK SCRIPT ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      try { lucide.createIcons(); } catch(e){}
-      try {
-        if (typeof fetchStockPrices === "function") fetchStockPrices();
-        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
-        if (typeof updateMarketClock === "function") updateMarketClock();
-      } catch(e){}
+      if (window.lucide) lucide.createIcons();
+
+      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+      const PROXY = "https://api.allorigins.win/raw?url=";
+      const TECH_SYMBOLS = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
+
+      function movementStyle(p){
+        if (typeof p !== "number" || isNaN(p)) return {cls:"neutral-glow", arrow:"•"};
+        if (p > 0.05) return {cls:"teal-glow", arrow:"▲"};
+        if (p < -0.05) return {cls:"red-glow", arrow:"▼"};
+        return {cls:"neutral-glow", arrow:"•"};
+      }
+
+      async function fetchQuote(symbol){
+        try{
+          const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
+          const res = await fetch(url);
+          const d = await res.json();
+          if (d && d.c) return { price: d.c, pct: d.dp };
+          return { price: NaN, pct: NaN };
+        }catch(e){
+          console.warn("Quote fetch failed:", symbol, e);
+          return { price: NaN, pct: NaN };
+        }
+      }
+
+      async function renderTicker(){
+        const label = document.getElementById("exchangeLabel");
+        const ticker = document.getElementById("stockTicker");
+        if (!ticker) return;
+        label.innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
+        try{
+          const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
+          const html = TECH_SYMBOLS.map((s, i) => {
+            const { price, pct } = quotes[i] || {};
+            const { cls, arrow } = movementStyle(pct);
+            const pStr = Number.isFinite(price) ? price.toFixed(2) : "N/A";
+            const pctStr = Number.isFinite(pct) ? pct.toFixed(2) : "0.00";
+            return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
+          }).join(" • ");
+          ticker.innerHTML = html + " • " + html;
+        }catch{
+          ticker.innerHTML = `<span class="neutral-glow">Unable to load stock data — please refresh.</span>`;
+        }
+      }
+
+      function updateMarketClocks(){
+        const zones = [
+          { name: "Lagos (WAT)", offset: 1 },
+          { name: "Johannesburg (SAST)", offset: 2 },
+          { name: "London", offset: 0 },
+          { name: "New York", offset: -4 },
+          { name: "Shanghai (CST)", offset: 8 },
+          { name: "Singapore (SGT)", offset: 8 },
+          { name: "Tokyo", offset: 9 }
+        ];
+        const now = new Date();
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        document.getElementById("marketClockBar").textContent = zones.map(z => {
+          const local = new Date(utc + z.offset * 3600000);
+          return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
+        }).join(" • ");
+      }
+
+      updateMarketClocks();
+      renderTicker();
+      setInterval(updateMarketClocks, 60000);
+      setInterval(renderTicker, 180000);
     });
   </script>
 </body>
