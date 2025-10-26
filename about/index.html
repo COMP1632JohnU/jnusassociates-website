@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- ✅ Updated to allow live data securely -->
   <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
   <title>About Us | JNUS Associates Ltd</title>
 
@@ -11,7 +10,7 @@
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <style>
-    /* ======== your original CSS preserved 100% ======== */
+    /* ======== Original Styling ======== */
     body {
       margin: 0;
       color: #e0f7f7;
@@ -34,10 +33,51 @@
     .logo { width:60px; height:auto; }
     .brand-text h1.glow { color:#00f5d4; margin:0; font-size: clamp(1.1rem, 2.4vw, 1.5rem); text-shadow: 0 0 10px rgba(0,255,255,.4); }
     .brand-text .glow-tagline { margin:.15rem 0 0; color:#aef; font-size: clamp(.8rem, 1.6vw, .95rem); }
+
     nav.navbar ul { list-style:none; padding:0; margin:8px 0 0; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
     nav.navbar a { color:#dff; text-decoration:none; font-weight:500; }
     nav.navbar a.active, nav.navbar a:hover { color:#00f5d4; }
 
+    /* ✅ Step 2: Mobile Dropdown Styles */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #00f5d4;
+      cursor: pointer;
+      font-size: 1.6rem;
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      z-index: 1001;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .navbar ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        background: rgba(0,0,0,0.85);
+        border: 1px solid rgba(0,255,255,0.25);
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,255,255,0.25);
+        padding: 20px;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        left: 20px;
+        z-index: 1000;
+        animation: fadeDown .3s ease forwards;
+      }
+      .navbar ul.show { display: flex; }
+      @keyframes fadeDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+
+    /* ======== Rest of your CSS preserved ======== */
     .about-section {
       text-align: center;
       margin: 80px auto 28px;
@@ -50,73 +90,35 @@
       max-width: 980px;
       animation: fadeUp .9s ease-out both;
     }
-    .about-section h2 {
-      font-size: clamp(1.4rem, 2.4vw, 2rem);
-      color: #00f5d4;
-      text-shadow: 0 0 10px rgba(0,255,255,.6);
-      margin: 0 0 16px;
-    }
-    .about-lead {
-      max-width: 760px;
-      margin: 0 auto 22px;
-      line-height: 1.6;
-      color: #d6f3f3;
-      font-size: clamp(.95rem, 1.6vw, 1.05rem);
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-top: 8px;
-    }
-    .about-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(0,255,255,0.28);
-      border-radius: 12px;
-      padding: 18px 16px;
-      text-align: left;
-      color: #e0f7f7;
-      text-decoration: none;
-      transition: transform .3s ease, box-shadow .3s ease;
-      backdrop-filter: blur(8px);
-    }
-    .about-card:hover { transform: translateY(-6px); box-shadow: 0 10px 26px rgba(0,255,255,.35); }
-    .about-card h3 { color:#00ffd1; margin:.25rem 0 .5rem; text-shadow: 0 0 8px rgba(0,255,255,.5); }
+    .about-section h2 { font-size: clamp(1.4rem,2.4vw,2rem); color:#00f5d4; text-shadow:0 0 10px rgba(0,255,255,.6); margin:0 0 16px; }
+    .about-lead { max-width:760px; margin:0 auto 22px; line-height:1.6; color:#d6f3f3; font-size:clamp(.95rem,1.6vw,1.05rem); }
+    .about-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-top:8px; }
+    .about-card { background:rgba(255,255,255,0.08); border:1px solid rgba(0,255,255,0.28); border-radius:12px; padding:18px 16px; text-align:left; color:#e0f7f7; text-decoration:none; transition:transform .3s ease, box-shadow .3s ease; backdrop-filter:blur(8px); }
+    .about-card:hover { transform:translateY(-6px); box-shadow:0 10px 26px rgba(0,255,255,.35); }
+    .about-card h3 { color:#00ffd1; margin:.25rem 0 .5rem; text-shadow:0 0 8px rgba(0,255,255,.5); }
     .about-card p { color:#d6f3f3; line-height:1.55; }
 
-    .market-wrap { width: 92%; max-width: 1100px; margin: 10px auto 20px; }
-    .region-band,.city-band,.ticker-shell { background: rgba(0,0,0,0.45); border: 1px solid rgba(0,255,255,0.22); border-radius: 12px; box-shadow: 0 0 14px rgba(0,255,255,0.18); backdrop-filter: blur(8px); color: #e4fdfd; text-align: center; letter-spacing: .5px; }
-    .region-band { padding: 8px 10px; text-transform: uppercase; font-size: .9rem; color: #00ffd1; margin-bottom: 8px; }
- .city-band {
-  padding: 10px 14px;
-  font-family: "Courier New", monospace;
-  font-size: .95rem;
-  margin-bottom: 12px;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  display: block;
-  min-height: 2.2rem;
-  line-height: 1.6rem;
-}
-    .ticker-shell { position: relative; padding: 8px 10px 12px; overflow: hidden; }
-    .now-showing { font-weight: 700; color: #00f5d4; text-shadow: 0 0 10px rgba(0,255,255,.75); margin-bottom: 6px; font-family: "Courier New", monospace; }
-    .marquee-viewport { width: 100%; overflow: hidden; position: relative; height: 1.6rem; }
-    .marquee-inner { position: absolute; left: 100%; white-space: nowrap; font-family: "Courier New", monospace; font-size: .9rem; opacity: 0; animation: fadeIn 1s ease-out forwards, scrollMarquee 60s linear infinite; animation-delay: 0s, 2s; }
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } }
+    .market-wrap { width:92%; max-width:1100px; margin:10px auto 20px; }
+    .region-band,.city-band,.ticker-shell { background:rgba(0,0,0,0.45); border:1px solid rgba(0,255,255,0.22); border-radius:12px; box-shadow:0 0 14px rgba(0,255,255,0.18); backdrop-filter:blur(8px); color:#e4fdfd; text-align:center; letter-spacing:.5px; }
+    .region-band { padding:8px 10px; text-transform:uppercase; font-size:.9rem; color:#00ffd1; margin-bottom:8px; }
+    .city-band { padding:10px 14px; font-family:"Courier New",monospace; font-size:.95rem; margin-bottom:12px; white-space:nowrap; overflow-x:auto; overflow-y:hidden; display:block; min-height:2.2rem; line-height:1.6rem; }
+    .ticker-shell { position:relative; padding:8px 10px 12px; overflow:hidden; }
+    .now-showing { font-weight:700; color:#00f5d4; text-shadow:0 0 10px rgba(0,255,255,.75); margin-bottom:6px; font-family:"Courier New",monospace; }
+    .marquee-viewport { width:100%; overflow:hidden; position:relative; height:1.6rem; }
+    .marquee-inner { position:absolute; left:100%; white-space:nowrap; font-family:"Courier New",monospace; font-size:.9rem; opacity:0; animation:fadeIn 1s ease-out forwards, scrollMarquee 60s linear infinite; animation-delay:0s,2s; }
+    @keyframes fadeIn { to { opacity:1; } }
+    @keyframes scrollMarquee { 0% { transform:translateX(0); } 100% { transform:translateX(-200%); } }
     .teal-glow { color:#00f5d4; text-shadow:0 0 8px rgba(0,255,255,.6); }
     .red-glow { color:#ff6b6b; text-shadow:0 0 8px rgba(255,80,80,.6); }
     .neutral-glow { color:#ccf; opacity:.92; }
 
-    footer { width: 92%; max-width: 880px; margin: 16px auto 28px; text-align: center; color: #aef; background: rgba(0,0,0,0.6); border: 1px solid rgba(0,255,255,0.25); border-radius: 12px; box-shadow: 0 0 18px rgba(0,255,255,.15); backdrop-filter: blur(10px); padding: 12px 10px; font-size: clamp(.78rem, 1.4vw, .92rem); }
-    footer a { color:#00f5d4; text-decoration: none; }
-    .podcast-fab { position: fixed; right: 16px; bottom: 16px; z-index: 9999; display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,.65); border: 1px solid rgba(0,255,255,.35); color: #c8ffff; padding: 10px 12px; border-radius: 999px; box-shadow: 0 0 18px rgba(0,255,255,.35); font-weight: 600; font-size: .92rem; backdrop-filter: blur(6px); text-decoration: none; }
+    footer { width:92%; max-width:880px; margin:16px auto 28px; text-align:center; color:#aef; background:rgba(0,0,0,0.6); border:1px solid rgba(0,255,255,0.25); border-radius:12px; box-shadow:0 0 18px rgba(0,255,255,.15); backdrop-filter:blur(10px); padding:12px 10px; font-size:clamp(.78rem,1.4vw,.92rem); }
+    footer a { color:#00f5d4; text-decoration:none; }
+    .podcast-fab { position:fixed; right:16px; bottom:16px; z-index:9999; display:inline-flex; align-items:center; gap:8px; background:rgba(0,0,0,.65); border:1px solid rgba(0,255,255,.35); color:#c8ffff; padding:10px 12px; border-radius:999px; box-shadow:0 0 18px rgba(0,255,255,.35); font-weight:600; font-size:.92rem; backdrop-filter:blur(6px); text-decoration:none; }
   </style>
 </head>
 
 <body>
-  <!-- unchanged header + content -->
   <header class="site-header">
     <div class="container glass-box">
       <div class="brand">
@@ -126,20 +128,21 @@
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
         </div>
       </div>
-      <!-- ✅ Add this right before your <nav> -->
-<button class="menu-toggle" aria-label="Toggle menu">
-  <i data-lucide="menu"></i>
-</button>
 
-<nav class="navbar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about/" class="active">About</a></li>
-    <li><a href="/services/">Services</a></li>
-    <li><a href="/projects/">Projects</a></li>
-    <li><a href="/contact/">Contact</a></li>
-  </ul>
-</nav>
+      <!-- ✅ Step 1 Confirmed -->
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <nav class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/" class="active">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/projects/">Projects</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
@@ -161,7 +164,7 @@
     <div class="region-band">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
     <div class="city-band" id="marketClockBar">Lagos • Johannesburg • London • New York • Shanghai • Singapore • Tokyo</div>
     <div class="ticker-shell">
-      <div class="now-showing" id="exchangeLabel">📊 Now showing: <strong>New York Stock Exchange (NYSE)</strong></div>
+      <div class="now-showing" id="exchangeLabel">📊 Now showing: <strong>New York Tech Stocks (Live)</strong></div>
       <div class="marquee-viewport"><div class="marquee-inner" id="stockTicker">Loading prices…</div></div>
     </div>
   </div>
@@ -174,88 +177,40 @@
 
   <a class="podcast-fab" href="/#podcasts"><i data-lucide="headphones"></i> Open Podcasts</a>
 
-  <!-- ✅ functional fixes only -->
+  <!-- ✅ Step 3: JS for Toggle + Existing Scripts -->
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // ensure icons render
-  function initLucide(){ if (window.lucide) lucide.createIcons(); else setTimeout(initLucide,120); }
-  initLucide();
-
-  const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-  const PROXY = "https://api.allorigins.win/raw?url=";
-
-  const TECH_SYMBOLS = [
-    "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA",
-    "META", "TSLA", "IBM", "INTC", "ADBE",
-    "ORCL", "CRM", "AMD", "CSCO", "NFLX"
-  ];
-
-  function movementStyle(p) {
-    if (typeof p !== "number" || isNaN(p)) return { cls: "neutral-glow", arrow: "•" };
-    if (p > 0.05) return { cls: "teal-glow", arrow: "▲" };
-    if (p < -0.05) return { cls: "red-glow", arrow: "▼" };
-    return { cls: "neutral-glow", arrow: "•" };
-  }
-
-  async function fetchQuote(symbol) {
-    try {
-      const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
-      const res = await fetch(url);
-      const d = await res.json();
-      if (d && d.c) return { price: d.c, pct: d.dp };
-      return { price: NaN, pct: NaN };
-    } catch(e) {
-      console.warn("Quote fetch failed:", symbol, e);
-      return { price: NaN, pct: NaN };
+  document.addEventListener("DOMContentLoaded", () => {
+    function initLucide() {
+      if (window.lucide) lucide.createIcons();
+      else setTimeout(initLucide, 120);
     }
-  }
+    initLucide();
 
-  async function renderTicker() {
-    const label = document.getElementById("exchangeLabel");
-    const ticker = document.getElementById("stockTicker");
+    // ✅ Mobile nav toggle
+    const menuBtn = document.querySelector(".menu-toggle");
+    const navList = document.querySelector(".navbar ul");
+    const navLinks = document.querySelectorAll(".navbar a");
+    menuBtn.addEventListener("click", () => navList.classList.toggle("show"));
+    navLinks.forEach(link => link.addEventListener("click", () => navList.classList.remove("show")));
 
-    if (!ticker) return;
-    label.innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
+    // ✅ Existing stock + clock logic
+    const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+    const PROXY = "https://api.allorigins.win/raw?url=";
+    const TECH_SYMBOLS = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
 
-    try {
-      const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
-      const html = TECH_SYMBOLS.map((s, i) => {
-        const { price, pct } = quotes[i] || {};
-        const { cls, arrow } = movementStyle(pct);
-        const pStr = Number.isFinite(price) ? price.toFixed(2) : "N/A";
-        const pctStr = Number.isFinite(pct) ? pct.toFixed(2) : "0.00";
-        return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
-      }).join(" • ");
-      ticker.innerHTML = html + " • " + html;
-    } catch {
-      ticker.innerHTML = `<span class="neutral-glow">Unable to load stock data — please refresh.</span>`;
-    }
-  }
+    function movementStyle(p){if(typeof p!=="number"||isNaN(p))return{cls:"neutral-glow",arrow:"•"};if(p>0.05)return{cls:"teal-glow",arrow:"▲"};if(p<-0.05)return{cls:"red-glow",arrow:"▼"};return{cls:"neutral-glow",arrow:"•"};}
 
-  function updateMarketClocks() {
-    const zones = [
-      { name: "Lagos (WAT)", offset: 1 },
-      { name: "Johannesburg (SAST)", offset: 2 },
-      { name: "London", offset: 0 },
-      { name: "New York", offset: -4 },
-      { name: "Shanghai (CST)", offset: 8 },
-      { name: "Singapore (SGT)", offset: 8 },
-      { name: "Tokyo", offset: 9 }
-    ];
-    const now = new Date();
-    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-    document.getElementById("marketClockBar").textContent = zones.map(z => {
-      const local = new Date(utc + z.offset * 3600000);
-      return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
-    }).join(" • ");
-  }
+    async function fetchQuote(symbol){try{const url=`${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;const res=await fetch(url);const d=await res.json();if(d&&d.c)return{price:d.c,pct:d.dp};return{price:NaN,pct:NaN};}catch(e){console.warn("Quote fetch failed:",symbol,e);return{price:NaN,pct:NaN};}}
 
-  updateMarketClocks();
-  renderTicker();
+    async function renderTicker(){const label=document.getElementById("exchangeLabel");const ticker=document.getElementById("stockTicker");if(!ticker)return;label.innerHTML=`📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;try{const quotes=await Promise.all(TECH_SYMBOLS.map(fetchQuote));const html=TECH_SYMBOLS.map((s,i)=>{const{price,pct}=quotes[i]||{};const{cls,arrow}=movementStyle(pct);const pStr=Number.isFinite(price)?price.toFixed(2):"N/A";const pctStr=Number.isFinite(pct)?pct.toFixed(2):"0.00";return`<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;}).join(" • ");ticker.innerHTML=html+" • "+html;}catch{ticker.innerHTML=`<span class="neutral-glow">Unable to load stock data — please refresh.</span>`;}}
 
-  setInterval(updateMarketClocks, 60000);
-  setInterval(renderTicker, 180000);
-});
-</script>
+    function updateMarketClocks(){const zones=[{name:"Lagos (WAT)",offset:1},{name:"Johannesburg (SAST)",offset:2},{name:"London",offset:0},{name:"New York",offset:-4},{name:"Shanghai (CST)",offset:8},{name:"Singapore (SGT)",offset:8},{name:"Tokyo",offset:9}];const now=new Date();const utc=now.getTime()+now.getTimezoneOffset()*60000;document.getElementById("marketClockBar").textContent=zones.map(z=>{const local=new Date(utc+z.offset*3600000);return`${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;}).join(" • ");}
+
+    updateMarketClocks();
+    renderTicker();
+    setInterval(updateMarketClocks,60000);
+    setInterval(renderTicker,180000);
+  });
+  </script>
 </body>
 </html>
