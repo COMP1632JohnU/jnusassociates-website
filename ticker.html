@@ -1,4 +1,4 @@
-<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (RESPONSIVE + AUTO-SCROLL FOR MOBILE) ===== -->
+<!-- ===== JNUS ASSOCIATES LTD — GLOBAL MARKET TICKER (SINGLE GLASS, FULL WIDTH, RESPONSIVE) ===== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,132 +13,98 @@
       font-family: "Courier New", monospace;
       background: transparent;
       color: #dff;
+      overflow: hidden;
     }
 
-    /* ===== Glass Container ===== */
+    /* ===== Single Glass Full-Width Bar ===== */
     .ticker-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      max-width: 1100px;
-      margin: 0 auto;
-      border-radius: 12px;
+      width: 100%;
+      margin: 0;
+      padding: 8px 6px 12px;
+      box-sizing: border-box;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(0,255,255,0.25);
-      box-shadow: 0 0 15px rgba(0,255,255,0.2);
-      padding: 10px 10px 14px;
-      box-sizing: border-box;
-      overflow: hidden;
+      border-top: 1px solid rgba(0,255,255,0.25);
+      border-bottom: 1px solid rgba(0,255,255,0.25);
+      box-shadow: 0 0 15px rgba(0,255,255,0.15);
     }
 
-    /* ===== Bars ===== */
-    .market-status-bar,
-    .region-divider,
+    /* ===== Elements ===== */
+    .exchange-label {
+      font-weight: bold;
+      color: #00f5d4;
+      text-shadow: 0 0 6px rgba(0,255,255,0.4);
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+      margin-bottom: 6px;
+    }
+
     .market-clock-bar,
-    .exchange-label,
     .stock-ticker {
       color: #e4fdfd;
       text-shadow: 0 0 6px rgba(0,255,255,0.4);
       text-align: center;
       letter-spacing: 0.5px;
-      line-height: 1.5;
+      line-height: 1.4;
       transition: all 0.3s ease-in-out;
-    }
-
-    .market-status-bar { font-size: 0.9rem; margin-bottom: 4px; }
-
-    .region-divider {
-      color: #00ffd1;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(0,255,255,0.25);
-      border-bottom: 1px solid rgba(0,255,255,0.25);
-      padding: 6px 0;
       width: 100%;
+      box-sizing: border-box;
     }
 
-    /* ===== Clock Line ===== */
     .market-clock-bar {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 10px;
-      padding: 6px 10px;
-      font-size: 0.9rem;
-      width: 100%;
-      box-sizing: border-box;
+      gap: 12px;
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      margin-bottom: 4px;
     }
 
     .clock-item { white-space: nowrap; }
 
-    /* ===== Stock Line ===== */
     .stock-ticker {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px 18px;
+      gap: 12px 20px;
       padding: 6px 10px;
-      font-size: 0.9rem;
-      width: 100%;
       border-top: 1px solid rgba(0,255,255,0.15);
-      box-sizing: border-box;
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
       white-space: nowrap;
     }
 
-    /* ===== Glow Effects ===== */
+    /* ===== Glow Styles ===== */
     .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,0.6); }
     .red-glow { color: #ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,0.6); }
     .neutral-glow { color: #ccf; opacity: 0.9; }
 
-    /* ===== Dynamic Highlights ===== */
-    @keyframes pulseAsia {
-      0%,100% { box-shadow: 0 0 10px rgba(0,255,255,0.25); }
-      50% { box-shadow: 0 0 22px rgba(0,255,255,0.7); }
-    }
-
-    /* ===== Horizontal Scroll Animation (for small screens) ===== */
+    /* ===== Mobile Scroll Animation ===== */
     @keyframes scrollTicker {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 480px) {
       .market-clock-bar, .stock-ticker {
         display: block;
         white-space: nowrap;
         animation: scrollTicker 45s linear infinite;
       }
-      .stock-ticker span {
-        margin-right: 1.2rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .market-clock-bar, .stock-ticker { font-size: 0.8rem; gap: 6px; }
-      .region-divider { font-size: 0.75rem; }
+      .stock-ticker span { margin-right: 1.2rem; }
     }
   </style>
 </head>
 
 <body>
   <div class="ticker-wrapper">
-    <div id="marketStatusBar" class="market-status-bar">
-      Checking global market status...
-    </div>
-
-    <div id="regionDivider" class="region-divider">
-      🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC
-    </div>
-
+    <div id="exchangeLabel" class="exchange-label">📊 Now showing: Loading markets...</div>
     <div id="marketClockBar" class="market-clock-bar">
       <span class="neutral-glow">Syncing global clocks...</span>
     </div>
-
-    <div id="exchangeLabel" class="exchange-label">📊 Loading exchanges...</div>
-
     <div id="stockTickerContainer" class="stock-ticker">
       <span class="neutral-glow">Fetching live data...</span>
     </div>
@@ -149,16 +115,15 @@
     const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
     const ALPHA_KEY = "HARHFLFJZZBX044Y";
 
-    /* ===== GLOBAL EXCHANGES ===== */
+    /* ===== EXCHANGES ===== */
     const exchanges = [
       { code: "US", name: "New York Stock Exchange" },
       { code: "LSE", name: "London Stock Exchange" },
       { code: "SHG", name: "Shanghai Stock Exchange" },
-      { code: "TSE", name: "Tokyo Stock Exchange" },
       { code: "HK", name: "Hong Kong Stock Exchange" },
-      { code: "SG", name: "Singapore Exchange" }
+      { code: "SG", name: "Singapore Exchange" },
+      { code: "TSE", name: "Tokyo Stock Exchange" }
     ];
-
     let stockSymbols = [];
     let currentExchangeIndex = 0;
     let lastLoadedExchange = "";
@@ -171,9 +136,6 @@
         { name: "London", offset: 0 },
         { name: "New York", offset: -4 },
         { name: "Shanghai (CST)", offset: 8 },
-        { name: "Tokyo", offset: 9 },
-        { name: "Hong Kong", offset: 8 },
-        { name: "Singapore", offset: 8 }
       ];
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
@@ -188,30 +150,28 @@
 
     /* ===== MOVEMENT STYLE ===== */
     function movementStyle(changePercent) {
-      if (typeof changePercent !== "number" || isNaN(changePercent))
-        return { cls: "neutral-glow", arrow: "•" };
+      if (isNaN(changePercent)) return { cls: "neutral-glow", arrow: "•" };
       if (changePercent > 0.05) return { cls: "teal-glow", arrow: "▲" };
       if (changePercent < -0.05) return { cls: "red-glow", arrow: "▼" };
       return { cls: "neutral-glow", arrow: "•" };
     }
 
-    /* ===== LOAD TICKERS ===== */
+    /* ===== LOAD SYMBOLS ===== */
     async function loadAllTickers(exchangeObj) {
       try {
         const { code, name } = exchangeObj;
-        document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: <strong>${name}</strong>`;
+        document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: ${name}`;
         const res = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=${code}&token=${FINNHUB_KEY}`);
         const data = await res.json();
-        stockSymbols = Array.from(new Set(data.map(i => i.symbol))).slice(0, 10);
+        stockSymbols = Array.from(new Set(data.map(i => i.symbol))).slice(0, 12);
         lastLoadedExchange = code;
         fetchStockPrices();
       } catch {
-        document.getElementById("stockTickerContainer").innerHTML =
-          "<span class='neutral-glow'>Unable to load ticker list…</span>";
+        document.getElementById("stockTickerContainer").innerHTML = "<span class='neutral-glow'>Unable to load symbols…</span>";
       }
     }
 
-    /* ===== FETCH QUOTES ===== */
+    /* ===== FETCH PRICES ===== */
     async function fetchStockPrices() {
       const ticker = document.getElementById("stockTickerContainer");
       if (!ticker || stockSymbols.length === 0) return;
@@ -228,7 +188,6 @@
               const { cls, arrow } = movementStyle(pct);
               return `<span class="${cls}">${s}: ${isFinite(price)?price.toFixed(2):"N/A"} (${isFinite(pct)?pct.toFixed(2):"0"}%) ${arrow}</span>`;
             } catch {
-              // Alpha Vantage fallback
               const a = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${s}&apikey=${ALPHA_KEY}`);
               const j = await a.json();
               const q = j["Global Quote"] || {};
@@ -239,13 +198,13 @@
             }
           })
         );
-        ticker.innerHTML = results.filter(r => r.status === "fulfilled").map(r => r.value).slice(0, 12).join(" • ");
+        ticker.innerHTML = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
       } catch {
         ticker.innerHTML = `<span class="neutral-glow">Error fetching stock data</span>`;
       }
     }
 
-    /* ===== ROTATE EXCHANGES ===== */
+    /* ===== ROTATION ===== */
     function rotateExchange() {
       currentExchangeIndex = (currentExchangeIndex + 1) % exchanges.length;
       loadAllTickers(exchanges[currentExchangeIndex]);
