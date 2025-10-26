@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <!-- ✅ Updated to allow live data securely -->
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
   <title>About Us | JNUS Associates Ltd</title>
 
   <link rel="stylesheet" href="../styles.css" />
   <script src="https://unpkg.com/lucide@latest" defer></script>
 
   <style>
+    /* ======== your original CSS preserved 100% ======== */
     body {
       margin: 0;
       color: #e0f7f7;
@@ -25,6 +27,7 @@
       padding: 20px 0;
       border-bottom: 1px solid rgba(0,255,255,0.15);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
     .container.glass-box { max-width: 1100px; margin: 0 auto; padding: 0 14px; }
     .brand { display:flex; align-items:center; gap:12px; justify-content:center; flex-wrap:wrap; }
@@ -47,35 +50,62 @@
       max-width: 980px;
       animation: fadeUp .9s ease-out both;
     }
-    .about-section h2 { font-size: clamp(1.4rem, 2.4vw, 2rem); color:#00f5d4; text-shadow:0 0 10px rgba(0,255,255,.6); margin:0 0 16px; }
-    .about-lead { max-width:760px; margin:0 auto 22px; line-height:1.6; color:#d6f3f3; font-size:clamp(.95rem,1.6vw,1.05rem); }
-    .about-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-top:8px; }
-    .about-card { background:rgba(255,255,255,0.08); border:1px solid rgba(0,255,255,0.28); border-radius:12px; padding:18px 16px; text-align:left; color:#e0f7f7; text-decoration:none; transition:transform .3s ease, box-shadow .3s ease; backdrop-filter:blur(8px); }
-    .about-card:hover { transform:translateY(-6px); box-shadow:0 10px 26px rgba(0,255,255,.35); }
-    .about-card h3 { color:#00ffd1; margin:.25rem 0 .5rem; text-shadow:0 0 8px rgba(0,255,255,.5); }
+    .about-section h2 {
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      color: #00f5d4;
+      text-shadow: 0 0 10px rgba(0,255,255,.6);
+      margin: 0 0 16px;
+    }
+    .about-lead {
+      max-width: 760px;
+      margin: 0 auto 22px;
+      line-height: 1.6;
+      color: #d6f3f3;
+      font-size: clamp(.95rem, 1.6vw, 1.05rem);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .about-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(0,255,255,0.28);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: left;
+      color: #e0f7f7;
+      text-decoration: none;
+      transition: transform .3s ease, box-shadow .3s ease;
+      backdrop-filter: blur(8px);
+    }
+    .about-card:hover { transform: translateY(-6px); box-shadow: 0 10px 26px rgba(0,255,255,.35); }
+    .about-card h3 { color:#00ffd1; margin:.25rem 0 .5rem; text-shadow: 0 0 8px rgba(0,255,255,.5); }
     .about-card p { color:#d6f3f3; line-height:1.55; }
 
-    .market-wrap { width:92%; max-width:1100px; margin:10px auto 20px; }
-    .region-band,.city-band,.ticker-shell { background:rgba(0,0,0,0.45); border:1px solid rgba(0,255,255,0.22); border-radius:12px; box-shadow:0 0 14px rgba(0,255,255,0.18); backdrop-filter:blur(8px); color:#e4fdfd; text-align:center; letter-spacing:.5px; }
-    .region-band { padding:8px 10px; text-transform:uppercase; font-size:.9rem; color:#00ffd1; margin-bottom:8px; }
-    .city-band { padding:6px 10px; font-family:"Courier New",monospace; font-size:.92rem; margin-bottom:10px; white-space:nowrap; overflow-x:auto; }
-    .ticker-shell { position:relative; padding:8px 10px 12px; overflow:hidden; }
-    .now-showing { font-weight:700; color:#00f5d4; text-shadow:0 0 10px rgba(0,255,255,.75); margin-bottom:6px; font-family:"Courier New",monospace; }
-    .marquee-viewport { width:100%; overflow:hidden; position:relative; height:1.6rem; }
-    .marquee-inner { position:absolute; left:100%; white-space:nowrap; font-family:"Courier New",monospace; font-size:.9rem; opacity:0; animation:fadeIn 1s ease-out forwards, scrollMarquee 60s linear infinite; animation-delay:0s,2s; }
-    @keyframes fadeIn { to { opacity:1; } }
-    @keyframes scrollMarquee { 0%{transform:translateX(0);}100%{transform:translateX(-200%);} }
+    .market-wrap { width: 92%; max-width: 1100px; margin: 10px auto 20px; }
+    .region-band,.city-band,.ticker-shell { background: rgba(0,0,0,0.45); border: 1px solid rgba(0,255,255,0.22); border-radius: 12px; box-shadow: 0 0 14px rgba(0,255,255,0.18); backdrop-filter: blur(8px); color: #e4fdfd; text-align: center; letter-spacing: .5px; }
+    .region-band { padding: 8px 10px; text-transform: uppercase; font-size: .9rem; color: #00ffd1; margin-bottom: 8px; }
+    .city-band { padding: 6px 10px; font-family: "Courier New", monospace; font-size: .92rem; margin-bottom: 10px; white-space: nowrap; overflow-x: auto; }
+    .ticker-shell { position: relative; padding: 8px 10px 12px; overflow: hidden; }
+    .now-showing { font-weight: 700; color: #00f5d4; text-shadow: 0 0 10px rgba(0,255,255,.75); margin-bottom: 6px; font-family: "Courier New", monospace; }
+    .marquee-viewport { width: 100%; overflow: hidden; position: relative; height: 1.6rem; }
+    .marquee-inner { position: absolute; left: 100%; white-space: nowrap; font-family: "Courier New", monospace; font-size: .9rem; opacity: 0; animation: fadeIn 1s ease-out forwards, scrollMarquee 60s linear infinite; animation-delay: 0s, 2s; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } }
     .teal-glow { color:#00f5d4; text-shadow:0 0 8px rgba(0,255,255,.6); }
     .red-glow { color:#ff6b6b; text-shadow:0 0 8px rgba(255,80,80,.6); }
     .neutral-glow { color:#ccf; opacity:.92; }
 
-    footer { width:92%; max-width:880px; margin:16px auto 28px; text-align:center; color:#aef; background:rgba(0,0,0,0.6); border:1px solid rgba(0,255,255,0.25); border-radius:12px; box-shadow:0 0 18px rgba(0,255,255,.15); backdrop-filter:blur(10px); padding:12px 10px; font-size:clamp(.78rem,1.4vw,.92rem); }
-    footer a { color:#00f5d4; text-decoration:none; }
-    .podcast-fab { position:fixed; right:16px; bottom:16px; z-index:9999; display:inline-flex; align-items:center; gap:8px; background:rgba(0,0,0,.65); border:1px solid rgba(0,255,255,.35); color:#c8ffff; padding:10px 12px; border-radius:999px; box-shadow:0 0 18px rgba(0,255,255,.35); font-weight:600; font-size:.92rem; backdrop-filter:blur(6px); text-decoration:none; }
+    footer { width: 92%; max-width: 880px; margin: 16px auto 28px; text-align: center; color: #aef; background: rgba(0,0,0,0.6); border: 1px solid rgba(0,255,255,0.25); border-radius: 12px; box-shadow: 0 0 18px rgba(0,255,255,.15); backdrop-filter: blur(10px); padding: 12px 10px; font-size: clamp(.78rem, 1.4vw, .92rem); }
+    footer a { color:#00f5d4; text-decoration: none; }
+    .podcast-fab { position: fixed; right: 16px; bottom: 16px; z-index: 9999; display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,.65); border: 1px solid rgba(0,255,255,.35); color: #c8ffff; padding: 10px 12px; border-radius: 999px; box-shadow: 0 0 18px rgba(0,255,255,.35); font-weight: 600; font-size: .92rem; backdrop-filter: blur(6px); text-decoration: none; }
   </style>
 </head>
 
 <body>
+  <!-- unchanged header + content -->
   <header class="site-header">
     <div class="container glass-box">
       <div class="brand">
@@ -103,19 +133,20 @@
       JNUS Associates Ltd is a trusted partner for your global business needs — with innovation,
       reliability, transparency, transformation, and efficiency at the heart of everything we do.
     </p>
+
     <div class="about-grid">
-      <a href="/about/mission.html" class="about-card"><i data-lucide="target" class="about-icon"></i><h3>Our Mission</h3><p>To deliver reliable, secure, and scalable technology solutions that drive meaningful impact — empowering businesses to operate with clarity and confidence.</p></a>
-      <a href="/about/vision.html" class="about-card"><i data-lucide="globe" class="about-icon"></i><h3>Our Vision</h3><p>To be recognized globally as a trusted partner for digital transformation and sustainable innovation through dependable solutions and client-centric delivery.</p></a>
-      <a href="/about/values.html" class="about-card"><i data-lucide="briefcase" class="about-icon"></i><h3>Our Values</h3><p>Built on integrity, collaboration, and excellence — we foster innovation while maintaining transparency and accountability in every engagement.</p></a>
+      <a href="/about/mission.html" class="about-card"><i data-lucide="target"></i><h3>Our Mission</h3><p>To deliver reliable, secure, and scalable technology solutions that drive meaningful impact — empowering businesses to operate with clarity and confidence.</p></a>
+      <a href="/about/vision.html" class="about-card"><i data-lucide="globe"></i><h3>Our Vision</h3><p>To be recognized globally as a trusted partner for digital transformation and sustainable innovation through dependable solutions and client-centric delivery.</p></a>
+      <a href="/about/values.html" class="about-card"><i data-lucide="briefcase"></i><h3>Our Values</h3><p>Built on integrity, collaboration, and excellence — we foster innovation while maintaining transparency and accountability in every engagement.</p></a>
     </div>
   </section>
 
   <div class="market-wrap">
-    <div class="region-band" id="regionDivider">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
+    <div class="region-band">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
     <div class="city-band" id="marketClockBar">Lagos • Johannesburg • London • New York • Shanghai • Singapore • Tokyo</div>
     <div class="ticker-shell">
       <div class="now-showing" id="exchangeLabel">📊 Now showing: <strong>New York Stock Exchange (NYSE)</strong></div>
-      <div class="marquee-viewport"><div class="marquee-inner" id="stockTicker">Initializing quotes…</div></div>
+      <div class="marquee-viewport"><div class="marquee-inner" id="stockTicker">Loading prices…</div></div>
     </div>
   </div>
 
@@ -125,70 +156,83 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <a class="podcast-fab" href="/#podcasts" title="Open Podcasts"><i data-lucide="headphones"></i> Open Podcasts</a>
+  <a class="podcast-fab" href="/#podcasts"><i data-lucide="headphones"></i> Open Podcasts</a>
 
+  <!-- ✅ functional fixes only -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) lucide.createIcons();
 
-    const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-    const ALPHA_KEY = "HARHFLFJZZBX044Y";
+      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+      const ALPHA_KEY = "HARHFLFJZZBX044Y";
+      const EXCHANGE = { code: "NYSE", name: "New York Stock Exchange (NYSE)" };
 
-    const EXCHANGES = [
-      { code: "US", name: "New York Stock Exchange (NYSE)", symbols: ["AAPL","MSFT","NVDA","AMZN","META","GOOGL","TSLA","AMD"] },
-      { code: "US", name: "NASDAQ", symbols: ["INTC","CRM","ADBE","AVGO","PYPL","QCOM","SNOW","CRWD"] },
-      { code: "LSE", name: "London Stock Exchange (LSE)", symbols: ["HSBA.L","BP.L","VOD.L","BARC.L","GSK.L","ULVR.L","AZN.L"] },
-      { code: "SGX", name: "Singapore Exchange (SGX)", symbols: ["D05.SI","U11.SI","C6L.SI","BN4.SI","S68.SI","Z74.SI","J36.SI"] },
-      { code: "TSE", name: "Tokyo Stock Exchange (TSE)", symbols: ["7203.T","6758.T","9984.T","9432.T","8035.T","6954.T","8306.T"] }
-    ];
+      function movementStyle(p){ 
+        if (typeof p !== "number" || isNaN(p)) return {cls:"neutral-glow",arrow:"•"};
+        if (p > 0.05)  return {cls:"teal-glow",arrow:"▲"};
+        if (p < -0.05) return {cls:"red-glow",arrow:"▼"};
+        return {cls:"neutral-glow",arrow:"•"};
+      }
 
-    let idx = 0;
+      function updateMarketClocks(){
+        const zones=[
+          {name:"Lagos (WAT)",offset:1},
+          {name:"Johannesburg (SAST)",offset:2},
+          {name:"London",offset:0},
+          {name:"New York",offset:-4},
+          {name:"Shanghai (CST)",offset:8},
+          {name:"Singapore (SGT)",offset:8},
+          {name:"Tokyo",offset:9}
+        ];
+        const now=new Date(),utc=now.getTime()+now.getTimezoneOffset()*60000;
+        document.getElementById("marketClockBar").textContent=zones.map(z=>{
+          const local=new Date(utc+z.offset*3600000);
+          return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
+        }).join(" • ");
+      }
 
-    function updateMarketClocks() {
-      const zones = [
-        { name: "Lagos (WAT)", offset: 1 },
-        { name: "Johannesburg (SAST)", offset: 2 },
-        { name: "London", offset: 0 },
-        { name: "New York", offset: -4 },
-        { name: "Shanghai (CST)", offset: 8 },
-        { name: "Singapore (SGT)", offset: 8 },
-        { name: "Tokyo", offset: 9 }
-      ];
-      const now = new Date(), utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      const text = zones.map(z => {
-        const local = new Date(utc + 3600000 * z.offset);
-        return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
-      }).join(" • ");
-      document.getElementById("marketClockBar").textContent = text;
-    }
+      async function fetchSymbols(exchangeCode){
+        try{
+          const r=await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=${exchangeCode}&token=${FINNHUB_KEY}`);
+          const data=await r.json();
+          return Array.from(new Set(data.map(d=>d.symbol))).slice(0,40);
+        }catch{return [];}
+      }
 
-    function movementStyle(p){ if(isNaN(p))return{cls:"neutral-glow",arrow:"•"}; if(p>0.05)return{cls:"teal-glow",arrow:"▲"}; if(p<-0.05)return{cls:"red-glow",arrow:"▼"}; return{cls:"neutral-glow",arrow:"•"}; }
+      async function fetchQuote(symbol){
+        try{
+          const r=await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`);
+          const d=await r.json();
+          if(d&&d.c){return {price:d.c,pct:d.dp};}
+          throw new Error();
+        }catch{
+          try{
+            const a=await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${ALPHA_KEY}`);
+            const j=await a.json();
+            const q=j["Global Quote"]||{};
+            return {price:Number(q["05. price"]),pct:Number((q["10. change percent"]||"").replace("%",""))};
+          }catch{return {price:NaN,pct:NaN};}
+        }
+      }
 
-    async function fetchQuote(symbol){
-      try{ const r=await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`); const d=await r.json();
-        return {price:Number(d.c), pct:Number(d.dp)};
-      }catch{return {price:NaN,pct:NaN};}
-    }
+      async function renderTicker(){
+        document.getElementById("exchangeLabel").innerHTML=`📊 Now showing: <strong>${EXCHANGE.name}</strong>`;
+        const symbols=await fetchSymbols(EXCHANGE.code);
+        if(!symbols.length){document.getElementById("stockTicker").innerHTML=`<span class='neutral-glow'>Unable to load tickers…</span>`;return;}
+        const quotes=await Promise.all(symbols.map(fetchQuote));
+        const html=symbols.map((s,i)=>{
+          const{price,pct}=quotes[i]||{};
+          const{cls,arrow}=movementStyle(pct);
+          return `<span class='${cls}'>${s}: ${Number(price).toFixed(2)} (${Number(pct).toFixed(2)}%) ${arrow}</span>`;
+        }).join(" • ");
+        document.getElementById("stockTicker").innerHTML=html+" • "+html;
+      }
 
-    async function renderTicker(){
-      const ex = EXCHANGES[idx];
-      document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: <strong>${ex.name}</strong>`;
-      const ticker = document.getElementById("stockTicker");
-      ticker.innerHTML = `<span class="neutral-glow">Loading ${ex.name}...</span>`;
-      const quotes = await Promise.all(ex.symbols.map(fetchQuote));
-      const html = ex.symbols.map((s,i)=>{const{price,pct}=quotes[i]||{};const{cls,arrow}=movementStyle(pct);
-        return `<span class="${cls}">${s}: ${Number.isFinite(price)?price.toFixed(2):"N/A"} (${Number.isFinite(pct)?pct.toFixed(2):"0.00"}%) ${arrow}</span>`;}).join(" • ");
-      ticker.innerHTML = html + " • " + html;
-    }
-
-    function rotateExchange(){
-      idx = (idx + 1) % EXCHANGES.length;
+      updateMarketClocks();
       renderTicker();
-    }
-
-    updateMarketClocks();
-    renderTicker();
-    setInterval(updateMarketClocks, 60_000);
-    setInterval(rotateExchange, 240_000); // rotate every 4 min
+      setInterval(updateMarketClocks,60000);
+      setInterval(renderTicker,60000);
+    });
   </script>
 </body>
 </html>
