@@ -164,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
 
   const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+  const PROXY = "https://api.allorigins.win/raw?url=";
 
   const TECH_SYMBOLS = [
     "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA",
@@ -198,8 +199,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchQuote(symbol) {
     try {
-      const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`);
-      const d = await r.json();
+      const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
+      const res = await fetch(url);
+      const d = await res.json();
       if (d && d.c) return { price: d.c, pct: d.dp };
       return { price: NaN, pct: NaN };
     } catch {
@@ -208,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function renderTicker() {
-    document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: <strong>New York Stock Exchange (Tech Index)</strong>`;
+    document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
     const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
     const html = TECH_SYMBOLS.map((s, i) => {
       const { price, pct } = quotes[i] || {};
@@ -224,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTicker();
 
   setInterval(updateMarketClocks, 60000);
-  setInterval(renderTicker, 180000); // refresh every 3 min
+  setInterval(renderTicker, 180000);
 });
 </script>
 </body>
