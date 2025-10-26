@@ -354,7 +354,7 @@
 
       async function loadApplePodcasts() {
         try {
-          const searchTerms = ["finance", "AI", "ETFs", "business analytics", "data analytics", "insurance","reinsurance","tech stocks","mergers and acquisitions","systems engineering"];
+          const searchTerms = ["finance", "AI", "business analytics", "insurance","reinsurance","tech stocks","mergers and acquisitions"];
           const query = encodeURIComponent(searchTerms.join(" "));
           const res = await fetch(`https://itunes.apple.com/search?term=${query}&media=podcast&limit=5`);
           const data = await res.json();
