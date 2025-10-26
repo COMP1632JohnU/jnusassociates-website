@@ -1,231 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-<title>JNUS Associates Ltd | AI • Systems • Tech • Business & Data Analytics</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <title>JNUS Associates Ltd | AI • Systems • Tech • Business & Data Analytics</title>
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest" defer></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 
-<style>
-/* ===== GLOBAL ===== */
-html,body{
-  margin:0;padding:0;
-  background:#000;color:#e0f7f7;
-  font-family:"Inter",sans-serif;
-  overflow-x:hidden;scroll-behavior:smooth;
-}
-body{
-  display:flex;flex-direction:column;align-items:center;
-  background-image:url('gracechurch.jpg');
-  background-size:cover;background-position:center;
-  background-attachment:fixed;
-}
+  <style>
+    /* ===== GLOBAL ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #e0f7f7;
+      font-family: "Inter", sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
 
-/* ===== HEADER ===== */
-header.site-header{
-  width:100%;
-  background:rgba(0,0,0,.6);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  border-bottom:1px solid rgba(0,255,255,.15);
-  text-align:center;padding:10px 10px 12px;
-}
-.brand{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
-.logo{width:58px;height:auto;}
-.brand-text h1{color:#00f5d4;font-size:clamp(1rem,2.5vw,1.5rem);margin:0;}
-.brand-text p{color:#aef;font-size:clamp(.75rem,1.4vw,.95rem);margin:2px 0 0;}
-.contact-line{display:flex;justify-content:center;gap:10px;font-size:clamp(.8rem,1.4vw,.95rem);margin-top:4px;}
-.contact-line a{color:#00f5d4;text-decoration:none;display:flex;align-items:center;gap:4px;}
-.navbar ul{list-style:none;margin:6px 0 0;padding:0;display:flex;justify-content:center;flex-wrap:wrap;gap:14px;}
-.navbar a{color:#dff;text-decoration:none;font-weight:500;font-size:clamp(.8rem,1.5vw,1rem);transition:color .3s;}
-.navbar a.active,.navbar a:hover{color:#00f5d4;}
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: url('gracechurch.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
-/* ===== HERO ===== */
-main.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:40px 20px 20px;width:100%;}
-.hero-glass{
-  background:rgba(0,0,0,.55);
-  border:1px solid rgba(0,255,255,.25);
-  border-radius:16px;
-  box-shadow:0 0 25px rgba(0,255,255,.15);
-  backdrop-filter:blur(10px);
-  padding:30px 25px;max-width:850px;margin:0 auto;
-}
-.hero h2{font-size:clamp(1.1rem,3vw,1.8rem);color:#fff;margin-bottom:.8rem;text-shadow:0 0 12px rgba(0,255,255,.4);line-height:1.5;}
-.hero p{font-size:clamp(.85rem,1.8vw,1.1rem);color:#c0f8f8;margin-bottom:1.2rem;line-height:1.5;}
-.hero button{background-color:#00f5d4;border:none;color:#000;padding:10px 25px;font-weight:600;border-radius:6px;cursor:pointer;font-size:clamp(.85rem,1.4vw,1rem);transition:.3s;}
-.hero button:hover{background-color:#00ffd1;transform:translateY(-2px);}
+    /* ===== HEADER ===== */
+    header.site-header {
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,255,255,0.15);
+      text-align: center;
+      padding: 8px 10px 10px;
+      box-sizing: border-box;
+    }
 
-/* ===== PODCASTS ===== */
-.podcast-section{
-  text-align:center;margin:20px auto 0;padding:25px 20px;max-width:850px;
-  background:rgba(0,0,0,.45);
-  border:1px solid rgba(0,255,255,.25);
-  border-radius:16px;
-  box-shadow:0 0 20px rgba(0,255,255,.15);
-  backdrop-filter:blur(10px);
-}
-.podcast-section h2{color:#00f5d4;text-shadow:0 0 10px rgba(0,255,255,.6);font-size:clamp(1rem,2vw,1.3rem);margin-bottom:.6rem;display:flex;justify-content:center;align-items:center;gap:8px;}
-.podcast-intro{max-width:680px;margin:0 auto 18px;color:#c0f8f8;font-size:clamp(.8rem,1.5vw,.95rem);line-height:1.6;}
-.podcast-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
-.podcast-card{background:rgba(0,0,0,.35);border:1px solid rgba(0,255,255,.25);border-radius:12px;overflow:hidden;opacity:0;transform:translateY(10px);transition:.5s;}
-.podcast-card.visible{opacity:1;transform:translateY(0);}
-.podcast-card iframe{width:100%;height:clamp(160px,20vh,200px);}
-.podcast-card h3{color:#00f5d4;font-size:clamp(.85rem,1.4vw,1rem);margin:10px 0;text-shadow:0 0 8px rgba(0,255,255,.5);}
-.last-updated{margin-top:10px;font-size:clamp(.75rem,1.3vw,.85rem);color:#89f;opacity:.8;}
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-/* ===== SINGLE GLASS TICKER BAR ===== */
-.ticker-wrapper{
-  width:100%;max-width:1100px;margin:20px auto;
-  background:rgba(0,0,0,.45);
-  border:1px solid rgba(0,255,255,.25);
-  border-radius:12px;
-  box-shadow:0 0 15px rgba(0,255,255,.2);
-  backdrop-filter:blur(10px);
-  text-align:center;padding:12px 10px;color:#e4fdfd;
-}
-.exchange-label{color:#00f5d4;font-weight:bold;text-shadow:0 0 8px rgba(0,255,255,.6);margin-bottom:8px;}
-.market-clock-bar{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;font-size:.9rem;color:#ccf;margin-bottom:6px;}
-.stock-ticker{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 20px;font-size:.9rem;}
-.teal-glow{color:#00f5d4;text-shadow:0 0 8px rgba(0,255,255,.6);}
-.red-glow{color:#ff6b6b;text-shadow:0 0 8px rgba(255,80,80,.6);}
-.neutral-glow{color:#ccf;opacity:.9;}
+    .logo {
+      width: 58px;
+      height: auto;
+    }
 
-/* ===== FOOTER ===== */
-footer{
-  width:90%;max-width:900px;text-align:center;color:#aef;
-  background:rgba(0,0,0,.45);
-  border:1px solid rgba(0,255,255,.25);
-  border-radius:12px;
-  box-shadow:0 0 18px rgba(0,255,255,.15);
-  backdrop-filter:blur(10px);
-  padding:14px 10px;margin:20px auto 25px;
-  font-size:clamp(.75rem,1.5vw,.9rem);line-height:1.5;
-}
-footer a{color:#00f5d4;text-decoration:none;}
+    .brand-text h1 {
+      color: #00f5d4;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      margin: 0;
+    }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .market-clock-bar,.stock-ticker{font-size:.8rem;gap:6px;}
-}
-</style>
+    .brand-text p {
+      color: #aef;
+      font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+      margin: 2px 0 0;
+    }
+
+    .contact-line {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      margin-top: 4px;
+    }
+
+    .contact-line a {
+      color: #00f5d4;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      margin: 6px 0 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .navbar a {
+      color: #dff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      transition: color 0.3s ease;
+    }
+
+    .navbar a.active, .navbar a:hover {
+      color: #00f5d4;
+    }
+
+    /* ===== HERO ===== */
+    main.hero {
+      text-align: center;
+      padding: 30px 20px;
+      width: 100%;
+    }
+
+    .hero-glass {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 30px 25px;
+      max-width: 850px;
+      margin: 0 auto;
+      animation: fadeUp 1s ease-out;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
+      color: #fff;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 12px rgba(0,255,255,0.4);
+      line-height: 1.5;
+    }
+
+    .hero p {
+      font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+      color: #c0f8f8;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .hero button {
+      background-color: #00f5d4;
+      border: none;
+      color: #000;
+      padding: 10px 25px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      transition: all 0.3s ease;
+    }
+
+    .hero button:hover { background-color: #00ffd1; transform: translateY(-2px); }
+
+    /* ===== PODCAST SECTION ===== */
+    .podcast-section {
+      text-align: center;
+      margin: 20px auto 0;
+      padding: 25px 20px;
+      max-width: 850px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .podcast-section h2 {
+      color: #00f5d4;
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      margin-bottom: 0.6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .podcast-intro {
+      max-width: 680px;
+      margin: 0 auto 18px;
+      color: #c0f8f8;
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      line-height: 1.6;
+    }
+
+    .podcast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .podcast-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+
+    .podcast-card.visible { opacity: 1; transform: translateY(0); }
+
+    .podcast-card iframe {
+      width: 100%;
+      height: clamp(160px, 20vh, 200px);
+    }
+
+    .podcast-card h3 {
+      color: #00f5d4;
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      margin: 10px 0;
+      text-shadow: 0 0 8px rgba(0,255,255,0.5);
+    }
+
+    .last-updated {
+      margin-top: 10px;
+      font-size: clamp(0.75rem, 1.3vw, 0.85rem);
+      color: #89f;
+      opacity: 0.8;
+    }
+
+    .update-caption {
+      font-size: 0.8rem;
+      color: #77baff;
+      opacity: 0.75;
+      margin-top: 4px;
+      font-family: "Courier New", monospace;
+    }
+
+    /* ===== TICKER BAR ===== */
+    .ticker-bar {
+      width: 100%;
+      max-width: 1200px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 8px 0;
+      margin: 20px auto;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out 2s forwards;
+    }
+
+    .ticker-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scrollTicker 60s linear infinite;
+    }
+
+    @keyframes scrollTicker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .teal-glow { color: #00f5d4; text-shadow: 0 0 8px rgba(0,255,255,0.6); font-weight: bold; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      width: 90%;
+      max-width: 800px;
+      text-align: center;
+      color: #aef;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,255,255,0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 14px 10px;
+      margin-bottom: 25px;
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      line-height: 1.5;
+    }
+
+    footer a { color: #00f5d4; text-decoration: none; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
 </head>
 
 <body>
-<header class="site-header">
-  <div class="brand">
-    <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
-    <div class="brand-text">
-      <h1>JNUS Associates Ltd</h1>
-      <p>AI • Systems • Tech • Business & Data Analytics</p>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="brand">
+      <img src="jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+      <div class="brand-text">
+        <h1>JNUS Associates Ltd</h1>
+        <p>AI • Systems • Tech • Business & Data Analytics</p>
+      </div>
+    </div>
+    <div class="contact-line">
+      <a href="tel:02035384966"><i data-lucide="phone"></i> 020 3538 4966</a>
+      <a href="https://wa.me/442035384966" target="_blank" title="Chat on WhatsApp"><i data-lucide="whatsapp"></i></a>
+    </div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="hero-glass">
+      <h2>Delivering clarity and confidence in deep learning, software, tech, and quantum data analytics.</h2>
+      <p>At JNUS Associates, we provide solutions that empower your business through innovation, precision, and engineering excellence.</p>
+      <button onclick="window.location.href='/contact/'">Contact Us</button>
+    </div>
+  </main>
+
+  <!-- PODCASTS -->
+  <section class="podcast-section">
+    <h2><i data-lucide="radio"></i> Financial Insights & Podcasts</h2>
+    <p class="podcast-intro">
+      Stay informed with the latest market analysis, fintech innovations, insurance and reinsurance trends, MGAs, and business strategy discussions curated for modern enterprises.
+    </p>
+    <div class="podcast-grid" id="youtubeFeed">
+      <p style="color:#88f; text-align:center;">Loading latest videos...</p>
+    </div>
+    <p class="last-updated" id="lastUpdated">Last updated: Initializing…</p>
+    <p class="update-caption">(auto-updating every 4 hours)</p>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div id="tickerContent" class="ticker-content">
+      <span class="teal-glow">📊 Now showing: Loading Markets…</span>
     </div>
   </div>
-  <div class="contact-line">
-    <a href="tel:02035384966"><i data-lucide="phone"></i> 020 3538 4966</a>
-    <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a>
-  </div>
-  <nav class="navbar">
-    <ul>
-      <li><a href="/" class="active">Home</a></li>
-      <li><a href="/about/">About</a></li>
-      <li><a href="/services/">Services</a></li>
-      <li><a href="/projects/">Projects</a></li>
-      <li><a href="/contact/">Contact</a></li>
-    </ul>
-  </nav>
-</header>
 
-<main class="hero">
-  <div class="hero-glass">
-    <h2>Delivering clarity and confidence in deep learning, software, tech, and quantum data analytics.</h2>
-    <p>At JNUS Associates, we provide solutions that empower your business through innovation, precision, and engineering excellence.</p>
-    <button onclick="window.location.href='/contact/'">Contact Us</button>
-  </div>
-</main>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
+    <p>📞 020 3538 4966
+      <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a> |
+      <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
+    </p>
+    <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
+  </footer>
 
-<section class="podcast-section">
-  <h2><i data-lucide="radio"></i> Financial Insights & Podcasts</h2>
-  <p class="podcast-intro">
-    Stay informed with the latest market analysis, fintech innovations, insurance and reinsurance trends, MGAs, and business strategy discussions curated for modern enterprises.
-  </p>
-  <div class="podcast-grid" id="youtubeFeed">
-    <p style="color:#88f;text-align:center;">Loading latest videos...</p>
-  </div>
-  <p class="last-updated" id="lastUpdated">Last updated: Initializing…</p>
-</section>
+  <!-- SCRIPT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) lucide.createIcons();
 
-<div class="ticker-wrapper">
-  <div id="exchangeLabel" class="exchange-label">📊 Now showing: Loading market...</div>
-  <div id="marketClockBar" class="market-clock-bar"></div>
-  <div id="stockTickerContainer" class="stock-ticker"></div>
-</div>
+      /* === YouTube Podcasts === */
+      const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
+      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE";
+      const feed = document.getElementById("youtubeFeed");
+      const updated = document.getElementById("lastUpdated");
 
-<footer>
-  <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-  <p>📞 020 3538 4966
-    <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a> |
-    <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
-  </p>
-  <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
-</footer>
+      async function loadVideos() {
+        try {
+          const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
+          const res = await fetch(url);
+          const data = await res.json();
+          if (!data.items) throw new Error("No items");
+          feed.innerHTML = "";
+          data.items.forEach((i, idx) => {
+            if (i.id.kind === "youtube#video") {
+              const id = i.id.videoId;
+              const title = i.snippet.title;
+              const card = document.createElement("div");
+              card.classList.add("podcast-card");
+              card.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe><h3>${title}</h3>`;
+              feed.appendChild(card);
+              setTimeout(() => card.classList.add("visible"), idx * 200);
+            }
+          });
+          updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
+        } catch (e) {
+          feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Check API key or channel ID.</p>";
+          updated.textContent = "Last updated: Error fetching data";
+        }
+      }
 
-<script>
-if(window.lucide)lucide.createIcons();
+      loadVideos();
+      setInterval(loadVideos, 14400000);
 
-/* === YouTube Podcasts === */
-const API_KEY="AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
-const CHANNEL_ID="YOUR_CHANNEL_ID_HERE";
-const feed=document.getElementById("youtubeFeed");
-const updated=document.getElementById("lastUpdated");
-async function loadVideos(){
- try{
-  const url=`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
-  const r=await fetch(url);const d=await r.json();
-  if(!d.items)throw 0;feed.innerHTML="";
-  d.items.forEach((i,idx)=>{if(i.id.kind==="youtube#video"){const id=i.id.videoId;const t=i.snippet.title;
-  const c=document.createElement("div");c.classList.add("podcast-card");
-  c.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe><h3>${t}</h3>`;
-  feed.appendChild(c);setTimeout(()=>c.classList.add("visible"),idx*200);}});
-  updated.textContent="Last updated: "+new Date().toLocaleTimeString("en-GB");
- }catch{feed.innerHTML="<p style='color:#f88'>Unable to load podcasts</p>";}
-}
-loadVideos();setInterval(loadVideos,14400000);
+      /* === Market Ticker === */
+      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+      const ALPHA_KEY = "HARHFLFJZZBX044Y";
+      const tickerContent = document.getElementById("tickerContent");
 
-/* === Market Ticker === */
-const FINNHUB_KEY="d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-const exchanges=[{code:"US",name:"New York Stock Exchange"}];
-let stockSymbols=[];
-function updateClocks(){
- const z=[{n:"Lagos (WAT)",o:1},{n:"Johannesburg (SAST)",o:2},{n:"London",o:0},{n:"New York",o:-4},{n:"Shanghai (CST)",o:8},{n:"Singapore",o:8},{n:"Tokyo",o:9}];
- const now=new Date();const utc=now.getTime()+now.getTimezoneOffset()*6e4;
- document.getElementById("marketClockBar").innerHTML=z.map(x=>{const l=new Date(utc+36e5*x.o);const h=String(l.getHours()).padStart(2,"0");const m=String(l.getMinutes()).padStart(2,"0");return `<span>${x.n}: ${h}:${m}</span>`}).join(" • ");
-}
-function movementStyle(p){if(isNaN(p))return{cls:"neutral-glow",a:"•"};if(p>0.05)return{cls:"teal-glow",a:"▲"};if(p<-0.05)return{cls:"red-glow",a:"▼"};return{cls:"neutral-glow",a:"•"};}
-async function loadTickers(ex){
- document.getElementById("exchangeLabel").innerHTML=`📊 Now showing: <strong>${ex.name}</strong>`;
- try{
-  const res=await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=${ex.code}&token=${FINNHUB_KEY}`);
-  const d=await res.json();stockSymbols=d.slice(0,10).map(i=>i.symbol);
-  fetchPrices();
- }catch{document.getElementById("stockTickerContainer").innerHTML="<span class='neutral-glow'>Unable to load</span>";}
-}
-async function fetchPrices(){
- const c=document.getElementById("stockTickerContainer");if(!stockSymbols.length)return;
- const r=await Promise.all(stockSymbols.map(async s=>{
-  try{
-   const d=await(await fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`)).json();
-   const price=d.c,pct=d.dp;const {cls,a}=movementStyle(pct);
-   return `<span class="${cls}">${s}: ${price?.toFixed?.(2)||"N/A"} (${pct?.toFixed?.(2)||"0"}%) ${a}</span>`;
-  }catch{return"";}
- }));
- c.innerHTML=r.filter(Boolean).slice(0,12).join(" • ");
-}
-window.addEventListener("load",()=>{
- updateClocks();loadTickers(exchanges[0]);
- setInterval(updateClocks,60000);
- setInterval(fetchPrices,60000);
-});
-</script>
+      async function fetchStocks() {
+        try {
+          const res = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=US&token=${FINNHUB_KEY}`);
+          const data = await res.json();
+          const symbols = Array.from(new Set(data.map(i => i.symbol))).slice(0, 30);
+          const results = await Promise.allSettled(
+            symbols.map(async s => {
+              const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`);
+              const d = await r.json();
+              const price = parseFloat(d.c);
+              const pct = parseFloat(d.dp);
+              const cls = pct > 0 ? "teal-glow" : pct < 0 ? "red-glow" : "neutral-glow";
+              const arrow = pct > 0 ? "▲" : pct < 0 ? "▼" : "•";
+              return `<span class="${cls}">${s}: ${isFinite(price)?price.toFixed(2):"N/A"} (${isFinite(pct)?pct.toFixed(2):"0"}%) ${arrow}</span>`;
+            })
+          );
+          const html = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
+          tickerContent.innerHTML = `<span class="teal-glow">📊 Now showing: New York Stock Exchange</span> • ${html}`;
+        } catch (err) {
+          tickerContent.innerHTML = `<span class="neutral-glow">Unable to load live stock data</span>`;
+        }
+      }
+
+      setTimeout(fetchStocks, 2000);
+      setInterval(fetchStocks, 1800000);
+    });
+  </script>
 </body>
 </html>
