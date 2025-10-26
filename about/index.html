@@ -161,7 +161,9 @@
   <!-- ✅ functional fixes only -->
   <script>
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.lucide) lucide.createIcons();
+  // ensure icons render
+  function initLucide(){ if (window.lucide) lucide.createIcons(); else setTimeout(initLucide,120); }
+  initLucide();
 
   const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
   const PROXY = "https://api.allorigins.win/raw?url=";
@@ -177,6 +179,41 @@ document.addEventListener("DOMContentLoaded", () => {
     if (p > 0.05) return { cls: "teal-glow", arrow: "▲" };
     if (p < -0.05) return { cls: "red-glow", arrow: "▼" };
     return { cls: "neutral-glow", arrow: "•" };
+  }
+
+  async function fetchQuote(symbol) {
+    try {
+      const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
+      const res = await fetch(url);
+      const d = await res.json();
+      if (d && d.c) return { price: d.c, pct: d.dp };
+      return { price: NaN, pct: NaN };
+    } catch(e) {
+      console.warn("Quote fetch failed:", symbol, e);
+      return { price: NaN, pct: NaN };
+    }
+  }
+
+  async function renderTicker() {
+    const label = document.getElementById("exchangeLabel");
+    const ticker = document.getElementById("stockTicker");
+
+    if (!ticker) return;
+    label.innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
+
+    try {
+      const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
+      const html = TECH_SYMBOLS.map((s, i) => {
+        const { price, pct } = quotes[i] || {};
+        const { cls, arrow } = movementStyle(pct);
+        const pStr = Number.isFinite(price) ? price.toFixed(2) : "N/A";
+        const pctStr = Number.isFinite(pct) ? pct.toFixed(2) : "0.00";
+        return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
+      }).join(" • ");
+      ticker.innerHTML = html + " • " + html;
+    } catch {
+      ticker.innerHTML = `<span class="neutral-glow">Unable to load stock data — please refresh.</span>`;
+    }
   }
 
   function updateMarketClocks() {
@@ -195,31 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const local = new Date(utc + z.offset * 3600000);
       return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
     }).join(" • ");
-  }
-
-  async function fetchQuote(symbol) {
-    try {
-      const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
-      const res = await fetch(url);
-      const d = await res.json();
-      if (d && d.c) return { price: d.c, pct: d.dp };
-      return { price: NaN, pct: NaN };
-    } catch {
-      return { price: NaN, pct: NaN };
-    }
-  }
-
-  async function renderTicker() {
-    document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
-    const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
-    const html = TECH_SYMBOLS.map((s, i) => {
-      const { price, pct } = quotes[i] || {};
-      const { cls, arrow } = movementStyle(pct);
-      const pStr = Number.isFinite(price) ? price.toFixed(2) : "N/A";
-      const pctStr = Number.isFinite(pct) ? pct.toFixed(2) : "0.00";
-      return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
-    }).join(" • ");
-    document.getElementById("stockTicker").innerHTML = html + " • " + html;
   }
 
   updateMarketClocks();
