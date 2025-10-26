@@ -6,8 +6,10 @@
   <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
   <title>About Us | JNUS Associates Ltd</title>
 
-  <link rel="stylesheet" href="../styles.css" />
+  <!-- Use the same absolute paths as Services -->
+  <link rel="stylesheet" href="/styles.css" />
   <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="/script.js" defer></script>
 
   <style>
     /* ======== Original Styling ======== */
@@ -36,72 +38,12 @@
     .brand-text h1.glow { color:#00f5d4; margin:0; font-size: clamp(1.1rem, 2.4vw, 1.5rem); text-shadow: 0 0 10px rgba(0,255,255,.4); }
     .brand-text .glow-tagline { margin:.15rem 0 0; color:#aef; font-size: clamp(.8rem, 1.6vw, .95rem); }
 
+    /* Nav look is handled in /styles.css; keep structure only */
     nav.navbar ul { list-style:none; padding:0; margin:8px 0 0; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
     nav.navbar a { color:#dff; text-decoration:none; font-weight:500; }
     nav.navbar a.active, nav.navbar a:hover { color:#00f5d4; }
 
-    /* ======== Glass / Teal Mobile Dropdown ======== */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: #00f5d4;
-      cursor: pointer;
-      font-size: 1.8rem;
-      position: absolute;
-      top: 18px;
-      right: 22px;
-      z-index: 1100;
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-
-      .navbar ul {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        gap: 18px;
-
-        /* glass/teal look */
-        background: rgba(0, 30, 30, 0.65);
-        border: 1px solid rgba(0, 255, 255, 0.28);
-        border-radius: 14px;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.25);
-        padding: 26px;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-
-        position: absolute;
-        top: 74px;
-        right: 20px;
-        left: 20px;
-        z-index: 1000;
-        animation: fadeDown 0.3s ease forwards;
-      }
-
-      .navbar ul.show { display: flex; }
-
-      @keyframes fadeDown {
-        from { opacity: 0; transform: translateY(-12px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      nav.navbar a {
-        color: #e0fdfd;
-        font-size: 1.1rem;
-        text-decoration: none;
-        transition: color 0.25s ease;
-      }
-
-      nav.navbar a.active,
-      nav.navbar a:hover {
-        color: #00f5d4;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
-      }
-    }
-
-    /* ======== Rest of your CSS preserved ======== */
+    /* ======== About content ======== */
     .about-section {
       text-align: center;
       margin: 80px auto 28px;
@@ -122,8 +64,16 @@
     .about-card h3 { color:#00ffd1; margin:.25rem 0 .5rem; text-shadow:0 0 8px rgba(0,255,255,.5); }
     .about-card p { color:#d6f3f3; line-height:1.55; }
 
+    /* ======== Ticker area ======== */
     .market-wrap { width:92%; max-width:1100px; margin:10px auto 20px; }
-    .region-band,.city-band,.ticker-shell { background:rgba(0,0,0,0.45); border:1px solid rgba(0,255,255,0.22); border-radius:12px; box-shadow:0 0 14px rgba(0,255,255,0.18); backdrop-filter:blur(8px); color:#e4fdfd; text-align:center; letter-spacing:.5px; }
+    .region-band,.city-band,.ticker-shell {
+      background:rgba(0,0,0,0.45);
+      border:1px solid rgba(0,255,255,0.22);
+      border-radius:12px;
+      box-shadow:0 0 14px rgba(0,255,255,0.18);
+      backdrop-filter:blur(8px);
+      color:#e4fdfd; text-align:center; letter-spacing:.5px;
+    }
     .region-band { padding:8px 10px; text-transform:uppercase; font-size:.9rem; color:#00ffd1; margin-bottom:8px; }
     .city-band { padding:10px 14px; font-family:"Courier New",monospace; font-size:.95rem; margin-bottom:12px; white-space:nowrap; overflow-x:auto; overflow-y:hidden; display:block; min-height:2.2rem; line-height:1.6rem; }
     .ticker-shell { position:relative; padding:8px 10px 12px; overflow:hidden; }
@@ -143,21 +93,19 @@
 </head>
 
 <body>
+  <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container glass-box">
       <div class="brand">
-        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+        <img src="/jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
         </div>
       </div>
 
-      <!-- Glass/Teal Menu Toggle -->
-      <button class="menu-toggle" aria-label="Toggle menu">
-        <i data-lucide="menu"></i>
-      </button>
-
+      <!-- NOTE: No inline menu button or JS here.
+           Your global /script.js will inject / control the teal hamburger. -->
       <nav class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
@@ -170,6 +118,7 @@
     </div>
   </header>
 
+  <!-- ===== ABOUT CONTENT ===== -->
   <section class="about-section">
     <h2>About Us</h2>
     <p class="about-lead">
@@ -184,6 +133,7 @@
     </div>
   </section>
 
+  <!-- ===== TICKER / CLOCKS ===== -->
   <div class="market-wrap">
     <div class="region-band">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
     <div class="city-band" id="marketClockBar">Lagos • Johannesburg • London • New York • Shanghai • Singapore • Tokyo</div>
@@ -193,6 +143,7 @@
     </div>
   </div>
 
+  <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
     <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
@@ -201,92 +152,80 @@
 
   <a class="podcast-fab" href="/#podcasts"><i data-lucide="headphones"></i> Open Podcasts</a>
 
+  <!-- Page-local ticker/clock logic (kept) -->
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Lucide icons
-    function initLucide() {
-      if (window.lucide) lucide.createIcons();
-      else setTimeout(initLucide, 120);
-    }
-    initLucide();
+    document.addEventListener("DOMContentLoaded", () => {
+      // Lucide icons
+      try { if (window.lucide) lucide.createIcons(); } catch(e){}
 
-    // Mobile nav toggle
-    const menuBtn = document.querySelector(".menu-toggle");
-    const navList = document.querySelector(".navbar ul");
-    const navLinks = document.querySelectorAll(".navbar a");
-    menuBtn.addEventListener("click", () => navList.classList.toggle("show"));
-    navLinks.forEach(link => link.addEventListener("click", () => navList.classList.remove("show")));
+      // Stock + clock logic
+      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+      const PROXY = "https://api.allorigins.win/raw?url=";
+      const TECH_SYMBOLS = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
 
-    // Stock + clock logic (unchanged)
-    const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-    const PROXY = "https://api.allorigins.win/raw?url=";
-    const TECH_SYMBOLS = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
-
-    function movementStyle(p){
-      if (typeof p !== "number" || isNaN(p)) return {cls:"neutral-glow", arrow:"•"};
-      if (p > 0.05) return {cls:"teal-glow", arrow:"▲"};
-      if (p < -0.05) return {cls:"red-glow", arrow:"▼"};
-      return {cls:"neutral-glow", arrow:"•"};
-    }
-
-    async function fetchQuote(symbol){
-      try{
-        const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
-        const res = await fetch(url);
-        const d = await res.json();
-        if (d && d.c) return { price: d.c, pct: d.dp };
-        return { price: NaN, pct: NaN };
-      }catch(e){
-        console.warn("Quote fetch failed:", symbol, e);
-        return { price: NaN, pct: NaN };
+      function movementStyle(p){
+        if (typeof p !== "number" || isNaN(p)) return {cls:"neutral-glow", arrow:"•"};
+        if (p > 0.05) return {cls:"teal-glow", arrow:"▲"};
+        if (p < -0.05) return {cls:"red-glow", arrow:"▼"};
+        return {cls:"neutral-glow", arrow:"•"};
       }
-    }
 
-    async function renderTicker(){
-      const label = document.getElementById("exchangeLabel");
-      const ticker = document.getElementById("stockTicker");
-      if (!ticker) return;
+      async function fetchQuote(symbol){
+        try{
+          const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
+          const res = await fetch(url);
+          const d = await res.json();
+          if (d && d.c) return { price: d.c, pct: d.dp };
+          return { price: NaN, pct: NaN };
+        }catch(e){
+          console.warn("Quote fetch failed:", symbol, e);
+          return { price: NaN, pct: NaN };
+        }
+      }
 
-      label.innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
+      async function renderTicker(){
+        const label = document.getElementById("exchangeLabel");
+        const ticker = document.getElementById("stockTicker");
+        if (!ticker) return;
+        label.innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
+        try{
+          const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
+          const html = TECH_SYMBOLS.map((s, i) => {
+            const { price, pct } = quotes[i] || {};
+            const { cls, arrow } = movementStyle(pct);
+            const pStr = Number.isFinite(price) ? price.toFixed(2) : "N/A";
+            const pctStr = Number.isFinite(pct) ? pct.toFixed(2) : "0.00";
+            return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
+          }).join(" • ");
+          ticker.innerHTML = html + " • " + html;
+        }catch{
+          ticker.innerHTML = `<span class="neutral-glow">Unable to load stock data — please refresh.</span>`;
+        }
+      }
 
-      try{
-        const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
-        const html = TECH_SYMBOLS.map((s, i) => {
-          const { price, pct } = quotes[i] || {};
-          const { cls, arrow } = movementStyle(pct);
-          const pStr = Number.isFinite(price) ? price.toFixed(2) : "N/A";
-          const pctStr = Number.isFinite(pct) ? pct.toFixed(2) : "0.00";
-          return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
+      function updateMarketClocks(){
+        const zones = [
+          { name: "Lagos (WAT)", offset: 1 },
+          { name: "Johannesburg (SAST)", offset: 2 },
+          { name: "London", offset: 0 },
+          { name: "New York", offset: -4 },
+          { name: "Shanghai (CST)", offset: 8 },
+          { name: "Singapore (SGT)", offset: 8 },
+          { name: "Tokyo", offset: 9 }
+        ];
+        const now = new Date();
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        document.getElementById("marketClockBar").textContent = zones.map(z => {
+          const local = new Date(utc + z.offset * 3600000);
+          return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
         }).join(" • ");
-        ticker.innerHTML = html + " • " + html; // loop feel
-      }catch{
-        ticker.innerHTML = `<span class="neutral-glow">Unable to load stock data — please refresh.</span>`;
       }
-    }
 
-    function updateMarketClocks(){
-      const zones = [
-        { name: "Lagos (WAT)", offset: 1 },
-        { name: "Johannesburg (SAST)", offset: 2 },
-        { name: "London", offset: 0 },
-        { name: "New York", offset: -4 },
-        { name: "Shanghai (CST)", offset: 8 },
-        { name: "Singapore (SGT)", offset: 8 },
-        { name: "Tokyo", offset: 9 }
-      ];
-      const now = new Date();
-      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      document.getElementById("marketClockBar").textContent = zones.map(z => {
-        const local = new Date(utc + z.offset * 3600000);
-        return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
-      }).join(" • ");
-    }
-
-    updateMarketClocks();
-    renderTicker();
-    setInterval(updateMarketClocks, 60000);
-    setInterval(renderTicker, 180000);
-  });
+      updateMarketClocks();
+      renderTicker();
+      setInterval(updateMarketClocks, 60000);
+      setInterval(renderTicker, 180000);
+    });
   </script>
 </body>
 </html>
