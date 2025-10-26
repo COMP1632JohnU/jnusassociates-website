@@ -11,62 +11,68 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* Centered glass card (matches Services subpages aesthetic) */
+    body {
+      background-image: url('../marinabaysands.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+      color: #d6f3f3;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+
     .glass-card {
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0,255,255,0.25);
-      border-radius: 12px;
-      padding: 40px;
+      border-radius: 14px;
+      padding: 70px 40px;
       text-align: center;
       color: #e0f7f7;
-      max-width: 850px;
-      margin: 140px auto 100px auto;
+      max-width: 950px;
+      margin: 140px auto 80px auto;
       box-shadow: 0 0 25px rgba(0,255,255,0.15);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      animation: fadeIn 1.5s ease-out forwards;
-      transition: box-shadow 0.4s ease, transform 0.4s ease;
+      backdrop-filter: blur(12px);
+      animation: fadeUp 1.2s ease-out forwards;
     }
 
     .glass-card:hover {
       box-shadow: 0 0 40px rgba(0,255,255,0.4);
       transform: translateY(-6px);
+      transition: all 0.4s ease;
     }
 
-    h2 {
+    .glass-card h2 {
       color: #00f5d4;
       text-shadow: 0 0 10px rgba(0,255,255,0.7);
       margin-bottom: 15px;
+      font-weight: 700;
     }
 
-    p {
-      line-height: 1.7;
+    .glass-card p {
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
       color: #d6ffff;
-      margin-bottom: 1rem;
     }
 
-    /* Teal icon glow to match site */
     .service-icon {
-      width: 45px;
-      height: 45px;
       color: #00f5d4;
+      font-size: 2.2rem;
       margin-bottom: 16px;
       filter: drop-shadow(0 0 8px rgba(0,255,255,0.6));
     }
 
-    /* === NAVIGATION ARROWS FIX (Enhanced Visibility + Glass Style) === */
     .nav-arrows {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 850px;
-      margin: 60px auto 120px auto;
+      max-width: 950px;
+      margin: 60px auto 60px auto;
       padding: 12px 20px;
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(0, 255, 255, 0.25);
       border-radius: 8px;
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 0 15px rgba(0,255,255,0.15);
     }
 
@@ -83,30 +89,95 @@
       transform: translateY(-2px);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); filter: blur(3px); }
-      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    /* === Region / City / Ticker === */
+    .market-wrap {
+      width: 92%;
+      max-width: 1100px;
+      margin: 40px auto 20px;
     }
 
-    /* Keep main content centered on large screens like other pages */
-    @media (min-width: 992px) {
-      body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      main {
-        margin-top: 0 !important;
-        margin-bottom: auto;
-      }
-      footer {
-        margin-top: auto;
-      }
+    .region-band, .city-band, .ticker-shell {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0, 255, 255, 0.22);
+      border-radius: 12px;
+      box-shadow: 0 0 14px rgba(0, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      color: #e4fdfd;
+      text-align: center;
+      letter-spacing: .5px;
+    }
+
+    .region-band {
+      padding: 8px 10px;
+      text-transform: uppercase;
+      font-size: .9rem;
+      color: #00ffd1;
+      margin-bottom: 8px;
+    }
+
+    .city-band {
+      padding: 10px 14px;
+      font-family: "Courier New", monospace;
+      font-size: .95rem;
+      margin-bottom: 12px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .ticker-shell { position: relative; padding: 8px 10px 12px; overflow: hidden; }
+    .now-showing { font-weight: 700; color: #00f5d4; text-shadow: 0 0 10px rgba(0,255,255,.75); margin-bottom: 6px; font-family: "Courier New", monospace; }
+    .marquee-viewport { width: 100%; overflow: hidden; position: relative; height: 1.6rem; }
+    .marquee-inner {
+      position: absolute; left: 100%;
+      white-space: nowrap;
+      font-family: "Courier New", monospace;
+      font-size: .9rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards, scrollMarquee 60s linear infinite;
+      animation-delay: 0s, 2s;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } }
+
+    footer {
+      width: 92%;
+      max-width: 880px;
+      margin: 16px auto 28px;
+      text-align: center;
+      color: #aef;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,255,255,.15);
+      backdrop-filter: blur(10px);
+      padding: 12px 10px;
+      font-size: clamp(.78rem,1.4vw,.92rem);
+    }
+    footer a { color: #00f5d4; text-decoration: none; }
+
+    .podcast-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,0,0,.65);
+      border: 1px solid rgba(0,255,255,.35);
+      color: #c8ffff;
+      padding: 10px 12px;
+      border-radius: 999px;
+      box-shadow: 0 0 18px rgba(0,255,255,.35);
+      font-weight: 600;
+      font-size: .92rem;
+      backdrop-filter: blur(6px);
+      text-decoration: none;
     }
   </style>
 </head>
 
-<body style="background-image:url('../marinabaysands.jpg'); background-size:cover; background-position:center;">
+<body>
   <!-- ===== HEADER ===== -->
   <header class="site-header">
     <div class="container">
@@ -115,7 +186,6 @@
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p>📞 020 3538 4966</p>
         </div>
       </div>
 
@@ -131,9 +201,9 @@
     </div>
   </header>
 
-  <!-- ===== CONTENT ===== -->
+  <!-- ===== MAIN CONTENT ===== -->
   <main>
-    <section class="glass-card">
+    <section class="glass-card fade-up">
       <i data-lucide="shield" class="service-icon"></i>
       <h2>Cyber Resilience Initiative</h2>
       <p>
@@ -151,12 +221,21 @@
       </p>
     </section>
 
-    <!-- Prev / Next -->
     <div class="nav-arrows">
       <a href="/projects/quantum">← Previous</a>
       <a href="/projects/secure">Next →</a>
     </div>
   </main>
+
+  <!-- ===== REGION / CITY / TICKER ===== -->
+  <div class="market-wrap">
+    <div class="region-band">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
+    <div class="city-band" id="marketClockBar">Lagos • Johannesburg • London • New York • Shanghai • Singapore • Tokyo</div>
+    <div class="ticker-shell">
+      <div class="now-showing" id="exchangeLabel">📊 Now showing: <strong>New York Tech Stocks (Live)</strong></div>
+      <div class="marquee-viewport"><div class="marquee-inner" id="stockTicker">Loading prices…</div></div>
+    </div>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer>
@@ -165,26 +244,71 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-  <div id="marketStatusBar" class="market-status-bar">
-    <span class="neutral-glow">Checking global market status...</span>
-  </div>
-  <div id="marketClockBar" class="market-clock-bar">
-    <span class="neutral-glow">Loading clocks...</span>
-  </div>
-  <div class="stock-ticker">
-    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
-  </div>
+  <!-- ===== PODCAST BUTTON ===== -->
+  <a class="podcast-fab" href="/#podcasts">
+    <i data-lucide="headphones"></i> Open Podcasts
+  </a>
 
-  <!-- ===== INITIALIZATION ===== -->
+  <!-- ===== STOCK / CLOCK SCRIPT ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      try { if (window.lucide) lucide.createIcons(); } catch(e){}
-      try {
-        if (typeof fetchStockPrices === "function") fetchStockPrices();
-        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
-        if (typeof updateMarketClock === "function") updateMarketClock();
-      } catch(e){}
+      if (window.lucide) lucide.createIcons();
+
+      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+      const PROXY = "https://api.allorigins.win/raw?url=";
+      const TECH_SYMBOLS = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
+
+      function movementStyle(p){
+        if (typeof p !== "number" || isNaN(p)) return {cls:"neutral-glow", arrow:"•"};
+        if (p > 0.05) return {cls:"teal-glow", arrow:"▲"};
+        if (p < -0.05) return {cls:"red-glow", arrow:"▼"};
+        return {cls:"neutral-glow", arrow:"•"};
+      }
+
+      async function fetchQuote(symbol){
+        try{
+          const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
+          const res = await fetch(url);
+          const d = await res.json();
+          if (d && d.c) return { price: d.c, pct: d.dp };
+          return { price: NaN, pct: NaN };
+        }catch(e){ return { price: NaN, pct: NaN }; }
+      }
+
+      async function renderTicker(){
+        const label = document.getElementById("exchangeLabel");
+        const ticker = document.getElementById("stockTicker");
+        if (!ticker) return;
+        label.innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
+        try{
+          const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
+          const html = TECH_SYMBOLS.map((s,i)=>{
+            const {price,pct}=quotes[i]||{};
+            const {cls,arrow}=movementStyle(pct);
+            const pStr=Number.isFinite(price)?price.toFixed(2):"N/A";
+            const pctStr=Number.isFinite(pct)?pct.toFixed(2):"0.00";
+            return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
+          }).join(" • ");
+          ticker.innerHTML = html + " • " + html;
+        }catch{ ticker.innerHTML = `<span class="neutral-glow">Unable to load stock data — please refresh.</span>`; }
+      }
+
+      function updateMarketClocks(){
+        const zones=[
+          {name:"Lagos (WAT)",offset:1},{name:"Johannesburg (SAST)",offset:2},
+          {name:"London",offset:0},{name:"New York",offset:-4},
+          {name:"Shanghai (CST)",offset:8},{name:"Singapore (SGT)",offset:8},{name:"Tokyo",offset:9}
+        ];
+        const now=new Date(); const utc=now.getTime()+now.getTimezoneOffset()*60000;
+        document.getElementById("marketClockBar").textContent=zones.map(z=>{
+          const local=new Date(utc+z.offset*3600000);
+          return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
+        }).join(" • ");
+      }
+
+      updateMarketClocks(); renderTicker();
+      setInterval(updateMarketClocks,60000);
+      setInterval(renderTicker,180000);
     });
   </script>
 </body>

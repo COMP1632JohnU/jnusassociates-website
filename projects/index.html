@@ -11,19 +11,11 @@
   <script src="../script.js" defer></script>
 
   <style>
-    /* === FADE-IN ANIMATION (Permanent) === */
     @keyframes fadeRipple {
-      0% {
-        opacity: 0;
-        transform: translateY(25px) scale(0.98);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      0% { opacity: 0; transform: translateY(25px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* === PROJECT CARD STYLE === */
     .project-card {
       opacity: 0;
       animation: fadeRipple 1.8s ease-out forwards;
@@ -35,14 +27,12 @@
       background: rgba(0, 0, 0, 0.45);
       border: 1px solid rgba(0, 255, 255, 0.25);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
       color: #e0f7f7;
       max-width: 360px;
       transition: all 0.4s ease;
     }
 
-    /* === CLICKABLE LINK WRAPPER === */
     .project-link {
       text-decoration: none;
       color: inherit;
@@ -50,42 +40,30 @@
       transition: transform 0.3s ease;
     }
 
-    .project-link:hover {
-      transform: translateY(-4px);
-    }
+    .project-link:hover { transform: translateY(-4px); }
 
-    /* === HOVER GLOW (Unified Intensity Across Site) === */
     .project-card:hover {
       transform: translateY(-6px) scale(1.02);
       border-color: rgba(0, 255, 255, 0.5);
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.35);
     }
 
-    .project-card:hover i {
-      color: #00ffe0;
-      filter: drop-shadow(0 0 8px rgba(0,255,255,0.8));
-    }
-
-    .project-card:hover h3 {
-      text-shadow: 0 0 6px rgba(0,255,255,0.6);
-    }
+    .project-card:hover i { color: #00ffe0; filter: drop-shadow(0 0 8px rgba(0,255,255,0.8)); }
+    .project-card:hover h3 { text-shadow: 0 0 6px rgba(0,255,255,0.6); }
 
     .project-card i {
       color: #00f5d4;
       margin-bottom: 10px;
       font-size: 1.8rem;
       filter: drop-shadow(0 0 6px rgba(0,255,255,0.4));
-      transition: all 0.3s ease;
     }
 
     .project-card h3 {
       color: #00f5d4;
       margin-bottom: 10px;
       font-weight: 600;
-      transition: text-shadow 0.3s ease;
     }
 
-    /* === HEADER CARD === */
     .projects-header {
       text-align: center;
       margin: 80px auto 40px auto;
@@ -96,15 +74,11 @@
       border: 1px solid rgba(0, 255, 255, 0.25);
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       color: #e0f7f7;
     }
 
-    .projects-header h2 {
-      color: #00f5d4;
-    }
+    .projects-header h2 { color: #00f5d4; }
 
-    /* === GRID STRUCTURE === */
     .projects-grid {
       display: grid;
       justify-content: center;
@@ -127,24 +101,102 @@
       margin-left: 12%;
     }
 
-    .projects-row-1 {
-      display: flex;
-      justify-content: center;
-    }
+    .projects-row-1 { display: flex; justify-content: center; }
 
     @media (max-width: 992px) {
-      .projects-row-3,
-      .projects-row-2 {
+      .projects-row-3, .projects-row-2 {
         grid-template-columns: 1fr;
         margin-left: 0;
       }
-      .projects-grid {
-        gap: 1rem;
-      }
-      .project-card {
-        max-width: 90%;
-        margin: 0 auto;
-      }
+      .projects-grid { gap: 1rem; }
+      .project-card { max-width: 90%; margin: 0 auto; }
+    }
+
+    /* === Region / City / Ticker === */
+    .market-wrap {
+      width: 92%;
+      max-width: 1100px;
+      margin: 40px auto 20px;
+    }
+
+    .region-band, .city-band, .ticker-shell {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0, 255, 255, 0.22);
+      border-radius: 12px;
+      box-shadow: 0 0 14px rgba(0,255,255,0.18);
+      backdrop-filter: blur(8px);
+      color: #e4fdfd;
+      text-align: center;
+      letter-spacing: .5px;
+    }
+
+    .region-band {
+      padding: 8px 10px;
+      text-transform: uppercase;
+      font-size: .9rem;
+      color: #00ffd1;
+      margin-bottom: 8px;
+    }
+
+    .city-band {
+      padding: 10px 14px;
+      font-family: "Courier New", monospace;
+      font-size: .95rem;
+      margin-bottom: 12px;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    .ticker-shell { padding: 8px 10px 12px; overflow: hidden; position: relative; }
+    .now-showing { font-weight: 700; color: #00f5d4; text-shadow: 0 0 10px rgba(0,255,255,.75); margin-bottom: 6px; font-family: "Courier New", monospace; }
+    .marquee-viewport { width: 100%; overflow: hidden; position: relative; height: 1.6rem; }
+    .marquee-inner {
+      position: absolute;
+      left: 100%;
+      white-space: nowrap;
+      font-family: "Courier New", monospace;
+      font-size: .9rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards, scrollMarquee 60s linear infinite;
+      animation-delay: 0s, 2s;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } }
+
+    footer {
+      width: 92%;
+      max-width: 880px;
+      margin: 16px auto 28px;
+      text-align: center;
+      color: #aef;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,255,255,.15);
+      backdrop-filter: blur(10px);
+      padding: 12px 10px;
+      font-size: clamp(.78rem,1.4vw,.92rem);
+    }
+    footer a { color: #00f5d4; text-decoration: none; }
+
+    .podcast-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,0,0,.65);
+      border: 1px solid rgba(0,255,255,.35);
+      color: #c8ffff;
+      padding: 10px 12px;
+      border-radius: 999px;
+      box-shadow: 0 0 18px rgba(0,255,255,.35);
+      font-weight: 600;
+      font-size: .92rem;
+      backdrop-filter: blur(6px);
+      text-decoration: none;
     }
   </style>
 </head>
@@ -158,10 +210,8 @@
         <div class="brand-text">
           <h1 class="glow">JNUS Associates Ltd</h1>
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p>📞 020 3538 4966</p>
         </div>
       </div>
-
       <nav class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
@@ -177,7 +227,7 @@
   <!-- ===== PROJECTS SECTION ===== -->
   <main class="projects-layout fade-up">
     <section class="projects-header fade-up" style="animation-delay:0.2s;">
-      <i data-lucide="briefcase" class="about-icon"></i>
+      <i data-lucide="briefcase"></i>
       <h2 class="teal-glow">Our Projects</h2>
       <p>
         A selection of recent work demonstrating our expertise in AI, systems engineering, 
@@ -186,84 +236,68 @@
     </section>
 
     <div class="projects-grid">
-
-      <!-- === TOP ROW (3) === -->
       <div class="projects-row-3">
         <a href="/projects/ai-model" class="project-link" style="--delay:0.3s;">
           <div class="project-card">
             <i data-lucide="cpu"></i>
             <h3>AI Model Deployment Platform</h3>
-            <p>
-              Built scalable deep learning infrastructure for automated deployment pipelines — 
-              enabling seamless integration of AI models across enterprise environments.
-            </p>
+            <p>Built scalable deep learning infrastructure for automated deployment pipelines.</p>
           </div>
         </a>
-
         <a href="/projects/enterprise" class="project-link" style="--delay:0.5s;">
           <div class="project-card">
             <i data-lucide="database"></i>
             <h3>Enterprise Data Lake Modernization</h3>
-            <p>
-              Migrated complex legacy systems into a unified, cloud-native data lake — 
-              improving analytics latency and governance efficiency.
-            </p>
+            <p>Migrated complex legacy systems into a unified, cloud-native data lake.</p>
           </div>
         </a>
-
         <a href="/projects/quantum" class="project-link" style="--delay:0.7s;">
           <div class="project-card">
             <i data-lucide="bar-chart-3"></i>
             <h3>Quantum-Inspired Analytics Engine</h3>
-            <p>
-              Developed quantum-inspired analytics engines to optimize financial modeling 
-              and accelerate computation through pattern recognition.
-            </p>
+            <p>Developed quantum-inspired engines to optimize financial modeling.</p>
           </div>
         </a>
       </div>
 
-      <!-- === MIDDLE ROW (2 aligned right) === -->
       <div class="projects-row-2">
         <a href="/projects/cyber" class="project-link" style="--delay:1s;">
           <div class="project-card">
             <i data-lucide="shield"></i>
             <h3>Cyber Resilience Initiative</h3>
-            <p>
-              Enhanced digital infrastructure for regulated sectors, embedding AI-based 
-              threat prediction and zero-trust protocols for compliance resilience.
-            </p>
+            <p>Enhanced infrastructure with AI-based threat prediction & zero-trust protocols.</p>
           </div>
         </a>
-
         <a href="/projects/secure" class="project-link" style="--delay:1.2s;">
           <div class="project-card">
             <i data-lucide="network"></i>
             <h3>Secure Systems Integration</h3>
-            <p>
-              Implemented high-security API integration across distributed systems, 
-              maintaining uptime for global enterprise clients.
-            </p>
+            <p>Implemented high-security API integration across distributed systems.</p>
           </div>
         </a>
       </div>
 
-      <!-- === BOTTOM ROW (1) === -->
       <div class="projects-row-1">
         <a href="/projects/global" class="project-link" style="--delay:1.5s;">
           <div class="project-card">
             <i data-lucide="globe"></i>
             <h3>Global Cloud Optimization</h3>
-            <p>
-              Orchestrated multi-cloud optimization framework leveraging hybrid AI load-balancing, 
-              cutting operational costs across global clusters.
-            </p>
+            <p>Orchestrated multi-cloud optimization cutting operational costs globally.</p>
           </div>
         </a>
       </div>
-
     </div>
   </main>
+
+  <!-- ===== REGION / CITY / TICKER ===== -->
+  <div class="market-wrap">
+    <div class="region-band">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
+    <div class="city-band" id="marketClockBar">Lagos • Johannesburg • London • New York • Shanghai • Singapore • Tokyo</div>
+    <div class="ticker-shell">
+      <div class="now-showing" id="exchangeLabel">📊 Now showing: <strong>New York Tech Stocks (Live)</strong></div>
+      <div class="marquee-viewport"><div class="marquee-inner" id="stockTicker">Loading prices…</div></div>
+    </div>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer>
@@ -272,29 +306,82 @@
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-  <div id="marketStatusBar" class="market-status-bar">
-    <span class="neutral-glow">Checking global market status...</span>
-  </div>
-  <div id="marketClockBar" class="market-clock-bar">
-    <span class="neutral-glow">Loading clocks...</span>
-  </div>
-  <div class="stock-ticker">
-    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
-  </div>
+  <!-- ===== PODCAST BUTTON ===== -->
+  <a class="podcast-fab" href="/#podcasts">
+    <i data-lucide="headphones"></i> Open Podcasts
+  </a>
 
-  <!-- ===== INITIALIZATION ===== -->
+  <!-- ===== STOCK / CLOCK SCRIPT ===== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      try { lucide.createIcons(); } catch(e){}
-      try {
-        if (typeof fetchStockPrices === "function") fetchStockPrices();
-        if (typeof adjustTickerSpeed === "function") adjustTickerSpeed();
-        if (typeof updateMarketClock === "function") updateMarketClock();
-      } catch(e){}
-      setTimeout(() => {
-        try { lucide.createIcons(); } catch(e){}
-      }, 1200);
+      if (window.lucide) lucide.createIcons();
+
+      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+      const PROXY = "https://api.allorigins.win/raw?url=";
+      const TECH_SYMBOLS = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
+
+      function movementStyle(p){
+        if (typeof p !== "number" || isNaN(p)) return {cls:"neutral-glow", arrow:"•"};
+        if (p > 0.05) return {cls:"teal-glow", arrow:"▲"};
+        if (p < -0.05) return {cls:"red-glow", arrow:"▼"};
+        return {cls:"neutral-glow", arrow:"•"};
+      }
+
+      async function fetchQuote(symbol){
+        try{
+          const url = `${PROXY}https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`;
+          const res = await fetch(url);
+          const d = await res.json();
+          if (d && d.c) return { price: d.c, pct: d.dp };
+          return { price: NaN, pct: NaN };
+        }catch(e){
+          console.warn("Quote fetch failed:", symbol, e);
+          return { price: NaN, pct: NaN };
+        }
+      }
+
+      async function renderTicker(){
+        const label = document.getElementById("exchangeLabel");
+        const ticker = document.getElementById("stockTicker");
+        if (!ticker) return;
+        label.innerHTML = `📊 Now showing: <strong>New York Tech Stocks (Live)</strong>`;
+        try{
+          const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
+          const html = TECH_SYMBOLS.map((s, i) => {
+            const { price, pct } = quotes[i] || {};
+            const { cls, arrow } = movementStyle(pct);
+            const pStr = Number.isFinite(price) ? price.toFixed(2) : "N/A";
+            const pctStr = Number.isFinite(pct) ? pct.toFixed(2) : "0.00";
+            return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
+          }).join(" • ");
+          ticker.innerHTML = html + " • " + html;
+        }catch{
+          ticker.innerHTML = `<span class="neutral-glow">Unable to load stock data — please refresh.</span>`;
+        }
+      }
+
+      function updateMarketClocks(){
+        const zones = [
+          { name: "Lagos (WAT)", offset: 1 },
+          { name: "Johannesburg (SAST)", offset: 2 },
+          { name: "London", offset: 0 },
+          { name: "New York", offset: -4 },
+          { name: "Shanghai (CST)", offset: 8 },
+          { name: "Singapore (SGT)", offset: 8 },
+          { name: "Tokyo", offset: 9 }
+        ];
+        const now = new Date();
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        document.getElementById("marketClockBar").textContent = zones.map(z => {
+          const local = new Date(utc + z.offset * 3600000);
+          return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
+        }).join(" • ");
+      }
+
+      updateMarketClocks();
+      renderTicker();
+      setInterval(updateMarketClocks, 60000);
+      setInterval(renderTicker, 180000);
     });
   </script>
 </body>
