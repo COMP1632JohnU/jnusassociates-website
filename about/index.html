@@ -126,15 +126,20 @@
           <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
         </div>
       </div>
-      <nav class="navbar">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about/" class="active">About</a></li>
-          <li><a href="/services/">Services</a></li>
-          <li><a href="/projects/">Projects</a></li>
-          <li><a href="/contact/">Contact</a></li>
-        </ul>
-      </nav>
+      <!-- ✅ Add this right before your <nav> -->
+<button class="menu-toggle" aria-label="Toggle menu">
+  <i data-lucide="menu"></i>
+</button>
+
+<nav class="navbar">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about/" class="active">About</a></li>
+    <li><a href="/services/">Services</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+</nav>
     </div>
   </header>
 
