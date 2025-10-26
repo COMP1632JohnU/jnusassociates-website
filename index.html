@@ -17,7 +17,6 @@
       background: #000;
       color: #e0f7f7;
       font-family: "Inter", sans-serif;
-      height: 100%;
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
@@ -26,6 +25,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
       background-image: url('gracechurch.jpg');
       background-size: cover;
       background-position: center;
@@ -37,11 +37,9 @@
       width: 100%;
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(0,255,255,0.15);
       text-align: center;
       padding: 8px 10px 10px;
-      box-sizing: border-box;
     }
 
     .brand {
@@ -52,60 +50,27 @@
       flex-wrap: wrap;
     }
 
-    .logo {
-      width: 58px;
-      height: auto;
-    }
+    .logo { width: 58px; height: auto; }
 
-    .brand-text h1 {
-      color: #00f5d4;
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      margin: 0;
-    }
-
-    .brand-text p {
-      color: #aef;
-      font-size: clamp(0.75rem, 1.4vw, 0.95rem);
-      margin: 2px 0 0;
-    }
+    .brand-text h1 { color: #00f5d4; font-size: clamp(1rem, 2.5vw, 1.5rem); margin: 0; }
+    .brand-text p { color: #aef; font-size: clamp(0.75rem, 1.4vw, 0.95rem); margin: 2px 0 0; }
 
     .contact-line {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
-      margin-top: 4px;
+      display: flex; justify-content: center; gap: 10px;
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem); margin-top: 4px;
     }
-
-    .contact-line a {
-      color: #00f5d4;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .contact-line a { color: #00f5d4; text-decoration: none; display: flex; align-items: center; gap: 4px; }
 
     .navbar ul {
-      list-style: none;
-      margin: 6px 0 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
+      list-style: none; margin: 6px 0 0; padding: 0;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 14px;
     }
 
     .navbar a {
-      color: #dff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: clamp(0.8rem, 1.5vw, 1rem);
-      transition: color 0.3s ease;
+      color: #dff; text-decoration: none; font-weight: 500;
+      font-size: clamp(0.8rem, 1.5vw, 1rem); transition: color 0.3s ease;
     }
-
-    .navbar a.active, .navbar a:hover {
-      color: #00f5d4;
-    }
+    .navbar a.active, .navbar a:hover { color: #00f5d4; }
 
     /* ===== HERO ===== */
     main.hero {
@@ -120,7 +85,6 @@
       border-radius: 16px;
       box-shadow: 0 0 25px rgba(0,255,255,0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       padding: 30px 25px;
       max-width: 850px;
       margin: 0 auto;
@@ -156,7 +120,7 @@
 
     .hero button:hover { background-color: #00ffd1; transform: translateY(-2px); }
 
-    /* ===== PODCAST SECTION ===== */
+    /* ===== PODCASTS ===== */
     .podcast-section {
       text-align: center;
       margin: 20px auto 0;
@@ -167,7 +131,6 @@
       border-radius: 16px;
       box-shadow: 0 0 20px rgba(0,255,255,0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
     }
 
     .podcast-section h2 {
@@ -175,10 +138,7 @@
       text-shadow: 0 0 10px rgba(0,255,255,0.6);
       font-size: clamp(1rem, 2vw, 1.3rem);
       margin-bottom: 0.6rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
+      display: flex; justify-content: center; align-items: center; gap: 8px;
     }
 
     .podcast-intro {
@@ -190,10 +150,8 @@
     }
 
     .podcast-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
-      justify-content: center;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px; justify-content: center;
     }
 
     .podcast-card {
@@ -201,17 +159,13 @@
       border: 1px solid rgba(0,255,255,0.25);
       border-radius: 12px;
       overflow: hidden;
-      opacity: 0;
-      transform: translateY(10px);
+      opacity: 0; transform: translateY(10px);
       transition: all 0.5s ease;
     }
 
     .podcast-card.visible { opacity: 1; transform: translateY(0); }
 
-    .podcast-card iframe {
-      width: 100%;
-      height: clamp(160px, 20vh, 200px);
-    }
+    .podcast-card iframe { width: 100%; height: clamp(160px, 20vh, 200px); }
 
     .podcast-card h3 {
       color: #00f5d4;
@@ -220,19 +174,23 @@
       text-shadow: 0 0 8px rgba(0,255,255,0.5);
     }
 
-    .last-updated {
-      margin-top: 10px;
-      font-size: clamp(0.75rem, 1.3vw, 0.85rem);
-      color: #89f;
-      opacity: 0.8;
-    }
+    .last-updated { margin-top: 10px; font-size: clamp(0.75rem, 1.3vw, 0.85rem); color: #89f; opacity: 0.8; }
+    .update-caption { font-size: 0.8rem; color: #77baff; opacity: 0.75; margin-top: 4px; }
 
-    .update-caption {
-      font-size: 0.8rem;
-      color: #77baff;
-      opacity: 0.75;
-      margin-top: 4px;
-      font-family: "Courier New", monospace;
+    /* ===== REGIONS & CITIES ===== */
+    .region-bar, .cities-bar {
+      text-align: center;
+      color: #00f5d4;
+      text-shadow: 0 0 8px rgba(0,255,255,0.6);
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+    }
+    .cities-bar {
+      color: #aef;
+      font-weight: 400;
+      margin-top: 6px;
+      font-size: clamp(0.75rem, 1.3vw, 0.9rem);
     }
 
     /* ===== TICKER BAR ===== */
@@ -244,9 +202,8 @@
       border-radius: 12px;
       box-shadow: 0 0 18px rgba(0,255,255,0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       padding: 8px 0;
-      margin: 20px auto;
+      margin: 10px auto 20px;
       overflow: hidden;
       opacity: 0;
       animation: fadeIn 1s ease-in-out 2s forwards;
@@ -276,13 +233,10 @@
       border-radius: 12px;
       box-shadow: 0 0 18px rgba(0,255,255,0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       padding: 14px 10px;
       margin-bottom: 25px;
       font-size: clamp(0.75rem, 1.5vw, 0.9rem);
-      line-height: 1.5;
     }
-
     footer a { color: #00f5d4; text-decoration: none; }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
@@ -302,7 +256,7 @@
     </div>
     <div class="contact-line">
       <a href="tel:02035384966"><i data-lucide="phone"></i> 020 3538 4966</a>
-      <a href="https://wa.me/442035384966" target="_blank" title="Chat on WhatsApp"><i data-lucide="whatsapp"></i></a>
+      <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a>
     </div>
     <nav class="navbar">
       <ul>
@@ -337,6 +291,10 @@
     <p class="update-caption">(auto-updating every 4 hours)</p>
   </section>
 
+  <!-- REGIONS & CITIES ABOVE TICKER -->
+  <div class="region-bar">🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC</div>
+  <div class="cities-bar">Lagos • Johannesburg • London • New York • Shanghai • Tokyo</div>
+
   <!-- TICKER -->
   <div class="ticker-bar">
     <div id="tickerContent" class="ticker-content">
@@ -347,7 +305,7 @@
   <!-- FOOTER -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-    <p>📞 020 3538 4966
+    <p>📞 020 3538 4966 |
       <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a> |
       <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
     </p>
@@ -384,14 +342,14 @@
             }
           });
           updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
-        } catch (e) {
+        } catch {
           feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Check API key or channel ID.</p>";
           updated.textContent = "Last updated: Error fetching data";
         }
       }
 
       loadVideos();
-      setInterval(loadVideos, 14400000);
+      setInterval(loadVideos, 14400000); // refresh every 4h
 
       /* === Market Ticker === */
       const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
@@ -416,7 +374,7 @@
           );
           const html = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
           tickerContent.innerHTML = `<span class="teal-glow">📊 Now showing: New York Stock Exchange</span> • ${html}`;
-        } catch (err) {
+        } catch {
           tickerContent.innerHTML = `<span class="neutral-glow">Unable to load live stock data</span>`;
         }
       }
@@ -426,4 +384,3 @@
     });
   </script>
 </body>
-</html>
