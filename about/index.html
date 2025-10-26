@@ -160,79 +160,72 @@
 
   <!-- ✅ functional fixes only -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (window.lucide) lucide.createIcons();
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.lucide) lucide.createIcons();
 
-      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-      const ALPHA_KEY = "HARHFLFJZZBX044Y";
-      const EXCHANGE = { code: "NYSE", name: "New York Stock Exchange (NYSE)" };
+  const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
 
-      function movementStyle(p){ 
-        if (typeof p !== "number" || isNaN(p)) return {cls:"neutral-glow",arrow:"•"};
-        if (p > 0.05)  return {cls:"teal-glow",arrow:"▲"};
-        if (p < -0.05) return {cls:"red-glow",arrow:"▼"};
-        return {cls:"neutral-glow",arrow:"•"};
-      }
+  const TECH_SYMBOLS = [
+    "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA",
+    "META", "TSLA", "IBM", "INTC", "ADBE",
+    "ORCL", "CRM", "AMD", "CSCO", "NFLX"
+  ];
 
-      function updateMarketClocks(){
-        const zones=[
-          {name:"Lagos (WAT)",offset:1},
-          {name:"Johannesburg (SAST)",offset:2},
-          {name:"London",offset:0},
-          {name:"New York",offset:-4},
-          {name:"Shanghai (CST)",offset:8},
-          {name:"Singapore (SGT)",offset:8},
-          {name:"Tokyo",offset:9}
-        ];
-        const now=new Date(),utc=now.getTime()+now.getTimezoneOffset()*60000;
-        document.getElementById("marketClockBar").textContent=zones.map(z=>{
-          const local=new Date(utc+z.offset*3600000);
-          return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
-        }).join(" • ");
-      }
+  function movementStyle(p) {
+    if (typeof p !== "number" || isNaN(p)) return { cls: "neutral-glow", arrow: "•" };
+    if (p > 0.05) return { cls: "teal-glow", arrow: "▲" };
+    if (p < -0.05) return { cls: "red-glow", arrow: "▼" };
+    return { cls: "neutral-glow", arrow: "•" };
+  }
 
-      async function fetchSymbols(exchangeCode){
-        try{
-          const r=await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=${exchangeCode}&token=${FINNHUB_KEY}`);
-          const data=await r.json();
-          return Array.from(new Set(data.map(d=>d.symbol))).slice(0,40);
-        }catch{return [];}
-      }
+  function updateMarketClocks() {
+    const zones = [
+      { name: "Lagos (WAT)", offset: 1 },
+      { name: "Johannesburg (SAST)", offset: 2 },
+      { name: "London", offset: 0 },
+      { name: "New York", offset: -4 },
+      { name: "Shanghai (CST)", offset: 8 },
+      { name: "Singapore (SGT)", offset: 8 },
+      { name: "Tokyo", offset: 9 }
+    ];
+    const now = new Date();
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    document.getElementById("marketClockBar").textContent = zones.map(z => {
+      const local = new Date(utc + z.offset * 3600000);
+      return `${z.name}: ${String(local.getHours()).padStart(2,"0")}:${String(local.getMinutes()).padStart(2,"0")}`;
+    }).join(" • ");
+  }
 
-      async function fetchQuote(symbol){
-        try{
-          const r=await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`);
-          const d=await r.json();
-          if(d&&d.c){return {price:d.c,pct:d.dp};}
-          throw new Error();
-        }catch{
-          try{
-            const a=await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${ALPHA_KEY}`);
-            const j=await a.json();
-            const q=j["Global Quote"]||{};
-            return {price:Number(q["05. price"]),pct:Number((q["10. change percent"]||"").replace("%",""))};
-          }catch{return {price:NaN,pct:NaN};}
-        }
-      }
+  async function fetchQuote(symbol) {
+    try {
+      const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`);
+      const d = await r.json();
+      if (d && d.c) return { price: d.c, pct: d.dp };
+      return { price: NaN, pct: NaN };
+    } catch {
+      return { price: NaN, pct: NaN };
+    }
+  }
 
-      async function renderTicker(){
-        document.getElementById("exchangeLabel").innerHTML=`📊 Now showing: <strong>${EXCHANGE.name}</strong>`;
-        const symbols=await fetchSymbols(EXCHANGE.code);
-        if(!symbols.length){document.getElementById("stockTicker").innerHTML=`<span class='neutral-glow'>Unable to load tickers…</span>`;return;}
-        const quotes=await Promise.all(symbols.map(fetchQuote));
-        const html=symbols.map((s,i)=>{
-          const{price,pct}=quotes[i]||{};
-          const{cls,arrow}=movementStyle(pct);
-          return `<span class='${cls}'>${s}: ${Number(price).toFixed(2)} (${Number(pct).toFixed(2)}%) ${arrow}</span>`;
-        }).join(" • ");
-        document.getElementById("stockTicker").innerHTML=html+" • "+html;
-      }
+  async function renderTicker() {
+    document.getElementById("exchangeLabel").innerHTML = `📊 Now showing: <strong>New York Stock Exchange (Tech Index)</strong>`;
+    const quotes = await Promise.all(TECH_SYMBOLS.map(fetchQuote));
+    const html = TECH_SYMBOLS.map((s, i) => {
+      const { price, pct } = quotes[i] || {};
+      const { cls, arrow } = movementStyle(pct);
+      const pStr = Number.isFinite(price) ? price.toFixed(2) : "N/A";
+      const pctStr = Number.isFinite(pct) ? pct.toFixed(2) : "0.00";
+      return `<span class="${cls}">${s}: ${pStr} (${pctStr}%) ${arrow}</span>`;
+    }).join(" • ");
+    document.getElementById("stockTicker").innerHTML = html + " • " + html;
+  }
 
-      updateMarketClocks();
-      renderTicker();
-      setInterval(updateMarketClocks,60000);
-      setInterval(renderTicker,60000);
-    });
-  </script>
+  updateMarketClocks();
+  renderTicker();
+
+  setInterval(updateMarketClocks, 60000);
+  setInterval(renderTicker, 180000); // refresh every 3 min
+});
+</script>
 </body>
 </html>
