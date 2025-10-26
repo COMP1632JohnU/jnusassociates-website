@@ -2,162 +2,309 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>About Us | JNUS Associates Ltd</title>
 
-  <link rel="stylesheet" href="../styles.css" />
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest" defer></script>
-  <script src="../script.js" defer></script>
 
   <style>
+    /* ===== GLOBAL ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #e0f7f7;
+      font-family: "Inter", sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      background-image: url('../fenchurch.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    /* ===== HEADER ===== */
+    header.site-header {
+      width: 100%;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,255,255,0.2);
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 60px;
+      margin-bottom: 6px;
+    }
+
+    .brand-text h1 {
+      color: #00f5d4;
+      margin: 0;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+    }
+
+    .brand-text p {
+      color: #aef;
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      margin: 2px 0;
+    }
+
+    nav.navbar ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    nav.navbar a {
+      color: #dff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: clamp(0.8rem, 1.6vw, 1rem);
+    }
+
+    nav.navbar a.active,
+    nav.navbar a:hover {
+      color: #00f5d4;
+    }
+
+    /* ===== ABOUT SECTION ===== */
     .about-section {
       text-align: center;
-      margin-top: 120px;
-      padding: 100px 20px;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 12px;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 255, 255, 0.25);
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      margin: 60px auto 0;
+      padding: 50px 20px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 16px;
+      max-width: 900px;
+      border: 1px solid rgba(0,255,255,0.25);
+      box-shadow: 0 0 25px rgba(0,255,255,0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       animation: fadeUp 1.2s ease-out forwards;
     }
 
     .about-section h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #00f5d4;
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
+      margin-bottom: 1rem;
+    }
+
+    .about-section p {
+      color: #d6f3f3;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+      line-height: 1.6;
+      max-width: 750px;
+      margin: 0 auto 2rem;
     }
 
     .about-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .about-card {
-      flex: 1 1 280px;
-      max-width: 300px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(0, 255, 255, 0.3);
+      flex: 1 1 260px;
+      max-width: 280px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(0,255,255,0.25);
       border-radius: 12px;
-      padding: 2rem 1.8rem;
+      padding: 20px 16px;
       color: #e0f7f7;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.12);
       transition: transform 0.35s ease, box-shadow 0.35s ease;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      cursor: pointer;
+      box-shadow: 0 0 12px rgba(0,255,255,0.1);
       text-decoration: none;
     }
 
     .about-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.35);
+      box-shadow: 0 8px 25px rgba(0,255,255,0.35);
     }
 
     .about-card h3 {
-      margin-bottom: 0.8rem;
       color: #00ffd1;
-      text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+      margin-bottom: 8px;
+      text-shadow: 0 0 8px rgba(0,255,255,0.5);
     }
 
     .about-card p {
-      line-height: 1.6;
-      font-size: 1.05rem;
-      color: #d6f3f3;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #dff;
     }
 
-    .about-icon {
-      width: 36px;
-      height: 36px;
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      color: #aef;
+      background: rgba(0,0,0,0.6);
+      border-top: 1px solid rgba(0,255,255,0.2);
+      border-radius: 12px;
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 12px;
+      font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+      box-shadow: 0 0 15px rgba(0,255,255,0.1);
+    }
+
+    footer a { color: #00f5d4; text-decoration: none; }
+
+    /* ===== MINI PODCAST PLAYER ===== */
+    .podcast-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,255,255,0.15);
+      border: 1px solid rgba(0,255,255,0.35);
       color: #00f5d4;
-      margin-bottom: 1rem;
-      filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.4));
-      transition: filter 0.3s ease;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 50px;
+      padding: 10px 18px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 15px rgba(0,255,255,0.3);
+      transition: all 0.4s ease;
+      animation: fadeIn 1.2s ease forwards;
     }
 
-    .about-card:hover .about-icon {
-      filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9));
+    .podcast-btn:hover { background: rgba(0,255,255,0.3); transform: scale(1.05); }
+
+    .podcast-popup {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 250px;
+      height: 250px;
+      background: rgba(0,0,0,0.75);
+      border: 1px solid rgba(0,255,255,0.25);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.25);
+      backdrop-filter: blur(10px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadePopup 0.8s ease forwards;
+      z-index: 999;
+    }
+
+    .podcast-popup iframe {
+      width: 90%;
+      height: 60%;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .podcast-popup h4 {
+      color: #00f5d4;
+      margin: 6px 0;
+      font-size: 0.9rem;
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      color: #00f5d4;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .close-popup:hover { color: #fff; }
+
+    @keyframes fadePopup {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(25px); filter: blur(3px); }
-      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .podcast-btn {
+        bottom: 15px;
+        right: 50%;
+        transform: translateX(50%);
+        font-size: 0.8rem;
+        padding: 8px 14px;
+      }
+
+      .podcast-popup {
+        bottom: 70px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 200px;
+        height: 200px;
+      }
     }
   </style>
 </head>
 
-<body style="background-image:url('../fenchurch.jpg');background-size:cover;background-position:center;">
+<body>
   <!-- ===== HEADER ===== -->
-  <header class="site-header" style="position: relative; background: rgba(0,0,0,0.65); padding: 20px 0;">
-    <div class="container glass-box">
-      <div class="brand">
-        <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
-        <div class="brand-text">
-          <h1 class="glow">JNUS Associates Ltd</h1>
-          <p class="glow-tagline">AI • Systems • Tech • Business & Data Analytics</p>
-          <p class="glow">
-            📞 020 3538 4966
-            <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
-              <i data-lucide="whatsapp"></i>
-            </a>
-          </p>
-        </div>
+  <header class="site-header">
+    <div class="brand">
+      <img src="../jnus-logo.png" alt="JNUS Associates Logo" class="logo" />
+      <div class="brand-text">
+        <h1>JNUS Associates Ltd</h1>
+        <p>AI • Systems • Tech • Business & Data Analytics</p>
       </div>
-
-      <nav class="navbar">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about/" class="active">About</a></li>
-          <li><a href="/services/">Services</a></li>
-          <li><a href="/projects/">Projects</a></li>
-          <li><a href="/contact/">Contact</a></li>
-        </ul>
-      </nav>
     </div>
+
+    <nav class="navbar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/" class="active">About</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <!-- ===== ABOUT SECTION ===== -->
-  <section class="about-section fade-up">
+  <section class="about-section">
     <h2>About Us</h2>
-    <p style="max-width:750px;margin:0 auto 2rem;color:#d6f3f3;">
-      JNUS Associates Ltd is a trusted partner for your global business needs — with innovation, 
-      reliability, transparency, transformation, and efficiency at the heart of everything we do.
-    </p>
+    <p>JNUS Associates Ltd is a trusted partner for your global business needs — with innovation, reliability, transparency, transformation, and efficiency at the heart of everything we do.</p>
 
     <div class="about-grid">
       <a href="/about/mission.html" class="about-card">
-        <i data-lucide="target" class="about-icon"></i>
         <h3>Our Mission</h3>
-        <p>
-          To deliver reliable, secure, and scalable technology solutions that drive meaningful 
-          impact — empowering businesses to operate with clarity and confidence.
-        </p>
+        <p>To deliver reliable, secure, and scalable technology solutions that drive meaningful impact — empowering businesses to operate with clarity and confidence.</p>
       </a>
-
       <a href="/about/vision.html" class="about-card">
-        <i data-lucide="globe" class="about-icon"></i>
         <h3>Our Vision</h3>
-        <p>
-          To be recognized globally as a trusted partner for digital transformation and 
-          sustainable innovation through dependable solutions and client-centric delivery.
-        </p>
+        <p>To be recognized globally as a trusted partner for digital transformation and sustainable innovation through dependable solutions and client-centric delivery.</p>
       </a>
-
       <a href="/about/values.html" class="about-card">
-        <i data-lucide="briefcase" class="about-icon"></i>
         <h3>Our Values</h3>
-        <p>
-          Built on integrity, collaboration, and excellence — we foster innovation while 
-          maintaining transparency and accountability in every engagement.
-        </p>
+        <p>Built on integrity, collaboration, and excellence — we foster innovation while maintaining transparency and accountability in every engagement.</p>
       </a>
     </div>
   </section>
@@ -165,37 +312,45 @@
   <!-- ===== FOOTER ===== -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-    <p>
-      📞 020 3538 4966 
-      <a href="https://wa.me/442035384966" target="_blank" class="whatsapp-icon" title="Chat on WhatsApp">
-        <i data-lucide="whatsapp"></i>
-      </a>
-      | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
-    </p>
+    <p>📞 020 3538 4966 | <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a></p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
   </footer>
 
-  <!-- ===== MARKET STATUS + CLOCK + STOCK TICKER ===== -->
-  <div id="marketStatusBar" class="market-status-bar">
-    <span class="neutral-glow">Checking global market status...</span>
-  </div>
-  <div id="marketClockBar" class="market-clock-bar">
-    <span class="neutral-glow">Loading clocks...</span>
-  </div>
-  <div class="stock-ticker">
-    <div class="ticker-content" id="stockTicker">Loading live market data...</div>
+  <!-- 🎧 MINI PODCAST PLAYER -->
+  <button class="podcast-btn" id="openPodcast">🎧 Open Podcasts</button>
+  <div class="podcast-popup" id="podcastPopup">
+    <span class="close-popup" id="closePodcast">&times;</span>
+    <h4>Now Playing 🎙️</h4>
+    <iframe id="podcastFrame" src="" allowfullscreen></iframe>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      function initLucide() {
-        if (window.lucide) {
-          lucide.createIcons();
-        } else {
-          setTimeout(initLucide, 150);
+      if (window.lucide) lucide.createIcons();
+
+      const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
+      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE";
+      const frame = document.getElementById("podcastFrame");
+
+      async function loadLatestPodcast() {
+        try {
+          const res = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`);
+          const data = await res.json();
+          const videoId = data.items[0].id.videoId;
+          frame.src = `https://www.youtube.com/embed/${videoId}`;
+        } catch {
+          frame.src = "";
         }
       }
-      initLucide();
+
+      loadLatestPodcast();
+
+      const openBtn = document.getElementById("openPodcast");
+      const popup = document.getElementById("podcastPopup");
+      const closeBtn = document.getElementById("closePodcast");
+
+      openBtn.addEventListener("click", () => popup.style.display = "flex");
+      closeBtn.addEventListener("click", () => popup.style.display = "none");
     });
   </script>
 </body>
