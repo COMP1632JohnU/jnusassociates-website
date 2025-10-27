@@ -713,21 +713,24 @@
           return { c: NaN, dp: NaN };
         }
       }
-// === Sparkline helper ===
+// === Sparkline helper (updated) ===
 async function fetchSparkline(symbol) {
   try {
     const now = Math.floor(Date.now() / 1000);
     const from = now - 86400 * 5; // last 5 days
-    const url = `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=30&from=${from}&to=${now}&token=${FINNHUB_KEY}`;
+    const url = `https://finnhub.io/api/v1/stock/candle?symbol=${encodeURIComponent(symbol)}&resolution=30&from=${from}&to=${now}&token=${FINNHUB_KEY}`;
     const res = await fetch(url);
     const d = await res.json();
-    if (d.s !== "ok" || !d.c || !d.c.length) return [];
 
-    // Normalize values for drawing
+    // Validate data
+    if (!d || d.s !== "ok" || !Array.isArray(d.c) || !d.c.length) return [];
+
+    // Normalize values between 0–1
     const min = Math.min(...d.c);
     const max = Math.max(...d.c);
     return d.c.map(v => (v - min) / (max - min));
-  } catch {
+  } catch (err) {
+    console.error("Sparkline error:", err);
     return [];
   }
 }
@@ -738,8 +741,16 @@ function drawSparkline(canvas, data) {
   const w = canvas.width;
   const h = canvas.height;
   ctx.clearRect(0, 0, w, h);
-  ctx.strokeStyle = "#00f5d4";
-  ctx.lineWidth = 1.8;
+
+  // 🌊 Create a subtle teal gradient stroke
+  const gradient = ctx.createLinearGradient(0, 0, w, 0);
+  gradient.addColorStop(0, "#00f5d4");   // bright teal start
+  gradient.addColorStop(1, "#00b3b3");   // deeper teal end
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 1.6;
+  ctx.shadowColor = "rgba(0,255,255,0.35)";
+  ctx.shadowBlur = 6;
+
   ctx.beginPath();
   data.forEach((val, i) => {
     const x = (i / (data.length - 1)) * w;
