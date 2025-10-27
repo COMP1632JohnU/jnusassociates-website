@@ -706,7 +706,11 @@ footer p:last-of-type {
   </footer>
 
   <!-- SCRIPT -->
-  <script src="config.js"></script> 
+  <script src="config.js" onerror="
+    console.warn('⚠️ config.js not found — using fallback (no API key)');
+    window.API_KEY = window.API_KEY || '';
+    window.CHANNEL_ID = window.CHANNEL_ID || '';
+"></script>
   <script>
 document.addEventListener("DOMContentLoaded", async () => {
   if (window.lucide) lucide.createIcons();
@@ -715,15 +719,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const updated = document.getElementById("lastUpdated");
 
   /* === YouTube + Apple Podcasts Fallback (Branded) === */
-
-
   async function loadYouTube() {
     try {
       const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
       const res = await fetch(url);
       const data = await res.json();
       if (!data.items || !data.items.length) throw new Error("No videos");
-
+      console.log(
+    `%c✅ YouTube feed active for: ${CHANNEL_ID}`,
+    "color:#00f5d4; font-weight:600; font-size:0.95rem; text-shadow:0 0 6px rgba(0,255,255,0.4);"
+);
       feed.innerHTML = "";
       data.items.forEach((i, idx) => {
         if (i.id.kind === "youtube#video") {
