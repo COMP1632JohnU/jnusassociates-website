@@ -237,6 +237,78 @@
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ===== NEW: Dynamic Market Overview (3-col glass cards) ===== */
+    .market-overview-dynamic{
+      width:92%;
+      max-width:1100px;
+      margin:18px auto 6px;
+      padding:18px 14px 14px;
+      background:rgba(0,0,0,0.40);
+      border:1px solid rgba(0,255,255,0.25);
+      border-radius:14px;
+      box-shadow:0 0 16px rgba(0,255,255,0.18);
+      backdrop-filter:blur(12px);
+    }
+    .market-overview-dynamic h3{
+      margin:0 0 10px;
+      font-size: clamp(1rem,2.2vw,1.25rem);
+      color:#00f5d4;
+      text-shadow:0 0 10px rgba(0,255,255,.6);
+      text-align:center;
+      font-weight:700;
+      letter-spacing:.4px;
+    }
+    .region-tabs{
+      display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+      margin:8px 0 14px;
+    }
+    .tab-btn{
+      background:rgba(0,0,0,0.45);
+      color:#cfffff;
+      border:1px solid rgba(0,255,255,0.25);
+      border-radius:999px;
+      padding:8px 14px;
+      font-weight:600;
+      font-size:.9rem;
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+      box-shadow:0 0 12px rgba(0,255,255,.18);
+      transition:transform .2s ease, box-shadow .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .tab-btn:hover{ transform: translateY(-2px); box-shadow:0 6px 18px rgba(0,255,255,.25); color:#00ffee; }
+    .tab-btn.active{ color:#00f5d4; border-color:rgba(0,255,255,0.45); box-shadow: 0 0 16px rgba(0,255,255,.35); }
+
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+    @media (max-width:900px){ .cards-grid{ grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:560px){ .cards-grid{ grid-template-columns:1fr; } }
+
+    .mcard{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(0,255,255,0.28);
+      border-radius:12px;
+      padding:12px 14px;
+      min-height:84px;
+      display:flex; flex-direction:column; gap:6px;
+      box-shadow:0 0 14px rgba(0,255,255,.20);
+      backdrop-filter:blur(8px);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .mcard:hover{ transform: translateY(-4px); box-shadow:0 10px 24px rgba(0,255,255,.30); }
+    .mcard .mname{ font-weight:700; color:#e0ffff; font-size:.95rem; }
+    .mcard .mprice{ font-family:"Courier New", monospace; font-size:1rem; color:#fff; }
+    .mcard .mchange{ font-family:"Courier New", monospace; font-size:.9rem; }
+    .mcard .mstatus{ font-size:.78rem; color:#aef; opacity:.85; }
+
+    .chg-up{ color:#00f5d4; text-shadow: 0 0 8px rgba(0,255,255,.5); }
+    .chg-down{ color:#ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,.5); }
+    .chg-flat{ color:#ccf; opacity:.92; }
+
+    .update-note{ text-align:center; font-size:.8rem; color:#89f; margin-top:8px; opacity:.85; }
   </style>
 </head>
 
@@ -289,46 +361,70 @@
     <p class="update-caption">(auto-updating every 4 hours)</p>
   </section>
 
-  
+  <!-- 🌐 GLOBAL MARKET OVERVIEW (existing static block kept) -->
+  <section class="market-glass">
+    <h3>🌐 Global Market Overview</h3>
+    <div class="market-grid" id="marketGrid">
+      <p style="color:#88f; text-align:center;">Loading live data...</p>
+    </div>
+    <p class="update-caption" id="marketUpdated">(auto-refreshing every 5 min)</p>
+  </section>
+
+  <!-- ✅ NEW: Dynamic Region Tabs + 3-col cards (preview below your static block) -->
+  <section class="market-overview-dynamic" id="dynamicMarket">
+    <h3>🌐 Global Market Overview — Regions</h3>
+    <div class="region-tabs" id="regionTabs">
+      <button class="tab-btn active" data-region="AMERICA">AMERICA</button>
+      <button class="tab-btn" data-region="EUROPE">EUROPE</button>
+      <button class="tab-btn" data-region="AFRICA">AFRICA</button>
+      <button class="tab-btn" data-region="ASIA-PACIFIC">ASIA-PACIFIC</button>
+    </div>
+    <div class="cards-grid" id="regionGrid">
+      <!-- cards injected by JS -->
+    </div>
+    <div class="update-note" id="regionUpdated">Loading region data…</div>
+  </section>
+
+  <!-- REGIONS & CITIES ABOVE TICKER (kept) -->
+  <div class="glass-region-wrapper" style="width:100%;display:flex;flex-direction:column;align-items:center;margin-top:20px;">
+    <div class="glass-region-bar" style="
+      background:rgba(0,0,0,0.45);
+      border:1px solid rgba(0,255,255,0.25);
+      border-radius:12px;
+      box-shadow:0 0 18px rgba(0,255,255,0.15);
+      backdrop-filter:blur(10px);
+      color:#00f5d4;
+      text-shadow:0 0 8px rgba(0,255,255,0.6);
+      font-weight:600;
+      text-transform:uppercase;
+      padding:8px 18px;
+      text-align:center;
+      max-width:800px;
+      width:90%;
+      font-size:clamp(0.8rem,1.5vw,1rem);
+    ">
+      🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC
+    </div>
+    <div class="glass-city-bar" style="
+      background:rgba(0,0,0,0.4);
+      border:1px solid rgba(0,255,255,0.2);
+      border-radius:12px;
+      box-shadow:0 0 14px rgba(0,255,255,0.12);
+      backdrop-filter:blur(8px);
+      color:#aef;
+      font-weight:400;
+      margin-top:8px;
+      padding:8px 18px;
+      text-align:center;
+      max-width:800px;
+      width:90%;
+      font-size:clamp(0.75rem,1.3vw,0.9rem);
+    ">
+      Lagos • Johannesburg • London • New York • Shanghai • Tokyo
+    </div>
+  </div>
+
   <!-- TICKER -->
-<!-- REGIONS & CITIES ABOVE TICKER -->
-<div class="glass-region-wrapper" style="width:100%;display:flex;flex-direction:column;align-items:center;margin-top:20px;">
-  <div class="glass-region-bar" style="
-    background:rgba(0,0,0,0.45);
-    border:1px solid rgba(0,255,255,0.25);
-    border-radius:12px;
-    box-shadow:0 0 18px rgba(0,255,255,0.15);
-    backdrop-filter:blur(10px);
-    color:#00f5d4;
-    text-shadow:0 0 8px rgba(0,255,255,0.6);
-    font-weight:600;
-    text-transform:uppercase;
-    padding:8px 18px;
-    text-align:center;
-    max-width:800px;
-    width:90%;
-    font-size:clamp(0.8rem,1.5vw,1rem);
-  ">
-    🌍 AFRICA • EUROPE • AMERICA • ASIA-PACIFIC
-  </div>
-  <div class="glass-city-bar" style="
-    background:rgba(0,0,0,0.4);
-    border:1px solid rgba(0,255,255,0.2);
-    border-radius:12px;
-    box-shadow:0 0 14px rgba(0,255,255,0.12);
-    backdrop-filter:blur(8px);
-    color:#aef;
-    font-weight:400;
-    margin-top:8px;
-    padding:8px 18px;
-    text-align:center;
-    max-width:800px;
-    width:90%;
-    font-size:clamp(0.75rem,1.3vw,0.9rem);
-  ">
-    Lagos • Johannesburg • London • New York • Shanghai • Tokyo
-  </div>
-</div>
   <div class="ticker-bar">
     <div id="tickerContent" class="ticker-content">
       <span class="teal-glow">📊 Now showing: Loading Markets…</span>
@@ -394,7 +490,6 @@
           const res = await fetch(`https://itunes.apple.com/search?term=${query}&media=podcast&limit=5`);
           const data = await res.json();
 
-          // Header badge (JNUS Data Feeds)
           const header = `
             <div style="text-align:center;margin-bottom:14px;color:#00f5d4;font-weight:600;text-shadow:0 0 8px rgba(0,255,255,0.6);animation:fadeUp 1s ease-out;">
               🎧 Powered by <span style="font-weight:700;">JNUS Data Feeds</span> — Curated from Apple Podcasts
@@ -423,13 +518,12 @@
       const ytOK = await loadYouTube();
       if (!ytOK) await loadApplePodcasts();
 
-      // Auto-refresh every 4 hours, keeping YouTube primary and Apple as fallback
       setInterval(async () => {
         const ok = await loadYouTube();
         if (!ok) await loadApplePodcasts();
-      }, 14400000);
+      }, 14400000); // 4h
 
-      /* === Market Ticker === */
+      /* === Market Ticker (existing) === */
       const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
       const tickerContent = document.getElementById("tickerContent");
 
@@ -437,7 +531,6 @@
 
       async function fetchStocks() {
         try {
-          // Focused tech list (readable + lively)
           const TECH = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
           const results = await Promise.allSettled(
             TECH.map(async s => {
@@ -457,13 +550,109 @@
         }
       }
 
-      // Initial + regular refresh (every 3 minutes)
       setTimeout(fetchStocks, 2000);
       setInterval(fetchStocks, 180000);
+
+      /* === NEW: Dynamic Region Tabs + Cards (3-col) === */
+      const REGION_MAP = {
+        "AMERICA": [
+          { symbol: "SPY",  label: "S&P 500 (SPY)" },
+          { symbol: "QQQ",  label: "NASDAQ 100 (QQQ)" },
+          { symbol: "DIA",  label: "Dow Jones (DIA)" }
+        ],
+        "EUROPE": [
+          { symbol: "VGK",  label: "Europe (VGK)" },
+          { symbol: "EWU",  label: "FTSE UK (EWU)" },
+          { symbol: "EZU",  label: "Eurozone (EZU)" }
+        ],
+        "AFRICA": [
+          { symbol: "EZA",  label: "South Africa (EZA)" },
+          { symbol: "AFK",  label: "Africa ex-SA (AFK)" },
+          { symbol: "EGPT", label: "Egypt (EGPT)" }
+        ],
+        "ASIA-PACIFIC": [
+          { symbol: "EWJ",  label: "Japan (EWJ)" },
+          { symbol: "EWH",  label: "Hong Kong (EWH)" },
+          { symbol: "EWA",  label: "Australia (EWA)" }
+        ]
+      };
+
+      const regionGrid = document.getElementById("regionGrid");
+      const regionUpdated = document.getElementById("regionUpdated");
+      const regionTabs = document.getElementById("regionTabs");
+
+      function classForPct(dp){
+        if (!Number.isFinite(dp)) return "chg-flat";
+        if (dp > 0.05)  return "chg-up";
+        if (dp < -0.05) return "chg-down";
+        return "chg-flat";
+      }
+
+      async function fetchQuote(symbol) {
+        try {
+          const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_KEY}`);
+          const d = await r.json();
+          return { c: d.c, dp: d.dp };
+        } catch {
+          return { c: NaN, dp: NaN };
+        }
+      }
+
+      async function renderRegion(regionKey){
+        const items = REGION_MAP[regionKey] || [];
+        if (!items.length) return;
+
+        regionGrid.innerHTML = items.map(() => `
+          <div class="mcard">
+            <div class="mname">Loading…</div>
+            <div class="mprice">—</div>
+            <div class="mchange chg-flat">—</div>
+            <div class="mstatus">Fetching live data…</div>
+          </div>
+        `).join("");
+
+        const cards = Array.from(regionGrid.querySelectorAll(".mcard"));
+
+        const quotes = await Promise.all(items.map(i => fetchQuote(i.symbol)));
+
+        quotes.forEach((q, idx) => {
+          const card = cards[idx];
+          if (!card) return;
+          const nameEl = card.querySelector(".mname");
+          const priceEl = card.querySelector(".mprice");
+          const chgEl = card.querySelector(".mchange");
+          const statusEl = card.querySelector(".mstatus");
+
+          const px  = Number.isFinite(q.c)  ? q.c.toFixed(2)  : "N/A";
+          const pct = Number.isFinite(q.dp) ? q.dp.toFixed(2) : "0.00";
+          const cls = classForPct(q.dp);
+          nameEl.textContent = items[idx].label;
+          priceEl.textContent = `${px}`;
+          chgEl.textContent = `${pct}%`;
+          chgEl.className = `mchange ${cls}`;
+          statusEl.textContent = `Symbol: ${items[idx].symbol}`;
+        });
+
+        regionUpdated.textContent = "Updated: " + new Date().toLocaleTimeString("en-GB");
+      }
+
+      // Tab interactions
+      regionTabs.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab-btn");
+        if (!btn) return;
+        regionTabs.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderRegion(btn.dataset.region);
+      });
+
+      // Initial load: AMERICA
+      renderRegion("AMERICA");
+      // Auto-refresh current tab every 5 minutes
+      setInterval(() => {
+        const active = regionTabs.querySelector(".tab-btn.active");
+        if (active) renderRegion(active.dataset.region);
+      }, 300000);
     });
   </script>
 </body>
 </html>
-
-
-
