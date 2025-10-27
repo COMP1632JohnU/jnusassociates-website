@@ -237,7 +237,24 @@ footer {
     filter: blur(0);
   }
 }
+.fade-in {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
 footer p,
 footer a {
   color: #00f5d4;
@@ -359,36 +376,6 @@ footer a:hover {
   }
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .navbar ul {
-    display: none;
-    flex-direction: column;
-    background: rgba(0, 0, 0, 0.95);
-    padding: 1rem 0;
-    border-top: 1px solid rgba(0, 255, 255, 0.4);
-  }
-
-  .navbar ul.active { display: flex; }
-
-  .hamburger {
-    display: block;
-    cursor: pointer;
-    font-size: 1.8rem;
-    color: #00f5d4;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
-  }
-
-  .logo { width: 60px; }
-
-  .whatsapp-icon i { width: 20px; height: 20px; }
-}
-
 /* ===== FINANCIAL PODCASTS SECTION ===== */
 .podcast-section {
   text-align: center;
@@ -465,5 +452,75 @@ footer a:hover {
 
   .podcast-card iframe {
     height: 180px;
+  }
+}
+
+/* ===== INDUSTRY FEED SECTION (Dynamic YouTube API) ===== */
+#industryInsights {
+  text-align: center;
+  margin: 120px auto;
+  padding: 60px 30px;
+  max-width: 1200px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #e0f7f7;
+  animation: fadeUp 1.2s ease-out forwards;
+}
+
+#industryInsights h3 {
+  color: #00f5d4;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Grid layout for videos */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin-top: 14px;
+  padding: 10px 0;
+}
+
+.video-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px;
+  backdrop-filter: blur(10px);
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.video-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.video-card h4 {
+  font-size: 0.9rem;
+  color: #eafcff;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.video-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 18px rgba(0, 245, 212, 0.2);
+}
+
+@media (max-width: 768px) {
+  #industryInsights {
+    padding: 40px 20px;
   }
 }

@@ -617,7 +617,21 @@ footer p:last-of-type {
     <p class="last-updated" id="lastUpdated">Last updated: Initializing…</p>
     <p class="update-caption">(auto-updating every 4 hours)</p>
   </section>
+<!-- 🌍 FinTech & Reinsurance Industry Insights -->
+<section id="industryInsights" class="glass-panel" style="margin-top:40px;">
+  <h3 class="teal-glow">FinTech & Reinsurance Trends</h3>
 
+  <p class="industry-intro">
+    Explore curated videos on fintech innovations, reinsurance insights, MGAs, and emerging market strategies for modern enterprises.
+  </p>
+
+  <div id="industryFeed" class="video-grid">
+    <p style="color:#88f; text-align:center;">Loading industry insights...</p>
+  </div>
+
+  <p class="last-updated" id="industryUpdated">Last updated: Initializing...</p>
+  <p class="update-caption">(auto-refreshing every 4 hours)</p>
+</section>
   <!-- 🌐 GLOBAL MARKET OVERVIEW (existing static block kept) -->
   <section class="market-glass">
     <h3>🌐 Global Market Overview</h3>
@@ -711,6 +725,7 @@ footer p:last-of-type {
     window.API_KEY = window.API_KEY || '';
     window.CHANNEL_ID = window.CHANNEL_ID || '';
 "></script>
+
   <script>
 document.addEventListener("DOMContentLoaded", async () => {
   if (window.lucide) lucide.createIcons();
@@ -752,6 +767,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+async function loadIndustryFeed() {
+  const keywords =
+    "fintech innovation reinsurance MGA insurance technology global markets business strategy";
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+    keywords
+  )}&type=video&order=date&maxResults=4&key=${API_KEY}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data.items?.length) throw new Error("No industry videos found");
+
+    console.log(
+      "%c🌐 Live industry feed updated",
+      "color:#00f5d4;font-weight:600;text-shadow:0 0 6px rgba(0,255,255,0.4)"
+    );
+
+    const industryFeed = document.getElementById("industryFeed");
+    industryFeed.innerHTML = data.items
+      .map(
+        (v) => `
+        <div class="video-card glass-card">
+          <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank" rel="noopener">
+            <img src="${v.snippet.thumbnails.medium.url}" alt="${v.snippet.title}" loading="lazy" />
+            <h4>${v.snippet.title}</h4>
+          </a>
+        </div>`
+      )
+      .join("");
+  } catch (err) {
+    console.error("❌ Failed to load industry feed:", err);
+  }
+}
   async function loadApplePodcasts() {
     try {
       const searchTerms = ["finance","AI","business analytics","insurance","reinsurance","tech stocks","mergers and acquisitions"];
@@ -798,7 +846,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function fetchStocks() {
     try {
-      const TECH = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
+      const TECH = ["AAPL","MSFT","NVDA","GOOGL","GOOG","AMZN","META","TSLA","AVGO","TSM","ORCL","ASML","AMD","V","MA","NFLX","ADBE","CSCO","INTC","QCOM","CRM","IBM","TXN","MU","LRCX","AMAT",
+"NOW","FIS","PYPL","PLTR","SNOW","UBER","WDC","STX","HPQ","DELL","VMW","CTSH","WDAY","DOCU","PANW","SHOP","SAP","ARM","ADSK","EA","BIDU","JD","SPOT","TTD"];
       const results = await Promise.allSettled(
         TECH.map(async s => {
           const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`);
