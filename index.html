@@ -189,17 +189,6 @@
     .last-updated { margin-top: 10px; font-size: clamp(0.75rem, 1.3vw, 0.85rem); color: #89f; opacity: 0.8; }
     .update-caption { font-size: 0.8rem; color: #77baff; opacity: 0.75; margin-top: 4px; }
 
-    /* ===== REGIONS & CITIES ===== */
-    .region-bar, .cities-bar {
-      text-align: center;
-      color: #00f5d4;
-      text-shadow: 0 0 8px rgba(0,255,255,0.6);
-      margin-top: 20px;
-      font-weight: 600;
-      font-size: clamp(0.8rem, 1.5vw, 1rem);
-    }
-    .cities-bar { color: #aef; font-weight: 400; margin-top: 6px; font-size: clamp(0.75rem, 1.3vw, 0.9rem); }
-
     /* ===== TICKER BAR ===== */
     .ticker-bar {
       width: 100%; max-width: 1200px;
@@ -238,7 +227,7 @@
     @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* ===== NEW: Dynamic Market Overview (3-col glass cards) ===== */
+    /* ===== MARKET OVERVIEW (REGION TABS + CARDS) ===== */
     .market-overview-dynamic{
       width:92%;
       max-width:1100px;
@@ -259,10 +248,7 @@
       font-weight:700;
       letter-spacing:.4px;
     }
-    .region-tabs{
-      display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
-      margin:8px 0 14px;
-    }
+    .region-tabs{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:8px 0 14px; }
     .tab-btn{
       background:rgba(0,0,0,0.45);
       color:#cfffff;
@@ -286,113 +272,7 @@
     }
     @media (max-width:900px){ .cards-grid{ grid-template-columns:repeat(2,1fr);} }
     @media (max-width:560px){ .cards-grid{ grid-template-columns:1fr; } }
-/* ==== Markets Module (tabs + grid) ==== */
-.market-section {
-  width: 92%;
-  max-width: 1100px;
-  margin: 22px auto 16px;
-  background: rgba(0,0,0,0.40);
-  border: 1px solid rgba(0,255,255,0.22);
-  border-radius: 16px;
-  box-shadow: 0 0 18px rgba(0,255,255,0.15);
-  backdrop-filter: blur(10px);
-  padding: 16px 14px 18px;
-}
 
-.market-section h3 {
-  margin: 0 0 10px;
-  color: #00f5d4;
-  text-shadow: 0 0 10px rgba(0,255,255,.6);
-  font-size: clamp(1rem, 1.9vw, 1.25rem);
-  text-align: center;
-}
-
-.region-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: 8px 0 12px;
-}
-
-.region-tab {
-  background: rgba(0,0,0,0.45);
-  border: 1px solid rgba(0,255,255,0.25);
-  color: #c8ffff;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: clamp(.8rem, 1.4vw, .95rem);
-  cursor: pointer;
-  user-select: none;
-  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
-  box-shadow: 0 0 10px rgba(0,255,255,.15);
-}
-.region-tab:hover { transform: translateY(-1px); }
-.region-tab.active {
-  color: #001a1a;
-  background: #00f5d4;
-  border-color: rgba(0,255,255,.5);
-  box-shadow: 0 0 18px rgba(0,255,255,.35);
-}
-
-.region-clockbar {
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(0,255,255,0.18);
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0,255,255,.12);
-  padding: 8px 12px;
-  margin: 6px auto 12px;
-  color: #aef;
-  text-align: center;
-  font-family: "Courier New", monospace;
-  font-size: clamp(.78rem, 1.3vw, .9rem);
-}
-
-.market-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 14px;
-}
-
-.market-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(0,0,0,0.45);
-  border: 1px solid rgba(0,255,255,0.25);
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 0 15px rgba(0,255,255,0.15);
-  backdrop-filter: blur(10px);
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .35s ease, transform .35s ease;
-}
-.market-card.show { opacity: 1; transform: translateY(0); }
-
-.sparkline {
-  width: 96px; height: 36px; flex: 0 0 auto;
-  border-radius: 6px;
-  background: rgba(0,255,255,0.04);
-  border: 1px solid rgba(0,255,255,0.14);
-}
-
-.mkt-meta h4 {
-  margin: 0 0 2px;
-  color: #00f5d4;
-  font-size: clamp(.9rem,1.3vw,1rem);
-  text-shadow: 0 0 8px rgba(0,255,255,.5);
-}
-.mkt-meta p {
-  margin: 0;
-  color: #d6f3f3;
-  font-size: clamp(.78rem,1.2vw,.9rem);
-}
-
-.badge-up { color:#00f5d4; text-shadow:0 0 8px rgba(0,255,255,.6); font-weight:700; }
-.badge-down { color:#ff6b6b; text-shadow:0 0 8px rgba(255,80,80,.6); font-weight:700; }
-.badge-flat { color:#ccf; opacity:.95; font-weight:700; }
     .mcard{
       background:rgba(255,255,255,0.08);
       border:1px solid rgba(0,255,255,0.28);
@@ -403,18 +283,10 @@
       box-shadow:0 0 14px rgba(0,255,255,.20);
       backdrop-filter:blur(8px);
       transition:transform .25s ease, box-shadow .25s ease;
+      cursor: pointer;
     }
     .mcard:hover{ transform: translateY(-4px); box-shadow:0 10px 24px rgba(0,255,255,.30); }
-   /* === Sparkline (mini chart inside each card) === */ 
-  .sparkline {
-  width: 100%;
-  height: 40px;
-  background: rgba(0,255,255,0.05);
-  border: 1px solid rgba(0,255,255,0.15);
-  border-radius: 8px;
-  margin-top: 6px;
-  box-shadow: 0 0 10px rgba(0,255,255,0.08);
-}  
+
     .mcard .mname{ font-weight:700; color:#e0ffff; font-size:.95rem; }
     .mcard .mprice{ font-family:"Courier New", monospace; font-size:1rem; color:#fff; }
     .mcard .mchange{ font-family:"Courier New", monospace; font-size:.9rem; }
@@ -424,148 +296,87 @@
     .chg-down{ color:#ff6b6b; text-shadow: 0 0 8px rgba(255,80,80,.5); }
     .chg-flat{ color:#ccf; opacity:.92; }
 
+    /* Sparkline canvas (single definition) */
+    .sparkline {
+      width: 100%;
+      height: 40px;
+      background: rgba(0,255,255,0.05);
+      border: 1px solid rgba(0,255,255,0.15);
+      border-radius: 8px;
+      margin-top: 6px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.08);
+    }
+
     .update-note{ text-align:center; font-size:.8rem; color:#89f; margin-top:8px; opacity:.85; }
-    /* === Market Modal (Glass Overlay) === */
-.market-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(10px);
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  animation: fadeIn 0.3s ease;
-}
 
-.market-modal.active { display: flex; }
+    /* ===== REGION/CITY BARS (ABOVE TICKER) ===== */
+    .glass-region-wrapper { width:100%; display:flex; flex-direction:column; align-items:center; margin-top:20px; }
 
-.modal-content {
-  background: rgba(0,0,0,0.65);
-  border: 1px solid rgba(0,255,255,0.3);
-  border-radius: 14px;
-  box-shadow: 0 0 24px rgba(0,255,255,0.25);
-  padding: 18px 22px 22px;
-  width: 90%;
-  max-width: 880px;
-  color: #e0ffff;
-  position: relative;
-  animation: fadeUp 0.4s ease;
-}
+    /* ===== MODAL (GLASS OVERLAY) ===== */
+    .market-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 999;
+    }
+    .market-modal.active { opacity: 1; pointer-events: auto; }
 
-.modal-content h3 {
-  text-align: center;
-  color: #00f5d4;
-  text-shadow: 0 0 12px rgba(0,255,255,0.6);
-  margin-bottom: 12px;
-  font-size: clamp(1rem,2vw,1.3rem);
-}
+    .modal-content {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      border-radius: 14px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+      width: 90%;
+      max-width: 800px;
+      padding: 16px 18px 24px;
+      transform: scale(0.9);
+      transition: transform 0.35s ease;
+      text-align: center;
+    }
+    .market-modal.active .modal-content { transform: scale(1); }
 
-.modal-content iframe {
-  width: 100%;
-  height: 480px;
-  border: none;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.4);
-  box-shadow: 0 0 14px rgba(0,255,255,0.15);
-}
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: #00f5d4;
+      cursor: pointer;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .modal-close:hover { color: #00ffee; transform: rotate(90deg); }
 
-.modal-close {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 1.6rem;
-  color: #00f5d4;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
+    #modalTitle {
+      color: #00f5d4;
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+      margin-top: 10px;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+    }
 
-.modal-close:hover { color: #00ffee; }
-/* === Modal Styling Enhancements === */
-.market-modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 999;
-}
+    #modalFrame {
+      width: 100%;
+      height: 420px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 12px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      background: rgba(0,0,0,0.4);
+    }
 
-.market-modal.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal-content {
-  background: rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(0, 255, 255, 0.25);
-  border-radius: 14px;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
-  width: 90%;
-  max-width: 800px;
-  padding: 16px 18px 24px;
-  transform: scale(0.9);
-  transition: transform 0.35s ease;
-  text-align: center;
-}
-
-.market-modal.active .modal-content {
-  transform: scale(1);
-}
-
-.modal-close {
-  position: absolute;
-  top: 14px; right: 18px;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  color: #00f5d4;
-  cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.modal-close:hover {
-  color: #00ffee;
-  transform: rotate(90deg);
-}
-
-#modalTitle {
-  color: #00f5d4;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-  margin-top: 10px;
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
-}
-
-#modalFrame {
-  width: 100%;
-  height: 420px;
-  border: none;
-  border-radius: 10px;
-  margin-top: 12px;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-}
-/* === Footer Fade-In Animation for "Data powered by Yahoo Finance" === */
-@keyframes fadeInFooter {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 0.65;
-    transform: translateY(0);
-  }
-}
-
-footer p:last-of-type {
-  animation: fadeInFooter 1.4s ease-out 2s; /* 2s delay syncs with ticker fade */
-}
+    /* ===== FOOTER NOTE ANIMATION ===== */
+    @keyframes fadeInFooter {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 0.65; transform: translateY(0); }
+    }
+    footer p:last-of-type { animation: fadeInFooter 1.4s ease-out 2s; }
   </style>
 </head>
 
@@ -603,7 +414,7 @@ footer p:last-of-type {
     </div>
   </main>
 
-  <!-- 🎙 PODCASTS SECTION (YouTube + Apple Fallback) -->
+  <!-- 🎙 PODCASTS (YouTube + Apple fallback) -->
   <section class="podcast-section">
     <h2><i data-lucide="radio"></i> Financial Insights & Podcasts</h2>
     <p class="podcast-intro">
@@ -617,35 +428,19 @@ footer p:last-of-type {
     <p class="last-updated" id="lastUpdated">Last updated: Initializing…</p>
     <p class="update-caption">(auto-updating every 4 hours)</p>
   </section>
-<!-- 🌍 FinTech & Reinsurance Industry Insights -->
-<section id="industryInsights" class="glass-panel" style="margin-top:40px;">
-  <h3 class="teal-glow">FinTech & Reinsurance Trends</h3>
 
-  <p class="industry-intro">
-    Explore curated videos on fintech innovations, reinsurance insights, MGAs, and emerging market strategies for modern enterprises.
-  </p>
-
-  <div id="industryFeed" class="video-grid">
-    <p style="color:#88f; text-align:center;">Loading industry insights...</p>
-  </div>
-
-  <p class="last-updated" id="industryUpdated">Last updated: Initializing...</p>
-  <p class="update-caption">(auto-refreshing every 4 hours)</p>
-</section>
-  <!-- 🌐 GLOBAL MARKET OVERVIEW (existing static block kept) -->
+  <!-- 🌐 GLOBAL MARKET OVERVIEW (static heading + grid) -->
   <section class="market-glass">
-    <h3>🌐 Global Market Overview</h3>
+    <h3 style="text-align:center;">🌐 Global Market Overview</h3>
     <div class="market-grid" id="marketGrid">
       <p style="color:#88f; text-align:center;">Loading live data...</p>
     </div>
-  <p class="update-caption" id="marketUpdated" style="
-  text-align:center;
-  display:block;
-  margin: 0 auto;
-">(auto-refreshing every 5 min)</p>
+    <p class="update-caption" id="marketUpdated" style="text-align:center;display:block;margin:0 auto;">
+      (auto-refreshing every 5 min)
+    </p>
   </section>
 
-  <!-- ✅ NEW: Dynamic Region Tabs + 3-col cards (preview below your static block) -->
+  <!-- ✅ REGION TABS + CARDS -->
   <section class="market-overview-dynamic" id="dynamicMarket">
     <h3>🌐 Global Market Overview — Regions</h3>
     <div class="region-tabs" id="regionTabs">
@@ -654,14 +449,12 @@ footer p:last-of-type {
       <button class="tab-btn" data-region="AFRICA">AFRICA</button>
       <button class="tab-btn" data-region="ASIA-PACIFIC">ASIA-PACIFIC</button>
     </div>
-    <div class="cards-grid" id="regionGrid">
-      <!-- cards injected by JS -->
-    </div>
+    <div class="cards-grid" id="regionGrid"><!-- cards injected by JS --></div>
     <div class="update-note" id="regionUpdated">Loading region data…</div>
   </section>
 
-  <!-- REGIONS & CITIES ABOVE TICKER (kept) -->
-  <div class="glass-region-wrapper" style="width:100%;display:flex;flex-direction:column;align-items:center;margin-top:20px;">
+  <!-- REGIONS & CITIES ABOVE TICKER -->
+  <div class="glass-region-wrapper">
     <div class="glass-region-bar" style="
       background:rgba(0,0,0,0.45);
       border:1px solid rgba(0,255,255,0.25);
@@ -709,362 +502,333 @@ footer p:last-of-type {
   <!-- FOOTER -->
   <footer>
     <p>© 2025 JNUS Associates Ltd. All rights reserved.</p>
-    <p>📞 020 3538 4966 |
+    <p>
+      📞 020 3538 4966 |
       <a href="https://wa.me/442035384966" target="_blank"><i data-lucide="whatsapp"></i></a> |
       <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
     </p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
-   <p style="color:#00f5d4;opacity:0.65;font-size:0.8rem;margin-top:8px;text-shadow:0 0 8px rgba(0,255,255,0.4);display:flex;align-items:center;justify-content:center;gap:6px;">
-  <span style="font-size:1rem;">📊</span> Global Market Data powered by Yahoo Finance, Finhub & Alpha Vantage
-</p>
+    <p style="color:#00f5d4;opacity:0.65;font-size:0.8rem;margin-top:8px;text-shadow:0 0 8px rgba(0,255,255,0.4);display:flex;align-items:center;justify-content:center;gap:6px;">
+      <span style="font-size:1rem;">📊</span> Global Market Data powered by Yahoo Finance, Finhub & Alpha Vantage
+    </p>
   </footer>
 
-  <!-- SCRIPT -->
+  <!-- ===== SCRIPTS ===== -->
+
+  <!-- External config for API keys (kept out of repo; .gitignore) -->
   <script src="config.js" onerror="
     console.warn('⚠️ config.js not found — using fallback (no API key)');
     window.API_KEY = window.API_KEY || '';
     window.CHANNEL_ID = window.CHANNEL_ID || '';
-"></script>
+  "></script>
 
   <script>
-document.addEventListener("DOMContentLoaded", async () => {
-  if (window.lucide) lucide.createIcons();
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (window.lucide) lucide.createIcons();
 
-  const feed = document.getElementById("podcastFeed");
-  const updated = document.getElementById("lastUpdated");
+      /* ---------- PODCASTS: YouTube → Apple fallback ---------- */
+      const feed = document.getElementById("podcastFeed");
+      const updated = document.getElementById("lastUpdated");
 
-  /* === YouTube + Apple Podcasts Fallback (Branded) === */
-  async function loadYouTube() {
-    try {
-      const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (!data.items || !data.items.length) throw new Error("No videos");
-      console.log(
-    `%c✅ YouTube feed active for: ${CHANNEL_ID}`,
-    "color:#00f5d4; font-weight:600; font-size:0.95rem; text-shadow:0 0 6px rgba(0,255,255,0.4);"
-);
-      feed.innerHTML = "";
-      data.items.forEach((i, idx) => {
-        if (i.id.kind === "youtube#video") {
-          const id = i.id.videoId;
-          const title = i.snippet.title;
-          const card = document.createElement("div");
-          card.classList.add("podcast-card");
-          card.innerHTML = `
-            <iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
-            <h3>${title}</h3>
+      async function loadYouTube() {
+        try {
+          const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
+          const res = await fetch(url);
+          const data = await res.json();
+          if (!data.items || !data.items.length) throw new Error("No videos");
+
+          feed.innerHTML = "";
+          data.items.forEach((i, idx) => {
+            if (i.id.kind === "youtube#video") {
+              const id = i.id.videoId;
+              const title = i.snippet.title;
+              const card = document.createElement("div");
+              card.classList.add("podcast-card");
+              card.innerHTML = `
+                <iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
+                <h3>${title}</h3>
+              `;
+              feed.appendChild(card);
+              setTimeout(() => card.classList.add("visible"), idx * 200);
+            }
+          });
+          updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
+          return true;
+        } catch {
+          console.warn("YouTube API unavailable, switching to Apple Podcasts");
+          return false;
+        }
+      }
+
+      async function loadApplePodcasts() {
+        try {
+          const searchTerms = ["finance","AI","business analytics","insurance","reinsurance","tech stocks","mergers and acquisitions"];
+          const query = encodeURIComponent(searchTerms.join(" "));
+          const res = await fetch(`https://itunes.apple.com/search?term=${query}&media=podcast&limit=5`);
+          const data = await res.json();
+
+          const header = `
+            <div style="text-align:center;margin-bottom:14px;color:#00f5d4;font-weight:600;text-shadow:0 0 8px rgba(0,255,255,0.6);animation:fadeUp 1s ease-out;">
+              🎧 Powered by <span style="font-weight:700;">JNUS Data Feeds</span> — Curated from Apple Podcasts
+            </div>
           `;
-          feed.appendChild(card);
-          setTimeout(() => card.classList.add("visible"), idx * 200);
+
+          const cards = (data.results || []).map((p, idx) => `
+            <div class="podcast-card fade-up" style="animation-delay:${idx * 0.2}s;">
+              <img src="${p.artworkUrl600 || p.artworkUrl100 || ''}" alt="${p.collectionName || 'Podcast'}" class="podcast-cover"/>
+              <div class="podcast-info">
+                <h3>${p.collectionName || 'Podcast'}</h3>
+                <p>${p.artistName || ''}</p>
+                <a href="${p.collectionViewUrl || '#'}" target="_blank" rel="noopener" class="teal-link">🎧 Listen on Apple Podcasts</a>
+              </div>
+            </div>
+          `).join("");
+
+          feed.innerHTML = header + (cards || "<p style='color:#f88;'>No podcasts found.</p>");
+          updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
+        } catch {
+          feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Please try again later.</p>";
+          updated.textContent = "Last updated: Error fetching Apple Podcasts";
+        }
+      }
+
+      const ytOK = await loadYouTube();
+      if (!ytOK) await loadApplePodcasts();
+      setInterval(async () => {
+        const ok = await loadYouTube();
+        if (!ok) await loadApplePodcasts();
+      }, 14400000); // 4h
+
+      /* ---------- TICKER (Finnhub) ---------- */
+      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+      const tickerContent = document.getElementById("tickerContent");
+      const fmt = (n) => Number.isFinite(n) ? n.toFixed(2) : "N/A";
+
+      async function fetchStocks() {
+        try {
+          const TECH = ["AAPL","MSFT","NVDA","GOOGL","GOOG","AMZN","META","TSLA","AVGO","TSM","ORCL","ASML","AMD","V","MA","NFLX","ADBE","CSCO","INTC","QCOM","CRM","IBM","TXN","MU","LRCX","AMAT",
+"NOW","FIS","PYPL","PLTR","SNOW","UBER","WDC","STX","HPQ","DELL","VMW","CTSH","WDAY","DOCU","PANW","SHOP","SAP","ARM","ADSK","EA","BIDU","JD","SPOT","TTD"
+];
+          const results = await Promise.allSettled(
+            TECH.map(async s => {
+              const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`);
+              const d = await r.json();
+              const price = parseFloat(d.c);
+              const pct = parseFloat(d.dp);
+              const cls = Number.isFinite(pct) ? (pct > 0 ? "teal-glow" : pct < 0 ? "red-glow" : "neutral-glow") : "neutral-glow";
+              const arrow = Number.isFinite(pct) ? (pct > 0 ? "▲" : pct < 0 ? "▼" : "•") : "•";
+              return `<span class="${cls}">${s}: ${fmt(price)} (${Number.isFinite(pct) ? pct.toFixed(2) : "0.00"}%) ${arrow}</span>`;
+            })
+          );
+          const html = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
+          tickerContent.innerHTML = `<span class="teal-glow">📊 Now showing: New York Tech Stocks (Live)</span> • ${html}`;
+        } catch {
+          tickerContent.innerHTML = `<span class="neutral-glow">Unable to load live stock data</span>`;
+        }
+      }
+      setTimeout(fetchStocks, 2000);
+      setInterval(fetchStocks, 180000);
+
+      /* ---------- REGION OVERVIEW + SPARKLINES (Yahoo) ---------- */
+      const REGION_MAP = {
+        "AMERICA": [
+          { symbol: "SPY",  label: "S&P 500 (SPY)" },
+          { symbol: "QQQ",  label: "NASDAQ 100 (QQQ)" },
+          { symbol: "DIA",  label: "Dow Jones (DIA)" }
+        ],
+        "EUROPE": [
+          { symbol: "VGK",  label: "Europe (VGK)" },
+          { symbol: "EWU",  label: "FTSE UK (EWU)" },
+          { symbol: "EZU",  label: "Eurozone (EZU)" }
+        ],
+        "AFRICA": [
+          { symbol: "EZA",  label: "South Africa (EZA)" },
+          { symbol: "AFK",  label: "Africa ex-SA (AFK)" },
+          { symbol: "EGPT", label: "Egypt (EGPT)" }
+        ],
+        "ASIA-PACIFIC": [
+          { symbol: "EWJ",  label: "Japan (EWJ)" },
+          { symbol: "EWH",  label: "Hong Kong (EWH)" },
+          { symbol: "EWA",  label: "Australia (EWA)" }
+        ]
+      };
+
+      const regionGrid   = document.getElementById("regionGrid");
+      const regionUpdated = document.getElementById("regionUpdated");
+      const regionTabs   = document.getElementById("regionTabs");
+
+      const classForPct = (dp) => {
+        if (!Number.isFinite(dp)) return "chg-flat";
+        if (dp > 0.05)  return "chg-up";
+        if (dp < -0.05) return "chg-down";
+        return "chg-flat";
+      };
+
+      async function fetchQuote(symbol) {
+        try {
+          const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_KEY}`);
+          const d = await r.json();
+          return { c: d.c, dp: d.dp };
+        } catch {
+          return { c: NaN, dp: NaN };
+        }
+      }
+
+      // Yahoo sparkline (free)
+      async function fetchSparkline(symbol) {
+        try {
+          const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=5d&interval=1h`;
+          const res = await fetch(url);
+          const json = await res.json();
+          const result = json?.chart?.result?.[0];
+          const closes = result?.indicators?.quote?.[0]?.close || [];
+          if (!Array.isArray(closes) || !closes.length) return fallbackSparkline();
+          const valid = closes.filter(n => Number.isFinite(n));
+          if (!valid.length) return fallbackSparkline();
+          const min = Math.min(...valid);
+          const max = Math.max(...valid);
+          return valid.map(v => (v - min) / (max - min));
+        } catch {
+          return fallbackSparkline();
+        }
+      }
+
+      function fallbackSparkline() {
+        const points = Array.from({ length: 25 }, (_, i) =>
+          0.5 + 0.3 * Math.sin(i / 3) + (Math.random() - 0.5) * 0.1
+        );
+        return points.map(v => Math.min(1, Math.max(0, v)));
+      }
+
+      function drawSparkline(canvas, data) {
+        const ctx = canvas.getContext("2d");
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0,0,w,h);
+        if(!data || !data.length){
+          ctx.strokeStyle="rgba(0,255,255,0.25)";
+          ctx.setLineDash([4,4]);
+          ctx.lineWidth=1;
+          ctx.beginPath();
+          ctx.moveTo(0,h/2); ctx.lineTo(w,h/2);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          return;
+        }
+        const gradient = ctx.createLinearGradient(0,0,w,0);
+        gradient.addColorStop(0,"#00f5d4");
+        gradient.addColorStop(1,"#00b3b3");
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 1.6;
+        ctx.shadowColor = "rgba(0,255,255,0.35)";
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        data.forEach((val,i)=>{
+          const x=(i/(data.length-1))*w;
+          const y=h - val*h;
+          if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        });
+        ctx.stroke();
+      }
+
+      async function renderRegion(regionKey){
+        const items = REGION_MAP[regionKey] || [];
+        if (!items.length) return;
+
+        regionGrid.innerHTML = items.map(i => `
+          <div class="mcard" data-symbol="${i.symbol}" data-label="${i.label}">
+            <div class="mname">${i.label}</div>
+            <div class="mprice">—</div>
+            <div class="mchange chg-flat">—</div>
+            <div class="mstatus">Fetching live data…</div>
+            <canvas class="sparkline" width="120" height="40"></canvas>
+          </div>
+        `).join("");
+
+        const cards = Array.from(regionGrid.querySelectorAll(".mcard"));
+        const quotes = await Promise.all(items.map(i => fetchQuote(i.symbol)));
+
+        quotes.forEach((q, idx) => {
+          const card = cards[idx];
+          if (!card) return;
+          const nameEl = card.querySelector(".mname");
+          const priceEl = card.querySelector(".mprice");
+          const chgEl = card.querySelector(".mchange");
+          const statusEl = card.querySelector(".mstatus");
+
+          const px  = Number.isFinite(q.c)  ? q.c.toFixed(2)  : "N/A";
+          const pct = Number.isFinite(q.dp) ? q.dp.toFixed(2) : "0.00";
+          const cls = classForPct(q.dp);
+
+          nameEl.textContent = items[idx].label;
+          priceEl.textContent = `${px}`;
+          chgEl.textContent = `${pct}%`;
+          chgEl.className = `mchange ${cls}`;
+          statusEl.textContent = `Symbol: ${items[idx].symbol}`;
+
+          // sparkline
+          const canvas = card.querySelector(".sparkline");
+          fetchSparkline(items[idx].symbol).then(data => drawSparkline(canvas, data));
+        });
+
+        regionUpdated.textContent = "Updated: " + new Date().toLocaleTimeString("en-GB");
+
+        // open modal on card click
+        regionGrid.querySelectorAll(".mcard").forEach(card => {
+          card.addEventListener("click", () => {
+            const symbol = card.dataset.symbol;
+            const label  = card.dataset.label;
+            openMarketModal(symbol, label);
+          });
+        });
+      }
+
+      /* ---------- Modal controls ---------- */
+      function openMarketModal(symbol, label) {
+        const modal = document.getElementById("marketModal");
+        const frame = document.getElementById("modalFrame");
+        const title = document.getElementById("modalTitle");
+        title.textContent = `${label} — Live Yahoo Finance Chart`;
+        frame.src = `https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}?p=${encodeURIComponent(symbol)}`;
+        modal.classList.add("active");
+      }
+
+      document.getElementById("modalClose").addEventListener("click", () => {
+        const modal = document.getElementById("marketModal");
+        modal.classList.remove("active");
+        document.getElementById("modalFrame").src = "";
+      });
+
+      document.getElementById("marketModal").addEventListener("click", (e) => {
+        if (e.target.id === "marketModal") {
+          e.currentTarget.classList.remove("active");
+          document.getElementById("modalFrame").src = "";
         }
       });
-      updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
-      return true;
-    } catch {
-      console.warn("YouTube API unavailable, switching to Apple Podcasts");
-      return false;
-    }
-  }
 
-async function loadIndustryFeed() {
-  const keywords =
-    "fintech innovation reinsurance MGA insurance technology global markets business strategy";
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
-    keywords
-  )}&type=video&order=date&maxResults=4&key=${API_KEY}`;
+      /* ---------- Tabs init + refresh ---------- */
+      regionTabs.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab-btn");
+        if (!btn) return;
+        regionTabs.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderRegion(btn.dataset.region);
+      });
 
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    if (!data.items?.length) throw new Error("No industry videos found");
-
-    console.log(
-      "%c🌐 Live industry feed updated",
-      "color:#00f5d4;font-weight:600;text-shadow:0 0 6px rgba(0,255,255,0.4)"
-    );
-
-    const industryFeed = document.getElementById("industryFeed");
-    industryFeed.innerHTML = data.items
-      .map(
-        (v) => `
-        <div class="video-card glass-card">
-          <a href="https://www.youtube.com/watch?v=${v.id.videoId}" target="_blank" rel="noopener">
-            <img src="${v.snippet.thumbnails.medium.url}" alt="${v.snippet.title}" loading="lazy" />
-            <h4>${v.snippet.title}</h4>
-          </a>
-        </div>`
-      )
-      .join("");
-  } catch (err) {
-    console.error("❌ Failed to load industry feed:", err);
-  }
-}
-  async function loadApplePodcasts() {
-    try {
-      const searchTerms = ["finance","AI","business analytics","insurance","reinsurance","tech stocks","mergers and acquisitions"];
-      const query = encodeURIComponent(searchTerms.join(" "));
-      const res = await fetch(`https://itunes.apple.com/search?term=${query}&media=podcast&limit=5`);
-      const data = await res.json();
-
-      const header = `
-        <div style="text-align:center;margin-bottom:14px;color:#00f5d4;font-weight:600;text-shadow:0 0 8px rgba(0,255,255,0.6);animation:fadeUp 1s ease-out;">
-          🎧 Powered by <span style="font-weight:700;">JNUS Data Feeds</span> — Curated from Apple Podcasts
-        </div>
-      `;
-
-      const cards = (data.results || []).map((p, idx) => `
-        <div class="podcast-card fade-up" style="animation-delay:${idx * 0.2}s;">
-          <img src="${p.artworkUrl600 || p.artworkUrl100 || ''}" alt="${p.collectionName || 'Podcast'}" class="podcast-cover"/>
-          <div class="podcast-info">
-            <h3>${p.collectionName || 'Podcast'}</h3>
-            <p>${p.artistName || ''}</p>
-            <a href="${p.collectionViewUrl || '#'}" target="_blank" rel="noopener" class="teal-link">🎧 Listen on Apple Podcasts</a>
-          </div>
-        </div>
-      `).join("");
-
-      feed.innerHTML = header + (cards || "<p style='color:#f88;'>No podcasts found.</p>");
-      updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
-    } catch {
-      feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Please try again later.</p>";
-      updated.textContent = "Last updated: Error fetching Apple Podcasts";
-    }
-  }
-
-  const ytOK = await loadYouTube();
-  if (!ytOK) await loadApplePodcasts();
-  setInterval(async () => {
-    const ok = await loadYouTube();
-    if (!ok) await loadApplePodcasts();
-  }, 14400000);
-
-  /* === Market Ticker === */
-  const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-  const tickerContent = document.getElementById("tickerContent");
-  function fmt(n) { return Number.isFinite(n) ? n.toFixed(2) : "N/A"; }
-
-  async function fetchStocks() {
-    try {
-      const TECH = ["AAPL","MSFT","NVDA","GOOGL","GOOG","AMZN","META","TSLA","AVGO","TSM","ORCL","ASML","AMD","V","MA","NFLX","ADBE","CSCO","INTC","QCOM","CRM","IBM","TXN","MU","LRCX","AMAT",
-"NOW","FIS","PYPL","PLTR","SNOW","UBER","WDC","STX","HPQ","DELL","VMW","CTSH","WDAY","DOCU","PANW","SHOP","SAP","ARM","ADSK","EA","BIDU","JD","SPOT","TTD"];
-      const results = await Promise.allSettled(
-        TECH.map(async s => {
-          const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`);
-          const d = await r.json();
-          const price = parseFloat(d.c);
-          const pct = parseFloat(d.dp);
-          const cls = Number.isFinite(pct) ? (pct > 0 ? "teal-glow" : pct < 0 ? "red-glow" : "neutral-glow") : "neutral-glow";
-          const arrow = Number.isFinite(pct) ? (pct > 0 ? "▲" : pct < 0 ? "▼" : "•") : "•";
-          return `<span class="${cls}">${s}: ${fmt(price)} (${Number.isFinite(pct) ? pct.toFixed(2) : "0.00"}%) ${arrow}</span>`;
-        })
-      );
-      const html = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
-      tickerContent.innerHTML = `<span class="teal-glow">📊 Now showing: New York Tech Stocks (Live)</span> • ${html}`;
-    } catch {
-      tickerContent.innerHTML = `<span class="neutral-glow">Unable to load live stock data</span>`;
-    }
-  }
-  setTimeout(fetchStocks, 2000);
-  setInterval(fetchStocks, 180000);
-
-  /* === Region Overview === */
-  const REGION_MAP = {
-    "AMERICA":[{symbol:"SPY",label:"S&P 500 (SPY)"},{symbol:"QQQ",label:"NASDAQ 100 (QQQ)"},{symbol:"DIA",label:"Dow Jones (DIA)"}],
-    "EUROPE":[{symbol:"VGK",label:"Europe (VGK)"},{symbol:"EWU",label:"FTSE UK (EWU)"},{symbol:"EZU",label:"Eurozone (EZU)"}],
-    "AFRICA":[{symbol:"EZA",label:"South Africa (EZA)"},{symbol:"AFK",label:"Africa ex-SA (AFK)"},{symbol:"EGPT",label:"Egypt (EGPT)"}],
-    "ASIA-PACIFIC":[{symbol:"EWJ",label:"Japan (EWJ)"},{symbol:"EWH",label:"Hong Kong (EWH)"},{symbol:"EWA",label:"Australia (EWA)"}]
-  };
-
-  const regionGrid = document.getElementById("regionGrid");
-  const regionUpdated = document.getElementById("regionUpdated");
-  const regionTabs = document.getElementById("regionTabs");
-
-  function classForPct(dp){
-    if (!Number.isFinite(dp)) return "chg-flat";
-    if (dp > 0.05) return "chg-up";
-    if (dp < -0.05) return "chg-down";
-    return "chg-flat";
-  }
-
-  async function fetchQuote(symbol){
-    try{
-      const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_KEY}`);
-      const d = await r.json();
-      return {c:d.c, dp:d.dp};
-    }catch{return {c:NaN, dp:NaN};}
-  }
-
-  // === Sparkline helper (Yahoo Finance version) ===
-async function fetchSparkline(symbol) {
-  try {
-    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=5d&interval=1h`;
-    const res = await fetch(url);
-    const json = await res.json();
-
-    const result = json?.chart?.result?.[0];
-    const closes = result?.indicators?.quote?.[0]?.close || [];
-
-    if (!Array.isArray(closes) || !closes.length) {
-      console.warn("No Yahoo data for", symbol);
-      return generateFallbackSparkline();
-    }
-
-    const valid = closes.filter(n => Number.isFinite(n));
-    if (!valid.length) return generateFallbackSparkline();
-
-    const min = Math.min(...valid);
-    const max = Math.max(...valid);
-    return valid.map(v => (v - min) / (max - min));
-  } catch (e) {
-    console.error("Yahoo sparkline error:", e);
-    return generateFallbackSparkline();
-  }
-}
-
-// === Fallback generator (in case Yahoo fails) ===
-function generateFallbackSparkline() {
-  const points = Array.from({ length: 25 }, (_, i) =>
-    0.5 + 0.3 * Math.sin(i / 3) + (Math.random() - 0.5) * 0.1
-  );
-  return points.map(v => Math.min(1, Math.max(0, v)));
-}
-
-  function drawSparkline(canvas, data){
-    const ctx = canvas.getContext("2d");
-    const w = canvas.width, h = canvas.height;
-    ctx.clearRect(0,0,w,h);
-    if(!data || !data.length){
-      ctx.strokeStyle="rgba(0,255,255,0.25)";
-      ctx.setLineDash([4,4]);
-      ctx.lineWidth=1;
-      ctx.beginPath();
-      ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      return;
-    }
-    const gradient=ctx.createLinearGradient(0,0,w,0);
-    gradient.addColorStop(0,"#00f5d4");
-    gradient.addColorStop(1,"#00b3b3");
-    ctx.strokeStyle=gradient;
-    ctx.lineWidth=1.6;
-    ctx.shadowColor="rgba(0,255,255,0.35)";
-    ctx.shadowBlur=6;
-    ctx.beginPath();
-    data.forEach((val,i)=>{
-      const x=(i/(data.length-1))*w;
-      const y=h - val*h;
-      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      renderRegion("AMERICA"); // initial
+      setInterval(() => {
+        const active = regionTabs.querySelector(".tab-btn.active");
+        if (active) renderRegion(active.dataset.region);
+      }, 300000); // 5 min
     });
-    ctx.stroke();
-  }
+  </script>
 
-  async function renderRegion(regionKey){
-  const items = REGION_MAP[regionKey] || [];
-  if (!items.length) return;
-
-  regionGrid.innerHTML = items.map(i => `
-    <div class="mcard" data-symbol="${i.symbol}" data-label="${i.label}">
-      <div class="mname">${i.label}</div>
-      <div class="mprice">—</div>
-      <div class="mchange chg-flat">—</div>
-      <div class="mstatus">Fetching live data…</div>
-      <canvas class="sparkline" width="120" height="40"></canvas>
+  <!-- Market Modal -->
+  <div id="marketModal" class="market-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <h3 id="modalTitle"></h3>
+      <iframe id="modalFrame" loading="lazy"></iframe>
     </div>
-  `).join("");
-
-  const cards = Array.from(regionGrid.querySelectorAll(".mcard"));
-  const quotes = await Promise.all(items.map(i => fetchQuote(i.symbol)));
-
-  quotes.forEach((q, idx) => {
-    const card = cards[idx];
-    if (!card) return;
-    const nameEl = card.querySelector(".mname");
-    const priceEl = card.querySelector(".mprice");
-    const chgEl = card.querySelector(".mchange");
-    const statusEl = card.querySelector(".mstatus");
-
-    const px  = Number.isFinite(q.c)  ? q.c.toFixed(2)  : "N/A";
-    const pct = Number.isFinite(q.dp) ? q.dp.toFixed(2) : "0.00";
-    const cls = classForPct(q.dp);
-    nameEl.textContent = items[idx].label;
-    priceEl.textContent = `${px}`;
-    chgEl.textContent = `${pct}%`;
-    chgEl.className = `mchange ${cls}`;
-    statusEl.textContent = `Symbol: ${items[idx].symbol}`;
-
-    // Draw sparkline
-    const canvas = card.querySelector(".sparkline");
-    fetchSparkline(items[idx].symbol).then(data => drawSparkline(canvas, data));
-  });
-
-  regionUpdated.textContent = "Updated: " + new Date().toLocaleTimeString("en-GB");
-
-  // Add click listener to open modal
-  regionGrid.querySelectorAll(".mcard").forEach(card => {
-    card.addEventListener("click", () => {
-      const symbol = card.dataset.symbol;
-      const label = card.dataset.label;
-      openMarketModal(symbol, label);
-    });
-  });
-}
-// === Modal Controls ===
-function openMarketModal(symbol, label) {
-  const modal = document.getElementById("marketModal");
-  const frame = document.getElementById("modalFrame");
-  const title = document.getElementById("modalTitle");
-
-  title.textContent = `${label} — Live Yahoo Finance Chart`;
-  frame.src = `https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}?p=${encodeURIComponent(symbol)}`;
-  document.getElementById("modalFrame").insertAdjacentHTML(
-  "afterend",
-  `<p style="text-align:center;margin-top:8px;">
-     <a href="https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}" 
-        target="_blank" rel="noopener" 
-        style="color:#00f5d4;text-decoration:none;font-weight:600;">
-        ↗ View full chart on Yahoo Finance
-     </a>
-   </p>`
-);
-  modal.classList.add("active");
-}
-
-document.getElementById("modalClose").addEventListener("click", () => {
-  const modal = document.getElementById("marketModal");
-  modal.classList.remove("active");
-  document.getElementById("modalFrame").src = "";
-});
-
-document.getElementById("marketModal").addEventListener("click", (e) => {
-  if (e.target.id === "marketModal") {
-    e.currentTarget.classList.remove("active");
-    document.getElementById("modalFrame").src = "";
-  }
-});
-  regionTabs.addEventListener("click",e=>{
-    const btn=e.target.closest(".tab-btn");
-    if(!btn)return;
-    regionTabs.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    renderRegion(btn.dataset.region);
-  });
-
-  renderRegion("AMERICA");
-  setInterval(()=>{
-    const active=regionTabs.querySelector(".tab-btn.active");
-    if(active) renderRegion(active.dataset.region);
-  },300000);
-});
-</script>
-<!-- Market Modal -->
-<div id="marketModal" class="market-modal">
-  <div class="modal-content">
-    <button class="modal-close" id="modalClose">&times;</button>
-    <h3 id="modalTitle"></h3>
-    <iframe id="modalFrame" loading="lazy"></iframe>
   </div>
-</div>
 </body>
 </html>
