@@ -483,6 +483,89 @@
 }
 
 .modal-close:hover { color: #00ffee; }
+/* === Modal Styling Enhancements === */
+.market-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+}
+
+.market-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+  width: 90%;
+  max-width: 800px;
+  padding: 16px 18px 24px;
+  transform: scale(0.9);
+  transition: transform 0.35s ease;
+  text-align: center;
+}
+
+.market-modal.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px; right: 18px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #00f5d4;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: #00ffee;
+  transform: rotate(90deg);
+}
+
+#modalTitle {
+  color: #00f5d4;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  margin-top: 10px;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+}
+
+#modalFrame {
+  width: 100%;
+  height: 420px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 12px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+/* === Footer Fade-In Animation for "Data powered by Yahoo Finance" === */
+@keyframes fadeInFooter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 0.65;
+    transform: translateY(0);
+  }
+}
+
+footer p:last-of-type {
+  animation: fadeInFooter 1.4s ease-out 2s; /* 2s delay syncs with ticker fade */
+}
   </style>
 </head>
 
@@ -617,6 +700,9 @@
       <a href="mailto:juzoukwu@jnusassociates.com">juzoukwu@jnusassociates.com</a>
     </p>
     <p>VAT No. GB303748316 | Company Reg No. 11463053</p>
+   <p style="color:#00f5d4;opacity:0.65;font-size:0.8rem;margin-top:8px;text-shadow:0 0 8px rgba(0,255,255,0.4);display:flex;align-items:center;justify-content:center;gap:6px;">
+  <span style="font-size:1rem;">📊</span> Data powered by Yahoo Finance
+</p>
   </footer>
 
   <!-- SCRIPT -->
