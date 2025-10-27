@@ -713,7 +713,42 @@
           return { c: NaN, dp: NaN };
         }
       }
+// === Sparkline helper ===
+async function fetchSparkline(symbol) {
+  try {
+    const now = Math.floor(Date.now() / 1000);
+    const from = now - 86400 * 5; // last 5 days
+    const url = `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=30&from=${from}&to=${now}&token=${FINNHUB_KEY}`;
+    const res = await fetch(url);
+    const d = await res.json();
+    if (d.s !== "ok" || !d.c || !d.c.length) return [];
 
+    // Normalize values for drawing
+    const min = Math.min(...d.c);
+    const max = Math.max(...d.c);
+    return d.c.map(v => (v - min) / (max - min));
+  } catch {
+    return [];
+  }
+}
+
+function drawSparkline(canvas, data) {
+  if (!canvas || !data.length) return;
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+  ctx.strokeStyle = "#00f5d4";
+  ctx.lineWidth = 1.8;
+  ctx.beginPath();
+  data.forEach((val, i) => {
+    const x = (i / (data.length - 1)) * w;
+    const y = h - val * h;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+}
       async function renderRegion(regionKey){
         const items = REGION_MAP[regionKey] || [];
         if (!items.length) return;
@@ -748,7 +783,15 @@
           chgEl.className = `mchange ${cls}`;
           statusEl.textContent = `Symbol: ${items[idx].symbol}`;
         });
+// Add sparkline canvas
+const canvas = document.createElement("canvas");
+canvas.width = 120;
+canvas.height = 40;
+canvas.className = "sparkline";
+card.appendChild(canvas);
 
+// Fetch and draw sparkline
+fetchSparkline(items[idx].symbol).then(data => drawSparkline(canvas, data));
         regionUpdated.textContent = "Updated: " + new Date().toLocaleTimeString("en-GB");
       }
 
