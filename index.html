@@ -425,6 +425,64 @@
     .chg-flat{ color:#ccf; opacity:.92; }
 
     .update-note{ text-align:center; font-size:.8rem; color:#89f; margin-top:8px; opacity:.85; }
+    /* === Market Modal (Glass Overlay) === */
+.market-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.market-modal.active { display: flex; }
+
+.modal-content {
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(0,255,255,0.3);
+  border-radius: 14px;
+  box-shadow: 0 0 24px rgba(0,255,255,0.25);
+  padding: 18px 22px 22px;
+  width: 90%;
+  max-width: 880px;
+  color: #e0ffff;
+  position: relative;
+  animation: fadeUp 0.4s ease;
+}
+
+.modal-content h3 {
+  text-align: center;
+  color: #00f5d4;
+  text-shadow: 0 0 12px rgba(0,255,255,0.6);
+  margin-bottom: 12px;
+  font-size: clamp(1rem,2vw,1.3rem);
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.4);
+  box-shadow: 0 0 14px rgba(0,255,255,0.15);
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 1.6rem;
+  color: #00f5d4;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover { color: #00ffee; }
   </style>
 </head>
 
@@ -763,48 +821,88 @@ function generateFallbackSparkline() {
   }
 
   async function renderRegion(regionKey){
-    const items=REGION_MAP[regionKey]||[];
-    if(!items.length)return;
+  const items = REGION_MAP[regionKey] || [];
+  if (!items.length) return;
 
-    regionGrid.innerHTML=items.map(()=>`
-      <div class="mcard fade">
-        <div class="mname">Loading…</div>
-        <div class="mprice">—</div>
-        <div class="mchange chg-flat">—</div>
-        <div class="mstatus">Fetching live data…</div>
-      </div>`).join("");
+  regionGrid.innerHTML = items.map(i => `
+    <div class="mcard" data-symbol="${i.symbol}" data-label="${i.label}">
+      <div class="mname">${i.label}</div>
+      <div class="mprice">—</div>
+      <div class="mchange chg-flat">—</div>
+      <div class="mstatus">Fetching live data…</div>
+      <canvas class="sparkline" width="120" height="40"></canvas>
+    </div>
+  `).join("");
 
-    const cards=Array.from(regionGrid.querySelectorAll(".mcard"));
-    const quotes=await Promise.all(items.map(i=>fetchQuote(i.symbol)));
+  const cards = Array.from(regionGrid.querySelectorAll(".mcard"));
+  const quotes = await Promise.all(items.map(i => fetchQuote(i.symbol)));
 
-    quotes.forEach(async(q,idx)=>{
-      const card=cards[idx]; if(!card) return;
-      const item=items[idx];
-      const px=Number.isFinite(q.c)?q.c.toFixed(2):"N/A";
-      const pct=Number.isFinite(q.dp)?q.dp.toFixed(2):"0.00";
-      const cls=classForPct(q.dp);
-      card.querySelector(".mname").textContent=item.label;
-      card.querySelector(".mprice").textContent=px;
-      const chgEl=card.querySelector(".mchange");
-      chgEl.textContent=`${pct}%`;
-      chgEl.className=`mchange ${cls}`;
-      card.querySelector(".mstatus").textContent=`Symbol: ${item.symbol}`;
+  quotes.forEach((q, idx) => {
+    const card = cards[idx];
+    if (!card) return;
+    const nameEl = card.querySelector(".mname");
+    const priceEl = card.querySelector(".mprice");
+    const chgEl = card.querySelector(".mchange");
+    const statusEl = card.querySelector(".mstatus");
 
-      // Sparkline
-      const canvas=document.createElement("canvas");
-      canvas.width=120; canvas.height=40;
-      canvas.className="sparkline";
-      canvas.style.opacity="0"; // for fade-in
-      card.appendChild(canvas);
-      const data=await fetchSparkline(item.symbol);
-      drawSparkline(canvas,data);
-      setTimeout(()=>canvas.style.transition="opacity 0.6s ease",10);
-      setTimeout(()=>canvas.style.opacity="1",20);
+    const px  = Number.isFinite(q.c)  ? q.c.toFixed(2)  : "N/A";
+    const pct = Number.isFinite(q.dp) ? q.dp.toFixed(2) : "0.00";
+    const cls = classForPct(q.dp);
+    nameEl.textContent = items[idx].label;
+    priceEl.textContent = `${px}`;
+    chgEl.textContent = `${pct}%`;
+    chgEl.className = `mchange ${cls}`;
+    statusEl.textContent = `Symbol: ${items[idx].symbol}`;
+
+    // Draw sparkline
+    const canvas = card.querySelector(".sparkline");
+    fetchSparkline(items[idx].symbol).then(data => drawSparkline(canvas, data));
+  });
+
+  regionUpdated.textContent = "Updated: " + new Date().toLocaleTimeString("en-GB");
+
+  // Add click listener to open modal
+  regionGrid.querySelectorAll(".mcard").forEach(card => {
+    card.addEventListener("click", () => {
+      const symbol = card.dataset.symbol;
+      const label = card.dataset.label;
+      openMarketModal(symbol, label);
     });
+  });
+}
+// === Modal Controls ===
+function openMarketModal(symbol, label) {
+  const modal = document.getElementById("marketModal");
+  const frame = document.getElementById("modalFrame");
+  const title = document.getElementById("modalTitle");
 
-    regionUpdated.textContent="Updated: "+new Date().toLocaleTimeString("en-GB");
+  title.textContent = `${label} — Live Yahoo Finance Chart`;
+  frame.src = `https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}?p=${encodeURIComponent(symbol)}`;
+  document.getElementById("modalFrame").insertAdjacentHTML(
+  "afterend",
+  `<p style="text-align:center;margin-top:8px;">
+     <a href="https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}" 
+        target="_blank" rel="noopener" 
+        style="color:#00f5d4;text-decoration:none;font-weight:600;">
+        ↗ View full chart on Yahoo Finance
+     </a>
+   </p>`
+);
+  modal.classList.add("active");
+}
+
+document.getElementById("modalClose").addEventListener("click", () => {
+  const modal = document.getElementById("marketModal");
+  modal.classList.remove("active");
+  document.getElementById("modalFrame").src = "";
+});
+
+document.getElementById("marketModal").addEventListener("click", (e) => {
+  if (e.target.id === "marketModal") {
+    e.currentTarget.classList.remove("active");
+    document.getElementById("modalFrame").src = "";
   }
-
+});
   regionTabs.addEventListener("click",e=>{
     const btn=e.target.closest(".tab-btn");
     if(!btn)return;
@@ -820,5 +918,13 @@ function generateFallbackSparkline() {
   },300000);
 });
 </script>
+<!-- Market Modal -->
+<div id="marketModal" class="market-modal">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <h3 id="modalTitle"></h3>
+    <iframe id="modalFrame" loading="lazy"></iframe>
+  </div>
+</div>
 </body>
 </html>
