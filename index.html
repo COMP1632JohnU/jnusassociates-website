@@ -563,283 +563,241 @@
 
   <!-- SCRIPT -->
   <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      if (window.lucide) lucide.createIcons();
+document.addEventListener("DOMContentLoaded", async () => {
+  if (window.lucide) lucide.createIcons();
 
-      const feed = document.getElementById("podcastFeed");
-      const updated = document.getElementById("lastUpdated");
+  const feed = document.getElementById("podcastFeed");
+  const updated = document.getElementById("lastUpdated");
 
-      /* === YouTube + Apple Podcasts Fallback (Branded) === */
-      const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
-      const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE"; // keep your existing channel id here
+  /* === YouTube + Apple Podcasts Fallback (Branded) === */
+  const API_KEY = "AIzaSyAoV-sJksBEsJFILjbT_5DzqmmjGHr6ErM";
+  const CHANNEL_ID = "YOUR_CHANNEL_ID_HERE";
 
-      async function loadYouTube() {
-        try {
-          const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
-          const res = await fetch(url);
-          const data = await res.json();
-          if (!data.items || !data.items.length) throw new Error("No videos");
+  async function loadYouTube() {
+    try {
+      const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=3`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (!data.items || !data.items.length) throw new Error("No videos");
 
-          feed.innerHTML = "";
-          data.items.forEach((i, idx) => {
-            if (i.id.kind === "youtube#video") {
-              const id = i.id.videoId;
-              const title = i.snippet.title;
-              const card = document.createElement("div");
-              card.classList.add("podcast-card");
-              card.innerHTML = `
-                <iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
-                <h3>${title}</h3>
-              `;
-              feed.appendChild(card);
-              setTimeout(() => card.classList.add("visible"), idx * 200);
-            }
-          });
-          updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
-          return true;
-        } catch {
-          console.warn("YouTube API unavailable, switching to Apple Podcasts");
-          return false;
-        }
-      }
-
-      async function loadApplePodcasts() {
-        try {
-          const searchTerms = ["finance", "AI", "business analytics", "insurance","reinsurance","tech stocks","mergers and acquisitions"];
-          const query = encodeURIComponent(searchTerms.join(" "));
-          const res = await fetch(`https://itunes.apple.com/search?term=${query}&media=podcast&limit=5`);
-          const data = await res.json();
-
-          const header = `
-            <div style="text-align:center;margin-bottom:14px;color:#00f5d4;font-weight:600;text-shadow:0 0 8px rgba(0,255,255,0.6);animation:fadeUp 1s ease-out;">
-              🎧 Powered by <span style="font-weight:700;">JNUS Data Feeds</span> — Curated from Apple Podcasts
-            </div>
+      feed.innerHTML = "";
+      data.items.forEach((i, idx) => {
+        if (i.id.kind === "youtube#video") {
+          const id = i.id.videoId;
+          const title = i.snippet.title;
+          const card = document.createElement("div");
+          card.classList.add("podcast-card");
+          card.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
+            <h3>${title}</h3>
           `;
-
-          const cards = (data.results || []).map((p, idx) => `
-            <div class="podcast-card fade-up" style="animation-delay:${idx * 0.2}s;">
-              <img src="${p.artworkUrl600 || p.artworkUrl100 || ''}" alt="${p.collectionName || 'Podcast'}" class="podcast-cover"/>
-              <div class="podcast-info">
-                <h3>${p.collectionName || 'Podcast'}</h3>
-                <p>${p.artistName || ''}</p>
-                <a href="${p.collectionViewUrl || '#'}" target="_blank" rel="noopener" class="teal-link">🎧 Listen on Apple Podcasts</a>
-              </div>
-            </div>
-          `).join("");
-
-          feed.innerHTML = header + (cards || "<p style='color:#f88;'>No podcasts found.</p>");
-          updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
-        } catch {
-          feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Please try again later.</p>";
-          updated.textContent = "Last updated: Error fetching Apple Podcasts";
+          feed.appendChild(card);
+          setTimeout(() => card.classList.add("visible"), idx * 200);
         }
-      }
-
-      const ytOK = await loadYouTube();
-      if (!ytOK) await loadApplePodcasts();
-
-      setInterval(async () => {
-        const ok = await loadYouTube();
-        if (!ok) await loadApplePodcasts();
-      }, 14400000); // 4h
-
-      /* === Market Ticker (existing) === */
-      const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
-      const tickerContent = document.getElementById("tickerContent");
-
-      function fmt(n) { return Number.isFinite(n) ? n.toFixed(2) : "N/A"; }
-
-      async function fetchStocks() {
-        try {
-          const TECH = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
-          const results = await Promise.allSettled(
-            TECH.map(async s => {
-              const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`);
-              const d = await r.json();
-              const price = parseFloat(d.c);
-              const pct = parseFloat(d.dp);
-              const cls = Number.isFinite(pct) ? (pct > 0 ? "teal-glow" : pct < 0 ? "red-glow" : "neutral-glow") : "neutral-glow";
-              const arrow = Number.isFinite(pct) ? (pct > 0 ? "▲" : pct < 0 ? "▼" : "•") : "•";
-              return `<span class="${cls}">${s}: ${fmt(price)} (${Number.isFinite(pct) ? pct.toFixed(2) : "0.00"}%) ${arrow}</span>`;
-            })
-          );
-          const html = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
-          tickerContent.innerHTML = `<span class="teal-glow">📊 Now showing: New York Tech Stocks (Live)</span> • ${html}`;
-        } catch (e) {
-          tickerContent.innerHTML = `<span class="neutral-glow">Unable to load live stock data</span>`;
-        }
-      }
-
-      setTimeout(fetchStocks, 2000);
-      setInterval(fetchStocks, 180000);
-
-      /* === NEW: Dynamic Region Tabs + Cards (3-col) === */
-      const REGION_MAP = {
-        "AMERICA": [
-          { symbol: "SPY",  label: "S&P 500 (SPY)" },
-          { symbol: "QQQ",  label: "NASDAQ 100 (QQQ)" },
-          { symbol: "DIA",  label: "Dow Jones (DIA)" }
-        ],
-        "EUROPE": [
-          { symbol: "VGK",  label: "Europe (VGK)" },
-          { symbol: "EWU",  label: "FTSE UK (EWU)" },
-          { symbol: "EZU",  label: "Eurozone (EZU)" }
-        ],
-        "AFRICA": [
-          { symbol: "EZA",  label: "South Africa (EZA)" },
-          { symbol: "AFK",  label: "Africa ex-SA (AFK)" },
-          { symbol: "EGPT", label: "Egypt (EGPT)" }
-        ],
-        "ASIA-PACIFIC": [
-          { symbol: "EWJ",  label: "Japan (EWJ)" },
-          { symbol: "EWH",  label: "Hong Kong (EWH)" },
-          { symbol: "EWA",  label: "Australia (EWA)" }
-        ]
-      };
-
-      const regionGrid = document.getElementById("regionGrid");
-      const regionUpdated = document.getElementById("regionUpdated");
-      const regionTabs = document.getElementById("regionTabs");
-
-      function classForPct(dp){
-        if (!Number.isFinite(dp)) return "chg-flat";
-        if (dp > 0.05)  return "chg-up";
-        if (dp < -0.05) return "chg-down";
-        return "chg-flat";
-      }
-
-      async function fetchQuote(symbol) {
-        try {
-          const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_KEY}`);
-          const d = await r.json();
-          return { c: d.c, dp: d.dp };
-        } catch {
-          return { c: NaN, dp: NaN };
-        }
-      }
-// === Sparkline helper (updated) ===
-async function fetchSparkline(symbol) {
-  try {
-    const now = Math.floor(Date.now() / 1000);
-    const from = now - 86400 * 5; // last 5 days
-    const url = `https://finnhub.io/api/v1/stock/candle?symbol=${encodeURIComponent(symbol)}&resolution=30&from=${from}&to=${now}&token=${FINNHUB_KEY}`;
-    const res = await fetch(url);
-    const d = await res.json();
-
-    // Validate data
-    if (!d || d.s !== "ok" || !Array.isArray(d.c) || !d.c.length) return [];
-
-    // Normalize values between 0–1
-    const min = Math.min(...d.c);
-    const max = Math.max(...d.c);
-    return d.c.map(v => (v - min) / (max - min));
-  } catch (err) {
-    console.error("Sparkline error:", err);
-    return [];
-  }
-}
-
-function drawSparkline(canvas, data) {
-  if (!canvas || !data.length) return;
-  const ctx = canvas.getContext("2d");
-  const w = canvas.width;
-  const h = canvas.height;
-  ctx.clearRect(0, 0, w, h);
-
- // --- CASE 1: No data — draw placeholder line ---
-  if (!data || !data.length) {
-    ctx.strokeStyle = "rgba(0,255,255,0.25)";
-    ctx.setLineDash([4, 4]); // dotted pattern
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(0, h / 2);
-    ctx.lineTo(w, h / 2);
-    ctx.stroke();
-    ctx.setLineDash([]); // reset
-    return;
-  }
- 
-  // 🌊 Create a subtle teal gradient stroke
-  const gradient = ctx.createLinearGradient(0, 0, w, 0);
-  gradient.addColorStop(0, "#00f5d4");   // bright teal start
-  gradient.addColorStop(1, "#00b3b3");   // deeper teal end
-  ctx.strokeStyle = gradient;
-  ctx.lineWidth = 1.6;
-  ctx.shadowColor = "rgba(0,255,255,0.35)";
-  ctx.shadowBlur = 6;
-
-  ctx.beginPath();
-  data.forEach((val, i) => {
-    const x = (i / (data.length - 1)) * w;
-    const y = h - val * h;
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  });
-  ctx.stroke();
-}
-      async function renderRegion(regionKey){
-        const items = REGION_MAP[regionKey] || [];
-        if (!items.length) return;
-
-        regionGrid.innerHTML = items.map(() => `
-          <div class="mcard">
-            <div class="mname">Loading…</div>
-            <div class="mprice">—</div>
-            <div class="mchange chg-flat">—</div>
-            <div class="mstatus">Fetching live data…</div>
-          </div>
-        `).join("");
-
-        const cards = Array.from(regionGrid.querySelectorAll(".mcard"));
-
-        const quotes = await Promise.all(items.map(i => fetchQuote(i.symbol)));
-
-        quotes.forEach((q, idx) => {
-          const card = cards[idx];
-          if (!card) return;
-          const nameEl = card.querySelector(".mname");
-          const priceEl = card.querySelector(".mprice");
-          const chgEl = card.querySelector(".mchange");
-          const statusEl = card.querySelector(".mstatus");
-
-          const px  = Number.isFinite(q.c)  ? q.c.toFixed(2)  : "N/A";
-          const pct = Number.isFinite(q.dp) ? q.dp.toFixed(2) : "0.00";
-          const cls = classForPct(q.dp);
-          nameEl.textContent = items[idx].label;
-          priceEl.textContent = `${px}`;
-          chgEl.textContent = `${pct}%`;
-          chgEl.className = `mchange ${cls}`;
-          statusEl.textContent = `Symbol: ${items[idx].symbol}`;
-        });
-// Add sparkline canvas
-const canvas = document.createElement("canvas");
-canvas.width = 120;
-canvas.height = 40;
-canvas.className = "sparkline";
-card.appendChild(canvas);
-
-// Fetch and draw sparkline
-fetchSparkline(items[idx].symbol).then(data => drawSparkline(canvas, data));
-        regionUpdated.textContent = "Updated: " + new Date().toLocaleTimeString("en-GB");
-      }
-
-      // Tab interactions
-      regionTabs.addEventListener("click", (e) => {
-        const btn = e.target.closest(".tab-btn");
-        if (!btn) return;
-        regionTabs.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderRegion(btn.dataset.region);
       });
+      updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
+      return true;
+    } catch {
+      console.warn("YouTube API unavailable, switching to Apple Podcasts");
+      return false;
+    }
+  }
 
-      // Initial load: AMERICA
-      renderRegion("AMERICA");
-      // Auto-refresh current tab every 5 minutes
-      setInterval(() => {
-        const active = regionTabs.querySelector(".tab-btn.active");
-        if (active) renderRegion(active.dataset.region);
-      }, 300000);
+  async function loadApplePodcasts() {
+    try {
+      const searchTerms = ["finance","AI","business analytics","insurance","reinsurance","tech stocks","mergers and acquisitions"];
+      const query = encodeURIComponent(searchTerms.join(" "));
+      const res = await fetch(`https://itunes.apple.com/search?term=${query}&media=podcast&limit=5`);
+      const data = await res.json();
+
+      const header = `
+        <div style="text-align:center;margin-bottom:14px;color:#00f5d4;font-weight:600;text-shadow:0 0 8px rgba(0,255,255,0.6);animation:fadeUp 1s ease-out;">
+          🎧 Powered by <span style="font-weight:700;">JNUS Data Feeds</span> — Curated from Apple Podcasts
+        </div>
+      `;
+
+      const cards = (data.results || []).map((p, idx) => `
+        <div class="podcast-card fade-up" style="animation-delay:${idx * 0.2}s;">
+          <img src="${p.artworkUrl600 || p.artworkUrl100 || ''}" alt="${p.collectionName || 'Podcast'}" class="podcast-cover"/>
+          <div class="podcast-info">
+            <h3>${p.collectionName || 'Podcast'}</h3>
+            <p>${p.artistName || ''}</p>
+            <a href="${p.collectionViewUrl || '#'}" target="_blank" rel="noopener" class="teal-link">🎧 Listen on Apple Podcasts</a>
+          </div>
+        </div>
+      `).join("");
+
+      feed.innerHTML = header + (cards || "<p style='color:#f88;'>No podcasts found.</p>");
+      updated.textContent = "Last updated: " + new Date().toLocaleTimeString("en-GB");
+    } catch {
+      feed.innerHTML = "<p style='color:#f88;'>Unable to load podcasts. Please try again later.</p>";
+      updated.textContent = "Last updated: Error fetching Apple Podcasts";
+    }
+  }
+
+  const ytOK = await loadYouTube();
+  if (!ytOK) await loadApplePodcasts();
+  setInterval(async () => {
+    const ok = await loadYouTube();
+    if (!ok) await loadApplePodcasts();
+  }, 14400000);
+
+  /* === Market Ticker === */
+  const FINNHUB_KEY = "d3tjfj9r01qigeg3f3v0d3tjfj9r01qigeg3f3vg";
+  const tickerContent = document.getElementById("tickerContent");
+  function fmt(n) { return Number.isFinite(n) ? n.toFixed(2) : "N/A"; }
+
+  async function fetchStocks() {
+    try {
+      const TECH = ["AAPL","MSFT","GOOGL","AMZN","NVDA","META","TSLA","IBM","INTC","ADBE","ORCL","CRM","AMD","CSCO","NFLX"];
+      const results = await Promise.allSettled(
+        TECH.map(async s => {
+          const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_KEY}`);
+          const d = await r.json();
+          const price = parseFloat(d.c);
+          const pct = parseFloat(d.dp);
+          const cls = Number.isFinite(pct) ? (pct > 0 ? "teal-glow" : pct < 0 ? "red-glow" : "neutral-glow") : "neutral-glow";
+          const arrow = Number.isFinite(pct) ? (pct > 0 ? "▲" : pct < 0 ? "▼" : "•") : "•";
+          return `<span class="${cls}">${s}: ${fmt(price)} (${Number.isFinite(pct) ? pct.toFixed(2) : "0.00"}%) ${arrow}</span>`;
+        })
+      );
+      const html = results.filter(r => r.status === "fulfilled").map(r => r.value).join(" • ");
+      tickerContent.innerHTML = `<span class="teal-glow">📊 Now showing: New York Tech Stocks (Live)</span> • ${html}`;
+    } catch {
+      tickerContent.innerHTML = `<span class="neutral-glow">Unable to load live stock data</span>`;
+    }
+  }
+  setTimeout(fetchStocks, 2000);
+  setInterval(fetchStocks, 180000);
+
+  /* === Region Overview === */
+  const REGION_MAP = {
+    "AMERICA":[{symbol:"SPY",label:"S&P 500 (SPY)"},{symbol:"QQQ",label:"NASDAQ 100 (QQQ)"},{symbol:"DIA",label:"Dow Jones (DIA)"}],
+    "EUROPE":[{symbol:"VGK",label:"Europe (VGK)"},{symbol:"EWU",label:"FTSE UK (EWU)"},{symbol:"EZU",label:"Eurozone (EZU)"}],
+    "AFRICA":[{symbol:"EZA",label:"South Africa (EZA)"},{symbol:"AFK",label:"Africa ex-SA (AFK)"},{symbol:"EGPT",label:"Egypt (EGPT)"}],
+    "ASIA-PACIFIC":[{symbol:"EWJ",label:"Japan (EWJ)"},{symbol:"EWH",label:"Hong Kong (EWH)"},{symbol:"EWA",label:"Australia (EWA)"}]
+  };
+
+  const regionGrid = document.getElementById("regionGrid");
+  const regionUpdated = document.getElementById("regionUpdated");
+  const regionTabs = document.getElementById("regionTabs");
+
+  function classForPct(dp){
+    if (!Number.isFinite(dp)) return "chg-flat";
+    if (dp > 0.05) return "chg-up";
+    if (dp < -0.05) return "chg-down";
+    return "chg-flat";
+  }
+
+  async function fetchQuote(symbol){
+    try{
+      const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_KEY}`);
+      const d = await r.json();
+      return {c:d.c, dp:d.dp};
+    }catch{return {c:NaN, dp:NaN};}
+  }
+
+  async function fetchSparkline(symbol){
+    try{
+      const now = Math.floor(Date.now()/1000);
+      const from = now - 86400*5;
+      const url = `https://finnhub.io/api/v1/stock/candle?symbol=${encodeURIComponent(symbol)}&resolution=30&from=${from}&to=${now}&token=${FINNHUB_KEY}`;
+      const res = await fetch(url);
+      const d = await res.json();
+      if(!d || d.s!=="ok" || !Array.isArray(d.c) || !d.c.length) return [];
+      const min = Math.min(...d.c);
+      const max = Math.max(...d.c);
+      return d.c.map(v => (v - min)/(max - min));
+    }catch(e){console.error("Sparkline error:",e);return [];}
+  }
+
+  function drawSparkline(canvas, data){
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+    if(!data || !data.length){
+      ctx.strokeStyle="rgba(0,255,255,0.25)";
+      ctx.setLineDash([4,4]);
+      ctx.lineWidth=1;
+      ctx.beginPath();
+      ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      return;
+    }
+    const gradient=ctx.createLinearGradient(0,0,w,0);
+    gradient.addColorStop(0,"#00f5d4");
+    gradient.addColorStop(1,"#00b3b3");
+    ctx.strokeStyle=gradient;
+    ctx.lineWidth=1.6;
+    ctx.shadowColor="rgba(0,255,255,0.35)";
+    ctx.shadowBlur=6;
+    ctx.beginPath();
+    data.forEach((val,i)=>{
+      const x=(i/(data.length-1))*w;
+      const y=h - val*h;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
     });
-  </script>
+    ctx.stroke();
+  }
+
+  async function renderRegion(regionKey){
+    const items=REGION_MAP[regionKey]||[];
+    if(!items.length)return;
+
+    regionGrid.innerHTML=items.map(()=>`
+      <div class="mcard fade">
+        <div class="mname">Loading…</div>
+        <div class="mprice">—</div>
+        <div class="mchange chg-flat">—</div>
+        <div class="mstatus">Fetching live data…</div>
+      </div>`).join("");
+
+    const cards=Array.from(regionGrid.querySelectorAll(".mcard"));
+    const quotes=await Promise.all(items.map(i=>fetchQuote(i.symbol)));
+
+    quotes.forEach(async(q,idx)=>{
+      const card=cards[idx]; if(!card) return;
+      const item=items[idx];
+      const px=Number.isFinite(q.c)?q.c.toFixed(2):"N/A";
+      const pct=Number.isFinite(q.dp)?q.dp.toFixed(2):"0.00";
+      const cls=classForPct(q.dp);
+      card.querySelector(".mname").textContent=item.label;
+      card.querySelector(".mprice").textContent=px;
+      const chgEl=card.querySelector(".mchange");
+      chgEl.textContent=`${pct}%`;
+      chgEl.className=`mchange ${cls}`;
+      card.querySelector(".mstatus").textContent=`Symbol: ${item.symbol}`;
+
+      // Sparkline
+      const canvas=document.createElement("canvas");
+      canvas.width=120; canvas.height=40;
+      canvas.className="sparkline";
+      canvas.style.opacity="0"; // for fade-in
+      card.appendChild(canvas);
+      const data=await fetchSparkline(item.symbol);
+      drawSparkline(canvas,data);
+      setTimeout(()=>canvas.style.transition="opacity 0.6s ease",10);
+      setTimeout(()=>canvas.style.opacity="1",20);
+    });
+
+    regionUpdated.textContent="Updated: "+new Date().toLocaleTimeString("en-GB");
+  }
+
+  regionTabs.addEventListener("click",e=>{
+    const btn=e.target.closest(".tab-btn");
+    if(!btn)return;
+    regionTabs.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    renderRegion(btn.dataset.region);
+  });
+
+  renderRegion("AMERICA");
+  setInterval(()=>{
+    const active=regionTabs.querySelector(".tab-btn.active");
+    if(active) renderRegion(active.dataset.region);
+  },300000);
+});
+</script>
 </body>
 </html>
