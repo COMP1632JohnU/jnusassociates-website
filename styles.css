@@ -67,7 +67,17 @@ header.site-header {
   top: 0;
   z-index: 10;
 }
+/* ===== FIX FOR HEADER OVERLAP (Adaptive Padding) ===== */
+body {
+  padding-top: 140px; /* Default for desktop */
+}
 
+/* Adjust for smaller screens where header stacks */
+@media (max-width: 768px) {
+  body {
+    padding-top: 180px; /* Extra space for mobile header */
+  }
+}
 /* Unified brand block */
 .brand {
   display: flex;
