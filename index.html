@@ -362,14 +362,14 @@
     }
 
     #modalFrame {
-      width: 100%;
-      height: 420px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 12px;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-      background: rgba(0,0,0,0.4);
-    }
+  width: 100%;
+  height: 420px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 12px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  background: #fff; /* FIX: Use a white background for chart visibility */
+}
 
     /* ===== FOOTER NOTE ANIMATION ===== */
     @keyframes fadeInFooter {
@@ -771,33 +771,30 @@ function generateFallbackSparkline() {
   });
 }
 // === Modal Controls ===
-// === Modal Controls ===
 function openMarketModal(symbol, label) {
     const modal = document.getElementById("marketModal");
     const frame = document.getElementById("modalFrame");
     const title = document.getElementById("modalTitle");
 
     // 1. Set the Title
-    title.textContent = `${label} - Live Stock Chart`; 
+    title.textContent = `${label} - Live Yahoo Finance Chart`; 
     
-    // 2. Fix for Duplicate Links: Clear the existing link before adding a new one
-    // The link is added "afterend" of modalFrame, so we look at the next sibling.
+    // 2. Fix for Duplicate Links: Clear the existing link
     let oldLink = frame.nextElementSibling;
     if (oldLink && oldLink.tagName === 'P' && oldLink.textContent.includes('chart')) {
         oldLink.remove();
     }
     
-    // 3. Load the Embeddable Chart
-    // This uses a robust TradingView URL for a clean chart embed
-    frame.src = `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(symbol)}`; 
+    // 3. Load the Embeddable Chart (Using Yahoo Chart with dark theme)
+    frame.src = `https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}?p=${encodeURIComponent(symbol)}&theme=dark`; 
     
     // 4. Insert the Updated Link
     frame.insertAdjacentHTML("afterend",
         `<p style="text-align:center;margin-top:8px;">
-            <a href="https://www.tradingview.com/chart/?symbol=${encodeURIComponent(symbol)}"
+            <a href="https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}/"
                target="_blank" rel="noopener"
                style="color:#00f5d4;text-decoration:none;font-weight:600;">
-                View full chart on TradingView
+                View full chart on Yahoo Finance
             </a>
         </p>`);
 
