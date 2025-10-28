@@ -777,33 +777,31 @@ function openMarketModal(symbol, label) {
     const frame = document.getElementById("modalFrame");
     const title = document.getElementById("modalTitle");
 
-    title.textContent = `${label} - Live Yahoo Finance Chart`;
+    // 1. Set the Title
+    title.textContent = `${label} - Live Stock Chart`; 
     
-    // --- FIX START: Clear the existing link before adding a new one ---
-    
-    // 1. Get a reference to the link element to be removed (if it exists)
+    // 2. Fix for Duplicate Links: Clear the existing link before adding a new one
     // The link is added "afterend" of modalFrame, so we look at the next sibling.
     let oldLink = frame.nextElementSibling;
-    
-    // 2. Check if the element exists and is the link we added (or at least remove it safely)
-    if (oldLink && oldLink.tagName === 'P' && oldLink.textContent.includes('Yahoo Finance')) {
+    if (oldLink && oldLink.tagName === 'P' && oldLink.textContent.includes('chart')) {
         oldLink.remove();
     }
     
-    // --- FIX END ---
+    // 3. Load the Embeddable Chart
+    // This uses a robust TradingView URL for a clean chart embed
+    frame.src = `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(symbol)}`; 
     
-    frame.src = `https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}?p=${encodeURIComponent(symbol)}`;
-    
-    // Re-insert the link after removing the old one (if it existed)
+    // 4. Insert the Updated Link
     frame.insertAdjacentHTML("afterend",
         `<p style="text-align:center;margin-top:8px;">
-            <a href="https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}/"
+            <a href="https://www.tradingview.com/chart/?symbol=${encodeURIComponent(symbol)}"
                target="_blank" rel="noopener"
                style="color:#00f5d4;text-decoration:none;font-weight:600;">
-                View full chart on Yahoo Finance
+                View full chart on TradingView
             </a>
         </p>`);
 
+    // 5. Display the Modal
     modal.classList.add("active");
 }
 
