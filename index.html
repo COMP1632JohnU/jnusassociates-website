@@ -837,7 +837,9 @@ document.getElementById("marketModal").addEventListener("click", (e) => {
   <div class="modal-content">
     <button class="modal-close" id="modalClose">&times;</button>
     <h3 id="modalTitle"></h3>
-    <iframe id="modalFrame" loading="lazy"></iframe>
+    <iframe id="modalFrame" loading="lazy" 
+        sandbox="allow-scripts allow-same-origin allow-popups allow-forms">
+</iframe>
   </div>
 </div>
 </body>
