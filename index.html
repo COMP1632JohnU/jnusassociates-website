@@ -825,19 +825,18 @@
 <script>
 function openMarketModal(symbol, title, yahooUrl) {
   const modal = document.getElementById("marketModal");
+  const iframe = document.getElementById("modalFrame");
   const modalTitle = document.getElementById("modalTitle");
-  const viewChartBtn = document.getElementById("viewChartBtn");
 
-  // Ensure full Yahoo Finance chart URL
+  // Ensure full HTTPS Yahoo chart URL
   const fullUrl = yahooUrl.startsWith("https")
     ? yahooUrl
     : `https://finance.yahoo.com/chart/${symbol}`;
 
-  // Update modal content
   modalTitle.textContent = `${title} — Live Yahoo Finance Chart`;
-  viewChartBtn.href = fullUrl;
+  iframe.src = fullUrl;
 
-  // Show modal
+  // Show modal smoothly
   modal.classList.add("show");
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
