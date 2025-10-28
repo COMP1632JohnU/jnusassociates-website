@@ -56,113 +56,83 @@ body {
 }
 
 /* ===== HEADER ===== */
-.site-header {
-  background: rgba(0, 0, 0, 0.65);
-  padding: 1rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+header.site-header {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+  text-align: center;
+  padding: 10px 10px 14px;
   position: sticky;
   top: 0;
   z-index: 10;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* ===== BRAND ===== */
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
-}
-
+/* Unified brand block */
 .brand {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .logo {
-  width: 70px;
+  width: 58px;
   height: auto;
 }
 
 .brand-text h1 {
-  font-size: 1.4rem;
-  color: #eaf4f8;
-  text-shadow: 0 0 10px rgba(173, 216, 230, 0.6), 0 0 20px rgba(0, 128, 255, 0.3);
+  color: #00f5d4;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  margin: 0;
 }
 
 .brand-text p {
-  font-size: 0.9rem;
-  color: #d0d0d0;
+  color: #aef;
+  font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+  margin: 2px 0 0;
 }
 
-/* ===== WHATSAPP ICON ===== */
-.whatsapp-icon {
-  display: inline-flex;
-  align-items: center;
+/* Contact line */
+.contact-line {
+  display: flex;
   justify-content: center;
-  margin-left: 8px;
+  gap: 10px;
+  font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+  margin-top: 6px;
+}
+
+.contact-line a {
+  color: #00f5d4;
   text-decoration: none;
-  color: #25D366;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 0 4px rgba(37, 211, 102, 0.5));
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.whatsapp-icon i {
-  width: 22px;
-  height: 22px;
-  stroke-width: 2.2px;
-  color: inherit;
-}
-
-.whatsapp-icon:hover {
-  color: #8b5af5;
-  filter: drop-shadow(0 0 12px rgba(186, 245, 90, 0.9)) brightness(1.3);
-  transform: scale(1.15);
-}
-
-/* ===== NAVBAR ===== */
+/* Nav */
 .navbar ul {
   list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
   display: flex;
-  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .navbar a {
-  position: relative;
-  color: #ffffff;
+  color: #dff;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
   transition: color 0.3s ease;
 }
 
-.navbar a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background: #00f5d4;
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
-  transition: width 0.4s ease;
-}
-
-.navbar a:hover,
-.navbar a.active {
+.navbar a.active,
+.navbar a:hover {
   color: #00f5d4;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
-}
-
-.navbar a:hover::after,
-.navbar a.active::after {
-  width: 100%;
 }
 
 /* ===== HERO ===== */
@@ -204,7 +174,7 @@ body {
   background-color: #00c2a8;
 }
 
-/* ===== FOOTER ===== */
+/* ===== FOOTER (Glass-Effect Resized) ===== */
 footer {
   display: inline-block;
   text-align: center;
@@ -220,6 +190,7 @@ footer {
   opacity: 0;
   animation: fadeInGlass 1.6s ease forwards;
   animation-delay: 0.8s;
+  transition: background 0.6s ease, box-shadow 0.6s ease;
   position: relative;
   z-index: 2;
   margin: 2rem auto 5rem auto;
@@ -237,24 +208,7 @@ footer {
     filter: blur(0);
   }
 }
-.fade-in {
-  opacity: 0;
-  transform: translateY(15px);
-  animation: fadeInUp 0.8s ease-out forwards;
-}
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-    filter: blur(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
 footer p,
 footer a {
   color: #00f5d4;
@@ -268,7 +222,7 @@ footer a:hover {
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
 }
 
-/* ===== MARKET STATUS, CLOCK BAR, TICKER ===== */
+/* ===== MARKET STATUS & CLOCK BAR ===== */
 .market-status-bar,
 .market-clock-bar,
 .stock-ticker {
@@ -290,23 +244,7 @@ footer a:hover {
   }
 }
 
-.market-status-bar,
-.market-clock-bar {
-  width: 100%;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.65);
-  color: #00f5d4;
-  font-family: "Courier New", monospace;
-  font-size: 0.9rem;
-  padding: 6px 0;
-  border-top: 1px solid rgba(0, 255, 255, 0.3);
-  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  z-index: 2;
-}
-
+/* ===== STOCK TICKER ===== */
 .stock-ticker {
   position: fixed;
   bottom: 0;
@@ -338,189 +276,89 @@ footer a:hover {
   100% { transform: translateX(-100%); }
 }
 
-.stock-ticker:hover #stockTicker {
-  animation-play-state: paused;
-  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9));
+/* ===== GLOW & REFRESH ===== */
+.teal-glow {
   color: #00f5d4;
-  cursor: pointer;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
 }
 
-/* ===== SERVICE SECTIONS ===== */
-.service-section {
+.red-glow {
+  color: #ff4d4d;
+  text-shadow: 0 0 10px rgba(255, 80, 80, 0.6);
+}
+
+.neutral-glow {
+  color: #cfd8dc;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+  opacity: 0.85;
+}
+
+/* ===== ABOUT PAGE LAYOUT ===== */
+.about-layout {
   text-align: center;
-  margin-top: 120px;
-  padding: 60px 30px;
-  background: rgba(0, 0, 0, 0.45);
-  border-radius: 14px;
   max-width: 950px;
-  margin-left: auto;
-  margin-right: auto;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0,255,255,0.25);
-  box-shadow: 0 0 18px rgba(0,255,255,0.25);
-  animation: fadeUp 1.2s ease-out forwards;
-  position: relative;
-  top: 0;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-  .service-section {
-    margin-top: 100px;
-    padding: 50px 20px;
-  }
-}
-
-/* ===== FINANCIAL PODCASTS SECTION ===== */
-.podcast-section {
-  text-align: center;
-  margin: 120px auto;
-  padding: 60px 30px;
-  max-width: 1200px;
+  margin: 6rem auto 4rem auto;
   background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(0,255,255,0.25);
+  padding: 3rem 2rem;
   border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0,255,255,0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: #e0f7f7;
-  animation: fadeUp 1.2s ease-out forwards;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.15);
 }
 
-.podcast-section h2 {
-  color: #00f5d4;
-  text-shadow: 0 0 10px rgba(0,255,255,0.6);
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.podcast-intro {
-  max-width: 800px;
-  margin: 0 auto 40px;
-  color: #c0f8f8;
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-.podcast-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-  gap: 30px;
-  justify-content: center;
-}
-
-.podcast-card {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(0,255,255,0.25);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0,255,255,0.1);
-  transition: all 0.3s ease;
-}
-
-.podcast-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 30px rgba(0,255,255,0.4);
-}
-
-.podcast-card iframe {
-  width: 100%;
-  height: 200px;
-  border: none;
-}
-
-.podcast-card h3 {
-  color: #00f5d4;
-  font-size: 1.1rem;
-  margin: 12px 0 18px 0;
-  text-shadow: 0 0 8px rgba(0,255,255,0.5);
-}
-
-@media (max-width: 768px) {
-  .podcast-section {
-    padding: 40px 20px;
-  }
-
-  .podcast-card iframe {
-    height: 180px;
-  }
-}
-
-/* ===== INDUSTRY FEED SECTION (Dynamic YouTube API) ===== */
-#industryInsights {
-  text-align: center;
-  margin: 120px auto;
-  padding: 60px 30px;
-  max-width: 1200px;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(0, 255, 255, 0.25);
-  border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #e0f7f7;
-  animation: fadeUp 1.2s ease-out forwards;
-}
-
-#industryInsights h3 {
-  color: #00f5d4;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Grid layout for videos */
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 18px;
-  margin-top: 14px;
-  padding: 10px 0;
-}
-
-.video-card {
+.about-card.reduced {
   background: rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 10px;
-  backdrop-filter: blur(10px);
-  text-align: left;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 1.8rem 1.5rem;
+  margin-bottom: 1.8rem;
+  color: #e0f7f7;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.video-card img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  display: block;
+.about-card.reduced:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 255, 255, 0.3);
 }
 
-.video-card h4 {
-  font-size: 0.9rem;
-  color: #eafcff;
-  font-weight: 500;
-  line-height: 1.3;
-}
-
-.video-card:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 18px rgba(0, 245, 212, 0.2);
-}
-
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  #industryInsights {
-    padding: 40px 20px;
+  /* Unify mobile header look */
+  header.site-header {
+    text-align: center;
+    padding: 8px 10px 10px;
+    background: rgba(0,0,0,0.6);
+    border-bottom: 1px solid rgba(0,255,255,0.15);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .logo { width: 58px; height: auto; }
+
+  .contact-line {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .navbar ul {
+    position: static !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 14px !important;
+    margin: 6px 0 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 }
