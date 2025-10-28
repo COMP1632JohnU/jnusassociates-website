@@ -821,7 +821,54 @@
       }, 300000); // 5 min
     });
   </script>
+<!-- ===== Market Modal Logic ===== -->
+<script>
+function openMarketModal(symbol, title, url) {
+  const modal = document.getElementById("marketModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalFrame = document.getElementById("modalFrame");
 
+  modalTitle.textContent = `${title} — Live Yahoo Finance Chart`;
+  modalFrame.src = url;
+  modal.classList.add("show"); // fade in
+  modal.style.display = "block";
+}
+
+// Attach click handlers for sparkline charts
+document.querySelectorAll(".sparkline").forEach(chart => {
+  chart.addEventListener("click", () => {
+    const symbol = chart.dataset.symbol || "SPY";
+    const title = chart.dataset.title || symbol;
+    const yahooUrl = `https://finance.yahoo.com/chart/${symbol}`;
+    openMarketModal(symbol, title, yahooUrl);
+  });
+});
+
+// Close modal when clicking × button
+document.querySelectorAll(".modal-close").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const modal = document.getElementById("marketModal");
+    modal.classList.remove("show");
+    setTimeout(() => {
+      modal.style.display = "none";
+      document.getElementById("modalFrame").src = "";
+     document.body.style.overflow = ""; // re-enable background scroll when closing 
+    }, 300);
+  });
+});
+
+// Optional: close modal when clicking outside content box
+window.addEventListener("click", e => {
+  const modal = document.getElementById("marketModal");
+  if (e.target === modal) {
+    modal.classList.remove("show");
+    setTimeout(() => {
+      modal.style.display = "none";
+      document.getElementById("modalFrame").src = "";
+    }, 300);
+  }
+});
+</script>
   <!-- Market Modal -->
   <div id="marketModal" class="market-modal">
     <div class="modal-content">
