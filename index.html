@@ -771,24 +771,40 @@ function generateFallbackSparkline() {
   });
 }
 // === Modal Controls ===
+// === Modal Controls ===
 function openMarketModal(symbol, label) {
-  const modal = document.getElementById("marketModal");
-  const frame = document.getElementById("modalFrame");
-  const title = document.getElementById("modalTitle");
+    const modal = document.getElementById("marketModal");
+    const frame = document.getElementById("modalFrame");
+    const title = document.getElementById("modalTitle");
 
-  title.textContent = `${label} — Live Yahoo Finance Chart`;
-  frame.src = `https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}?p=${encodeURIComponent(symbol)}`;
-  document.getElementById("modalFrame").insertAdjacentHTML(
-  "afterend",
-  `<p style="text-align:center;margin-top:8px;">
-     <a href="https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}" 
-        target="_blank" rel="noopener" 
-        style="color:#00f5d4;text-decoration:none;font-weight:600;">
-        ↗ View full chart on Yahoo Finance
-     </a>
-   </p>`
-);
-  modal.classList.add("active");
+    title.textContent = `${label} - Live Yahoo Finance Chart`;
+    
+    // --- FIX START: Clear the existing link before adding a new one ---
+    
+    // 1. Get a reference to the link element to be removed (if it exists)
+    // The link is added "afterend" of modalFrame, so we look at the next sibling.
+    let oldLink = frame.nextElementSibling;
+    
+    // 2. Check if the element exists and is the link we added (or at least remove it safely)
+    if (oldLink && oldLink.tagName === 'P' && oldLink.textContent.includes('Yahoo Finance')) {
+        oldLink.remove();
+    }
+    
+    // --- FIX END ---
+    
+    frame.src = `https://finance.yahoo.com/chart/${encodeURIComponent(symbol)}?p=${encodeURIComponent(symbol)}`;
+    
+    // Re-insert the link after removing the old one (if it existed)
+    frame.insertAdjacentHTML("afterend",
+        `<p style="text-align:center;margin-top:8px;">
+            <a href="https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}/"
+               target="_blank" rel="noopener"
+               style="color:#00f5d4;text-decoration:none;font-weight:600;">
+                View full chart on Yahoo Finance
+            </a>
+        </p>`);
+
+    modal.classList.add("active");
 }
 
 document.getElementById("modalClose").addEventListener("click", () => {
