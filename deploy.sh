@@ -1,44 +1,65 @@
 #!/bin/bash
+set -euo pipefail
+
 # ============================================
 #  JNUS Associates Ltd - One Click Deployment
 # ============================================
 
+# Ensure we're running from the script's directory (repo root)
+cd "$(dirname "$0")"
+
+# Helpers
+say() { echo -e "$1"; }
+
 # Check if commit message was provided
-if [ -z "$1" ]; then
-  echo "❌ Please provide a commit message. Example:"
-  echo "./deploy.sh 'Updated services layout'"
+if [ "${1:-}" = "" ]; then
+  say "❌ Please provide a commit message. Example:"
+  say "./deploy.sh \"Updated services layout\""
   exit 1
 fi
 
-# Step 1: Ensure you’re in the right folder
-echo "📁 Navigating to project directory..."
-cd "$(dirname "$0")" || exit
+COMMIT_MSG="$1"
+BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")"
 
-# Step 2: Stage all modified files
-echo "📦 Staging changes..."
-git add .
+say "📁 Project directory: $(pwd)"
+say "🌿 Current branch: ${BRANCH}"
 
-# Step 3: Commit with your message
-echo "📝 Committing changes..."
-git commit -m "$1"
+# Make sure this is a git repo
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || {
+  say "❌ Not a git repository. Run this from your repo root."
+  exit 1
+}
 
-# Step 4: Pull latest updates (avoid merge issues)
-echo "🔄 Pulling latest updates..."
-git pull origin main --rebase
+# Step 1: Stage changes
+say "📦 Staging changes..."
+git add -A
 
-# Step 5: Push to GitHub
-echo "🚀 Pushing changes to GitHub..."
-git push origin main
-
-# Step 6: Open GitHub Pages live site with cache-buster
-echo "🌐 Opening live site..."
-URL="https://jnusassociates.com?nocache=$(date +%s)"
-if command -v open &> /dev/null; then
-  open "$URL"
-elif command -v xdg-open &> /dev/null; then
-  xdg-open "$URL"
+# If nothing staged, exit cleanly
+if git diff --cached --quiet; then
+  say "ℹ️ No changes to commit. Working tree clean."
 else
-  echo "🌍 Please open this URL manually: $URL"
+  # Step 2: Commit
+  say "📝 Committing changes..."
+  git commit -m "$COMMIT_MSG"
 fi
 
-echo "✅ Deployment complete!"
+# Step 3: Sync with remote (rebase to avoid merge commits)
+say "🔄 Pulling latest updates (rebase)..."
+git pull --rebase origin "$BRANCH"
+
+# Step 4: Push
+say "🚀 Pushing changes to GitHub..."
+git push origin "$BRANCH"
+
+# Step 5: Open live site (cache-buster)
+say "🌐 Opening live site..."
+URL="https://jnusassociates.com?nocache=$(date +%s)"
+if command -v open >/dev/null 2>&1; then
+  open "$URL"
+elif command -v xdg-open >/dev/null 2>&1; then
+  xdg-open "$URL"
+else
+  say "🌍 Please open this URL manually: $URL"
+fi
+
+say "✅ Deployment complete!"
